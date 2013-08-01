@@ -28,7 +28,6 @@
 
 + (NSString *)builSQLUpdateStringForRowID:(NSUInteger)rowID FTTableID:(NSString *)fusionTableID, ...;
 
-
 + (NSString *)buildDeleteAllRowStringForFusionTableID:(NSString *)fusionTableID;
 + (NSString *)buildDeleteRowStringForFusionTableID:(NSString *)fusionTableID RowID:(NSUInteger)rowID;
 

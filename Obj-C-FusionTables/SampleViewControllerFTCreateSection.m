@@ -64,8 +64,10 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
     NSString *tableTitle = [NSString stringWithFormat:@"Sample_FT_%@",
                             [formatter stringFromDate:[NSDate date]]];
     
-    NSDictionary *tableDictionary = [SampleFTBuilder buildFusionTableStructureDictionary:tableTitle
-                                   WithDescription:nil IsExportable:YES];
+    NSDictionary *tableDictionary = [SampleFTBuilder
+                                        buildFusionTableStructureDictionary:tableTitle
+                                        WithDescription:nil
+                                        IsExportable:YES];
     
     ftState = kFTStatesCreating;
     [[NSNotificationCenter defaultCenter]
