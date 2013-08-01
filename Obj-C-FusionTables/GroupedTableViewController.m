@@ -1,6 +1,6 @@
 //
 //  GroupedTableViewController.m
-//  iCasualTours
+//  GroupedUITableViews
 //
 //  Created by Arseniy Kuznetsov on 11/10/11.
 //  Copyright 2011 Arseniy Kuznetsov. All rights reserved.

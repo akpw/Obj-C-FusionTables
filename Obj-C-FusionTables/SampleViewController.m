@@ -26,7 +26,8 @@
     [super viewDidLoad];
     
     self.title = @"Fusion Tables Sample";
-    // specific UI controller, dispatching TableView messages to individual section controllers
+    
+    // the UI controller that will be dispatching related TableView messages to individual section controllers
     self.uiController = [[SampleViewControllerUIController alloc] initWithParentViewController:self];
 }
 
