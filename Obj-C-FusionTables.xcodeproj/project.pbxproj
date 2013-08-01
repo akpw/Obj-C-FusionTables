@@ -349,6 +349,8 @@
 		57A7DF1717AA3A2500E74167 /* Google Toolbox */ = {
 			isa = PBXGroup;
 			children = (
+				57B2123417AA5E7B00041BCB /* CLient LIbrary */,
+				57B2123317AA5E6200041BCB /* Drive API */,
 				57A7DF1817AA3A3500E74167 /* GTMHTTPFetcher.h */,
 				57A7DF1917AA3A3500E74167 /* GTMHTTPFetcher.m */,
 				57A7DF1A17AA3A3500E74167 /* GTMOAuth2Authentication.h */,
@@ -373,6 +375,20 @@
 				57A7DF2C17AA3A8900E74167 /* GenericButtonPushed_54.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		57B2123317AA5E6200041BCB /* Drive API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Drive API";
+			sourceTree = "<group>";
+		};
+		57B2123417AA5E7B00041BCB /* CLient LIbrary */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CLient LIbrary";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
