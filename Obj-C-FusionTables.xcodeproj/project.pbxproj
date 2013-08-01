@@ -32,7 +32,6 @@
 		57A7DEEE17AA39A900E74167 /* SampleViewControllerFTSharingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE917AA39A900E74167 /* SampleViewControllerFTSharingSection.m */; };
 		57A7DEF417AA39C000E74167 /* SampleViewControllerUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */; };
 		57A7DEF517AA39C000E74167 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEF217AA39C000E74167 /* SampleViewController.m */; };
-		57A7DEF617AA39C000E74167 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEF317AA39C000E74167 /* SampleViewController.xib */; };
 		57A7DEFF17AA3A0900E74167 /* GroupedTableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEF917AA3A0900E74167 /* GroupedTableSectionController.m */; };
 		57A7DF0017AA3A0900E74167 /* GroupedTableUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEFB17AA3A0900E74167 /* GroupedTableUIController.m */; };
 		57A7DF0117AA3A0900E74167 /* GroupedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEFD17AA3A0900E74167 /* GroupedTableViewController.m */; };
@@ -109,7 +108,6 @@
 		57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerUIController.m; sourceTree = "<group>"; };
 		57A7DEF117AA39C000E74167 /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
 		57A7DEF217AA39C000E74167 /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
-		57A7DEF317AA39C000E74167 /* SampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleViewController.xib; sourceTree = "<group>"; };
 		57A7DEF817AA3A0900E74167 /* GroupedTableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedTableSectionController.h; sourceTree = "<group>"; };
 		57A7DEF917AA3A0900E74167 /* GroupedTableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedTableSectionController.m; sourceTree = "<group>"; };
 		57A7DEFA17AA3A0900E74167 /* GroupedTableUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedTableUIController.h; sourceTree = "<group>"; };
@@ -295,7 +293,6 @@
 				57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */,
 				57A7DEF117AA39C000E74167 /* SampleViewController.h */,
 				57A7DEF217AA39C000E74167 /* SampleViewController.m */,
-				57A7DEF317AA39C000E74167 /* SampleViewController.xib */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -455,7 +452,6 @@
 				57A7DEA917AA37FB00E74167 /* Default-568h@2x.png in Resources */,
 				57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */,
 				57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */,
-				57A7DEF617AA39C000E74167 /* SampleViewController.xib in Resources */,
 				57A7DF0217AA3A0900E74167 /* GroupedTableViewController.xib in Resources */,
 				57A7DF1017AA3A1F00E74167 /* GoogleAPIKeys.plist in Resources */,
 				57A7DF2517AA3A3500E74167 /* GTMOAuth2ViewTouch.xib in Resources */,
