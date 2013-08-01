@@ -29,6 +29,10 @@ static const NSTimeInterval kDefaultNetworkLossTimeoutInterval = 30.0;
 NSString *const kOOBString = @"urn:ietf:wg:oauth:2.0:oob";
 
 
+@interface GTMOAuth2Authentication (InternalMethods)
+- (NSDictionary *)dictionaryWithJSONData:(NSData *)data;
+@end
+
 @interface GTMOAuth2SignIn ()
 @property (assign) BOOL hasHandledCallback;
 @property (retain) GTMHTTPFetcher *pendingFetcher;
@@ -42,10 +46,11 @@ NSString *const kOOBString = @"urn:ietf:wg:oauth:2.0:oob";
 + (NSMutableURLRequest *)mutableURLRequestWithURL:(NSURL *)oldURL
                                       paramString:(NSString *)paramStr;
 #if !GTM_OAUTH2_SKIP_GOOGLE_SUPPORT
-- (void)addScopeForGoogleUserInfo;
 - (void)fetchGoogleUserInfo;
 #endif
 - (void)finishSignInWithError:(NSError *)error;
+
+- (void)handleCallbackReached;
 
 - (void)auth:(GTMOAuth2Authentication *)auth
 finishedWithFetcher:(GTMHTTPFetcher *)fetcher
@@ -55,7 +60,6 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
 - (void)infoFetcher:(GTMHTTPFetcher *)fetcher
    finishedWithData:(NSData *)data
               error:(NSError *)error;
-+ (NSData *)decodeWebSafeBase64:(NSString *)base64Str;
 #endif
 
 - (void)closeTheWindow;
@@ -131,27 +135,6 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   auth.scope = scope;
 
   return auth;
-}
-
-- (void)addScopeForGoogleUserInfo {
-  GTMOAuth2Authentication *auth = self.authentication;
-  if (self.shouldFetchGoogleUserEmail) {
-    NSString *const emailScope = @"https://www.googleapis.com/auth/userinfo.email";
-    NSString *scope = auth.scope;
-    if ([scope rangeOfString:emailScope].location == NSNotFound) {
-      scope = [GTMOAuth2Authentication scopeWithStrings:scope, emailScope, nil];
-      auth.scope = scope;
-    }
-  }
-
-  if (self.shouldFetchGoogleUserProfile) {
-    NSString *const profileScope = @"https://www.googleapis.com/auth/userinfo.profile";
-    NSString *scope = auth.scope;
-    if ([scope rangeOfString:profileScope].location == NSNotFound) {
-      scope = [GTMOAuth2Authentication scopeWithStrings:scope, profileScope, nil];
-      auth.scope = scope;
-    }
-  }
 }
 #endif
 
@@ -234,7 +217,24 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   // For signing in to Google, append the scope for obtaining the authenticated
   // user email and profile, as appropriate
 #if !GTM_OAUTH2_SKIP_GOOGLE_SUPPORT
-  [self addScopeForGoogleUserInfo];
+  GTMOAuth2Authentication *auth = self.authentication;
+  if (self.shouldFetchGoogleUserEmail) {
+    NSString *const emailScope = @"https://www.googleapis.com/auth/userinfo.email";
+    NSString *scope = auth.scope;
+    if ([scope rangeOfString:emailScope].location == NSNotFound) {
+      scope = [GTMOAuth2Authentication scopeWithStrings:scope, emailScope, nil];
+      auth.scope = scope;
+    }
+  }
+
+  if (self.shouldFetchGoogleUserProfile) {
+    NSString *const profileScope = @"https://www.googleapis.com/auth/userinfo.profile";
+    NSString *scope = auth.scope;
+    if ([scope rangeOfString:profileScope].location == NSNotFound) {
+      scope = [GTMOAuth2Authentication scopeWithStrings:scope, profileScope, nil];
+      auth.scope = scope;
+    }
+  }
 #endif
 
   // start the authorization
@@ -303,10 +303,6 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
 // utility for making a request from an old URL with some additional parameters
 + (NSMutableURLRequest *)mutableURLRequestWithURL:(NSURL *)oldURL
                                       paramString:(NSString *)paramStr {
-  if ([paramStr length] == 0) {
-    return [NSMutableURLRequest requestWithURL:oldURL];
-  }
-
   NSString *query = [oldURL query];
   if ([query length] > 0) {
     query = [query stringByAppendingFormat:@"&%@", paramStr];
@@ -354,7 +350,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
 // requested
 //
 // When the request is for the callback URL, this method invokes
-// authCodeObtained and returns YES
+// handleCallbackReached and returns YES
 - (BOOL)requestRedirectedToRequest:(NSURLRequest *)redirectedRequest {
   // for Google's installed app sign-in protocol, we'll look for the
   // end-of-sign-in indicator in the titleChanged: method below
@@ -404,7 +400,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
              @"response lacks auth code or error");
 #endif
 
-    [self authCodeObtained];
+    [self handleCallbackReached];
   }
   // tell the delegate that we did handle this request
   return YES;
@@ -414,7 +410,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
 // been loadded
 //
 // When the title indicates sign-in has completed, this method invokes
-// authCodeObtained and returns YES
+// handleCallbackReached and returns YES
 - (BOOL)titleChanged:(NSString *)title {
   // return YES if the OAuth flow ending title was detected
 
@@ -436,7 +432,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
       if (!self.hasHandledCallback) {
         [self.authentication setKeysForResponseDictionary:dict];
 
-        [self authCodeObtained];
+        [self handleCallbackReached];
       }
       return YES;
     }
@@ -471,7 +467,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   return NO;
 }
 
-- (void)authCodeObtained {
+- (void)handleCallbackReached {
   // the callback page was requested, or the authenticate code was loaded
   // into a page's title, so exchange the auth code for access & refresh tokens
   // and tell the window to close
@@ -479,19 +475,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   // avoid duplicate signals that the callback point has been reached
   self.hasHandledCallback = YES;
 
-  // If the signin was request for exchanging an authentication token to a
-  // refresh token, there is no window to close.
-  if (self.webRequestSelector) {
-    [self closeTheWindow];
-  } else {
-    // For signing in to Google, append the scope for obtaining the
-    // authenticated user email and profile, as appropriate. This is usually
-    // done by the startSigningIn method, but this method is not called when
-    // exchanging an authentication token for a refresh token.
-#if !GTM_OAUTH2_SKIP_GOOGLE_SUPPORT
-    [self addScopeForGoogleUserInfo];
-#endif
-  }
+  [self closeTheWindow];
 
   NSError *error = nil;
 
@@ -560,17 +544,12 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   NSURL *infoURL = [[self class] googleUserInfoURL];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:infoURL];
 
-  if ([auth respondsToSelector:@selector(userAgent)]) {
-    NSString *userAgent = [auth userAgent];
-    [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-  }
+  NSString *userAgent = [auth userAgent];
+  [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
   [request setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
 
   GTMHTTPFetcher *fetcher;
-  id <GTMHTTPFetcherServiceProtocol> fetcherService = nil;
-  if ([auth respondsToSelector:@selector(fetcherService)]) {
-    fetcherService = auth.fetcherService;
-  };
+  id <GTMHTTPFetcherServiceProtocol> fetcherService = auth.fetcherService;
   if (fetcherService) {
     fetcher = [fetcherService fetcherWithRequest:request];
   } else {
@@ -584,36 +563,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 - (void)fetchGoogleUserInfo {
-  if (!self.shouldFetchGoogleUserProfile) {
-    // If we only need email and user ID, not the full profile, and we have an
-    // id_token, it may have the email and user ID so we won't need to fetch
-    // them.
-    GTMOAuth2Authentication *auth = self.authentication;
-    NSString *idToken = [auth.parameters objectForKey:@"id_token"];
-    if ([idToken length] > 0) {
-      // The id_token has three dot-delimited parts. The second is the
-      // JSON profile.
-      //
-      // http://www.tbray.org/ongoing/When/201x/2013/04/04/ID-Tokens
-      NSArray *parts = [idToken componentsSeparatedByString:@"."];
-      if ([parts count] == 3) {
-        NSString *part2 = [parts objectAtIndex:1];
-        if ([part2 length] > 0) {
-          NSData *data = [[self class] decodeWebSafeBase64:part2];
-          if ([data length] > 0) {
-            [self updateGoogleUserInfoWithData:data];
-            if ([[auth userID] length] > 0 && [[auth userEmail] length] > 0) {
-              // We obtained user ID and email from the ID token.
-              [self finishSignInWithError:nil];
-              return;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Fetch the email and profile from the userinfo endpoint.
+  // fetch the user's email address or profile
   GTMOAuth2Authentication *auth = self.authentication;
   GTMHTTPFetcher *fetcher = [[self class] userInfoFetcherWithAuth:auth];
   [fetcher beginFetchWithDelegate:self
@@ -646,38 +596,21 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
 #endif
   } else {
     // We have the authenticated user's info
-    [self updateGoogleUserInfoWithData:data];
+    if (data) {
+      NSDictionary *profileDict = [auth dictionaryWithJSONData:data];
+      if (profileDict) {
+        self.userProfile = profileDict;
+
+        // Save the email into the auth object
+        NSString *email = [profileDict objectForKey:@"email"];
+        [auth setUserEmail:email];
+
+        NSNumber *verified = [profileDict objectForKey:@"verified_email"];
+        [auth setUserEmailIsVerified:[verified stringValue]];
+      }
+    }
   }
   [self finishSignInWithError:error];
-}
-
-- (void)updateGoogleUserInfoWithData:(NSData *)data {
-  if (!data) return;
-
-  GTMOAuth2Authentication *auth = self.authentication;
-  NSDictionary *profileDict = [[auth class] dictionaryWithJSONData:data];
-  if (profileDict) {
-    self.userProfile = profileDict;
-
-    // Save the ID into the auth object
-    NSString *identifier = [profileDict objectForKey:@"id"];
-    [auth setUserID:identifier];
-
-    // Save the email into the auth object
-    NSString *email = [profileDict objectForKey:@"email"];
-    [auth setUserEmail:email];
-
-    // The verified_email key is a boolean NSNumber in the userinfo
-    // endpoint response, but it is a string like "true" in the id_token.
-    // We want to consistently save it as a string of the boolean value,
-    // like @"1".
-    id verified = [profileDict objectForKey:@"verified_email"];
-    if ([verified isKindOfClass:[NSString class]]) {
-      verified = [NSNumber numberWithBool:[verified boolValue]];
-    }
-
-    [auth setUserEmailIsVerified:[verified stringValue]];
-  }
 }
 
 #endif // !GTM_OAUTH2_SKIP_GOOGLE_SUPPORT
@@ -824,8 +757,7 @@ static void ReachabilityCallBack(SCNetworkReachabilityRef target,
 
 #if !GTM_OAUTH2_SKIP_GOOGLE_SUPPORT
 + (void)revokeTokenForGoogleAuthentication:(GTMOAuth2Authentication *)auth {
-  if (auth.refreshToken != nil
-      && auth.canAuthorize
+  if (auth.canAuthorize
       && [auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
 
     // create a signed revocation request for this authentication object
@@ -835,103 +767,46 @@ static void ReachabilityCallBack(SCNetworkReachabilityRef target,
 
     NSString *token = auth.refreshToken;
     NSString *encoded = [GTMOAuth2Authentication encodedOAuthValueForString:token];
-    if (encoded != nil) {
-      NSString *body = [@"token=" stringByAppendingString:encoded];
+    NSString *body = [@"token=" stringByAppendingString:encoded];
 
-      [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
-      [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setHTTPMethod:@"POST"];
 
-      NSString *userAgent = [auth userAgent];
-      [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
+    NSString *userAgent = [auth userAgent];
+    [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
 
-      // there's nothing to be done if revocation succeeds or fails
-      GTMHTTPFetcher *fetcher;
-      id <GTMHTTPFetcherServiceProtocol> fetcherService = auth.fetcherService;
-      if (fetcherService) {
-        fetcher = [fetcherService fetcherWithRequest:request];
-      } else {
-        fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-      }
-      fetcher.comment = @"revoke token";
+    // there's nothing to be done if revocation succeeds or fails
+    GTMHTTPFetcher *fetcher;
+    id <GTMHTTPFetcherServiceProtocol> fetcherService = auth.fetcherService;
+    if (fetcherService) {
+      fetcher = [fetcherService fetcherWithRequest:request];
+    } else {
+      fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    }
+    fetcher.comment = @"revoke token";
 
-      // Use a completion handler fetch for better debugging, but only if we're
-      // guaranteed that blocks are available in the runtime
+    // Use a completion handler fetch for better debugging, but only if we're
+    // guaranteed that blocks are available in the runtime
 #if (!TARGET_OS_IPHONE && (MAC_OS_X_VERSION_MIN_REQUIRED >= 1060)) || \
     (TARGET_OS_IPHONE && (__IPHONE_OS_VERSION_MIN_REQUIRED >= 40000))
-      // Blocks are available
-      [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
+    // Blocks are available
+    [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
   #if DEBUG
-        if (error) {
-          NSString *errStr = [[[NSString alloc] initWithData:data
-                                                    encoding:NSUTF8StringEncoding] autorelease];
-          NSLog(@"revoke error: %@", errStr);
-        }
+      if (error) {
+        NSString *errStr = [[[NSString alloc] initWithData:data
+                                                  encoding:NSUTF8StringEncoding] autorelease];
+        NSLog(@"revoke error: %@", errStr);
+      }
   #endif // DEBUG
-      }];
+    }];
 #else
-      // Blocks may not be available
-      [fetcher beginFetchWithDelegate:nil didFinishSelector:NULL];
+    // Blocks may not be available
+    [fetcher beginFetchWithDelegate:nil didFinishSelector:NULL];
 #endif
-    }
   }
+
   [auth reset];
 }
-
-
-// Based on Cyrus Najmabadi's elegent little encoder and decoder from
-// http://www.cocoadev.com/index.pl?BaseSixtyFour and on GTLBase64
-
-+ (NSData *)decodeWebSafeBase64:(NSString *)base64Str {
-  static char decodingTable[128];
-  static BOOL hasInited = NO;
-
-  if (!hasInited) {
-    char webSafeEncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
-    memset(decodingTable, 0, 128);
-    for (unsigned int i = 0; i < sizeof(webSafeEncodingTable); i++) {
-      decodingTable[(unsigned int) webSafeEncodingTable[i]] = (char)i;
-    }
-    hasInited = YES;
-  }
-
-  // The input string should be plain ASCII.
-  const char *cString = [base64Str cStringUsingEncoding:NSASCIIStringEncoding];
-  if (cString == nil) return nil;
-
-  NSInteger inputLength = (NSInteger)strlen(cString);
-  // Input length is not being restricted to multiples of 4.
-  if (inputLength == 0) return [NSData data];
-
-  while (inputLength > 0 && cString[inputLength - 1] == '=') {
-    inputLength--;
-  }
-
-  NSInteger outputLength = inputLength * 3 / 4;
-  NSMutableData* data = [NSMutableData dataWithLength:(NSUInteger)outputLength];
-  uint8_t *output = [data mutableBytes];
-
-  NSInteger inputPoint = 0;
-  NSInteger outputPoint = 0;
-  char *table = decodingTable;
-
-  while (inputPoint < inputLength - 1) {
-    int i0 = cString[inputPoint++];
-    int i1 = cString[inputPoint++];
-    int i2 = inputPoint < inputLength ? cString[inputPoint++] : 'A'; // 'A' will decode to \0
-    int i3 = inputPoint < inputLength ? cString[inputPoint++] : 'A';
-
-    output[outputPoint++] = (uint8_t)((table[i0] << 2) | (table[i1] >> 4));
-    if (outputPoint < outputLength) {
-      output[outputPoint++] = (uint8_t)(((table[i1] & 0xF) << 4) | (table[i2] >> 2));
-    }
-    if (outputPoint < outputLength) {
-      output[outputPoint++] = (uint8_t)(((table[i2] & 0x3) << 6) | table[i3]);
-    }
-  }
-
-  return data;
-}
-
 #endif // !GTM_OAUTH2_SKIP_GOOGLE_SUPPORT
 
 @end
