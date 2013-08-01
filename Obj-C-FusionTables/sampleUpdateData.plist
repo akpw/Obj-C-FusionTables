@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Jubilee Synagogue</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/AO7B0</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string>&lt;b&gt;Caption:&lt;/b&gt; an interesting building</string>
+		<key>entryImageURL</key>
+		<string>http://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Prague_-_Jerusalemer_Synagoge.jpg/220px-Prague_-_Jerusalemer_Synagoge.jpg</string>
+		<key>markerIcon</key>
+		<string> cross_hairs_highlight</string>
+		<key>lineColor</key>
+		<string></string>
+		<key>geometry</key>
+		<string>14.431944, 50.084722</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Prague Orloj</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/AO7B0</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string>&lt;b&gt;Caption:&lt;/b&gt; Old Town Astronomical Clock</string>
+		<key>entryImageURL</key>
+		<string>http://www.tunliweb.no/Bilder_SM/_album_Praha2/B0.jpg</string>
+		<key>markerIcon</key>
+		<string> cross_hairs_highlight</string>
+		<key>lineColor</key>
+		<string></string>
+		<key>geometry</key>
+		<string>14.420917, 50.087008</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Old Town Square</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/AO7B0</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string>&lt;b&gt;Caption:&lt;/b&gt; Old Town </string>
+		<key>entryImageURL</key>
+		<string>http://www.molon.de/galleries/Czech/Prague/Oldsquare/images01/07%20View%20of%20Old%20Town%20square.jpg</string>
+		<key>markerIcon</key>
+		<string> cross_hairs_highlight</string>
+		<key>lineColor</key>
+		<string></string>
+		<key>geometry</key>
+		<string>14.4214, 50.0872</string>
+	</dict>
+</array>
+</plist>

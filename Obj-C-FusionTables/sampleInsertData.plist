@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Route Segment</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/HGJ5X</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string></string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string></string>
+		<key>lineColor</key>
+		<string>#0000FF</string>
+		<key>geometry</key>
+		<string>14.4333,50.0847 14.4325,50.0843 14.4324,50.0843 14.4324,50.0843 14.4320,50.0845 14.4319,50.0846 14.4319,50.0846 14.4319,50.0846 14.4319,50.0846 14.4319,50.0846 14.4319,50.0846 14.4319,50.0846 14.4319,50.0846 14.4319,50.0846 14.4318,50.0847 14.4318,50.0847 14.4297,50.0854 14.4297,50.0854 14.4294,50.0857 14.4286,50.0861 14.4285,50.0862 14.4285,50.0862 14.4285,50.0862 14.4285,50.0862 14.4263,50.0858 14.4263,50.0858</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Route Segment</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/HGJ5X</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string></string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string></string>
+		<key>lineColor</key>
+		<string>#9400D3</string>
+		<key>geometry</key>
+		<string>14.4257,50.0857 14.4257,50.0857 14.4254,50.0856 14.4246,50.0863 14.4242,50.0864 14.4245,50.0864 14.4245,50.0864 14.4245,50.0864 14.4246,50.0862 14.4243,50.0861 14.4241,50.0862 14.4239,50.0862 14.4237,50.0862 14.4235,50.0861 14.4233,50.0860 14.4232,50.0858 14.4229,50.0859 14.4228,50.0860</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Route Segment</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/HGJ5X</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string></string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string></string>
+		<key>lineColor</key>
+		<string>#DC143C</string>
+		<key>geometry</key>
+		<string>14.4228,50.0861 14.4228,50.0861 14.4228,50.0862 14.4227,50.0862 14.4225,50.0862 14.4224,50.0863 14.4223,50.0864 14.4221,50.0864 14.4220,50.0865 14.4219,50.0866 14.4219,50.0866 14.4214,50.0868 14.4213,50.0867 14.4212,50.0868 14.4211,50.0869 14.4211,50.0870 14.4212,50.0870 14.4213,50.0871 14.4213,50.0872 14.4213,50.0872 14.4213,50.0872 14.4213,50.0872 14.4213,50.0872 14.4211,50.0873 14.4210,50.0873 14.4209,50.0874 14.4208,50.0874 14.4206,50.0875 14.4205,50.0875 14.4203,50.0876 14.4202,50.0876 14.4201,50.0876 14.4200,50.0877 14.4198,50.0878 14.4197,50.0878 14.4195,50.0878 14.4193,50.0877 14.4191,50.0877 14.4190,50.0877 14.4188,50.0876 14.4187,50.0876 14.4185,50.0875 14.4184,50.0875 14.4183,50.0874 14.4181,50.0874 14.4180,50.0873 14.4179,50.0872 14.4177,50.0873 14.4177,50.0874 14.4177,50.0874 14.4176,50.0874 14.4175,50.0874 14.4173,50.0873 14.4172,50.0873 14.4170,50.0873 14.4169,50.0873 14.4167,50.0873 14.4166,50.0873 14.4164,50.0873 14.4163,50.0872 14.4162,50.0872 14.4160,50.0872 14.4158,50.0873 14.4157,50.0873 14.4155,50.0873 14.4154,50.0873 14.4152,50.0873 14.4152,50.0872 14.4151,50.0872 14.4150,50.0871 14.4149,50.0870 14.4148,50.0869 14.4147,50.0868 14.4147,50.0867 14.4146,50.0867 14.4146,50.0865 14.4145,50.0863 14.4144,50.0862 14.4143,50.0862 14.4141,50.0862 14.4141,50.0862 14.4140,50.0862 14.4140,50.0862 14.4139,50.0862 14.4140,50.0861 14.4141,50.0861 14.4138,50.0854 14.4137,50.0854 14.4136,50.0854 14.4134,50.0854 14.4133,50.0854 14.4131,50.0854 14.4130,50.0854</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Route Segment</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/HGJ5X</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string></string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string></string>
+		<key>lineColor</key>
+		<string>#9400D3</string>
+		<key>geometry</key>
+		<string>14.4129,50.0854 14.4129,50.0854 14.4129,50.0854 14.4129,50.0854 14.4129,50.0854 14.4129,50.0854 14.4129,50.0854 14.4132,50.0854 14.4134,50.0854 14.4136,50.0854 14.4138,50.0853 14.4137,50.0852 14.4137,50.0850 14.4136,50.0849 14.4135,50.0848 14.4134,50.0846 14.4134,50.0845 14.4133,50.0843 14.4133,50.0842 14.4133,50.0841 14.4133,50.0839 14.4133,50.0838 14.4132,50.0836 14.4132,50.0835 14.4131,50.0834 14.4131,50.0832 14.4132,50.0831 14.4133,50.0829 14.4133,50.0828 14.4133,50.0827 14.4132,50.0825 14.4134,50.0824 14.4136,50.0823 14.4138,50.0823 14.4138,50.0821 14.4139,50.0813 14.4141,50.0812 14.4143,50.0812 14.4145,50.0812 14.4145,50.0812</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Route Segment</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/HGJ5X</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string></string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string></string>
+		<key>lineColor</key>
+		<string>#228B22</string>
+		<key>geometry</key>
+		<string>14.4147,50.0812 14.4147,50.0812 14.4147,50.0812 14.4148,50.0812 14.4148,50.0812</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Route Segment</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/HGJ5X</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string></string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string></string>
+		<key>lineColor</key>
+		<string>#0000FF</string>
+		<key>geometry</key>
+		<string>14.4148,50.0813 14.4148,50.0813 14.4148,50.0813 14.4170,50.0814 14.4170,50.0814 14.4193,50.0823 14.4193,50.0823 14.4196,50.0819 14.4196,50.0819 14.4205,50.0819 14.4205,50.0819 14.4224,50.0813 14.4224,50.0813 14.4245,50.0811</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Route Segment</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/HGJ5X</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string></string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string></string>
+		<key>lineColor</key>
+		<string>#9400D3</string>
+		<key>geometry</key>
+		<string>14.4251,50.0818 14.4251,50.0818 14.4253,50.0820 14.4254,50.0822 14.4256,50.0823 14.4258,50.0822 14.4260,50.0821 14.4262,50.0820 14.4263,50.0819 14.4265,50.0818 14.4267,50.0817 14.4268,50.0816 14.4270,50.0815 14.4272,50.0815 14.4273,50.0814 14.4273,50.0815 14.4275,50.0816 14.4278,50.0816 14.4279,50.0815 14.4281,50.0815 14.4284,50.0814 14.4285,50.0814 14.4288,50.0813 14.4289,50.0812 14.4288,50.0810 14.4287,50.0809 14.4286,50.0807 14.4286,50.0806 14.4288,50.0805 14.4287,50.0807 14.4287,50.0808 14.4289,50.0809 14.4291,50.0809 14.4293,50.0810 14.4295,50.0810 14.4297,50.0812 14.4299,50.0812 14.4302,50.0813 14.4303,50.0815 14.4304,50.0816 14.4305,50.0817 14.4306,50.0818 14.4307,50.0820 14.4309,50.0820 14.4311,50.0821 14.4312,50.0823 14.4314,50.0824 14.4316,50.0825 14.4317,50.0826</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:38 PM</string>
+		<key>entryName</key>
+		<string>Charles Bridge</string>
+		<key>entryThumbImageURL</key>
+		<string>http://www.geonames.org/img/wikipedia/147000/thumb-146468-100.jpg</string>
+		<key>entryURL</key>
+		<string>http://en.wikipedia.org/wiki/Charles_Bridge</string>
+		<key>entryURLDescription</key>
+		<string>The Charles Bridge</string>
+		<key>entryNote</key>
+		<string>The Charles Bridge (listen) is a famous historic bridge that crosses the Vltava river in Prague, Czech Republic. Its construction started in 1357 under the auspices of King Charles IV, and finished in the beginning of the 15th century (...)</string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string>museum</string>
+		<key>lineColor</key>
+		<string></string>
+		<key>geometry</key>
+		<string>14.4119,50.0864</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:23 PM </string>
+		<key>entryName</key>
+		<string>Estates Theatre</string>
+		<key>entryThumbImageURL</key>
+		<string>http://www.geonames.org/img/wikipedia/18000/thumb-17163-100.jpg</string>
+		<key>entryURL</key>
+		<string>http://en.wikipedia.org/wiki/Estates_Theatre</string>
+		<key>entryURLDescription</key>
+		<string>The Estates Theatre</string>
+		<key>entryNote</key>
+		<string>The Estates Theatre or Stavovské divadlo is a historic theatre in Prague, Czech Republic. The Estates Theatre was annexed to the National Theatre in 1948 and currently draws on three artistic ensembles, opera, ballet, and drama, which perform at the Estates Theatre, the National Theatre (Národní (...)</string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string>museum</string>
+		<key>lineColor</key>
+		<string></string>
+		<key>geometry</key>
+		<string>14.4239,50.0861</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:08 PM</string>
+		<key>entryName</key>
+		<string>Wenceslas Square</string>
+		<key>entryThumbImageURL</key>
+		<string>http://www.geonames.org/img/wikipedia/157000/thumb-156864-100.jpg</string>
+		<key>entryURL</key>
+		<string>http://en.wikipedia.org/wiki/Wenceslas_Square</string>
+		<key>entryURLDescription</key>
+		<string>Wenceslas Square</string>
+		<key>entryNote</key>
+		<string>Wenceslas Square (Czech: Václavské náměstí , colloquially Václavák) is one of the main city squares and the centre of the business and cultural communities in the New Town of Prague, Czech Republic. Many historical events occurred there, and it is a traditional setting for demonstrations, (...)</string>
+		<key>entryImageURL</key>
+		<string></string>
+		<key>markerIcon</key>
+		<string>museum</string>
+		<key>lineColor</key>
+		<string></string>
+		<key>geometry</key>
+		<string>14.4270,50.0820</string>
+	</dict>
+	<dict>
+		<key>entryDate</key>
+		<string>Jan 23, 2012 2:07 PM </string>
+		<key>entryName</key>
+		<string>Old Town Square</string>
+		<key>entryThumbImageURL</key>
+		<string>http://goo.gl/AO7B0</string>
+		<key>entryURL</key>
+		<string></string>
+		<key>entryURLDescription</key>
+		<string></string>
+		<key>entryNote</key>
+		<string>&lt;b&gt;Caption:&lt;/b&gt; Old Town </string>
+		<key>entryImageURL</key>
+		<string>http://www.molon.de/galleries/Czech/Prague/Oldsquare/images01/07%20View%20of%20Old%20Town%20square.jpg</string>
+		<key>markerIcon</key>
+		<string> cross_hairs_highlight</string>
+		<key>lineColor</key>
+		<string></string>
+		<key>geometry</key>
+		<string>14.4214, 50.0872</string>
+	</dict>
+</array>
+</plist>
