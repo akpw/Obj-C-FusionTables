@@ -12,17 +12,51 @@
 		57A7DE9717AA37FB00E74167 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9617AA37FB00E74167 /* CoreGraphics.framework */; };
 		57A7DE9D17AA37FB00E74167 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DE9B17AA37FB00E74167 /* InfoPlist.strings */; };
 		57A7DE9F17AA37FB00E74167 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DE9E17AA37FB00E74167 /* main.m */; };
-		57A7DEA317AA37FB00E74167 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEA217AA37FB00E74167 /* AppDelegate.m */; };
 		57A7DEA517AA37FB00E74167 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEA417AA37FB00E74167 /* Default.png */; };
 		57A7DEA717AA37FB00E74167 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEA617AA37FB00E74167 /* Default@2x.png */; };
 		57A7DEA917AA37FB00E74167 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEA817AA37FB00E74167 /* Default-568h@2x.png */; };
-		57A7DEAC17AA37FB00E74167 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEAB17AA37FB00E74167 /* ViewController.m */; };
-		57A7DEAF17AA37FB00E74167 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEAD17AA37FB00E74167 /* ViewController.xib */; };
 		57A7DEB717AA37FB00E74167 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DEB617AA37FB00E74167 /* SenTestingKit.framework */; };
 		57A7DEB817AA37FB00E74167 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9217AA37FB00E74167 /* UIKit.framework */; };
 		57A7DEB917AA37FB00E74167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9417AA37FB00E74167 /* Foundation.framework */; };
 		57A7DEC117AA37FB00E74167 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */; };
 		57A7DEC417AA37FB00E74167 /* Obj_C_FusionTablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEC317AA37FB00E74167 /* Obj_C_FusionTablesTests.m */; };
+		57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DECE17AA385A00E74167 /* AppDelegate.m */; };
+		57A7DED317AA387A00E74167 /* AppGeneralServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DED217AA387A00E74167 /* AppGeneralServicesController.m */; };
+		57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED717AA394700E74167 /* sampleInsertData.plist */; };
+		57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED817AA394700E74167 /* sampleUpdateData.plist */; };
+		57A7DEDF17AA399B00E74167 /* SampleFTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEDE17AA399B00E74167 /* SampleFTBuilder.m */; };
+		57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */; };
+		57A7DEEB17AA39A900E74167 /* SampleViewControllerFTCreateSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE317AA39A900E74167 /* SampleViewControllerFTCreateSection.m */; };
+		57A7DEEC17AA39A900E74167 /* SampleViewControllerFTStylingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE517AA39A900E74167 /* SampleViewControllerFTStylingSection.m */; };
+		57A7DEED17AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE717AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m */; };
+		57A7DEEE17AA39A900E74167 /* SampleViewControllerFTSharingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE917AA39A900E74167 /* SampleViewControllerFTSharingSection.m */; };
+		57A7DEF417AA39C000E74167 /* SampleViewControllerUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */; };
+		57A7DEF517AA39C000E74167 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEF217AA39C000E74167 /* SampleViewController.m */; };
+		57A7DEF617AA39C000E74167 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEF317AA39C000E74167 /* SampleViewController.xib */; };
+		57A7DEFF17AA3A0900E74167 /* GroupedTableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEF917AA3A0900E74167 /* GroupedTableSectionController.m */; };
+		57A7DF0017AA3A0900E74167 /* GroupedTableUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEFB17AA3A0900E74167 /* GroupedTableUIController.m */; };
+		57A7DF0117AA3A0900E74167 /* GroupedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEFD17AA3A0900E74167 /* GroupedTableViewController.m */; };
+		57A7DF0217AA3A0900E74167 /* GroupedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEFE17AA3A0900E74167 /* GroupedTableViewController.xib */; };
+		57A7DF1017AA3A1F00E74167 /* GoogleAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF0317AA3A1F00E74167 /* GoogleAPIKeys.plist */; };
+		57A7DF1117AA3A1F00E74167 /* GoogleAuthorizationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0517AA3A1F00E74167 /* GoogleAuthorizationController.m */; };
+		57A7DF1217AA3A1F00E74167 /* FTResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0717AA3A1F00E74167 /* FTResource.m */; };
+		57A7DF1317AA3A1F00E74167 /* FTTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0917AA3A1F00E74167 /* FTTable.m */; };
+		57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0B17AA3A1F00E74167 /* FTStyle.m */; };
+		57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */; };
+		57A7DF1617AA3A1F00E74167 /* FTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0F17AA3A1F00E74167 /* FTBuilder.m */; };
+		57A7DF2117AA3A3500E74167 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF1917AA3A3500E74167 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		57A7DF2217AA3A3500E74167 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF1B17AA3A3500E74167 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		57A7DF2317AA3A3500E74167 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF1D17AA3A3500E74167 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		57A7DF2417AA3A3500E74167 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF1F17AA3A3500E74167 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		57A7DF2517AA3A3500E74167 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2017AA3A3500E74167 /* GTMOAuth2ViewTouch.xib */; };
+		57A7DF2D17AA3A8900E74167 /* CellAccessoryViewButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2717AA3A8900E74167 /* CellAccessoryViewButton.png */; };
+		57A7DF2E17AA3A8900E74167 /* CellAccessoryViewButtonHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2817AA3A8900E74167 /* CellAccessoryViewButtonHighlighted.png */; };
+		57A7DF2F17AA3A8900E74167 /* CellAccessoryViewButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2917AA3A8900E74167 /* CellAccessoryViewButton@2x.png */; };
+		57A7DF3017AA3A8900E74167 /* CellAccessoryViewButtonHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2A17AA3A8900E74167 /* CellAccessoryViewButtonHighlighted@2x.png */; };
+		57A7DF3117AA3A8900E74167 /* GenericButtonNormal_54.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2B17AA3A8900E74167 /* GenericButtonNormal_54.png */; };
+		57A7DF3217AA3A8900E74167 /* GenericButtonPushed_54.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2C17AA3A8900E74167 /* GenericButtonPushed_54.png */; };
+		57A7DF3417AA3AA700E74167 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */; };
+		57A7DF3617AA3AAE00E74167 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DF3517AA3AAE00E74167 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,20 +78,75 @@
 		57A7DE9C17AA37FB00E74167 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		57A7DE9E17AA37FB00E74167 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		57A7DEA017AA37FB00E74167 /* Obj-C-FusionTables-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Obj-C-FusionTables-Prefix.pch"; sourceTree = "<group>"; };
-		57A7DEA117AA37FB00E74167 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		57A7DEA217AA37FB00E74167 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		57A7DEA417AA37FB00E74167 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		57A7DEA617AA37FB00E74167 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		57A7DEA817AA37FB00E74167 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		57A7DEAA17AA37FB00E74167 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		57A7DEAB17AA37FB00E74167 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		57A7DEAE17AA37FB00E74167 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		57A7DEB517AA37FB00E74167 /* Obj-C-FusionTablesTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Obj-C-FusionTablesTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57A7DEB617AA37FB00E74167 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		57A7DEBE17AA37FB00E74167 /* Obj-C-FusionTablesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Obj-C-FusionTablesTests-Info.plist"; sourceTree = "<group>"; };
 		57A7DEC017AA37FB00E74167 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		57A7DEC217AA37FB00E74167 /* Obj_C_FusionTablesTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Obj_C_FusionTablesTests.h; sourceTree = "<group>"; };
 		57A7DEC317AA37FB00E74167 /* Obj_C_FusionTablesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Obj_C_FusionTablesTests.m; sourceTree = "<group>"; };
+		57A7DECD17AA385A00E74167 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		57A7DECE17AA385A00E74167 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		57A7DED117AA387A00E74167 /* AppGeneralServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGeneralServicesController.h; sourceTree = "<group>"; };
+		57A7DED217AA387A00E74167 /* AppGeneralServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGeneralServicesController.m; sourceTree = "<group>"; };
+		57A7DED717AA394700E74167 /* sampleInsertData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleInsertData.plist; sourceTree = "<group>"; };
+		57A7DED817AA394700E74167 /* sampleUpdateData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleUpdateData.plist; sourceTree = "<group>"; };
+		57A7DEDD17AA399B00E74167 /* SampleFTBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleFTBuilder.h; sourceTree = "<group>"; };
+		57A7DEDE17AA399B00E74167 /* SampleFTBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleFTBuilder.m; sourceTree = "<group>"; };
+		57A7DEE017AA39A900E74167 /* SampleViewControllerFTBaseSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTBaseSection.h; sourceTree = "<group>"; };
+		57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerFTBaseSection.m; sourceTree = "<group>"; };
+		57A7DEE217AA39A900E74167 /* SampleViewControllerFTCreateSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTCreateSection.h; sourceTree = "<group>"; };
+		57A7DEE317AA39A900E74167 /* SampleViewControllerFTCreateSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerFTCreateSection.m; sourceTree = "<group>"; };
+		57A7DEE417AA39A900E74167 /* SampleViewControllerFTStylingSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTStylingSection.h; sourceTree = "<group>"; };
+		57A7DEE517AA39A900E74167 /* SampleViewControllerFTStylingSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerFTStylingSection.m; sourceTree = "<group>"; };
+		57A7DEE617AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerInsertFTRowsSection.h; sourceTree = "<group>"; };
+		57A7DEE717AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerInsertFTRowsSection.m; sourceTree = "<group>"; };
+		57A7DEE817AA39A900E74167 /* SampleViewControllerFTSharingSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTSharingSection.h; sourceTree = "<group>"; };
+		57A7DEE917AA39A900E74167 /* SampleViewControllerFTSharingSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerFTSharingSection.m; sourceTree = "<group>"; };
+		57A7DEEF17AA39C000E74167 /* SampleViewControllerUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerUIController.h; sourceTree = "<group>"; };
+		57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerUIController.m; sourceTree = "<group>"; };
+		57A7DEF117AA39C000E74167 /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		57A7DEF217AA39C000E74167 /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
+		57A7DEF317AA39C000E74167 /* SampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleViewController.xib; sourceTree = "<group>"; };
+		57A7DEF817AA3A0900E74167 /* GroupedTableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedTableSectionController.h; sourceTree = "<group>"; };
+		57A7DEF917AA3A0900E74167 /* GroupedTableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedTableSectionController.m; sourceTree = "<group>"; };
+		57A7DEFA17AA3A0900E74167 /* GroupedTableUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedTableUIController.h; sourceTree = "<group>"; };
+		57A7DEFB17AA3A0900E74167 /* GroupedTableUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedTableUIController.m; sourceTree = "<group>"; };
+		57A7DEFC17AA3A0900E74167 /* GroupedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedTableViewController.h; sourceTree = "<group>"; };
+		57A7DEFD17AA3A0900E74167 /* GroupedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedTableViewController.m; sourceTree = "<group>"; };
+		57A7DEFE17AA3A0900E74167 /* GroupedTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupedTableViewController.xib; sourceTree = "<group>"; };
+		57A7DF0317AA3A1F00E74167 /* GoogleAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GoogleAPIKeys.plist; sourceTree = "<group>"; };
+		57A7DF0417AA3A1F00E74167 /* GoogleAuthorizationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAuthorizationController.h; sourceTree = "<group>"; };
+		57A7DF0517AA3A1F00E74167 /* GoogleAuthorizationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAuthorizationController.m; sourceTree = "<group>"; };
+		57A7DF0617AA3A1F00E74167 /* FTResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTResource.h; sourceTree = "<group>"; };
+		57A7DF0717AA3A1F00E74167 /* FTResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTResource.m; sourceTree = "<group>"; };
+		57A7DF0817AA3A1F00E74167 /* FTTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTable.h; sourceTree = "<group>"; };
+		57A7DF0917AA3A1F00E74167 /* FTTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTable.m; sourceTree = "<group>"; };
+		57A7DF0A17AA3A1F00E74167 /* FTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStyle.h; sourceTree = "<group>"; };
+		57A7DF0B17AA3A1F00E74167 /* FTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStyle.m; sourceTree = "<group>"; };
+		57A7DF0C17AA3A1F00E74167 /* FTTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTemplate.h; sourceTree = "<group>"; };
+		57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTemplate.m; sourceTree = "<group>"; };
+		57A7DF0E17AA3A1F00E74167 /* FTBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBuilder.h; sourceTree = "<group>"; };
+		57A7DF0F17AA3A1F00E74167 /* FTBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBuilder.m; sourceTree = "<group>"; };
+		57A7DF1817AA3A3500E74167 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
+		57A7DF1917AA3A3500E74167 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
+		57A7DF1A17AA3A3500E74167 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
+		57A7DF1B17AA3A3500E74167 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2Authentication.m; sourceTree = "<group>"; };
+		57A7DF1C17AA3A3500E74167 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
+		57A7DF1D17AA3A3500E74167 /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2SignIn.m; sourceTree = "<group>"; };
+		57A7DF1E17AA3A3500E74167 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
+		57A7DF1F17AA3A3500E74167 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
+		57A7DF2017AA3A3500E74167 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
+		57A7DF2717AA3A8900E74167 /* CellAccessoryViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellAccessoryViewButton.png; sourceTree = "<group>"; };
+		57A7DF2817AA3A8900E74167 /* CellAccessoryViewButtonHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellAccessoryViewButtonHighlighted.png; sourceTree = "<group>"; };
+		57A7DF2917AA3A8900E74167 /* CellAccessoryViewButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellAccessoryViewButton@2x.png"; sourceTree = "<group>"; };
+		57A7DF2A17AA3A8900E74167 /* CellAccessoryViewButtonHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellAccessoryViewButtonHighlighted@2x.png"; sourceTree = "<group>"; };
+		57A7DF2B17AA3A8900E74167 /* GenericButtonNormal_54.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericButtonNormal_54.png; sourceTree = "<group>"; };
+		57A7DF2C17AA3A8900E74167 /* GenericButtonPushed_54.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericButtonPushed_54.png; sourceTree = "<group>"; };
+		57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		57A7DF3517AA3AAE00E74167 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +154,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57A7DF3617AA3AAE00E74167 /* Security.framework in Frameworks */,
+				57A7DF3417AA3AA700E74167 /* SystemConfiguration.framework in Frameworks */,
 				57A7DE9317AA37FB00E74167 /* UIKit.framework in Frameworks */,
 				57A7DE9517AA37FB00E74167 /* Foundation.framework in Frameworks */,
 				57A7DE9717AA37FB00E74167 /* CoreGraphics.framework in Frameworks */,
@@ -87,6 +178,8 @@
 		57A7DE8617AA37FA00E74167 = {
 			isa = PBXGroup;
 			children = (
+				57A7DF3517AA3AAE00E74167 /* Security.framework */,
+				57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */,
 				57A7DE9817AA37FB00E74167 /* Obj-C-FusionTables */,
 				57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesTests */,
 				57A7DE9117AA37FB00E74167 /* Frameworks */,
@@ -117,11 +210,12 @@
 		57A7DE9817AA37FB00E74167 /* Obj-C-FusionTables */ = {
 			isa = PBXGroup;
 			children = (
-				57A7DEA117AA37FB00E74167 /* AppDelegate.h */,
-				57A7DEA217AA37FB00E74167 /* AppDelegate.m */,
-				57A7DEAA17AA37FB00E74167 /* ViewController.h */,
-				57A7DEAB17AA37FB00E74167 /* ViewController.m */,
-				57A7DEAD17AA37FB00E74167 /* ViewController.xib */,
+				57A7DECD17AA385A00E74167 /* AppDelegate.h */,
+				57A7DECE17AA385A00E74167 /* AppDelegate.m */,
+				57A7DED017AA386700E74167 /* App Services */,
+				57A7DED517AA38EA00E74167 /* Example */,
+				57A7DEF717AA39ED00E74167 /* GroupedUITableViews */,
+				57A7DED417AA38C900E74167 /* Obj-C-Fusion Tables Base */,
 				57A7DE9917AA37FB00E74167 /* Supporting Files */,
 			);
 			path = "Obj-C-FusionTables";
@@ -130,6 +224,7 @@
 		57A7DE9917AA37FB00E74167 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				57A7DF2617AA3A7700E74167 /* Resources */,
 				57A7DE9A17AA37FB00E74167 /* Obj-C-FusionTables-Info.plist */,
 				57A7DE9B17AA37FB00E74167 /* InfoPlist.strings */,
 				57A7DE9E17AA37FB00E74167 /* main.m */,
@@ -158,6 +253,129 @@
 				57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		57A7DED017AA386700E74167 /* App Services */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DED117AA387A00E74167 /* AppGeneralServicesController.h */,
+				57A7DED217AA387A00E74167 /* AppGeneralServicesController.m */,
+			);
+			name = "App Services";
+			sourceTree = "<group>";
+		};
+		57A7DED417AA38C900E74167 /* Obj-C-Fusion Tables Base */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DF1717AA3A2500E74167 /* Google Toolbox */,
+				57A7DF0317AA3A1F00E74167 /* GoogleAPIKeys.plist */,
+				57A7DF0417AA3A1F00E74167 /* GoogleAuthorizationController.h */,
+				57A7DF0517AA3A1F00E74167 /* GoogleAuthorizationController.m */,
+				57A7DF0617AA3A1F00E74167 /* FTResource.h */,
+				57A7DF0717AA3A1F00E74167 /* FTResource.m */,
+				57A7DF0817AA3A1F00E74167 /* FTTable.h */,
+				57A7DF0917AA3A1F00E74167 /* FTTable.m */,
+				57A7DF0A17AA3A1F00E74167 /* FTStyle.h */,
+				57A7DF0B17AA3A1F00E74167 /* FTStyle.m */,
+				57A7DF0C17AA3A1F00E74167 /* FTTemplate.h */,
+				57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */,
+				57A7DF0E17AA3A1F00E74167 /* FTBuilder.h */,
+				57A7DF0F17AA3A1F00E74167 /* FTBuilder.m */,
+			);
+			name = "Obj-C-Fusion Tables Base";
+			sourceTree = "<group>";
+		};
+		57A7DED517AA38EA00E74167 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DED617AA392800E74167 /* Sample Data */,
+				57A7DEDB17AA395200E74167 /* FT Builder */,
+				57A7DEDC17AA396000E74167 /* UI Sections */,
+				57A7DEEF17AA39C000E74167 /* SampleViewControllerUIController.h */,
+				57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */,
+				57A7DEF117AA39C000E74167 /* SampleViewController.h */,
+				57A7DEF217AA39C000E74167 /* SampleViewController.m */,
+				57A7DEF317AA39C000E74167 /* SampleViewController.xib */,
+			);
+			name = Example;
+			sourceTree = "<group>";
+		};
+		57A7DED617AA392800E74167 /* Sample Data */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DED717AA394700E74167 /* sampleInsertData.plist */,
+				57A7DED817AA394700E74167 /* sampleUpdateData.plist */,
+			);
+			name = "Sample Data";
+			sourceTree = "<group>";
+		};
+		57A7DEDB17AA395200E74167 /* FT Builder */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DEDD17AA399B00E74167 /* SampleFTBuilder.h */,
+				57A7DEDE17AA399B00E74167 /* SampleFTBuilder.m */,
+			);
+			name = "FT Builder";
+			sourceTree = "<group>";
+		};
+		57A7DEDC17AA396000E74167 /* UI Sections */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DEE017AA39A900E74167 /* SampleViewControllerFTBaseSection.h */,
+				57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */,
+				57A7DEE217AA39A900E74167 /* SampleViewControllerFTCreateSection.h */,
+				57A7DEE317AA39A900E74167 /* SampleViewControllerFTCreateSection.m */,
+				57A7DEE417AA39A900E74167 /* SampleViewControllerFTStylingSection.h */,
+				57A7DEE517AA39A900E74167 /* SampleViewControllerFTStylingSection.m */,
+				57A7DEE617AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.h */,
+				57A7DEE717AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m */,
+				57A7DEE817AA39A900E74167 /* SampleViewControllerFTSharingSection.h */,
+				57A7DEE917AA39A900E74167 /* SampleViewControllerFTSharingSection.m */,
+			);
+			name = "UI Sections";
+			sourceTree = "<group>";
+		};
+		57A7DEF717AA39ED00E74167 /* GroupedUITableViews */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DEF817AA3A0900E74167 /* GroupedTableSectionController.h */,
+				57A7DEF917AA3A0900E74167 /* GroupedTableSectionController.m */,
+				57A7DEFA17AA3A0900E74167 /* GroupedTableUIController.h */,
+				57A7DEFB17AA3A0900E74167 /* GroupedTableUIController.m */,
+				57A7DEFC17AA3A0900E74167 /* GroupedTableViewController.h */,
+				57A7DEFD17AA3A0900E74167 /* GroupedTableViewController.m */,
+				57A7DEFE17AA3A0900E74167 /* GroupedTableViewController.xib */,
+			);
+			name = GroupedUITableViews;
+			sourceTree = "<group>";
+		};
+		57A7DF1717AA3A2500E74167 /* Google Toolbox */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DF1817AA3A3500E74167 /* GTMHTTPFetcher.h */,
+				57A7DF1917AA3A3500E74167 /* GTMHTTPFetcher.m */,
+				57A7DF1A17AA3A3500E74167 /* GTMOAuth2Authentication.h */,
+				57A7DF1B17AA3A3500E74167 /* GTMOAuth2Authentication.m */,
+				57A7DF1C17AA3A3500E74167 /* GTMOAuth2SignIn.h */,
+				57A7DF1D17AA3A3500E74167 /* GTMOAuth2SignIn.m */,
+				57A7DF1E17AA3A3500E74167 /* GTMOAuth2ViewControllerTouch.h */,
+				57A7DF1F17AA3A3500E74167 /* GTMOAuth2ViewControllerTouch.m */,
+				57A7DF2017AA3A3500E74167 /* GTMOAuth2ViewTouch.xib */,
+			);
+			name = "Google Toolbox";
+			sourceTree = "<group>";
+		};
+		57A7DF2617AA3A7700E74167 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DF2717AA3A8900E74167 /* CellAccessoryViewButton.png */,
+				57A7DF2817AA3A8900E74167 /* CellAccessoryViewButtonHighlighted.png */,
+				57A7DF2917AA3A8900E74167 /* CellAccessoryViewButton@2x.png */,
+				57A7DF2A17AA3A8900E74167 /* CellAccessoryViewButtonHighlighted@2x.png */,
+				57A7DF2B17AA3A8900E74167 /* GenericButtonNormal_54.png */,
+				57A7DF2C17AA3A8900E74167 /* GenericButtonPushed_54.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +453,18 @@
 				57A7DEA517AA37FB00E74167 /* Default.png in Resources */,
 				57A7DEA717AA37FB00E74167 /* Default@2x.png in Resources */,
 				57A7DEA917AA37FB00E74167 /* Default-568h@2x.png in Resources */,
-				57A7DEAF17AA37FB00E74167 /* ViewController.xib in Resources */,
+				57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */,
+				57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */,
+				57A7DEF617AA39C000E74167 /* SampleViewController.xib in Resources */,
+				57A7DF0217AA3A0900E74167 /* GroupedTableViewController.xib in Resources */,
+				57A7DF1017AA3A1F00E74167 /* GoogleAPIKeys.plist in Resources */,
+				57A7DF2517AA3A3500E74167 /* GTMOAuth2ViewTouch.xib in Resources */,
+				57A7DF2D17AA3A8900E74167 /* CellAccessoryViewButton.png in Resources */,
+				57A7DF2E17AA3A8900E74167 /* CellAccessoryViewButtonHighlighted.png in Resources */,
+				57A7DF2F17AA3A8900E74167 /* CellAccessoryViewButton@2x.png in Resources */,
+				57A7DF3017AA3A8900E74167 /* CellAccessoryViewButtonHighlighted@2x.png in Resources */,
+				57A7DF3117AA3A8900E74167 /* GenericButtonNormal_54.png in Resources */,
+				57A7DF3217AA3A8900E74167 /* GenericButtonPushed_54.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,8 +500,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				57A7DE9F17AA37FB00E74167 /* main.m in Sources */,
-				57A7DEA317AA37FB00E74167 /* AppDelegate.m in Sources */,
-				57A7DEAC17AA37FB00E74167 /* ViewController.m in Sources */,
+				57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */,
+				57A7DED317AA387A00E74167 /* AppGeneralServicesController.m in Sources */,
+				57A7DEDF17AA399B00E74167 /* SampleFTBuilder.m in Sources */,
+				57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */,
+				57A7DEEB17AA39A900E74167 /* SampleViewControllerFTCreateSection.m in Sources */,
+				57A7DEEC17AA39A900E74167 /* SampleViewControllerFTStylingSection.m in Sources */,
+				57A7DEED17AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m in Sources */,
+				57A7DEEE17AA39A900E74167 /* SampleViewControllerFTSharingSection.m in Sources */,
+				57A7DEF417AA39C000E74167 /* SampleViewControllerUIController.m in Sources */,
+				57A7DEF517AA39C000E74167 /* SampleViewController.m in Sources */,
+				57A7DEFF17AA3A0900E74167 /* GroupedTableSectionController.m in Sources */,
+				57A7DF0017AA3A0900E74167 /* GroupedTableUIController.m in Sources */,
+				57A7DF0117AA3A0900E74167 /* GroupedTableViewController.m in Sources */,
+				57A7DF1117AA3A1F00E74167 /* GoogleAuthorizationController.m in Sources */,
+				57A7DF1217AA3A1F00E74167 /* FTResource.m in Sources */,
+				57A7DF1317AA3A1F00E74167 /* FTTable.m in Sources */,
+				57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */,
+				57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */,
+				57A7DF1617AA3A1F00E74167 /* FTBuilder.m in Sources */,
+				57A7DF2117AA3A3500E74167 /* GTMHTTPFetcher.m in Sources */,
+				57A7DF2217AA3A3500E74167 /* GTMOAuth2Authentication.m in Sources */,
+				57A7DF2317AA3A3500E74167 /* GTMOAuth2SignIn.m in Sources */,
+				57A7DF2417AA3A3500E74167 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,14 +551,6 @@
 				57A7DE9C17AA37FB00E74167 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		57A7DEAD17AA37FB00E74167 /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				57A7DEAE17AA37FB00E74167 /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 		57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */ = {
