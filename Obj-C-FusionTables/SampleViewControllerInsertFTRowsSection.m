@@ -1,5 +1,5 @@
 //
-//  SampleViewControllerInsertFTRowsSection.m
+//  SampleViewControllerFTSharingSection.m
 //  Obj-C-FusionTables
 //
 //  Created by Arseniy on 19/7/13.

@@ -1,5 +1,5 @@
 //
-//  SampleViewControllerStartStopTickingButtonSection.h
+//  SampleViewControllerFTSharingSection.h
 //  Obj-C-FusionTables
 //
 //  Created by Arseniy on 20/7/13.
