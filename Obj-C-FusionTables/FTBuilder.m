@@ -64,7 +64,7 @@
 #pragma mark - Builds Fusion Tables SQL Query Insert Statement
 + (NSString *)builSQLInsertStringForFTTableID:(NSString *)fusionTableID, ... {
     NSString *insertString = nil;
-    NSMutableString *sqlInsertTemplateString = nil;
+    NSString *sqlInsertTemplateString = nil;
 
     NSArray *columnNames = [self columnNames];
     NSUInteger columnsCount = [columnNames count];
@@ -95,7 +95,7 @@
 #pragma mark - Builds Fusion Tables SQL Query Update Statement
 + (NSString *)builSQLUpdateStringForRowID:(NSUInteger)rowID FTTableID:(NSString *)fusionTableID, ... {
     NSString *ftUpdateString = nil;
-    NSMutableString *sqlUPdateTemplateString = nil;
+    NSString *sqlUPdateTemplateString = nil;
 
     NSArray *columnNames = [self columnNames];
     NSUInteger columnsCount = [columnNames count];
