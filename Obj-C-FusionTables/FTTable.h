@@ -11,6 +11,10 @@
 @interface FTTable : FTResource
 
 #pragma mark - Creates a Fusion Table
-- (void)createFusionTable:(NSDictionary *)tableDictionary WithCompletionHandler:(FTAPIHandler)handler;
+- (void)createFusionTable:(NSDictionary *)tableDictionary
+                    WithCompletionHandler:(FTAPIHandler)handler;
+
+- (void)setPublicSharingForFusionTableID:(NSString *)fusionTableID
+                    WithCompletionHandler:(FTAPIHandler)handler;
 
 @end

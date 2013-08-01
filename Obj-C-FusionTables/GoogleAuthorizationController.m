@@ -38,14 +38,18 @@
 #define GOOGLE_FUSION_TABLES_API_SCOPE (@"https://www.googleapis.com/auth/fusiontables")
 #define GOOGLE_FUSION_TABLES_SCOPE_READONLY (@"https://www.googleapis.com/auth/fusiontables.readonly")
 #define GOOGLE_URLSHORTENER_SCOPE (@"https://www.googleapis.com/auth/urlshortener")
+
+#define GOOGLE_DRIVE_SCOPE (@"https://www.googleapis.com/auth/drive")
 #pragma mark - Initialization
 - (id)init {
     self = [super init];
     if (self) {
+        [self signOutFromGoogle];
         self.theScope = [GTMOAuth2Authentication scopeWithStrings:
                                      GOOGLE_FUSION_TABLES_API_SCOPE,
                                      GOOGLE_FUSION_TABLES_SCOPE_READONLY,
                                      GOOGLE_URLSHORTENER_SCOPE,
+                                     GOOGLE_DRIVE_SCOPE,
                                      nil];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(incrementNetworkActivity:)

@@ -55,7 +55,8 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
             forwardButton = forwardButton_,
             navButtonsView = navButtonsView_,
             rightBarButtonItem = rightBarButtonItem_,
-            webView = webView_;
+            webView = webView_,
+            initialActivityIndicator = initialActivityIndicator_;
 
 @synthesize keychainItemName = keychainItemName_,
             keychainItemAccessibility = keychainItemAccessibility_,
@@ -112,7 +113,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
                  clientID:(NSString *)clientID
              clientSecret:(NSString *)clientSecret
          keychainItemName:(NSString *)keychainItemName
-        completionHandler:(void (^)(GTMOAuth2ViewControllerTouch *viewController, GTMOAuth2Authentication *auth, NSError *error))handler {
+        completionHandler:(GTMOAuth2ViewControllerCompletionHandler)handler {
   return [[[self alloc] initWithScope:scope
                              clientID:clientID
                          clientSecret:clientSecret
@@ -124,7 +125,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
            clientID:(NSString *)clientID
        clientSecret:(NSString *)clientSecret
    keychainItemName:(NSString *)keychainItemName
-  completionHandler:(void (^)(GTMOAuth2ViewControllerTouch *viewController, GTMOAuth2Authentication *auth, NSError *error))handler {
+  completionHandler:(GTMOAuth2ViewControllerCompletionHandler)handler {
   // convenient entry point for Google authentication
 
   Class signInClass = [[self class] signInClass];
@@ -205,7 +206,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
 + (id)controllerWithAuthentication:(GTMOAuth2Authentication *)auth
                   authorizationURL:(NSURL *)authorizationURL
                   keychainItemName:(NSString *)keychainItemName
-                 completionHandler:(void (^)(GTMOAuth2ViewControllerTouch *viewController, GTMOAuth2Authentication *auth, NSError *error))handler {
+                 completionHandler:(GTMOAuth2ViewControllerCompletionHandler)handler {
   return [[[self alloc] initWithAuthentication:auth
                               authorizationURL:authorizationURL
                               keychainItemName:keychainItemName
@@ -215,7 +216,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
 - (id)initWithAuthentication:(GTMOAuth2Authentication *)auth
             authorizationURL:(NSURL *)authorizationURL
             keychainItemName:(NSString *)keychainItemName
-           completionHandler:(void (^)(GTMOAuth2ViewControllerTouch *viewController, GTMOAuth2Authentication *auth, NSError *error))handler {
+           completionHandler:(GTMOAuth2ViewControllerCompletionHandler)handler {
   // fall back to the non-blocks init
   self = [self initWithAuthentication:auth
                      authorizationURL:authorizationURL
@@ -234,6 +235,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
 
   [backButton_ release];
   [forwardButton_ release];
+  [initialActivityIndicator_ release];
   [navButtonsView_ release];
   [rightBarButtonItem_ release];
   [webView_ release];
@@ -267,10 +269,20 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
 + (GTMOAuth2Authentication *)authForGoogleFromKeychainForName:(NSString *)keychainItemName
                                                      clientID:(NSString *)clientID
                                                  clientSecret:(NSString *)clientSecret {
+  return [self authForGoogleFromKeychainForName:keychainItemName
+                                       clientID:clientID
+                                   clientSecret:clientSecret
+                                          error:NULL];
+}
+
++ (GTMOAuth2Authentication *)authForGoogleFromKeychainForName:(NSString *)keychainItemName
+                                                     clientID:(NSString *)clientID
+                                                 clientSecret:(NSString *)clientSecret
+                                                        error:(NSError **)error {
   Class signInClass = [self signInClass];
   NSURL *tokenURL = [signInClass googleTokenURL];
   NSString *redirectURI = [signInClass nativeClientRedirectURI];
-  
+
   GTMOAuth2Authentication *auth;
   auth = [GTMOAuth2Authentication authenticationWithServiceProvider:kGTMOAuth2ServiceProviderGoogle
                                                            tokenURL:tokenURL
@@ -278,20 +290,23 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
                                                            clientID:clientID
                                                        clientSecret:clientSecret];
   [[self class] authorizeFromKeychainForName:keychainItemName
-                              authentication:auth];
+                              authentication:auth
+                                       error:error];
   return auth;
 }
+
 #endif
 
 + (BOOL)authorizeFromKeychainForName:(NSString *)keychainItemName
-                      authentication:(GTMOAuth2Authentication *)newAuth {
+                      authentication:(GTMOAuth2Authentication *)newAuth
+                               error:(NSError **)error {
   newAuth.accessToken = nil;
 
   BOOL didGetTokens = NO;
   GTMOAuth2Keychain *keychain = [GTMOAuth2Keychain defaultKeychain];
   NSString *password = [keychain passwordForService:keychainItemName
                                             account:kGTMOAuth2AccountName
-                                              error:nil];
+                                              error:error];
   if (password != nil) {
     [newAuth setKeysForResponseString:password];
     didGetTokens = YES;
@@ -310,15 +325,24 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
                      authentication:(GTMOAuth2Authentication *)auth {
   return [self saveParamsToKeychainForName:keychainItemName
                              accessibility:NULL
-                            authentication:auth];
+                            authentication:auth
+                                     error:NULL];
 }
 
 + (BOOL)saveParamsToKeychainForName:(NSString *)keychainItemName
                       accessibility:(CFTypeRef)accessibility
-                     authentication:(GTMOAuth2Authentication *)auth {
+                     authentication:(GTMOAuth2Authentication *)auth
+                              error:(NSError **)error {
   [self removeAuthFromKeychainForName:keychainItemName];
   // don't save unless we have a token that can really authorize requests
-  if (![auth canAuthorize]) return NO;
+  if (![auth canAuthorize]) {
+    if (error) {
+      *error = [NSError errorWithDomain:kGTMOAuth2ErrorDomain
+                                   code:kGTMOAuth2ErrorTokenUnavailable
+                               userInfo:nil];
+    }
+    return NO;
+  }
 
   if (accessibility == NULL
       && &kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly != NULL) {
@@ -332,7 +356,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
                     forService:keychainItemName
                  accessibility:accessibility
                        account:kGTMOAuth2AccountName
-                         error:nil];
+                         error:error];
 }
 
 - (void)loadView {
@@ -363,6 +387,10 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
 
 
 - (void)viewDidLoad {
+  [self setUpNavigation];
+}
+
+- (void)setUpNavigation {
   rightBarButtonItem_.customView = navButtonsView_;
   self.navigationItem.rightBarButtonItem = rightBarButtonItem_;
 }
@@ -375,7 +403,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
 #endif
 
   if (popViewBlock || self.navigationController.topViewController == self) {
-    if (!self.view.isHidden) {
+    if (!self.view.hidden) {
       // Set the flag to our viewWillDisappear method so it knows
       // this is a disappearance initiated by the sign-in object,
       // not the user cancelling via the navigation controller
@@ -499,6 +527,14 @@ static Class gSignInClass = Nil;
   return ([name length] > 0);
 }
 
+- (BOOL)showsInitialActivityIndicator {
+  return (mustShowActivityIndicator_ == 1 || initialHTMLString_ == nil);
+}
+
+- (void)setShowsInitialActivityIndicator:(BOOL)flag {
+  mustShowActivityIndicator_ = (flag ? 1 : -1);
+}
+
 #pragma mark User Properties
 
 - (void)setProperty:(id)obj forKey:(NSString *)key {
@@ -554,10 +590,17 @@ static Class gSignInClass = Nil;
       // On iOS 5+, UIWebView will ignore loadHTMLString: if it's followed by
       // a loadRequest: call, so if there is a "loading" message we defer
       // the loadRequest: until after after we've drawn the "loading" message.
+      //
+      // If there is no initial html string, we show the activity indicator
+      // unless the user set showsInitialActivityIndicator to NO; if there
+      // is an initial html string, we hide the indicator unless the user set
+      // showsInitialActivityIndicator to YES.
       NSString *html = self.initialHTMLString;
       if ([html length] > 0) {
+        [initialActivityIndicator_ setHidden:(mustShowActivityIndicator_ < 1)];
         [self.webView loadHTMLString:html baseURL:nil];
       } else {
+        [initialActivityIndicator_ setHidden:(mustShowActivityIndicator_ < 0)];
         [self.webView loadRequest:request];
       }
     } else {
@@ -569,7 +612,7 @@ static Class gSignInClass = Nil;
       //
       // Even better is for apps to check the system clock and show some more
       // helpful, localized instructions for users; this is really a fallback.
-      NSString *html = @"<html><body><div align=center><font size='7'>"
+      NSString *const html = @"<html><body><div align=center><font size='7'>"
         @"&#x231A; ?<br><i>System Clock Incorrect</i><br>%@"
         @"</font></div></body></html>";
       NSString *errHTML = [NSString stringWithFormat:html, [NSDate date]];
@@ -596,7 +639,8 @@ static Class gSignInClass = Nil;
           CFTypeRef accessibility = self.keychainItemAccessibility;
           [[self class] saveParamsToKeychainForName:keychainItemName
                                       accessibility:accessibility
-                                     authentication:auth];
+                                     authentication:auth
+                                              error:NULL];
         } else {
           // remove the auth params from the keychain
           [[self class] removeAuthFromKeychainForName:keychainItemName];
@@ -653,6 +697,9 @@ static Class gSignInClass = Nil;
 #pragma mark Protocol implementations
 
 - (void)viewWillAppear:(BOOL)animated {
+  // See the comment on clearBrowserCookies in viewDidDisappear.
+  [self clearBrowserCookies];
+
   if (!isViewShown_) {
     isViewShown_ = YES;
     if ([self isNavigationBarTranslucent]) {
@@ -696,11 +743,23 @@ static Class gSignInClass = Nil;
 #endif
   }
 
-  // prevent the next sign-in from showing in the WebView that the user is
-  // already signed in
-  [self clearBrowserCookies];
-
   [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear:animated];
+
+  // prevent the next sign-in from showing in the WebView that the user is
+  // already signed in.  It's possible for the WebView to set the cookies even
+  // after this, so we also clear them when the view first appears.
+  [self clearBrowserCookies];
+}
+
+- (void)viewDidLayoutSubviews {
+  // We don't call super's version of this method because
+  // -[UIViewController viewDidLayoutSubviews] is documented as a no-op, that
+  // didn't exist before iOS 5.
+  [initialActivityIndicator_ setCenter:[webView_ center]];
 }
 
 - (BOOL)webView:(UIWebView *)webView
@@ -750,6 +809,7 @@ static Class gSignInClass = Nil;
     [self setInitialHTMLString:nil];
     [self.webView loadRequest:self.request];
   } else {
+    [initialActivityIndicator_ setHidden:YES];
     [signIn_ cookiesChanged:[NSHTTPCookieStorage sharedHTTPCookieStorage]];
 
     [self updateUI];
@@ -790,7 +850,16 @@ static Class gSignInClass = Nil;
 }
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-// Deployment target < iOS 6.
+// When running on a device with an OS version < 6, this gets called.
+//
+// Since it is never called in iOS 6 or greater, if your min deployment
+// target is iOS6 or greater, then you don't need to have this method compiled
+// into your app.
+//
+// When running on a device with an OS version 6 or greater, this code is
+// not called. - (NSUInteger)supportedInterfaceOrientations; would be called,
+// if it existed. Since it is absent,
+// Allow the default orientations: All for iPad, all but upside down for iPhone.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
   BOOL value = YES;
   if (!isInsideShouldAutorotateToInterfaceOrientation_) {
@@ -805,12 +874,8 @@ static Class gSignInClass = Nil;
   }
   return value;
 }
-#else
-// Deployment target >= iOS 6.
-- (NSUInteger)supportedInterfaceOrientations {
-  return UIInterfaceOrientationMaskAll;
-}
 #endif
+
 
 @end
 

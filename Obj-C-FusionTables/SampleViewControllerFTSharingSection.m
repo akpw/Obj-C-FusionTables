@@ -8,6 +8,8 @@
 
 
 #import "SampleViewControllerFTSharingSection.h"
+#import "AppGeneralServicesController.h"
+#import "FTTable.h"
 
 // Defines rows in section
 enum SampleViewControllerFTSharingSectionRows {
@@ -50,6 +52,28 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     }
 }
 - (void)executeFTAction:(id)sender {
+    ftSharingRowState = kFTStateSharing;
+    [self reloadSection];
+    
+    FTTable *ftTable = [[FTTable alloc] init];
+    [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
+    [ftTable setPublicSharingForFusionTableID:self.fusionTableID
+                            WithCompletionHandler:^(NSData *data, NSError *error) {
+            [[AppGeneralServicesController sharedInstance] decrementNetworkActivityIndicator];
+            ftSharingRowState = kFTStateIdle;
+            if (error) {
+                 NSData *data = [[error userInfo] valueForKey:@"data"];
+                 NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                 
+                 [[AppGeneralServicesController sharedInstance]
+                        showAlertViewWithTitle:@"Fusion Tables Error"
+                        AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", str]];
+             } else {
+                 NSDictionary *responceDict = [NSJSONSerialization
+                                               JSONObjectWithData:data options:kNilOptions error:nil];
+                 
+             }
+            [self reloadSection];
+         }];
 }
 
 #pragma mark - GroupedTableSectionsController Table View Delegate
