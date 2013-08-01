@@ -28,8 +28,6 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 }
 
 
-
-
 #pragma mark - GroupedTableSectionsController Table View Data Source
 - (NSUInteger)numberOfRows {
     return SampleViewControllerFTSharingSectionNumRows;
