@@ -9,29 +9,30 @@
 
 #import "SampleViewControllerFTSharingSection.h"
 
-// FTable styling states
-typedef NS_ENUM (NSUInteger, FTInsertRowsStates) {
+// Defines rows in section
+enum SampleViewControllerFTSharingSectionRows {
+    kSampleViewControllerFTSharingRowSection = 0,
+    SampleViewControllerFTSharingSectionNumRows
+};
+
+
+// FTable sharing states
+typedef NS_ENUM (NSUInteger, FTSharingStates) {
     kFTStateIdle = 0,
-    kFTStateInsertingRows,
-    kFTStateInsertedRows,
+    kFTStateSharing
 };
 
 
 @implementation SampleViewControllerFTSharingSection {
-    FTInsertRowsStates ftInsertRowState;
+    FTSharingStates ftSharingRowState;
 }
 
-// Defines rows in section
-enum SampleViewControllerFTInsertSectionRows {
-    kSampleViewControllerFTInsertRowSection = 0,
-    SampleViewControllerFTInsertSectionNumRows
-};
 
 
 
 #pragma mark - GroupedTableSectionsController Table View Data Source
 - (NSUInteger)numberOfRows {
-    return SampleViewControllerFTInsertSectionNumRows;
+    return SampleViewControllerFTSharingSectionNumRows;
 }
 
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
@@ -42,14 +43,9 @@ enum SampleViewControllerFTInsertSectionRows {
     cell.userInteractionEnabled = (self.fusionTableID) ? YES : NO;
     
     switch (row) {
-        case kSampleViewControllerFTInsertRowSection:
+        case kSampleViewControllerFTSharingRowSection:
             cell.textLabel.text = @"Share Fusion Table";
-            if (ftInsertRowState == kFTStateInsertedRows) {
-                cell.accessoryView = nil;
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            } else {
-                cell.accessoryView = [self ftActionButton];
-            }
+            cell.accessoryView = [self ftActionButton];
             break;
         default:
             break;
@@ -62,15 +58,12 @@ enum SampleViewControllerFTInsertSectionRows {
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
     if (self.fusionTableID) {
-        switch (ftInsertRowState) {
+        switch (ftSharingRowState) {
             case kFTStateIdle:
                 footerString = @"Share Fusion Tables";
                 break;
-            case kFTStateInsertingRows:
+            case kFTStateSharing:
                 footerString = @"Sharing Fusion Table...";
-                break;
-            case kFTStateInsertedRows:
-                footerString = @"Fusion Tables Shared";
                 break;
             default:
                 break;
