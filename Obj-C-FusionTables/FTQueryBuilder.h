@@ -1,5 +1,5 @@
 //
-//  FTBuilder.h
+//  FTQueryBuilder.h
 //  Obj-C-FusionTables
 //
 //  Created by Arseniy on 25/7/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FTBuilder : NSObject
+@interface FTQueryBuilder : NSObject
 
 
 #pragma mark - Fusion Tables Structure

@@ -1,5 +1,5 @@
 //
-//  SampleFTBuilder.h
+//  SampleFTQueryBuilder.h
 //  Obj-C-FusionTables
 //
 //  Created by Arseniy Kuznetsov on 5/10/11.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FTBuilder.h"
+#import "FTQueryBuilder.h"
 
-@interface SampleFTBuilder : FTBuilder
+@interface SampleFTQueryBuilder : FTQueryBuilder
 
 
 @end

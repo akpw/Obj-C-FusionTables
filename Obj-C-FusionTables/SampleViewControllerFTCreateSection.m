@@ -8,7 +8,7 @@
 
 #import "SampleViewControllerFTCreateSection.h"
 #import "AppGeneralServicesController.h"
-#import "SampleFTBuilder.h"
+#import "SampleFTQueryBuilder.h"
 #import "FTTable.h"
 
 // Defines rows in section
@@ -64,7 +64,7 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
     NSString *tableTitle = [NSString stringWithFormat:@"Sample_FT_%@",
                             [formatter stringFromDate:[NSDate date]]];
     
-    NSDictionary *tableDictionary = [SampleFTBuilder
+    NSDictionary *tableDictionary = [SampleFTQueryBuilder
                                         buildFusionTableStructureDictionary:tableTitle
                                         WithDescription:nil
                                         IsExportable:YES];

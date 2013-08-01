@@ -24,7 +24,7 @@
 		57A7DED317AA387A00E74167 /* AppGeneralServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DED217AA387A00E74167 /* AppGeneralServicesController.m */; };
 		57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED717AA394700E74167 /* sampleInsertData.plist */; };
 		57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED817AA394700E74167 /* sampleUpdateData.plist */; };
-		57A7DEDF17AA399B00E74167 /* SampleFTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEDE17AA399B00E74167 /* SampleFTBuilder.m */; };
+		57A7DEDF17AA399B00E74167 /* SampleFTQueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEDE17AA399B00E74167 /* SampleFTQueryBuilder.m */; };
 		57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */; };
 		57A7DEEB17AA39A900E74167 /* SampleViewControllerFTCreateSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE317AA39A900E74167 /* SampleViewControllerFTCreateSection.m */; };
 		57A7DEEC17AA39A900E74167 /* SampleViewControllerFTStylingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE517AA39A900E74167 /* SampleViewControllerFTStylingSection.m */; };
@@ -42,7 +42,7 @@
 		57A7DF1317AA3A1F00E74167 /* FTTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0917AA3A1F00E74167 /* FTTable.m */; };
 		57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0B17AA3A1F00E74167 /* FTStyle.m */; };
 		57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */; };
-		57A7DF1617AA3A1F00E74167 /* FTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0F17AA3A1F00E74167 /* FTBuilder.m */; };
+		57A7DF1617AA3A1F00E74167 /* FTQueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0F17AA3A1F00E74167 /* FTQueryBuilder.m */; };
 		57A7DF2117AA3A3500E74167 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF1917AA3A3500E74167 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		57A7DF2217AA3A3500E74167 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF1B17AA3A3500E74167 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		57A7DF2317AA3A3500E74167 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF1D17AA3A3500E74167 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -92,8 +92,8 @@
 		57A7DED217AA387A00E74167 /* AppGeneralServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGeneralServicesController.m; sourceTree = "<group>"; };
 		57A7DED717AA394700E74167 /* sampleInsertData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleInsertData.plist; sourceTree = "<group>"; };
 		57A7DED817AA394700E74167 /* sampleUpdateData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleUpdateData.plist; sourceTree = "<group>"; };
-		57A7DEDD17AA399B00E74167 /* SampleFTBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleFTBuilder.h; sourceTree = "<group>"; };
-		57A7DEDE17AA399B00E74167 /* SampleFTBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleFTBuilder.m; sourceTree = "<group>"; };
+		57A7DEDD17AA399B00E74167 /* SampleFTQueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleFTQueryBuilder.h; sourceTree = "<group>"; };
+		57A7DEDE17AA399B00E74167 /* SampleFTQueryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleFTQueryBuilder.m; sourceTree = "<group>"; };
 		57A7DEE017AA39A900E74167 /* SampleViewControllerFTBaseSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTBaseSection.h; sourceTree = "<group>"; };
 		57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerFTBaseSection.m; sourceTree = "<group>"; };
 		57A7DEE217AA39A900E74167 /* SampleViewControllerFTCreateSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTCreateSection.h; sourceTree = "<group>"; };
@@ -126,8 +126,8 @@
 		57A7DF0B17AA3A1F00E74167 /* FTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStyle.m; sourceTree = "<group>"; };
 		57A7DF0C17AA3A1F00E74167 /* FTTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTemplate.h; sourceTree = "<group>"; };
 		57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTemplate.m; sourceTree = "<group>"; };
-		57A7DF0E17AA3A1F00E74167 /* FTBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBuilder.h; sourceTree = "<group>"; };
-		57A7DF0F17AA3A1F00E74167 /* FTBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBuilder.m; sourceTree = "<group>"; };
+		57A7DF0E17AA3A1F00E74167 /* FTQueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTQueryBuilder.h; sourceTree = "<group>"; };
+		57A7DF0F17AA3A1F00E74167 /* FTQueryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTQueryBuilder.m; sourceTree = "<group>"; };
 		57A7DF1817AA3A3500E74167 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
 		57A7DF1917AA3A3500E74167 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
 		57A7DF1A17AA3A3500E74167 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
@@ -277,8 +277,8 @@
 				57A7DF0B17AA3A1F00E74167 /* FTStyle.m */,
 				57A7DF0C17AA3A1F00E74167 /* FTTemplate.h */,
 				57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */,
-				57A7DF0E17AA3A1F00E74167 /* FTBuilder.h */,
-				57A7DF0F17AA3A1F00E74167 /* FTBuilder.m */,
+				57A7DF0E17AA3A1F00E74167 /* FTQueryBuilder.h */,
+				57A7DF0F17AA3A1F00E74167 /* FTQueryBuilder.m */,
 			);
 			name = "Obj-C-Fusion Tables Base";
 			sourceTree = "<group>";
@@ -309,8 +309,8 @@
 		57A7DEDB17AA395200E74167 /* FT Builder */ = {
 			isa = PBXGroup;
 			children = (
-				57A7DEDD17AA399B00E74167 /* SampleFTBuilder.h */,
-				57A7DEDE17AA399B00E74167 /* SampleFTBuilder.m */,
+				57A7DEDD17AA399B00E74167 /* SampleFTQueryBuilder.h */,
+				57A7DEDE17AA399B00E74167 /* SampleFTQueryBuilder.m */,
 			);
 			name = "FT Builder";
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 				57A7DE9F17AA37FB00E74167 /* main.m in Sources */,
 				57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */,
 				57A7DED317AA387A00E74167 /* AppGeneralServicesController.m in Sources */,
-				57A7DEDF17AA399B00E74167 /* SampleFTBuilder.m in Sources */,
+				57A7DEDF17AA399B00E74167 /* SampleFTQueryBuilder.m in Sources */,
 				57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */,
 				57A7DEEB17AA39A900E74167 /* SampleViewControllerFTCreateSection.m in Sources */,
 				57A7DEEC17AA39A900E74167 /* SampleViewControllerFTStylingSection.m in Sources */,
@@ -514,7 +514,7 @@
 				57A7DF1317AA3A1F00E74167 /* FTTable.m in Sources */,
 				57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */,
 				57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */,
-				57A7DF1617AA3A1F00E74167 /* FTBuilder.m in Sources */,
+				57A7DF1617AA3A1F00E74167 /* FTQueryBuilder.m in Sources */,
 				57A7DF2117AA3A3500E74167 /* GTMHTTPFetcher.m in Sources */,
 				57A7DF2217AA3A3500E74167 /* GTMOAuth2Authentication.m in Sources */,
 				57A7DF2317AA3A3500E74167 /* GTMOAuth2SignIn.m in Sources */,
@@ -691,6 +691,7 @@
 				57A7DEC917AA37FB00E74167 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		57A7DECA17AA37FB00E74167 /* Build configuration list for PBXNativeTarget "Obj-C-FusionTablesTests" */ = {
 			isa = XCConfigurationList;
@@ -699,6 +700,7 @@
 				57A7DECC17AA37FB00E74167 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

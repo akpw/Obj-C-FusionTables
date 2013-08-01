@@ -9,7 +9,7 @@
 #import "SampleViewControllerFTStylingSection.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppGeneralServicesController.h"
-#import "SampleFTBuilder.h"
+#import "SampleFTQueryBuilder.h"
 #import "FTStyle.h"
 #import "FTTemplate.h"
 
@@ -109,7 +109,7 @@ enum FTActionTypes {
         [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
         [self reloadSection];
 
-        NSDictionary *styleDict = [SampleFTBuilder
+        NSDictionary *styleDict = [SampleFTQueryBuilder
                                    buildFusionTableStyleForFusionTableID:self.fusionTableID];
         FTStyle *ftStyle = [[FTStyle alloc] init];
         [ftStyle setFusionTableStyle:styleDict
@@ -139,7 +139,7 @@ enum FTActionTypes {
         ftStylingState = kFTStateApplyingInfoWindoTemplate;
         [self reloadSection];
         
-        NSDictionary *templDict = [SampleFTBuilder buildInfoWindowTemplate];
+        NSDictionary *templDict = [SampleFTQueryBuilder buildInfoWindowTemplate];
         FTTemplate *ftTemplate = [[FTTemplate alloc] init];
         [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
         [ftTemplate setFusionTableInfoWindow:templDict ForFusionTableID:self.fusionTableID

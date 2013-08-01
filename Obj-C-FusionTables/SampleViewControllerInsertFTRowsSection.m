@@ -9,7 +9,7 @@
 #import "SampleViewControllerInsertFTRowsSection.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppGeneralServicesController.h"
-#import "SampleFTBuilder.h"
+#import "SampleFTQueryBuilder.h"
 #import "FTResource.h"
 
 // Defines rows in section
@@ -170,21 +170,21 @@ enum FTActionTypes {
     
     NSString *ftInsertString = nil;
     for (NSDictionary *insertEntry in insertArray) {
-        NSString *lineColor = [SampleFTBuilder buildFTStringValueString:insertEntry[@"lineColor"]];
-        NSString *insertEntryString = [SampleFTBuilder builSQLInsertStringForFTTableID:
+        NSString *lineColor = [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"lineColor"]];
+        NSString *insertEntryString = [SampleFTQueryBuilder builSQLInsertStringForFTTableID:
                   self.fusionTableID,
-                  [SampleFTBuilder buildFTStringValueString:insertEntry[@"entryDate"]],
-                  [SampleFTBuilder buildFTStringValueString:insertEntry[@"entryName"]],
-                  [SampleFTBuilder buildFTStringValueString:insertEntry[@"entryThumbImageURL"]],
-                  [SampleFTBuilder buildFTStringValueString:insertEntry[@"entryURL"]],
-                  [SampleFTBuilder buildFTStringValueString:insertEntry[@"entryURLDescription"]],
-                  [SampleFTBuilder buildFTStringValueString:insertEntry[@"entryNote"]],
-                  [SampleFTBuilder buildFTStringValueString:insertEntry[@"entryImageURL"]],
-                  [SampleFTBuilder buildFTStringValueString:insertEntry[@"markerIcon"]],
+                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryDate"]],
+                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryName"]],
+                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryThumbImageURL"]],
+                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryURL"]],
+                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryURLDescription"]],
+                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryNote"]],
+                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryImageURL"]],
+                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"markerIcon"]],
                   lineColor,
                   ([lineColor length] > 2) ?  // a quick & dirty way to insert different KML item types
-                      [SampleFTBuilder buildKMLLineString:insertEntry[@"geometry"]] :
-                      [SampleFTBuilder buildKMLPointString:insertEntry[@"geometry"]]
+                      [SampleFTQueryBuilder buildKMLLineString:insertEntry[@"geometry"]] :
+                      [SampleFTQueryBuilder buildKMLPointString:insertEntry[@"geometry"]]
                  ];
         ftInsertString = (ftInsertString) ?
                 [NSString stringWithFormat:@"%@;%@", ftInsertString, insertEntryString] :
@@ -233,18 +233,18 @@ enum FTActionTypes {
     NSArray *updatetArray = [NSArray arrayWithContentsOfFile:plistPath];
     if (lastInsertedRowID > 0 && [updatetArray count] > 0) {
         NSDictionary *updateEntry = updatetArray[sampleUpdateDataIndex];
-        NSString *ftUpdateEntryString = [SampleFTBuilder builSQLUpdateStringForRowID:lastInsertedRowID
+        NSString *ftUpdateEntryString = [SampleFTQueryBuilder builSQLUpdateStringForRowID:lastInsertedRowID
                            FTTableID:self.fusionTableID,
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"entryDate"]],
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"entryName"]],
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"entryThumbImageURL"]],
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"entryURL"]],
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"entryURLDescription"]],
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"entryNote"]],
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"entryImageURL"]],
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"markerIcon"]],
-                           [SampleFTBuilder buildFTStringValueString:updateEntry[@"lineColor"]],
-                           [SampleFTBuilder buildKMLPointString:updateEntry[@"geometry"]]
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryDate"]],
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryName"]],
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryThumbImageURL"]],
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryURL"]],
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryURLDescription"]],
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryNote"]],
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryImageURL"]],
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"markerIcon"]],
+                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"lineColor"]],
+                           [SampleFTQueryBuilder buildKMLPointString:updateEntry[@"geometry"]]
                            ];
         ftInsertRowState = kFTStateUpdatingRows;
         [self reloadSection];
@@ -278,7 +278,7 @@ enum FTActionTypes {
     }    
 }
 - (void)deleteInsertedRows {
-    NSString *ftDeleteString = [SampleFTBuilder buildDeleteAllRowStringForFusionTableID:self.fusionTableID];
+    NSString *ftDeleteString = [SampleFTQueryBuilder buildDeleteAllRowStringForFusionTableID:self.fusionTableID];
     
     ftInsertRowState = kFTStateDeletingRows;
     [self reloadSection];

@@ -1,14 +1,14 @@
 //
-//  FTBuilder.m
+//  FTQueryBuilder.m
 //  Obj-C-FusionTables
 //
 //  Created by Arseniy on 25/7/13.
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import "FTBuilder.h"
+#import "FTQueryBuilder.h"
 
-@implementation FTBuilder
+@implementation FTQueryBuilder
 
 #pragma mark - Fusion Tables Structure
 + (NSArray *)columnNames {

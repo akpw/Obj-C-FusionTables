@@ -1,14 +1,14 @@
 //
-//  SampleFTBuilder.m
+//  SampleFTQueryBuilder.m
 //  Obj-C-FusionTables
 //
 //  Created by Arseniy Kuznetsov on 5/10/11.
 //  Copyright 2011 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import "SampleFTBuilder.h"
+#import "SampleFTQueryBuilder.h"
 
-@implementation SampleFTBuilder
+@implementation SampleFTQueryBuilder
 
 + (NSArray *)columnNames {
     return @[
@@ -47,7 +47,7 @@
     tableDictionary[@"name"] = tableTitle;
     
     // Table Columns
-    tableDictionary[@"columns"] = [SampleFTBuilder buildFusionTableColumns];
+    tableDictionary[@"columns"] = [SampleFTQueryBuilder buildFusionTableColumns];
 
     // Table Description
     if (tableDescription) {
