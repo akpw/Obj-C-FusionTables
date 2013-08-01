@@ -178,8 +178,6 @@
 		57A7DE8617AA37FA00E74167 = {
 			isa = PBXGroup;
 			children = (
-				57A7DF3517AA3AAE00E74167 /* Security.framework */,
-				57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */,
 				57A7DE9817AA37FB00E74167 /* Obj-C-FusionTables */,
 				57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesTests */,
 				57A7DE9117AA37FB00E74167 /* Frameworks */,
@@ -199,6 +197,8 @@
 		57A7DE9117AA37FB00E74167 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57A7DF3517AA3AAE00E74167 /* Security.framework */,
+				57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */,
 				57A7DE9217AA37FB00E74167 /* UIKit.framework */,
 				57A7DE9417AA37FB00E74167 /* Foundation.framework */,
 				57A7DE9617AA37FB00E74167 /* CoreGraphics.framework */,
