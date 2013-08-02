@@ -8,7 +8,7 @@
 
 #import "SampleViewControllerFTStylingSection.h"
 #import <QuartzCore/QuartzCore.h>
-#import "AppGeneralServicesController.h"
+#import "SimpleGoogleServiceHelpers.h"
 #import "SampleFTQueryBuilder.h"
 #import "FTStyle.h"
 #import "FTTemplate.h"
@@ -106,7 +106,7 @@ enum FTActionTypes {
 - (void)ftSetStyle {
     if (self.fusionTableID) {
         ftStylingState = kFTStateApplyingStyling;
-        [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
+        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
         [self reloadSection];
 
         NSDictionary *styleDict = [SampleFTQueryBuilder
@@ -115,11 +115,11 @@ enum FTActionTypes {
         [ftStyle setFusionTableStyle:styleDict
                     ForFusionTableID:self.fusionTableID
                     WithCompletionHandler:^(NSData *data, NSError *error) {
-            [[AppGeneralServicesController sharedInstance] decrementNetworkActivityIndicator];
+            [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
             if (error) {
                 NSData *data = [[error userInfo] valueForKey:@"data"];
                 NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                [[AppGeneralServicesController sharedInstance]
+                [[SimpleGoogleServiceHelpers sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
                         AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@",
                         infoString]];
@@ -141,14 +141,14 @@ enum FTActionTypes {
         
         NSDictionary *templDict = [SampleFTQueryBuilder buildInfoWindowTemplate];
         FTTemplate *ftTemplate = [[FTTemplate alloc] init];
-        [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
+        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
         [ftTemplate setFusionTableInfoWindow:templDict ForFusionTableID:self.fusionTableID
                                             WithCompletionHandler:^(NSData *data, NSError *error) {
-           [[AppGeneralServicesController sharedInstance] decrementNetworkActivityIndicator];
+           [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
            if (error) {
                NSData *data = [[error userInfo] valueForKey:@"data"];
                NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-               [[AppGeneralServicesController sharedInstance]
+               [[SimpleGoogleServiceHelpers sharedInstance]
                       showAlertViewWithTitle:@"Fusion Tables Error"
                       AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@",
                       infoString]];

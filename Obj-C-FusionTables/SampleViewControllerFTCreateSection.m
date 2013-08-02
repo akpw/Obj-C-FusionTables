@@ -7,7 +7,7 @@
 //
 
 #import "SampleViewControllerFTCreateSection.h"
-#import "AppGeneralServicesController.h"
+#import "SimpleGoogleServiceHelpers.h"
 #import "SampleFTQueryBuilder.h"
 #import "FTTable.h"
 
@@ -74,10 +74,10 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
             postNotificationName:FUSION_TABLE_CREATION_STARTED_NOTIFICATION object:nil];
     
     FTTable *ftTable = [[FTTable alloc] init];
-    [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
+    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
     [ftTable createFusionTable:tableDictionary
                             WithCompletionHandler:^(NSData *data, NSError *error) {
-        [[AppGeneralServicesController sharedInstance] decrementNetworkActivityIndicator];
+        [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
         if (error) {
             ftState = kFTStateDoesNotExists;
             [[NSNotificationCenter defaultCenter]
@@ -86,7 +86,7 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
             NSData *data = [[error userInfo] valueForKey:@"data"];
             NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
-            [[AppGeneralServicesController sharedInstance]
+            [[SimpleGoogleServiceHelpers sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
                         AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@",
                         str]];
@@ -105,7 +105,7 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
                 NSLog(@"Created a new Fusion Table: %@", contentDict);
             } else {
                 // the FT Create Table did not return tableid
-                [[AppGeneralServicesController sharedInstance]
+                [[SimpleGoogleServiceHelpers sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
                         AndText:  @"Error Fetching the Fusion Table ID"];
             }

@@ -7,10 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SimpleGoogleServiceHelpers.h"
 #import "GTMHTTPFetcher.h"
-#import "AppGeneralServicesController.h"
-
-typedef void (^void_completion_handler_block)(void);
 
 @interface GoogleAuthorizationController : NSObject
 

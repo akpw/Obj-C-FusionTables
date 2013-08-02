@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "SampleViewControllerFTBaseSection.h"
+#import <MessageUI/MessageUI.h>
 
 @interface SampleViewControllerFTSharingSection : SampleViewControllerFTBaseSection
+                                <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
 @end

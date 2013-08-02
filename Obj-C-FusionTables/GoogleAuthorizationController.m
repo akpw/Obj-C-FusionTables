@@ -44,7 +44,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self signOutFromGoogle];
+        //[self signOutFromGoogle];
         self.theScope = [GTMOAuth2Authentication scopeWithStrings:
                                      GOOGLE_FUSION_TABLES_API_SCOPE,
                                      GOOGLE_FUSION_TABLES_SCOPE_READONLY,
@@ -95,14 +95,14 @@
 
 #pragma mark - Network connectivity states
 - (void)incrementNetworkActivity:(NSNotification *)notify {
-    [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
+    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
 }
 - (void)decrementNetworkActivity:(NSNotification *)notify {
-    [[AppGeneralServicesController sharedInstance] decrementNetworkActivityIndicator];
+    [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
 }
 - (void)signInNetworkLostOrFound:(NSNotification *)notification {
     if ([[notification name] isEqual:kGTMOAuth2NetworkLost]) {
-        [[AppGeneralServicesController sharedInstance] showAlertViewWithTitle:@"Network Connection Lost"
+        [[SimpleGoogleServiceHelpers sharedInstance] showAlertViewWithTitle:@"Network Connection Lost"
                                             AndText:@"Network connection was lost while connecting to Google"];         
         [[[notification object] delegate] cancelSigningIn];
     } else {
@@ -126,7 +126,7 @@
                                               encoding:NSUTF8StringEncoding];
     }
     NSLog(@"Authentication error: %@ Failure response body: %@", error, responseBody);
-    [[AppGeneralServicesController sharedInstance] showAlertViewWithTitle:@"Authentication error" AndText:
+    [[SimpleGoogleServiceHelpers sharedInstance] showAlertViewWithTitle:@"Authentication error" AndText:
                                      [NSString stringWithFormat:@"Error while signing-in in to Google: %@", 
                                      [error localizedDescription]]];
 }
@@ -164,10 +164,11 @@
 #pragma mark - Google SignIn
 - (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler 
                                         CancelHandler:(void_completion_handler_block)cancelHandler {
-    GTMOAuth2ViewControllerTouch *viewController = [GTMOAuth2ViewControllerTouch controllerWithScope:self.theScope
-                                                              clientID:[self googleClientID]
-                                                          clientSecret:[self googleClientSecret]
-                                                      keychainItemName:GOOGLE_KEYCHAIN_ID
+    GTMOAuth2ViewControllerTouch *viewController = [GTMOAuth2ViewControllerTouch
+                                                            controllerWithScope:self.theScope
+                                                            clientID:[self googleClientID]
+                                                            clientSecret:[self googleClientSecret]
+                                                            keychainItemName:GOOGLE_KEYCHAIN_ID
          completionHandler:^(GTMOAuth2ViewControllerTouch *viewController, 
                                     GTMOAuth2Authentication *auth, NSError *error) {
              if (error) {
@@ -182,7 +183,7 @@
                                                           encoding:NSUTF8StringEncoding];
                  }
                  NSLog(@"Authentication error: %@ Failure response body: %@", error, responseBody);
-                 [[AppGeneralServicesController sharedInstance]
+                 [[SimpleGoogleServiceHelpers sharedInstance]
                                 showAlertViewWithTitle:@"Authentication error" AndText:
                                 [NSString stringWithFormat:@"Error while signing-in in to Google: %@",
                                 [error localizedDescription]]];

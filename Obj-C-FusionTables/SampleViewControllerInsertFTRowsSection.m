@@ -8,7 +8,7 @@
 
 #import "SampleViewControllerInsertFTRowsSection.h"
 #import <QuartzCore/QuartzCore.h>
-#import "AppGeneralServicesController.h"
+#import "SimpleGoogleServiceHelpers.h"
 #import "SampleFTQueryBuilder.h"
 #import "FTResource.h"
 
@@ -196,14 +196,14 @@ enum FTActionTypes {
     [self reloadSection];
     
     FTResource *ftResource = [[FTResource alloc] init];
-    [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
+    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
     [ftResource modifyFusionTablesSQL:ftInsertString WithCompletionHandler:^(NSData *data, NSError *error) {
-        [[AppGeneralServicesController sharedInstance] decrementNetworkActivityIndicator];
+        [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
         ftInsertRowState = kFTStateIdle;
         if (error) {
             NSData *data = [[error userInfo] valueForKey:@"data"];
             NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[AppGeneralServicesController sharedInstance]
+            [[SimpleGoogleServiceHelpers sharedInstance]
                     showAlertViewWithTitle:@"Fusion Tables Error"
                     AndText: [NSString stringWithFormat:@"Error inserting Rows: %@", infoString]];
         } else {
@@ -250,14 +250,14 @@ enum FTActionTypes {
         [self reloadSection];
         
         FTResource *ftResource = [[FTResource alloc] init];
-        [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
+        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
         [ftResource modifyFusionTablesSQL:ftUpdateEntryString WithCompletionHandler:^(NSData *data, NSError *error) {
-            [[AppGeneralServicesController sharedInstance] decrementNetworkActivityIndicator];
+            [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
             ftInsertRowState = kFTStateIdle;
             if (error) {
                 NSData *data = [[error userInfo] valueForKey:@"data"];
                 NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                [[AppGeneralServicesController sharedInstance]
+                [[SimpleGoogleServiceHelpers sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
                         AndText: [NSString stringWithFormat:@"Error updating rows: %@", infoString]];
             } else {
@@ -283,15 +283,15 @@ enum FTActionTypes {
     ftInsertRowState = kFTStateDeletingRows;
     [self reloadSection];
 
-    [[AppGeneralServicesController sharedInstance] incrementNetworkActivityIndicator];
+    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
     FTResource *ftResource = [[FTResource alloc] init];
     [ftResource modifyFusionTablesSQL:ftDeleteString WithCompletionHandler:^(NSData *data, NSError *error) {
-        [[AppGeneralServicesController sharedInstance] decrementNetworkActivityIndicator];
+        [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
         ftInsertRowState = kFTStateIdle;
         if (error) {
             NSData *data = [[error userInfo] valueForKey:@"data"];
             NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[AppGeneralServicesController sharedInstance]
+            [[SimpleGoogleServiceHelpers sharedInstance]
                     showAlertViewWithTitle:@"Fusion Tables Error"
                     AndText: [NSString stringWithFormat:@"Error deleting rows: %@", infoString]];
             

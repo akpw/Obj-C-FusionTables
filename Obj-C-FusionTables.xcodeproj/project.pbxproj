@@ -12,7 +12,7 @@
 		578180E217AA995A00434135 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DC17AA995A00434135 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E317AA995A00434135 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DE17AA995A00434135 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E417AA995A00434135 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578180DF17AA995A00434135 /* GTMOAuth2ViewTouch.xib */; };
-		5789583917AA90CA00119DD3 /* GDriveResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789583817AA90CA00119DD3 /* GDriveResource.m */; };
+		578180E817ABF19700434135 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578180E717ABF19700434135 /* MessageUI.framework */; };
 		57A7DE9317AA37FB00E74167 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9217AA37FB00E74167 /* UIKit.framework */; };
 		57A7DE9517AA37FB00E74167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9417AA37FB00E74167 /* Foundation.framework */; };
 		57A7DE9717AA37FB00E74167 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9617AA37FB00E74167 /* CoreGraphics.framework */; };
@@ -27,7 +27,7 @@
 		57A7DEC117AA37FB00E74167 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */; };
 		57A7DEC417AA37FB00E74167 /* Obj_C_FusionTablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEC317AA37FB00E74167 /* Obj_C_FusionTablesTests.m */; };
 		57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DECE17AA385A00E74167 /* AppDelegate.m */; };
-		57A7DED317AA387A00E74167 /* AppGeneralServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DED217AA387A00E74167 /* AppGeneralServicesController.m */; };
+		57A7DED317AA387A00E74167 /* SimpleGoogleServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DED217AA387A00E74167 /* SimpleGoogleServiceHelpers.m */; };
 		57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED717AA394700E74167 /* sampleInsertData.plist */; };
 		57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED817AA394700E74167 /* sampleUpdateData.plist */; };
 		57A7DEDF17AA399B00E74167 /* SampleFTQueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEDE17AA399B00E74167 /* SampleFTQueryBuilder.m */; };
@@ -79,8 +79,7 @@
 		578180DD17AA995A00434135 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
 		578180DE17AA995A00434135 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		578180DF17AA995A00434135 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
-		5789583717AA90CA00119DD3 /* GDriveResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDriveResource.h; sourceTree = "<group>"; };
-		5789583817AA90CA00119DD3 /* GDriveResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDriveResource.m; sourceTree = "<group>"; };
+		578180E717ABF19700434135 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		57A7DE8F17AA37FB00E74167 /* Obj-C-FusionTables.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Obj-C-FusionTables.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57A7DE9217AA37FB00E74167 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		57A7DE9417AA37FB00E74167 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,8 +99,8 @@
 		57A7DEC317AA37FB00E74167 /* Obj_C_FusionTablesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Obj_C_FusionTablesTests.m; sourceTree = "<group>"; };
 		57A7DECD17AA385A00E74167 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		57A7DECE17AA385A00E74167 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		57A7DED117AA387A00E74167 /* AppGeneralServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGeneralServicesController.h; sourceTree = "<group>"; };
-		57A7DED217AA387A00E74167 /* AppGeneralServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGeneralServicesController.m; sourceTree = "<group>"; };
+		57A7DED117AA387A00E74167 /* SimpleGoogleServiceHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleGoogleServiceHelpers.h; sourceTree = "<group>"; };
+		57A7DED217AA387A00E74167 /* SimpleGoogleServiceHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleGoogleServiceHelpers.m; sourceTree = "<group>"; };
 		57A7DED717AA394700E74167 /* sampleInsertData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleInsertData.plist; sourceTree = "<group>"; };
 		57A7DED817AA394700E74167 /* sampleUpdateData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleUpdateData.plist; sourceTree = "<group>"; };
 		57A7DEDD17AA399B00E74167 /* SampleFTQueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleFTQueryBuilder.h; sourceTree = "<group>"; };
@@ -155,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				578180E817ABF19700434135 /* MessageUI.framework in Frameworks */,
 				57A7DF3617AA3AAE00E74167 /* Security.framework in Frameworks */,
 				57A7DF3417AA3AA700E74167 /* SystemConfiguration.framework in Frameworks */,
 				57A7DE9317AA37FB00E74167 /* UIKit.framework in Frameworks */,
@@ -198,6 +198,7 @@
 		57A7DE9117AA37FB00E74167 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				578180E717ABF19700434135 /* MessageUI.framework */,
 				57A7DF3517AA3AAE00E74167 /* Security.framework */,
 				57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */,
 				57A7DE9217AA37FB00E74167 /* UIKit.framework */,
@@ -213,7 +214,6 @@
 			children = (
 				57A7DECD17AA385A00E74167 /* AppDelegate.h */,
 				57A7DECE17AA385A00E74167 /* AppDelegate.m */,
-				57A7DED017AA386700E74167 /* App Services */,
 				57A7DED517AA38EA00E74167 /* Example */,
 				57A7DEF717AA39ED00E74167 /* GroupedUITableViews */,
 				57A7DED417AA38C900E74167 /* Obj-C-Fusion Tables Base */,
@@ -256,15 +256,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		57A7DED017AA386700E74167 /* App Services */ = {
-			isa = PBXGroup;
-			children = (
-				57A7DED117AA387A00E74167 /* AppGeneralServicesController.h */,
-				57A7DED217AA387A00E74167 /* AppGeneralServicesController.m */,
-			);
-			name = "App Services";
-			sourceTree = "<group>";
-		};
 		57A7DED417AA38C900E74167 /* Obj-C-Fusion Tables Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,8 +263,8 @@
 				57A7DF0317AA3A1F00E74167 /* GoogleAPIKeys.plist */,
 				57A7DF0417AA3A1F00E74167 /* GoogleAuthorizationController.h */,
 				57A7DF0517AA3A1F00E74167 /* GoogleAuthorizationController.m */,
-				5789583717AA90CA00119DD3 /* GDriveResource.h */,
-				5789583817AA90CA00119DD3 /* GDriveResource.m */,
+				57A7DED117AA387A00E74167 /* SimpleGoogleServiceHelpers.h */,
+				57A7DED217AA387A00E74167 /* SimpleGoogleServiceHelpers.m */,
 				57A7DF0617AA3A1F00E74167 /* FTResource.h */,
 				57A7DF0717AA3A1F00E74167 /* FTResource.m */,
 				57A7DF0817AA3A1F00E74167 /* FTTable.h */,
@@ -502,7 +493,7 @@
 			files = (
 				57A7DE9F17AA37FB00E74167 /* main.m in Sources */,
 				57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */,
-				57A7DED317AA387A00E74167 /* AppGeneralServicesController.m in Sources */,
+				57A7DED317AA387A00E74167 /* SimpleGoogleServiceHelpers.m in Sources */,
 				57A7DEDF17AA399B00E74167 /* SampleFTQueryBuilder.m in Sources */,
 				57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */,
 				57A7DEEB17AA39A900E74167 /* SampleViewControllerFTCreateSection.m in Sources */,
@@ -520,7 +511,6 @@
 				57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */,
 				57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */,
 				57A7DF1617AA3A1F00E74167 /* FTQueryBuilder.m in Sources */,
-				5789583917AA90CA00119DD3 /* GDriveResource.m in Sources */,
 				578180E017AA995A00434135 /* GTMHTTPFetcher.m in Sources */,
 				578180E117AA995A00434135 /* GTMOAuth2Authentication.m in Sources */,
 				578180E217AA995A00434135 /* GTMOAuth2SignIn.m in Sources */,
