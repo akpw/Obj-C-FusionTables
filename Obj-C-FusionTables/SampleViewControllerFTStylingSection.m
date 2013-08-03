@@ -9,7 +9,6 @@
 #import "SampleViewControllerFTStylingSection.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SimpleGoogleServiceHelpers.h"
-#import "SampleFTQueryBuilder.h"
 #import "FTStyle.h"
 #import "FTTemplate.h"
 
@@ -103,18 +102,17 @@ enum FTActionTypes {
 }
 #undef FT_ACTION_TYPE_KEY
 
+
+#pragma mark - FT Map Styling
 - (void)ftSetStyle {
     if (self.fusionTableID) {
         ftStylingState = kFTStateApplyingStyling;
         [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
         [self reloadSection];
 
-        NSDictionary *styleDict = [SampleFTQueryBuilder
-                                   buildFusionTableStyleForFusionTableID:self.fusionTableID];
         FTStyle *ftStyle = [[FTStyle alloc] init];
-        [ftStyle setFusionTableStyle:styleDict
-                    ForFusionTableID:self.fusionTableID
-                    WithCompletionHandler:^(NSData *data, NSError *error) {
+        ftStyle.ftStyleDelegate = self;
+        [ftStyle insertFTStyleWithCompletionHandler:^(NSData *data, NSError *error) {
             [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
             if (error) {
                 NSData *data = [[error userInfo] valueForKey:@"data"];
@@ -134,16 +132,41 @@ enum FTActionTypes {
         }];
     }    
 }
+#pragma mark - FTStyleDelegate methods
+- (NSString *)ftTableID {
+    return self.fusionTableID;
+}
+- (NSString *)ftStyleName {
+    return @"sample-Style-1";
+}
+- (NSDictionary *)ftMarkerOptions {
+    return @{
+             @"iconStyler": @{
+                    @"kind": @"fusiontables#fromColumn",
+                    @"columnName": @"markerIcon"}
+            };
+}
+- (NSDictionary *)ftPolylineOptions {
+    return @{
+             @"strokeWeight" : @"4",
+             @"strokeColorStyler" : @{
+                     @"kind": @"fusiontables#fromColumn",
+                     @"columnName": @"lineColor"}
+            };
+}
+
+
+#pragma mark - FT Map Info Window Template
 - (void)ftSetInfoWindowTemplate {
     if (self.fusionTableID) {
         ftStylingState = kFTStateApplyingInfoWindoTemplate;
         [self reloadSection];
         
-        NSDictionary *templDict = [SampleFTQueryBuilder buildInfoWindowTemplate];
         FTTemplate *ftTemplate = [[FTTemplate alloc] init];
+        ftTemplate.ftTemplateDelegate = self;
+        
         [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
-        [ftTemplate setFusionTableInfoWindow:templDict ForFusionTableID:self.fusionTableID
-                                            WithCompletionHandler:^(NSData *data, NSError *error) {
+        [ftTemplate insertFTTemplateWithCompletionHandler:^(NSData *data, NSError *error) {
            [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
            if (error) {
                NSData *data = [[error userInfo] valueForKey:@"data"];
@@ -162,6 +185,26 @@ enum FTActionTypes {
            [self reloadSection];
        }];
     }    
+}
+#pragma mark - FTTemplateDelegate methods
+- (NSString *)ftTemplateName {
+    return @"sample-template-1";
+}
+- (NSString *)ftTemplateBody {
+    return
+        @"<div class='googft-info-window'"
+        "style='font-family: sans-serif; width: 19em; height: 20em; overflow: auto;'>"
+        "<img src='{entryThumbImageURL}' style='float:left; width:2em; vertical-align: top; margin-right:.5em'/>"
+        "<b>{entryName}</b>"
+        "<br>{entryDate}<br>"
+        "<p><a href='{entryURL}'>{entryURLDescription}</a>"
+        "<p>{entryNote}"
+        "<a href='{entryImageURL}' target='_blank'> "
+        "<img src='{entryImageURL}' style='width:18.5em; margin-top:.5em; margin-bottom:.5em'/>"
+        "</a>"
+        "<p>"
+        "<p>"
+        "</div>";
 }
 
 #pragma mark - GroupedTableSectionsController Table View Delegate

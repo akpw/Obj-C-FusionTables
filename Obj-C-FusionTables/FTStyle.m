@@ -11,24 +11,60 @@
 
 @implementation FTStyle
 
-#pragma mark - Accessing FT styles metadata
-- (void)queryStylesForFusionTable:(NSString *)fusionTableID WithCompletionHandler:(FTAPIHandler)handler {
-    [self queryFusionTablesAPI:fusionTableID QueryType:@"styles" WithCompletionHandler:handler];
+- (NSDictionary *)ftStyleDictionary {
+    NSMutableDictionary *ftStyleObject = [NSMutableDictionary dictionary];
+    ftStyleObject[@"name"] = [self.ftStyleDelegate ftStyleName];
+    ftStyleObject[@"tableId"] = [self.ftStyleDelegate ftTableID];
+    
+    // Default for Fusion Table?
+    if ([self.ftStyleDelegate respondsToSelector:@selector(isDefaulForTable)]) {
+        ftStyleObject[@"isDefaultForTable"] = ([self.ftStyleDelegate isDefaulForTable]) ? @"true" : @"false";
+    } else {
+        ftStyleObject[@"isDefaultForTable"] = @"true";
+    }
+    
+    // Icon Marker Options Object
+    if ([self.ftStyleDelegate respondsToSelector:@selector(ftMarkerOptions)]) {
+        ftStyleObject[@"markerOptions"] = [self.ftStyleDelegate ftMarkerOptions];
+    }
+    
+    // Line Color Options Object
+    if ([self.ftStyleDelegate respondsToSelector:@selector(ftPolylineOptions)]) {
+        ftStyleObject[@"polylineOptions"] = [self.ftStyleDelegate ftPolylineOptions];
+    }
+    
+    return ftStyleObject;
 }
 
-#pragma mark - Setting FT styles metadata
-- (void)setFusionTableStyle:(NSDictionary *)stylesDictionary
-                    ForFusionTableID:(NSString *)fusionTableID
-                    WithCompletionHandler:(FTAPIHandler)handler {
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:stylesDictionary
+- (void)insertFTStyleWithCompletionHandler:(ServiceAPIHandler)handler {
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self ftStyleDictionary]
                                                        options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData
                                                  encoding:NSUTF8StringEncoding];
-    
-    [self modifyFusionTablesAPI:fusionTableID ForQueryType:@"styles"
+    NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@/%@",
+                                            [self.ftStyleDelegate ftTableID], @"styles"];    
+    [self modifyFusionTablesAPI:resourceTypeIDString
                  PostDataString:jsonString WithCompletionHandler:handler];
 }
+
+
+- (void)lisFTStylesWithCompletionHandler:(ServiceAPIHandler)handler {
+    
+}
+- (void)updateFTStyleWithCompletionHandler:(ServiceAPIHandler)handler {
+    
+}
+- (void)deleteFTStyleWithCompletionHandler:(ServiceAPIHandler)handler {
+    
+}
+
+
+
+#pragma mark - Accessing FT styles metadata
+- (void)queryStylesForFusionTable:(NSString *)fusionTableID WithCompletionHandler:(ServiceAPIHandler)handler {
+    [self queryFusionTablesAPI:fusionTableID QueryType:@"styles" WithCompletionHandler:handler];
+}
+
 
 
 

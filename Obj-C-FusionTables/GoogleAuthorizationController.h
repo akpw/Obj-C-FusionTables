@@ -14,8 +14,10 @@
 
 @property (nonatomic, readonly) NSString *authenticatedUserID;
 
+#pragma mark - Singleton instance
 + (GoogleAuthorizationController *)sharedInstance;
 
+#pragma mark - Google Authorization Methods
 - (BOOL)isAuthorised;
 - (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler
                               CancelHandler:(void_completion_handler_block)cancelHandler;

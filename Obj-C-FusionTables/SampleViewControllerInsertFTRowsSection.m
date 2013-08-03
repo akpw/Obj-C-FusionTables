@@ -9,8 +9,8 @@
 #import "SampleViewControllerInsertFTRowsSection.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SimpleGoogleServiceHelpers.h"
-#import "SampleFTQueryBuilder.h"
-#import "FTResource.h"
+#import "FTSQLQuery.h"
+#import "FTSQLQueryBuilder.h"
 
 // Defines rows in section
 enum SampleViewControllerFTInsertSectionRows {
@@ -162,6 +162,20 @@ enum FTActionTypes {
     return 36.0f;
 }
 
+- (NSArray *)columnNames {
+    return @[@"entryDate",
+             @"entryName",
+             @"entryThumbImageURL",
+             @"entryURL",
+             @"entryURLDescription",
+             @"entryNote",
+             @"entryImageURL",
+             @"markerIcon",
+             @"lineColor",
+             @"geometry"
+             ];
+}
+
 #pragma mark - FT Action Handlers
 #pragma mark - Insert Sample Rows Handler
 - (void)insertSampleRows {
@@ -170,21 +184,22 @@ enum FTActionTypes {
     
     NSString *ftInsertString = nil;
     for (NSDictionary *insertEntry in insertArray) {
-        NSString *lineColor = [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"lineColor"]];
-        NSString *insertEntryString = [SampleFTQueryBuilder builSQLInsertStringForFTTableID:
-                  self.fusionTableID,
-                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryDate"]],
-                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryName"]],
-                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryThumbImageURL"]],
-                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryURL"]],
-                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryURLDescription"]],
-                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryNote"]],
-                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"entryImageURL"]],
-                  [SampleFTQueryBuilder buildFTStringValueString:insertEntry[@"markerIcon"]],
+        NSString *lineColor = [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"lineColor"]];
+        NSString *insertEntryString = [FTSQLQueryBuilder
+                                                builSQLInsertStringForColumnNames:[self columnNames]
+                                                FTTableID:self.fusionTableID,
+                  [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"entryDate"]],
+                  [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"entryName"]],
+                  [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"entryThumbImageURL"]],
+                  [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"entryURL"]],
+                  [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"entryURLDescription"]],
+                  [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"entryNote"]],
+                  [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"entryImageURL"]],
+                  [FTSQLQueryBuilder buildFTStringValueString:insertEntry[@"markerIcon"]],
                   lineColor,
                   ([lineColor length] > 2) ?  // a quick & dirty way to insert different KML item types
-                      [SampleFTQueryBuilder buildKMLLineString:insertEntry[@"geometry"]] :
-                      [SampleFTQueryBuilder buildKMLPointString:insertEntry[@"geometry"]]
+                      [FTSQLQueryBuilder buildKMLLineString:insertEntry[@"geometry"]] :
+                      [FTSQLQueryBuilder buildKMLPointString:insertEntry[@"geometry"]]
                  ];
         ftInsertString = (ftInsertString) ?
                 [NSString stringWithFormat:@"%@;%@", ftInsertString, insertEntryString] :
@@ -195,7 +210,7 @@ enum FTActionTypes {
     lastInsertedRowID = 0;
     [self reloadSection];
     
-    FTResource *ftResource = [[FTResource alloc] init];
+    FTSQLQuery *ftResource = [[FTSQLQuery alloc] init];
     [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
     [ftResource modifyFusionTablesSQL:ftInsertString WithCompletionHandler:^(NSData *data, NSError *error) {
         [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
@@ -233,23 +248,24 @@ enum FTActionTypes {
     NSArray *updatetArray = [NSArray arrayWithContentsOfFile:plistPath];
     if (lastInsertedRowID > 0 && [updatetArray count] > 0) {
         NSDictionary *updateEntry = updatetArray[sampleUpdateDataIndex];
-        NSString *ftUpdateEntryString = [SampleFTQueryBuilder builSQLUpdateStringForRowID:lastInsertedRowID
+        NSString *ftUpdateEntryString = [FTSQLQueryBuilder builSQLUpdateStringForRowID:lastInsertedRowID
+                                                    ColumnNames:[self columnNames]
                            FTTableID:self.fusionTableID,
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryDate"]],
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryName"]],
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryThumbImageURL"]],
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryURL"]],
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryURLDescription"]],
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryNote"]],
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"entryImageURL"]],
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"markerIcon"]],
-                           [SampleFTQueryBuilder buildFTStringValueString:updateEntry[@"lineColor"]],
-                           [SampleFTQueryBuilder buildKMLPointString:updateEntry[@"geometry"]]
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"entryDate"]],
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"entryName"]],
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"entryThumbImageURL"]],
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"entryURL"]],
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"entryURLDescription"]],
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"entryNote"]],
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"entryImageURL"]],
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"markerIcon"]],
+                           [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"lineColor"]],
+                           [FTSQLQueryBuilder buildKMLPointString:updateEntry[@"geometry"]]
                            ];
         ftInsertRowState = kFTStateUpdatingRows;
         [self reloadSection];
         
-        FTResource *ftResource = [[FTResource alloc] init];
+        FTSQLQuery *ftResource = [[FTSQLQuery alloc] init];
         [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
         [ftResource modifyFusionTablesSQL:ftUpdateEntryString WithCompletionHandler:^(NSData *data, NSError *error) {
             [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
@@ -278,13 +294,13 @@ enum FTActionTypes {
     }    
 }
 - (void)deleteInsertedRows {
-    NSString *ftDeleteString = [SampleFTQueryBuilder buildDeleteAllRowStringForFusionTableID:self.fusionTableID];
+    NSString *ftDeleteString = [FTSQLQueryBuilder buildDeleteAllRowStringForFusionTableID:self.fusionTableID];
     
     ftInsertRowState = kFTStateDeletingRows;
     [self reloadSection];
 
     [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
-    FTResource *ftResource = [[FTResource alloc] init];
+    FTSQLQuery *ftResource = [[FTSQLQuery alloc] init];
     [ftResource modifyFusionTablesSQL:ftDeleteString WithCompletionHandler:^(NSData *data, NSError *error) {
         [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
         ftInsertRowState = kFTStateIdle;

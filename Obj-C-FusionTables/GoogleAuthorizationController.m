@@ -35,12 +35,11 @@
     return sharedGoogleAuthorizationControllerInstance;
 }
 
+#pragma mark - Initialization
 #define GOOGLE_FUSION_TABLES_API_SCOPE (@"https://www.googleapis.com/auth/fusiontables")
 #define GOOGLE_FUSION_TABLES_SCOPE_READONLY (@"https://www.googleapis.com/auth/fusiontables.readonly")
 #define GOOGLE_URLSHORTENER_SCOPE (@"https://www.googleapis.com/auth/urlshortener")
-
 #define GOOGLE_DRIVE_SCOPE (@"https://www.googleapis.com/auth/drive")
-#pragma mark - Initialization
 - (id)init {
     self = [super init];
     if (self) {
@@ -66,9 +65,10 @@
 #undef GOOGLE_FUSION_TABLES_SCOPE_READONLY
 #undef GOOGLE_FUSION_TABLES_API_SCOPE
 #undef GOOGLE_URLSHORTENER_SCOPE
+#undef GOOGLE_DRIVE_SCOPE
 
 #pragma mark - Google API Keys need to be initialised in "GoogleAPIKeys.plist"
-// initialise "GoogleAPIKeys.plist" with your API Keys
+// initialize "GoogleAPIKeys.plist" with your API Keys
 // you can get the API keys from: https://developers.google.com/fusiontables/docs/v1/using#APIKey
 - (NSDictionary *)googleAPIKeys {
     if (!_googleAPIKeys) {
@@ -77,23 +77,23 @@
     }
     return _googleAPIKeys;
 }
-// initialise "GoogleAPIKeys.plist" with your API Keys
+// initialize "GoogleAPIKeys.plist" with your API Keys
 // you can get the API keys from: https://developers.google.com/fusiontables/docs/v1/using#APIKey
 #pragma mark - Google API Keys need to be initialised in "GoogleAPIKeys.plist"
 
 #pragma mark - Google API Keys Helpers
 #define GOOGLE_CLIENT_ID_KEY (@"GOOGLE_CLIENT_ID_KEY")
+#define GOOGLE_CLIENT_SECRET_KEY (@"GOOGLE_CLIENT_SECRET_KEY")
 - (NSString *)googleClientID {
     return self.googleAPIKeys[GOOGLE_CLIENT_ID_KEY];
 }
-#undef GOOGLE_CLIENT_ID_KEY
-#define GOOGLE_CLIENT_SECRET_KEY (@"GOOGLE_CLIENT_SECRET_KEY")
 - (NSString *)googleClientSecret {
     return self.googleAPIKeys[GOOGLE_CLIENT_SECRET_KEY];
 }
+#undef GOOGLE_CLIENT_ID_KEY
 #undef GOOGLE_CLIENT_SECRET_KEY
 
-#pragma mark - Network connectivity states
+#pragma mark - Network connectivity indication
 - (void)incrementNetworkActivity:(NSNotification *)notify {
     [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
 }
@@ -111,26 +111,6 @@
 }
 
 #pragma mark - Google Authorization Methods
-#define GOOGLE_KEYCHAIN_ID (@"Obj-C FT Google KeyChain ID")
-- (void)restoreFromKeyChain {
-    self.theAuth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:GOOGLE_KEYCHAIN_ID
-                                                                         clientID:[self googleClientID]
-                                                                     clientSecret:[self googleClientSecret]];
-}
-- (void)authorizationFailureHandlerForError:(NSError *)error {
-    NSData *responseData = [error userInfo][kGTMHTTPFetcherStatusDataKey]; // kGTMHTTPFetcherStatusDataKey
-    NSString *responseBody = nil;
-    if ([responseData length] > 0) {
-        // show the body of the server's authentication failure response
-        responseBody = [[NSString alloc] initWithData:responseData
-                                              encoding:NSUTF8StringEncoding];
-    }
-    NSLog(@"Authentication error: %@ Failure response body: %@", error, responseBody);
-    [[SimpleGoogleServiceHelpers sharedInstance] showAlertViewWithTitle:@"Authentication error" AndText:
-                                     [NSString stringWithFormat:@"Error while signing-in in to Google: %@", 
-                                     [error localizedDescription]]];
-}
-
 #pragma mark - Authorization Methods
 - (NSString *)authenticatedUserID {
     return [self.theAuth userEmail];
@@ -161,8 +141,15 @@
     [self authorizedRequestWithCompletionHandler:authFetcherBlock CancelHandler:nil];
 }
 
+#define GOOGLE_KEYCHAIN_ID (@"Obj-C FT Google KeyChain ID")
+- (void)restoreFromKeyChain {
+    self.theAuth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:GOOGLE_KEYCHAIN_ID
+                                                                         clientID:[self googleClientID]
+                                                                     clientSecret:[self googleClientSecret]];
+}
+
 #pragma mark - Google SignIn
-- (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler 
+- (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler
                                         CancelHandler:(void_completion_handler_block)cancelHandler {
     GTMOAuth2ViewControllerTouch *viewController = [GTMOAuth2ViewControllerTouch
                                                             controllerWithScope:self.theScope
@@ -233,4 +220,19 @@
 @end
 
 
-
+/*
+ 
+ - (void)authorizationFailureHandlerForError:(NSError *)error {
+ NSData *responseData = [error userInfo][kGTMHTTPFetcherStatusDataKey]; // kGTMHTTPFetcherStatusDataKey
+ NSString *responseBody = nil;
+ if ([responseData length] > 0) {
+ // show the body of the server's authentication failure response
+ responseBody = [[NSString alloc] initWithData:responseData
+ encoding:NSUTF8StringEncoding];
+ }
+ NSLog(@"Authentication error: %@ Failure response body: %@", error, responseBody);
+ [[SimpleGoogleServiceHelpers sharedInstance] showAlertViewWithTitle:@"Authentication error" AndText:
+ [NSString stringWithFormat:@"Error while signing-in in to Google: %@",
+ [error localizedDescription]]];
+ }
+ */

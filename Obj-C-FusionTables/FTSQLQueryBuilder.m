@@ -6,53 +6,9 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import "FTQueryBuilder.h"
+#import "FTSQLQueryBuilder.h"
 
-@implementation FTQueryBuilder
-
-#pragma mark - Fusion Tables Structure
-+ (NSArray *)columnNames {
-    // define in descendants
-    return nil;
-}
-+ (NSArray *)columnTypes {
-    // define in descendants
-    return nil;
-}
-#pragma mark - Builds the columns string for create Fusion Table statement
-+ (NSArray *)buildFusionTableColumns {
-    NSMutableArray *tableColumns = [NSMutableArray array];
-    
-    NSArray *columnNames = [self columnNames];
-    NSArray *columnTypes = [self columnTypes];
-    if ([columnTypes count] != [columnNames count]) {
-        [NSException raise:@"FusionTableBuilderException" format:@"Columns names / types number mismatch!"];
-    } else {
-        NSUInteger columnTypesIndex = 0;
-        for (NSString *columumnNameString in columnNames) {
-            NSMutableDictionary *aColumn = [NSMutableDictionary dictionary];
-            aColumn[@"name"] = columumnNameString;
-            aColumn[@"type"] = columnTypes[columnTypesIndex];
-            [tableColumns addObject:aColumn];
-            columnTypesIndex++;
-        }
-    }
-    return tableColumns;
-}
-+ (NSDictionary *)buildFusionTableStructureDictionary:(NSString *)tableTitle
-                                      WithDescription:(NSString *)tableDescription IsExportable:(BOOL)exportable{
-    return nil;
-}
-
-#pragma mark - Fusion Tables Styles
-+ (NSDictionary *)buildFusionTableStyleForFusionTableID:(NSString *)fusionTableID {
-    return nil;
-}
-
-#pragma mark - Builds FTable Info Window Template
-+ (NSDictionary *)buildInfoWindowTemplate {
-    return nil;
-}
+@implementation FTSQLQueryBuilder
 
 #pragma mark - Fusion Tables SQLQuery Statements
 #pragma mark - BUilds Fusion Tables SQL Query Describe Statement
@@ -62,11 +18,10 @@
 };
 
 #pragma mark - Builds Fusion Tables SQL Query Insert Statement
-+ (NSString *)builSQLInsertStringForFTTableID:(NSString *)fusionTableID, ... {
++ (NSString *)builSQLInsertStringForColumnNames:(NSArray *)columnNames FTTableID:(NSString *)fusionTableID, ... {
     NSString *insertString = nil;
     NSString *sqlInsertTemplateString = nil;
 
-    NSArray *columnNames = [self columnNames];
     NSUInteger columnsCount = [columnNames count];
     if (columnsCount > 0) {
         sqlInsertTemplateString = [NSMutableString  stringWithFormat:@"INSERT INTO %@ (", fusionTableID];
@@ -93,11 +48,10 @@
 }
 
 #pragma mark - Builds Fusion Tables SQL Query Update Statement
-+ (NSString *)builSQLUpdateStringForRowID:(NSUInteger)rowID FTTableID:(NSString *)fusionTableID, ... {
++ (NSString *)builSQLUpdateStringForRowID:(NSUInteger)rowID ColumnNames:(NSArray *)columnNames FTTableID:(NSString *)fusionTableID, ... {
     NSString *ftUpdateString = nil;
     NSString *sqlUPdateTemplateString = nil;
 
-    NSArray *columnNames = [self columnNames];
     NSUInteger columnsCount = [columnNames count];
     if (columnsCount > 0) {
         sqlUPdateTemplateString = [NSMutableString  stringWithFormat:@"UPDATE %@ SET ", fusionTableID];

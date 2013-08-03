@@ -27,7 +27,7 @@
     return sharedSimpleGoogleServiceHelperInstance;
 }
 
-#pragma mark Initialization
+#pragma mark - Initialization
 - (id)init {
     self = [super init];
     if (self) {
@@ -44,7 +44,7 @@
 }
 
 #pragma mark Public Methods
-#pragma mark - Network Activity
+#pragma mark - Network connectivity helpers
 - (void)incrementNetworkActivityIndicator {
     ++networkActivityIndicatorCounter;
     if (networkActivityIndicatorCounter == 1) {
@@ -62,7 +62,7 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
-#pragma mark - Visual Indicators methods
+#pragma mark - Alert View Helper
 - (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text {
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title 
                                                         message:text delegate:nil
@@ -71,13 +71,7 @@
 	[alertView show];
 }
 
-#pragma mark - a Random Number
-- (NSString *)random4DigitNumberString {
-    int from = 1000, to = 9999;
-    NSString *randomString = [NSString stringWithFormat:@"%i", (arc4random()%(to-from)) + from];
-    return randomString;
-}
-
+#pragma mark - Google Drive permissions helper
 #define GOOGLE_GDRIVE_API_URL @("https://www.googleapis.com/drive/v2/files")
 - (void)setPublicSharingForFileWithID:(NSString *)fileID
                 WithCompletionHandler:(ServiceAPIHandler)completionHandler {
@@ -100,6 +94,7 @@
     }];
 }
 
+#pragma mark - Google URL Shortener helper
 #define GOOGLE_URL_SHORTENER_API_URL (@"https://www.googleapis.com/urlshortener/v1/url")
 - (void)shortenURL:(NSString *)longURL
                         WithCompletionHandler:(ServiceAPIHandler)completionHandler {
@@ -125,17 +120,17 @@
     }];
 }
 
+#pragma mark - Random Number Helpers
+- (NSString *)random4DigitNumberStringFrom:(NSUInteger)from To:(NSUInteger)to {
+    return [NSString stringWithFormat:@"%i", (arc4random()%(to-from)) + from];
+}
+- (NSString *)random4DigitNumberString {
+    return [self random4DigitNumberStringFrom:1000 To:9999];
+}
+
+
 @end
 
-
-
-/*
- 
- NSString *jsonString = [[NSString alloc] initWithData:jsonData
- encoding:NSUTF8StringEncoding];
- NSData *postData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
- 
-*/
 
 
 

@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "SampleViewControllerFTBaseSection.h"
+#import "FTTable.h"
 
-@interface SampleViewControllerFTCreateSection : SampleViewControllerFTBaseSection
+@interface SampleViewControllerFTCreateSection : SampleViewControllerFTBaseSection <FTDelegate>
 
 @end

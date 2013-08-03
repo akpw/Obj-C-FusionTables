@@ -6,15 +6,28 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import "FTResource.h"
+#import "FTAPIResource.h"
 
-@interface FTTable : FTResource
+@protocol FTDelegate <NSObject>
+@required
+- (NSArray *)ftColumns;
+- (NSString *)ftTitle;
 
-#pragma mark - Creates a Fusion Table
-- (void)createFusionTable:(NSDictionary *)tableDictionary
-                    WithCompletionHandler:(FTAPIHandler)handler;
+@optional
+- (NSString *)ftDescription;
+- (BOOL)ftIsExportable;
+@end
 
-- (void)setPublicSharingForFusionTableID:(NSString *)fusionTableID
-                    WithCompletionHandler:(FTAPIHandler)handler;
+@interface FTTable : FTAPIResource
+
+@property (nonatomic, weak) id <FTDelegate> ftTableDelegate;
+
+#pragma mark - Fusion Table Structure / Lifecycle Methods
+- (void)insertFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)listFusionTablesWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)updateFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)deleteFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;
+
 
 @end
+

@@ -13,20 +13,28 @@ typedef void (^void_completion_handler_block)(void);
 
 @interface SimpleGoogleServiceHelpers : NSObject
 
+#pragma mark - Singleton instance
 + (SimpleGoogleServiceHelpers *)sharedInstance;
 
+#pragma mark - Network connectivity helpers
 - (void)incrementNetworkActivityIndicator;
 - (void)decrementNetworkActivityIndicator;
 - (void)hideNetworkActivityIndicator;
 
+#pragma mark - Alert View Helper
 - (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text;
 
-- (NSString *)random4DigitNumberString;
-
+#pragma mark - Google Drive permissions helper
 - (void)setPublicSharingForFileWithID:(NSString *)fileID
                 WithCompletionHandler:(ServiceAPIHandler)completionHandler;
+
+#pragma mark - Google URL Shortener helper
 - (void)shortenURL:(NSString *)longURL
                 WithCompletionHandler:(ServiceAPIHandler)completionHandler;
+
+#pragma mark - Random Number Helpers
+- (NSString *)random4DigitNumberStringFrom:(NSUInteger)from To:(NSUInteger)to;
+- (NSString *)random4DigitNumberString;
 
 
 @end

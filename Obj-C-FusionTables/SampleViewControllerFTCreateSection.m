@@ -8,7 +8,6 @@
 
 #import "SampleViewControllerFTCreateSection.h"
 #import "SimpleGoogleServiceHelpers.h"
-#import "SampleFTQueryBuilder.h"
 #import "FTTable.h"
 
 // Defines rows in section
@@ -35,6 +34,14 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
     ftState = kFTStateDoesNotExists;
 }
 
+#pragma mark - FTTableDelegate methods
+- (NSString *)ftTitle {
+    // a quick way of setting a name for the table
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
+    return [NSString stringWithFormat:@"Sample_FT_%@", [formatter stringFromDate:[NSDate date]]];
+}
+
 #pragma mark - GroupedTableSectionsController Table View Data Source
 - (NSUInteger)numberOfRows {
     return SampleViewControllerFTCreateSectionNumRows;
@@ -58,25 +65,16 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
 
 #pragma mark Creates Fusion Table Action Handler
 - (void)executeFTAction:(id)sender {
-    // a quick way of setting a name for the table
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
-    NSString *tableTitle = [NSString stringWithFormat:@"Sample_FT_%@",
-                            [formatter stringFromDate:[NSDate date]]];
-    
-    NSDictionary *tableDictionary = [SampleFTQueryBuilder
-                                        buildFusionTableStructureDictionary:tableTitle
-                                        WithDescription:nil
-                                        IsExportable:YES];
-    
+
     ftState = kFTStatesCreating;
     [[NSNotificationCenter defaultCenter]
             postNotificationName:FUSION_TABLE_CREATION_STARTED_NOTIFICATION object:nil];
     
     FTTable *ftTable = [[FTTable alloc] init];
+    ftTable.ftTableDelegate = self;
+    
     [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
-    [ftTable createFusionTable:tableDictionary
-                            WithCompletionHandler:^(NSData *data, NSError *error) {
+    [ftTable insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
         [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
         if (error) {
             ftState = kFTStateDoesNotExists;
@@ -112,8 +110,45 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
         }        
     }];
 }
+- (NSArray *)ftColumns {
+    return @[
+             @{@"name": @"entryDate",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryName",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryThumbImageURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryURLDescription",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryNote",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryImageURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"markerIcon",
+               @"type": @"STRING"
+               },
+             @{@"name": @"lineColor",
+               @"type": @"STRING"
+               },
+             @{@"name": @"geometry",
+               @"type": @"LOCATION"
+               }
+             ];
+}
 
 #pragma mark - GroupedTableSectionsController Table View Delegate
+- (CGFloat)heightForHeaderInSection {
+    return 4;
+}
 - (CGFloat)heightForFooterInSection {
     return (ftState == kFTStatesCreated) ? 56.0f : 30.0f;
 }
@@ -138,15 +173,6 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
     return footerString;
 }
 
+
 @end
 
-
-
-
-/*
- - (NSString *)titleForHeaderInSection {
- return @"FT Resource API";
- }
-
- 
-*/

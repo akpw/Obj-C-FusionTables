@@ -6,16 +6,26 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import "FTResource.h"
+#import "FTAPIResource.h"
 
-@interface FTStyle : FTResource
+@protocol FTStyleDelegate <NSObject>
+@required
+- (NSString *)ftTableID;
+- (NSString *)ftStyleName;
+@optional
+- (BOOL)isDefaulForTable;
+- (NSDictionary *)ftMarkerOptions;
+- (NSDictionary *)ftPolylineOptions;
+@end
+
+@interface FTStyle : FTAPIResource
+
+@property (nonatomic, weak) id <FTStyleDelegate> ftStyleDelegate;
 
 #pragma mark - Accessing FT styles metadata
-- (void)queryStylesForFusionTable:(NSString *)fusionTableID WithCompletionHandler:(FTAPIHandler)handler;
-
-#pragma mark - Setting FT styles metadata
-- (void)setFusionTableStyle:(NSDictionary *)stylesDictionary
-                ForFusionTableID:(NSString *)fusionTableID
-                WithCompletionHandler:(FTAPIHandler)handler;
+- (void)insertFTStyleWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)lisFTStylesWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)updateFTStyleWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)deleteFTStyleWithCompletionHandler:(ServiceAPIHandler)handler;
 
 @end
