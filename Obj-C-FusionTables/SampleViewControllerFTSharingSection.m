@@ -82,7 +82,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
         }
      }];
 }
-#define GOOGLE_URL_SHORTENER_API_URL (@"https://www.googleapis.com/urlshortener/v1/url")
+
 - (void)shortenURLWithCompletionHandler:(void_completion_handler_block)completionHandler {
     ftSharingRowState = kFTStateShorteningURL;
     [self reloadSection];

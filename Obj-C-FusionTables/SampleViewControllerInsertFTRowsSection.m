@@ -162,6 +162,9 @@ enum FTActionTypes {
     return 36.0f;
 }
 
+
+#pragma mark - FT Action Handlers
+#pragma mark - Columns Names for Insert / Update
 - (NSArray *)columnNames {
     return @[@"entryDate",
              @"entryName",
@@ -175,8 +178,6 @@ enum FTActionTypes {
              @"geometry"
              ];
 }
-
-#pragma mark - FT Action Handlers
 #pragma mark - Insert Sample Rows Handler
 - (void)insertSampleRows {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"sampleInsertData" ofType:@"plist"];
@@ -233,7 +234,6 @@ enum FTActionTypes {
         [self reloadSection];
     }];
 }
-
 
 #pragma mark - Update Last Inserted Row Handler
 // rotates entry index from sampleUpdateData.plist
@@ -323,14 +323,3 @@ enum FTActionTypes {
 @end
 
 
-
-/*
- 
- 
- // Current Date Value
- NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
- [formatter setDateFormat:@"dd MMM, yyyy h:mm a"];
- NSString *dateString = [formatter stringFromDate:[NSDate date]];
- 
- 
-*/
