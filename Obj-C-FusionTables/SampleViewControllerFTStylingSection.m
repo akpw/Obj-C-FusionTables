@@ -56,7 +56,7 @@ enum FTActionTypes {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont systemFontOfSize:16];
     
-    cell.backgroundColor = (self.fusionTableID) ? [UIColor whiteColor] : [UIColor lightGrayColor];    
+    cell.backgroundColor = (self.fusionTableID) ? [UIColor whiteColor] : [UIColor clearColor];
     cell.userInteractionEnabled = (self.fusionTableID) ? YES : NO;
     
     UIButton *actionButton = [self ftActionButton];

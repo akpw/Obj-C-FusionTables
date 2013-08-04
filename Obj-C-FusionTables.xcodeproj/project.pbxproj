@@ -47,7 +47,6 @@
 		57A7DF1317AA3A1F00E74167 /* FTTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0917AA3A1F00E74167 /* FTTable.m */; };
 		57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0B17AA3A1F00E74167 /* FTStyle.m */; };
 		57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */; };
-		57A7DF1617AA3A1F00E74167 /* FTSQLQueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0F17AA3A1F00E74167 /* FTSQLQueryBuilder.m */; };
 		57A7DF2D17AA3A8900E74167 /* CellAccessoryViewButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2717AA3A8900E74167 /* CellAccessoryViewButton.png */; };
 		57A7DF2E17AA3A8900E74167 /* CellAccessoryViewButtonHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2817AA3A8900E74167 /* CellAccessoryViewButtonHighlighted.png */; };
 		57A7DF2F17AA3A8900E74167 /* CellAccessoryViewButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2917AA3A8900E74167 /* CellAccessoryViewButton@2x.png */; };
@@ -135,8 +134,6 @@
 		57A7DF0B17AA3A1F00E74167 /* FTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStyle.m; sourceTree = "<group>"; };
 		57A7DF0C17AA3A1F00E74167 /* FTTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTemplate.h; sourceTree = "<group>"; };
 		57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTemplate.m; sourceTree = "<group>"; };
-		57A7DF0E17AA3A1F00E74167 /* FTSQLQueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQueryBuilder.h; sourceTree = "<group>"; };
-		57A7DF0F17AA3A1F00E74167 /* FTSQLQueryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQueryBuilder.m; sourceTree = "<group>"; };
 		57A7DF2717AA3A8900E74167 /* CellAccessoryViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellAccessoryViewButton.png; sourceTree = "<group>"; };
 		57A7DF2817AA3A8900E74167 /* CellAccessoryViewButtonHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellAccessoryViewButtonHighlighted.png; sourceTree = "<group>"; };
 		57A7DF2917AA3A8900E74167 /* CellAccessoryViewButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellAccessoryViewButton@2x.png"; sourceTree = "<group>"; };
@@ -275,8 +272,6 @@
 				57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */,
 				57FBFBC417AD6B9B00A275BA /* FTSQLQuery.h */,
 				57FBFBC517AD6B9B00A275BA /* FTSQLQuery.m */,
-				57A7DF0E17AA3A1F00E74167 /* FTSQLQueryBuilder.h */,
-				57A7DF0F17AA3A1F00E74167 /* FTSQLQueryBuilder.m */,
 			);
 			name = "Obj-C-Fusion Tables Base";
 			sourceTree = "<group>";
@@ -501,7 +496,6 @@
 				57A7DF1317AA3A1F00E74167 /* FTTable.m in Sources */,
 				57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */,
 				57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */,
-				57A7DF1617AA3A1F00E74167 /* FTSQLQueryBuilder.m in Sources */,
 				578180E017AA995A00434135 /* GTMHTTPFetcher.m in Sources */,
 				578180E117AA995A00434135 /* GTMOAuth2Authentication.m in Sources */,
 				578180E217AA995A00434135 /* GTMOAuth2SignIn.m in Sources */,

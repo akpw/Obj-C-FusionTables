@@ -43,7 +43,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        //[self signOutFromGoogle];
         self.theScope = [GTMOAuth2Authentication scopeWithStrings:
                                      GOOGLE_FUSION_TABLES_API_SCOPE,
                                      GOOGLE_FUSION_TABLES_SCOPE_READONLY,
