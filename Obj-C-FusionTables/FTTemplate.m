@@ -25,7 +25,7 @@
                                                  encoding:NSUTF8StringEncoding];
     NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@/%@",
                                       [self.ftTemplateDelegate ftTableID], @"templates"];
-    [self modifyFusionTablesAPI:resourceTypeIDString
+    [self modifyFusionTablesResource:resourceTypeIDString
                  PostDataString:jsonString WithCompletionHandler:handler];
 }
 
@@ -44,7 +44,8 @@
 
 #pragma mark - Setting FT templates metadata
 - (void)queryTemplatesForFusionTable:(NSString *)fusionTableID WithCompletionHandler:(ServiceAPIHandler)handler {
-    [self queryFusionTablesAPI:fusionTableID QueryType:@"templates" WithCompletionHandler:handler];
+    NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@/%@", fusionTableID, @"templates"];
+    [self queryFusionTablesResource:resourceTypeIDString WithCompletionHandler:handler];
 }
 
 #pragma mark - Setting FT templates metadata
@@ -59,7 +60,7 @@
 
     NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@/%@", fusionTableID, @"templates"];
     
-    [self modifyFusionTablesAPI:resourceTypeIDString
+    [self modifyFusionTablesResource:resourceTypeIDString
                  PostDataString:jsonString WithCompletionHandler:handler];
 }
 

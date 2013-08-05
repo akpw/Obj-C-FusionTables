@@ -11,13 +11,13 @@
 @implementation FTAPIResource
 
 #pragma mark - Fusion Tables API
-#pragma mark API for accessing FT metadata info (table structure,styles, and templates)
+#pragma mark API for accessing FT metadata info (table structure, styles, and templates)
 #define GOOGLE_FT_QUERY_API_URL @"https://www.googleapis.com/fusiontables/v1/tables"
-- (void)queryFusionTablesAPI:(NSString *)fusionTableID
-                    QueryType:(NSString *)theType
+- (void)queryFusionTablesResource:(NSString *)resourceTypeID
                     WithCompletionHandler:(ServiceAPIHandler)handler {
     
-    NSString *url = [NSString stringWithFormat:@"%@/%@/%@", GOOGLE_FT_QUERY_API_URL, fusionTableID, theType];
+    NSString *resourceTypeIDString = (resourceTypeID) ? resourceTypeID : @"";
+    NSString *url = [NSString stringWithFormat:@"%@%@", GOOGLE_FT_QUERY_API_URL, resourceTypeIDString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
@@ -26,8 +26,8 @@
     }];
 }
 
-#pragma mark API for setting FT metadata info (table structure,styles, and templates)
-- (void)modifyFusionTablesAPI:(NSString *)resourceTypeID
+#pragma mark API for setting FT metadata info (table structure, styles, and templates)
+- (void)modifyFusionTablesResource:(NSString *)resourceTypeID
                     PostDataString:(NSString *)postDataString
                     WithCompletionHandler:(ServiceAPIHandler)handler {
     
@@ -45,5 +45,19 @@
     }];
 }
 
+#pragma mark deletes a Fusion Table resource (i.e. table/style/template) with specified resourceTypeID
+- (void)deleteFusionTablesResource:(NSString *)resourceTypeID
+            WithCompletionHandler:(ServiceAPIHandler)handler {
+    NSString *resourceTypeIDString = (resourceTypeID) ? resourceTypeID : @"";
+    NSString *url = [NSString stringWithFormat:@"%@%@", GOOGLE_FT_QUERY_API_URL, resourceTypeIDString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    [request setHTTPMethod:@"DELETE"];
+    
+    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
+        [fetcher beginFetchWithCompletionHandler:handler];
+    }];    
+}
 
 @end

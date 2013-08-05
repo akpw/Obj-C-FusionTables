@@ -41,7 +41,40 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
     [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
     return [NSString stringWithFormat:@"Sample_FT_%@", [formatter stringFromDate:[NSDate date]]];
 }
-
+- (NSArray *)ftColumns {
+    return @[
+             @{@"name": @"entryDate",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryName",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryThumbImageURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryURLDescription",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryNote",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryImageURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"markerIcon",
+               @"type": @"STRING"
+               },
+             @{@"name": @"lineColor",
+               @"type": @"STRING"
+               },
+             @{@"name": @"geometry",
+               @"type": @"LOCATION"
+               }
+             ];
+}
 #pragma mark - GroupedTableSectionsController Table View Data Source
 - (NSUInteger)numberOfRows {
     return SampleViewControllerFTCreateSectionNumRows;
@@ -109,40 +142,6 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
             }
         }        
     }];
-}
-- (NSArray *)ftColumns {
-    return @[
-             @{@"name": @"entryDate",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryName",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryThumbImageURL",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryURL",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryURLDescription",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryNote",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryImageURL",
-               @"type": @"STRING"
-               },
-             @{@"name": @"markerIcon",
-               @"type": @"STRING"
-               },
-             @{@"name": @"lineColor",
-               @"type": @"STRING"
-               },
-             @{@"name": @"geometry",
-               @"type": @"LOCATION"
-               }
-             ];
 }
 
 #pragma mark - GroupedTableSectionsController Table View Delegate

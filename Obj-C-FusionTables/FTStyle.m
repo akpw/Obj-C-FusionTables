@@ -43,7 +43,7 @@
                                                  encoding:NSUTF8StringEncoding];
     NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@/%@",
                                             [self.ftStyleDelegate ftTableID], @"styles"];    
-    [self modifyFusionTablesAPI:resourceTypeIDString
+    [self modifyFusionTablesResource:resourceTypeIDString
                  PostDataString:jsonString WithCompletionHandler:handler];
 }
 
@@ -62,7 +62,9 @@
 
 #pragma mark - Accessing FT styles metadata
 - (void)queryStylesForFusionTable:(NSString *)fusionTableID WithCompletionHandler:(ServiceAPIHandler)handler {
-    [self queryFusionTablesAPI:fusionTableID QueryType:@"styles" WithCompletionHandler:handler];
+    NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@/%@",
+                                      [self.ftStyleDelegate ftTableID], @"styles"];
+    [self queryFusionTablesResource:resourceTypeIDString WithCompletionHandler:handler];
 }
 
 

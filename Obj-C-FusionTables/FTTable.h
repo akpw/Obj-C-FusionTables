@@ -6,14 +6,18 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/*
+    Represents a Fusion Table. 
+    Allows common table operations such as insert / list / update delete
+*/
+
 #import "FTAPIResource.h"
 
 @protocol FTDelegate <NSObject>
-@required
+@optional
+- (NSString *)ftTableID;
 - (NSArray *)ftColumns;
 - (NSString *)ftTitle;
-
-@optional
 - (NSString *)ftDescription;
 - (BOOL)ftIsExportable;
 @end
@@ -22,7 +26,7 @@
 
 @property (nonatomic, weak) id <FTDelegate> ftTableDelegate;
 
-#pragma mark - Fusion Table Structure / Lifecycle Methods
+#pragma mark - Fusion Table Lifecycle Methods
 - (void)insertFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;
 - (void)listFusionTablesWithCompletionHandler:(ServiceAPIHandler)handler;
 - (void)updateFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;

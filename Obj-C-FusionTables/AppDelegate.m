@@ -7,13 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "SampleViewController.h"
+#import "FusionTablesViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    SampleViewController *viewController = [[SampleViewController alloc]
-                                            initWithNibName:@"GroupedTableViewController" bundle:nil];
+    FusionTablesViewController *viewController = [[FusionTablesViewController alloc]
+                                            initWithNibName:@"FusionTablesViewController" bundle:nil];
     self.navigationController = [[UINavigationController alloc]
                                             initWithRootViewController:viewController];
 

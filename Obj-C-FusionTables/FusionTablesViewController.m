@@ -1,0 +1,309 @@
+//
+//  FusionTablesViewController.m
+//  Obj-C-FusionTables
+//
+//  Created by Arseniy on 4/8/13.
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
+//
+
+#import "FusionTablesViewController.h"
+#import "SampleViewController.h"
+
+// FTable processing states
+typedef NS_ENUM (NSUInteger, FTProcessingStates) {
+    kFTStateIdle = 0,
+    kFTStateRetrieving,
+    kFTStateInserting,
+    kFTStateDeleting
+};
+
+@interface FusionTablesViewController () {
+    FTProcessingStates ftProcessingStates;
+}
+@property (nonatomic, strong) NSMutableArray *ftTableObjects;
+@property (nonatomic, strong) FTTable *ftTable;
+@property (nonatomic, strong) NSString *selectedFusionTableID;
+@end
+
+@implementation FusionTablesViewController
+#pragma mark - Initialization
+- (FTTable *)ftTable {
+    if (!_ftTable) {
+        _ftTable = [[FTTable alloc] init];
+        _ftTable.ftTableDelegate = self;
+    }
+    return _ftTable;
+}
+
+#pragma mark - FT Action Handlers
+#pragma mark loads list of Fusion Tables for authenticated user
+- (void)loadFusionTables {
+    ftProcessingStates = kFTStateRetrieving;
+    self.ftTableObjects = nil;
+    [self.tableView reloadData];
+    
+    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+    [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
+        [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+        if (error) {
+            NSData *data = [[error userInfo] valueForKey:@"data"];
+            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [[SimpleGoogleServiceHelpers sharedInstance]
+                    showAlertViewWithTitle:@"Fusion Tables Error"
+                    AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
+        } else {
+            NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
+                                                             options:kNilOptions error:nil];
+            NSLog(@"Fusion Tables: %@", lines);
+            _ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
+            if ([_ftTableObjects count] > 0) self.navigationItem.leftBarButtonItem = self.editButtonItem;
+        }
+        ftProcessingStates = kFTStateIdle;
+        [self.tableView reloadData];
+    }];    
+}
+#pragma mark inserts a new Fusion Tables
+- (void)insertNewFusionTable {
+    ftProcessingStates = kFTStateInserting;
+    [self.tableView reloadData];
+    
+    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+    [self.ftTable insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+        [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+        if (error) {
+            NSData *data = [[error userInfo] valueForKey:@"data"];
+            NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            [[SimpleGoogleServiceHelpers sharedInstance]
+                    showAlertViewWithTitle:@"Fusion Tables Error"
+                    AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", str]];
+        } else {
+            NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                        options:kNilOptions error:nil];
+            if (contentDict) {
+                NSLog(@"Created a new Fusion Table: %@", contentDict);
+                
+                [_ftTableObjects insertObject:contentDict atIndex:0];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+                [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                if (!self.navigationItem.leftBarButtonItem) self.navigationItem.leftBarButtonItem = self.editButtonItem;
+            } else {
+                // the FT Create Table did not return tableid
+                [[SimpleGoogleServiceHelpers sharedInstance]
+                        showAlertViewWithTitle:@"Fusion Tables Error"
+                        AndText:  @"Error Fetching the Fusion Table ID"];
+            }
+        }
+        ftProcessingStates = kFTStateIdle;
+        [self.tableView reloadData];
+    }];
+}
+
+#pragma mark deletes a Fusion Tables with specified ID
+- (void)deleteFusionTableWithCompletionHandler:(void_completion_handler_block)completionHandler {
+    ftProcessingStates = kFTStateDeleting;
+    [self.tableView reloadData];
+    
+    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+    [self.ftTable deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+        [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+        if (error) {
+            NSData *data = [[error userInfo] valueForKey:@"data"];
+            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [[SimpleGoogleServiceHelpers sharedInstance]
+                    showAlertViewWithTitle:@"Fusion Tables Error"
+                    AndText: [NSString stringWithFormat:@"Error deleting Fusion Table: %@", errorStr]];
+        } else {
+            // Table deleted, run the handler
+            completionHandler();
+        }
+        ftProcessingStates = kFTStateIdle;
+        [self.tableView reloadData];
+    }];
+}
+
+#pragma mark - FTDelegate methods
+- (NSString *)ftTableID {
+    return self.selectedFusionTableID;
+}
+- (NSString *)ftTitle {
+    // a quick way of setting a name for the table
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
+    return [NSString stringWithFormat:@"Sample_FT_%@", [formatter stringFromDate:[NSDate date]]];
+}
+// Sample Fusion Table Columns Definition
+- (NSArray *)ftColumns {
+    return @[
+             @{@"name": @"entryDate",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryName",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryThumbImageURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryURLDescription",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryNote",
+               @"type": @"STRING"
+               },
+             @{@"name": @"entryImageURL",
+               @"type": @"STRING"
+               },
+             @{@"name": @"markerIcon",
+               @"type": @"STRING"
+               },
+             @{@"name": @"lineColor",
+               @"type": @"STRING"
+               },
+             @{@"name": @"geometry",
+               @"type": @"LOCATION"
+               }
+             ];
+}
+
+#pragma mark - View lifecycle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.title = @"FT API Example";
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
+                                            initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                            target:self action:@selector(insertNewFusionTable)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    ftProcessingStates = kFTStateIdle;
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshFusionTablesList:)
+                                    forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+    
+    // Load Fusion Tables list
+    [self loadFusionTables];
+}
+- (void)refreshFusionTablesList:(UIRefreshControl *)refreshControl {
+    [self loadFusionTables];
+    [refreshControl endRefreshing];
+}
+
+#pragma mark - Table view data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_ftTableObjects count] + 1;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"CellIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    cell.textLabel.font = [UIFont systemFontOfSize:16];
+    if ([_ftTableObjects count] > 0) {
+        [self configureCell:cell ForRow:indexPath.row];
+    } else {
+        [self configureInfoCell:cell];
+    }
+    return cell;
+}
+- (void)configureInfoCell:(UITableViewCell *)cell {
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.textLabel.text = @"";
+    cell.detailTextLabel.text = [self stringForProcessingState];
+    cell.contentView.backgroundColor = [UIColor lightGrayColor];
+    cell.detailTextLabel.backgroundColor = [UIColor lightGrayColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    cell.imageView.image = nil;
+}
+- (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
+    if (row == 0) {
+        [self configureInfoCell:cell];
+    } else {
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        NSDictionary *ftObject = _ftTableObjects[row - 1];
+        cell.textLabel.text = ftObject[@"name"];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"TableID: %@", ftObject[@"tableId"]];
+        cell.imageView.image = [UIImage imageNamed:@"m_type_fusion.png"];
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.detailTextLabel.backgroundColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [UIColor grayColor];
+    }
+}
+
+#pragma mark - Table view delegate
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (indexPath.row > 0) ? YES : NO;
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete & indexPath.row > 0) {
+        [self deleteFusionTableObjectWithIndex:(indexPath.row - 1)];
+    }
+}
+- (void)deleteFusionTableObjectWithIndex:(NSUInteger)rowIndex {
+    NSString *titleString = [NSString stringWithFormat:
+                             @"About to delete Fusion Table %@. This operation can not be undone",
+                             self.ftTableObjects[rowIndex][@"name"]];
+    UIActionSheet *deleteActionSheet = [[UIActionSheet alloc] initWithTitle:titleString
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Cancel"
+                                                     destructiveButtonTitle:@"Delete Table"
+                                                          otherButtonTitles:nil];
+    deleteActionSheet.tag = rowIndex;
+    [deleteActionSheet showInView:self.navigationController.view];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSUInteger rowIndex = actionSheet.tag;
+        self.selectedFusionTableID = self.ftTableObjects[rowIndex][@"tableId"];
+        [self deleteFusionTableWithCompletionHandler:^{
+            [_ftTableObjects removeObjectAtIndex:rowIndex];
+            if ([_ftTableObjects count] == 0) self.navigationItem.leftBarButtonItem = nil;
+            [self.tableView deleteRowsAtIndexPaths:
+                                    @[[NSIndexPath indexPathForRow:rowIndex inSection:0]]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+        }];
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > 0) {
+        self.selectedFusionTableID = self.ftTableObjects[indexPath.row - 1][@"tableId"];
+        SampleViewController *ftDetailViewController = [[SampleViewController alloc]
+                                                        initWithNibName:@"GroupedTableViewController" bundle:nil];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                                 style:UIBarButtonItemStylePlain target:nil action:nil];
+        [self.navigationController pushViewController:ftDetailViewController animated:YES];
+    }
+}
+
+#pragma mark - Info Cell Helpers
+- (NSString *)stringForProcessingState {
+    NSString *processingStateString = nil;
+    NSString *userID = [[GoogleAuthorizationController sharedInstance] authenticatedUserID];
+    switch (ftProcessingStates) {
+        case kFTStateIdle:
+            processingStateString = [NSString stringWithFormat:@"Fusion Tables for userID: %@", userID];
+            break;
+        case kFTStateRetrieving:
+            processingStateString = @"... retrieving list of Fusion Tables";
+            break;
+        case kFTStateInserting:
+            processingStateString = @"... creating a new Fusion Table";
+            break;
+        case kFTStateDeleting:
+            processingStateString = @"... deleting Fusion Table";
+            break;
+        default:
+            break;
+    }
+    return [[@"" stringByPaddingToLength:(46 - [processingStateString length])
+                              withString:@" " startingAtIndex:0] stringByAppendingString:processingStateString];
+}
+@end

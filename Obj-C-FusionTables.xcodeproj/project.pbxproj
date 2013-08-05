@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5704C5B317AFDC0F0026A12D /* m_type_fusion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5704C5B217AFDC0F0026A12D /* m_type_fusion@2x.png */; };
+		57162A5117AE4DBA007DDDD2 /* FusionTablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */; };
+		57162A5217AE4DBA007DDDD2 /* FusionTablesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */; };
 		578180E017AA995A00434135 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180D817AA995A00434135 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E117AA995A00434135 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DA17AA995A00434135 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E217AA995A00434135 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DC17AA995A00434135 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -69,6 +72,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5704C5B217AFDC0F0026A12D /* m_type_fusion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "m_type_fusion@2x.png"; sourceTree = "<group>"; };
+		57162A4E17AE4DBA007DDDD2 /* FusionTablesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FusionTablesViewController.h; sourceTree = "<group>"; };
+		57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FusionTablesViewController.m; sourceTree = "<group>"; };
+		57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FusionTablesViewController.xib; sourceTree = "<group>"; };
 		578180D717AA995A00434135 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
 		578180D817AA995A00434135 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
 		578180D917AA995A00434135 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
@@ -211,6 +218,7 @@
 			children = (
 				57A7DECD17AA385A00E74167 /* AppDelegate.h */,
 				57A7DECE17AA385A00E74167 /* AppDelegate.m */,
+				5704C5B217AFDC0F0026A12D /* m_type_fusion@2x.png */,
 				57A7DED517AA38EA00E74167 /* Example */,
 				57A7DEF717AA39ED00E74167 /* GroupedUITableViews */,
 				57A7DED417AA38C900E74167 /* Obj-C-Fusion Tables Base */,
@@ -285,6 +293,9 @@
 				57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */,
 				57A7DEF117AA39C000E74167 /* SampleViewController.h */,
 				57A7DEF217AA39C000E74167 /* SampleViewController.m */,
+				57162A4E17AE4DBA007DDDD2 /* FusionTablesViewController.h */,
+				57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */,
+				57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -444,6 +455,8 @@
 				57A7DF3117AA3A8900E74167 /* GenericButtonNormal_54.png in Resources */,
 				57A7DF3217AA3A8900E74167 /* GenericButtonPushed_54.png in Resources */,
 				578180E417AA995A00434135 /* GTMOAuth2ViewTouch.xib in Resources */,
+				57162A5217AE4DBA007DDDD2 /* FusionTablesViewController.xib in Resources */,
+				5704C5B317AFDC0F0026A12D /* m_type_fusion@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +514,7 @@
 				578180E217AA995A00434135 /* GTMOAuth2SignIn.m in Sources */,
 				578180E317AA995A00434135 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				57FBFBC617AD6B9B00A275BA /* FTSQLQuery.m in Sources */,
+				57162A5117AE4DBA007DDDD2 /* FusionTablesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
