@@ -69,9 +69,8 @@ enum FTActionTypes {
     UIButton *actionButton = [self ftActionButton];
     cell.accessoryView = actionButton;
     
-    cell.backgroundColor = [UIColor clearColor];
-    cell.userInteractionEnabled = NO;
-    
+    cell.userInteractionEnabled = YES;
+    cell.backgroundColor = [UIColor whiteColor];
     switch (row) {
         case kSampleViewControllerFTInsertRowSection:
         {
@@ -87,9 +86,9 @@ enum FTActionTypes {
         {
             cell.textLabel.text = @"Update FT Last Row";
             [actionButton.layer setValue:@(kFTActionUpdate) forKey:FT_ACTION_TYPE_KEY];
-            if (lastInsertedRowID > 0) {
-                cell.userInteractionEnabled = YES;
-                cell.backgroundColor = [UIColor whiteColor];
+            if (lastInsertedRowID == 0) {
+                cell.userInteractionEnabled = NO;
+                cell.backgroundColor = [UIColor clearColor];
             }
             break;
         }
@@ -97,9 +96,9 @@ enum FTActionTypes {
         {
             cell.textLabel.text = @"Delete FT Rows";
             [actionButton.layer setValue:@(kFTActionDelete) forKey:FT_ACTION_TYPE_KEY];
-            if (lastInsertedRowID > 0) {
-                cell.userInteractionEnabled = YES;
-                cell.backgroundColor = [UIColor whiteColor];
+            if (lastInsertedRowID == 0) {
+                cell.userInteractionEnabled = NO;
+                cell.backgroundColor = [UIColor clearColor];
             }
             break;
         }
