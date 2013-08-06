@@ -7,43 +7,22 @@
 //
 
 #import "SampleViewControllerFTBaseSection.h"
+#import "AppIconsController.h"
+#import "SampleViewController.h"
 
 @implementation SampleViewControllerFTBaseSection
 
-#pragma mark - Memory management
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - Initialisation
-- (void)initSpecifics {
-    [[NSNotificationCenter defaultCenter]
-                addObserverForName:FUSION_TABLE_CREATION_SUCCEDED_NOTIFICATION
-                object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSString *tableID = (NSString *)[[note userInfo] valueForKey:FT_TABLE_ID_KEY];
-        if (tableID) {
-            self.fusionTableID = tableID;
-            [self reloadSection];
-        }
-    }];
-    [[NSNotificationCenter defaultCenter]
-                addObserver:self selector:@selector(resetFusionTableID)
-                name:FUSION_TABLE_CREATION_FAILED_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter]
-                addObserver:self selector:@selector(resetFusionTableID)
-                name:FUSION_TABLE_CREATION_STARTED_NOTIFICATION object:nil];
-}
-- (void)resetFusionTableID {
-    self.fusionTableID = nil;
-    [self reloadSection];
+#pragma mark - FTDelegate Methods
+- (NSString *)ftTableID {
+    return [(SampleViewController *)self.parentVC fusionTableID];
 }
 
 #pragma mark - Default Action Button for Section Rows Action Handlers
 - (UIButton *)ftActionButton {
-    UIImage *buttonImage = [UIImage imageNamed:@"CellAccessoryViewButtonHighlighted.png"];
-    UIImage *selectedButtonImage = [UIImage imageNamed:@"CellAccessoryViewButton.png"];
+    UIImage *buttonImage = [AppIconsController cellAccessoryActionBtnImage][IconsControllerIconTypeNormal];
+    UIImage *selectedButtonImage = [AppIconsController cellAccessoryActionBtnImage][IconsControllerIconTypeHighlighted];
     
-    UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
     actionButton.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
     
     [actionButton setImage:buttonImage forState:UIControlStateNormal];

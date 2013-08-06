@@ -8,9 +8,6 @@
 
 
 #import "SampleViewControllerFTSharingSection.h"
-#import "GoogleAuthorizationController.h"
-#import "SimpleGoogleServiceHelpers.h"
-#import "FTTable.h"
 #import "AppDelegate.h"
 
 // Defines rows in section
@@ -42,9 +39,6 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont systemFontOfSize:16];
     
-    cell.backgroundColor = (self.fusionTableID) ? [UIColor whiteColor] : [UIColor clearColor];
-    cell.userInteractionEnabled = (self.fusionTableID) ? YES : NO;
-    
     switch (row) {
         case kSampleViewControllerFTSharingRowSection:
             cell.textLabel.text = @"Share Fusion Table";
@@ -67,7 +61,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     [self reloadSection];
     
     [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
-    [[SimpleGoogleServiceHelpers sharedInstance] setPublicSharingForFileWithID:self.fusionTableID
+    [[SimpleGoogleServiceHelpers sharedInstance] setPublicSharingForFileWithID:[self ftTableID]
                                                          WithCompletionHandler:^(NSData *data, NSError *error) {
     [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
         ftSharingRowState = kFTStateIdle;
@@ -109,30 +103,24 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 }
 - (NSString *)longShareURL {
     NSString *shareURLString = nil;
-    if (self.fusionTableID) {
-        shareURLString = [NSString stringWithFormat:@"https://www.google.com/fusiontables/embedviz?q=select+col9+from+%@&viz=MAP&h=false&lat=50.088555878607316&lng=14.429294793701292&t=1&z=15&l=col9", self.fusionTableID];
-    }
+        shareURLString = [NSString stringWithFormat:@"https://www.google.com/fusiontables/embedviz?q=select+col9+from+%@&viz=MAP&h=false&lat=50.088555878607316&lng=14.429294793701292&t=1&z=15&l=col9", [self ftTableID]];
     return shareURLString;
 }
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    if (self.fusionTableID) {
-        switch (ftSharingRowState) {
-            case kFTStateIdle:
-                footerString = @"Share Fusion Tables";
-                break;
-            case kFTStateSharing:
-                footerString = @"Sharing Fusion Table...";
-                break;
-            case kFTStateShorteningURL:
-                footerString = @"Shortening Sharing URL...";
-                break;
-            default:
-                break;
-        }
-    } else {
-        footerString = @"Create Fusion Table before sharing";
+    switch (ftSharingRowState) {
+        case kFTStateIdle:
+            footerString = @"Share Fusion Tables";
+            break;
+        case kFTStateSharing:
+            footerString = @"Sharing Fusion Table...";
+            break;
+        case kFTStateShorteningURL:
+            footerString = @"Shortening Sharing URL...";
+            break;
+        default:
+            break;
     }
     return footerString;
 }
@@ -230,3 +218,15 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 }
 
 @end
+
+
+
+
+
+/*
+ cell.backgroundColor = (self.fusionTableID) ? [UIColor whiteColor] : [UIColor clearColor];
+ cell.userInteractionEnabled = (self.fusionTableID) ? YES : NO;
+ 
+
+ 
+ */

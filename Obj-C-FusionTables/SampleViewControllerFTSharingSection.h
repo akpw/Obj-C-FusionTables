@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "SampleViewControllerFTBaseSection.h"
 #import <MessageUI/MessageUI.h>
 

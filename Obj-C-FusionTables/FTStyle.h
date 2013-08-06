@@ -9,10 +9,10 @@
 #import "FTAPIResource.h"
 
 @protocol FTStyleDelegate <NSObject>
-@required
-- (NSString *)ftTableID;
-- (NSString *)ftStyleName;
 @optional
+- (NSString *)ftTableID;
+- (NSString *)ftStyleID;
+- (NSString *)ftStyleName;
 - (BOOL)isDefaulForTable;
 - (NSDictionary *)ftMarkerOptions;
 - (NSDictionary *)ftPolylineOptions;
@@ -22,9 +22,9 @@
 
 @property (nonatomic, weak) id <FTStyleDelegate> ftStyleDelegate;
 
-#pragma mark - Accessing FT styles metadata
-- (void)insertFTStyleWithCompletionHandler:(ServiceAPIHandler)handler;
+#pragma mark - Fusion Table Styles Lifecycle Methods
 - (void)lisFTStylesWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)insertFTStyleWithCompletionHandler:(ServiceAPIHandler)handler;
 - (void)updateFTStyleWithCompletionHandler:(ServiceAPIHandler)handler;
 - (void)deleteFTStyleWithCompletionHandler:(ServiceAPIHandler)handler;
 

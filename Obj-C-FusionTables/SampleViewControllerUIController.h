@@ -10,5 +10,6 @@
 
 @interface SampleViewControllerUIController : GroupedTableUIController
 
+@property (nonatomic, strong) NSString *fusionTableID;
 
 @end

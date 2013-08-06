@@ -8,18 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "GroupedTableSectionController.h"
+#import "FTTable.h"
 
-#define FUSION_TABLE_CREATION_STARTED_NOTIFICATION (@"FusionTableCreationStartedNotification")
-#define FUSION_TABLE_CREATION_SUCCEDED_NOTIFICATION (@"FusionTableCreationSuccededNotification")
-#define FUSION_TABLE_CREATION_FAILED_NOTIFICATION (@"FusionTableCreationFailedNotification")
-#define FT_TABLE_ID_KEY (@"FTTableIDKey")
-
-@interface SampleViewControllerFTBaseSection : GroupedTableSectionController
-
-@property (nonatomic, strong) NSString *fusionTableID;
+@interface SampleViewControllerFTBaseSection : GroupedTableSectionController <FTDelegate>
 
 - (UIButton *)ftActionButton;
 - (void)executeFTAction:(id)sender;
-- (void)resetFusionTableID;
+
 
 @end

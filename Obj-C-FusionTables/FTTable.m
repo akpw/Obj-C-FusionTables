@@ -13,18 +13,25 @@
 #pragma mark - Internal Methods
 #pragma mark builds Fusion Tables Structure 
 - (NSDictionary *)ftStructureDictionary {
-    NSMutableDictionary *tableDictionary = [NSMutableDictionary dictionary];
+    NSMutableDictionary *tableDictionary = [NSMutableDictionary dictionary];    
     // Table Title
-    tableDictionary[@"name"] = [self.ftTableDelegate ftTitle];
-    
+    if ([self.ftTableDelegate respondsToSelector:@selector(ftTitle)]) {
+        tableDictionary[@"name"] = [self.ftTableDelegate ftTitle];
+    } else {        
+        [NSException raise:@"Obj-C-FusionTables Exception"
+                    format:@"For Insert / Update, a table name must be provided  by FTDelegate"];
+    }
     // Table Columns
-    tableDictionary[@"columns"] = [self.ftTableDelegate ftColumns];
-    
+    if ([self.ftTableDelegate respondsToSelector:@selector(ftColumns)]) {
+        tableDictionary[@"columns"] = [self.ftTableDelegate ftColumns];
+    } else {
+        [NSException raise:@"Obj-C-FusionTables Exception"
+                    format:@"For Insert / Update, columns definition must be provided  by FTDelegate"];
+    }    
     // Table Description
     if ([self.ftTableDelegate respondsToSelector:@selector(ftDescription)]) {
         tableDictionary[@"description"] = [self.ftTableDelegate ftDescription];
-    }
-    
+    }    
     // Exportable?
     if ([self.ftTableDelegate respondsToSelector:@selector(ftIsExportable)]) {
         tableDictionary[@"isExportable"] = ([self.ftTableDelegate ftIsExportable]) ? @"true" : @"false";
@@ -52,22 +59,28 @@
                  PostDataString:jsonString WithCompletionHandler:handler];
 }
 
+#pragma mark Updates fusion table structure
+- (void)updateFusionTableWithCompletionHandler:(ServiceAPIHandler)handler {    
+    if (![self.ftTableDelegate respondsToSelector:@selector(ftTableID)]) {
+        [NSException raise:@"Obj-C-FusionTables Exception"
+                    format:@"For this operation, tableID needs to be be provided  by FTDelegate"];
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self ftStructureDictionary]
+                                                       options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                 encoding:NSUTF8StringEncoding];
+    NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@", [self.ftTableDelegate ftTableID]];
+    [self modifyFusionTablesResource:resourceTypeIDString
+                      PostDataString:jsonString WithCompletionHandler:handler];
 
-#pragma mark Ypdates fusion table structure
-- (void)updateFusionTableWithCompletionHandler:(ServiceAPIHandler)handler {
-    if ([self.ftTableDelegate respondsToSelector:@selector(ftTableID)]) {
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self ftStructureDictionary]
-                                                           options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *jsonString = [[NSString alloc] initWithData:jsonData
-                                                     encoding:NSUTF8StringEncoding];
-        NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@", [self.ftTableDelegate ftTableID]];
-        [self modifyFusionTablesResource:resourceTypeIDString
-                     PostDataString:jsonString WithCompletionHandler:handler];
-    }    
 }
 
 #pragma mark Deletes fusion table
 - (void)deleteFusionTableWithCompletionHandler:(ServiceAPIHandler)handler {
+    if (![self.ftTableDelegate respondsToSelector:@selector(ftTableID)]) {
+        [NSException raise:@"Obj-C-FusionTables Exception"
+                    format:@"For this operation, tableID needs to be be provided  by FTDelegate"];
+    }    
     NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@", [self.ftTableDelegate ftTableID]];
     [self deleteFusionTablesResource:resourceTypeIDString WithCompletionHandler:handler];
 }

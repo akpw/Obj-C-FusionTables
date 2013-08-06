@@ -27,8 +27,8 @@
 @property (nonatomic, weak) id <FTDelegate> ftTableDelegate;
 
 #pragma mark - Fusion Table Lifecycle Methods
-- (void)insertFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;
 - (void)listFusionTablesWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)insertFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;
 - (void)updateFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;
 - (void)deleteFusionTableWithCompletionHandler:(ServiceAPIHandler)handler;
 

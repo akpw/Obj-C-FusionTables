@@ -57,6 +57,17 @@
     return customBackButtonImageDictionary;
 }
 
+
++ (NSDictionary *)cellAccessoryActionBtnImage {
+    UIImage *controlStateNormalImage = [UIImage imageNamed:@"CellAccessoryActionBtn.png"];
+    UIImage *controlStateHighlightedImage = [UIImage imageNamed:@"CellAccessoryActionBtnPressed.png"];
+    NSDictionary *cellAccessoryActionBtnImage = @{
+                                      IconsControllerIconTypeNormal : controlStateNormalImage,
+                                      IconsControllerIconTypeHighlighted : controlStateHighlightedImage
+                                                      };
+    return cellAccessoryActionBtnImage;
+}
+
 + (UIImage *)fusionTablesImage {
     return [UIImage imageNamed:@"fusion_tables_img.png"];
 }

@@ -7,16 +7,13 @@
 //
 
 #import "SampleViewControllerUIController.h"
-#import "SampleViewControllerFTCreateSection.h"
 #import "SampleViewControllerFTStylingSection.h"
-#import "SampleViewControllerInsertFTRowsSection.h"
 #import "SampleViewControllerInsertFTRowsSection.h"
 #import "SampleViewControllerFTSharingSection.h"
 
 // defines the TableView Sections
 enum SampleViewControllerSections {
-    kSampleViewControllerFTCreateSection = 0,
-    kSampleViewControllerFTStylingSection,
+    kSampleViewControllerFTStylingSection = 0,
     kSampleViewControllerInsertFTRowsSection,
     kSampleViewControllerFTSharingSection,
     kSampleViewControllerNumSections
@@ -27,11 +24,6 @@ enum SampleViewControllerSections {
 // Builds the dispatch table for SampleViewController
 - (void)buildSectionsDispatchTable {
     self.grandDispatchTable = @{
-        @(kSampleViewControllerFTCreateSection):[[SampleViewControllerFTCreateSection alloc]
-                                  initWithParentViewController:self.parentVC
-                                  SectionID:kSampleViewControllerFTCreateSection
-                                  DefaultCellID:@"kSampleViewControllerFTCreateSection"],
-        
         @(kSampleViewControllerFTStylingSection):[[SampleViewControllerFTStylingSection alloc]
                                   initWithParentViewController:self.parentVC
                                   SectionID:kSampleViewControllerFTStylingSection

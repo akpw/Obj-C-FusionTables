@@ -15,7 +15,6 @@
 - (NSString *)ftColumnNames;
 @end
 
-
 @interface FTSQLQuery : NSObject
 
 #pragma mark - Fusion Tables SQL API
@@ -24,7 +23,6 @@
 
 #pragma mark SQL API for modifying FT data rows
 - (void)modifyFusionTablesSQL:(NSString *)sql WithCompletionHandler:(ServiceAPIHandler)handler;
-
 
 
 #pragma mark - Query Statements Helpers

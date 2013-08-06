@@ -22,8 +22,8 @@
     GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher
                                                    WithCompletionHandler:^{
-                                                       [fetcher beginFetchWithCompletionHandler:handler];
-                                                   }];
+        [fetcher beginFetchWithCompletionHandler:handler];
+    }];
 }
 
 #pragma mark SQL API for modifying FT data rows
@@ -40,9 +40,6 @@
         [fetcher beginFetchWithCompletionHandler:handler];
     }];    
 }
-
-
-
 
 
 #pragma mark - Fusion Tables SQLQuery Statements

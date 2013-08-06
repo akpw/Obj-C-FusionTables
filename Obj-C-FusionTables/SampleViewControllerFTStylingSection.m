@@ -8,9 +8,6 @@
 
 #import "SampleViewControllerFTStylingSection.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SimpleGoogleServiceHelpers.h"
-#import "FTStyle.h"
-#import "FTTemplate.h"
 
 // Defines rows in section
 enum SampleViewControllerFTStylingSectionRows {
@@ -45,19 +42,15 @@ typedef NS_ENUM (NSUInteger, FTStylingStates) {
     return kSampleViewControllerFTStylingSectionNumRows;
 }
 
+#pragma mark - GroupedTableSectionsController Table View Data Source
 enum FTActionTypes {
     kFTActionTypeStyle = 0,
     kFTActionTypeInfoWindow
 };
-
-#pragma mark - GroupedTableSectionsController Table View Data Source
 #define FT_ACTION_TYPE_KEY (@"FT_Action_Type_Key")
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont systemFontOfSize:16];
-    
-    cell.backgroundColor = (self.fusionTableID) ? [UIColor whiteColor] : [UIColor clearColor];
-    cell.userInteractionEnabled = (self.fusionTableID) ? YES : NO;
     
     UIButton *actionButton = [self ftActionButton];
     cell.accessoryView = actionButton;    
@@ -105,7 +98,7 @@ enum FTActionTypes {
 
 #pragma mark - FT Map Styling
 - (void)ftSetStyle {
-    if (self.fusionTableID) {
+    if (ftStylingState == kFTStateIdle) {
         ftStylingState = kFTStateApplyingStyling;
         [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
         [self reloadSection];
@@ -133,12 +126,6 @@ enum FTActionTypes {
     }    
 }
 #pragma mark - FTStyleDelegate methods
-- (NSString *)ftTableID {
-    return self.fusionTableID;
-}
-- (NSString *)ftStyleName {
-    return @"sample-Style-1";
-}
 - (NSDictionary *)ftMarkerOptions {
     return @{
              @"iconStyler": @{
@@ -158,7 +145,7 @@ enum FTActionTypes {
 
 #pragma mark - FT Map Info Window Template
 - (void)ftSetInfoWindowTemplate {
-    if (self.fusionTableID) {
+    if (ftStylingState == kFTStateIdle) {
         ftStylingState = kFTStateApplyingInfoWindoTemplate;
         [self reloadSection];
         
@@ -187,9 +174,6 @@ enum FTActionTypes {
     }    
 }
 #pragma mark - FTTemplateDelegate methods
-- (NSString *)ftTemplateName {
-    return @"sample-template-1";
-}
 - (NSString *)ftTemplateBody {
     return
         @"<div class='googft-info-window'"
@@ -210,24 +194,23 @@ enum FTActionTypes {
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    if (self.fusionTableID) {
-        switch (ftStylingState) {
-            case kFTStateIdle:
-                footerString = @"Sets Fusion Table Info Window & Styling";
-                break;
-            case kFTStateApplyingStyling:
-                footerString = @"Setting Fusion Table Styling...";
-                break;
-            case kFTStateApplyingInfoWindoTemplate:
-                footerString = @"Setting Info Window Template..";
-                break;
-            default:
-                break;
-        }
-    } else {
-        footerString = @"Create Fusion Table before Styling";
+    switch (ftStylingState) {
+        case kFTStateIdle:
+            footerString = @"Sets Fusion Table Info Window & Styling";
+            break;
+        case kFTStateApplyingStyling:
+            footerString = @"Setting Fusion Table Styling...";
+            break;
+        case kFTStateApplyingInfoWindoTemplate:
+            footerString = @"Setting Info Window Template..";
+            break;
+        default:
+            break;
     }
     return footerString;
+}
+- (CGFloat)heightForHeaderInSection {
+    return 10.0f;
 }
 - (CGFloat)heightForFooterInSection {
     return 40.0f;

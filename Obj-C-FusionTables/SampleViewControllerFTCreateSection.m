@@ -10,6 +10,11 @@
 #import "SimpleGoogleServiceHelpers.h"
 #import "FTTable.h"
 
+#define FUSION_TABLE_CREATION_STARTED_NOTIFICATION (@"FusionTableCreationStartedNotification")
+#define FUSION_TABLE_CREATION_SUCCEDED_NOTIFICATION (@"FusionTableCreationSuccededNotification")
+#define FUSION_TABLE_CREATION_FAILED_NOTIFICATION (@"FusionTableCreationFailedNotification")
+#define FT_TABLE_ID_KEY (@"FTTableIDKey")
+
 // Defines rows in section
 enum SampleViewControllerFTCreateSectionRows {
     kSampleViewControllerFTCreateSectionCreateRow = 0,
@@ -86,7 +91,7 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
     
     switch (row) {
         case kSampleViewControllerFTCreateSectionCreateRow:
-            if (!self.fusionTableID) {
+            if (![self ftTableID]) {
                 cell.accessoryView = [self ftActionButton];
             } else {
                 cell.accessoryView = nil;
@@ -164,7 +169,7 @@ typedef NS_ENUM (NSUInteger, FTCreationStates) {
             footerString = @"Now creating a new Fusion Table...";
             break;
         case kFTStatesCreated:
-            footerString = [NSString stringWithFormat:@"Created Fusion Table with ID:\n%@", self.fusionTableID];
+            footerString = [NSString stringWithFormat:@"Created Fusion Table with ID:\n%@", [self ftTableID]];
             break;
         default:
             break;

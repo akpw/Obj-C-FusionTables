@@ -7,9 +7,8 @@
 //
 
 #import "SampleViewControllerInsertFTRowsSection.h"
-#import <QuartzCore/QuartzCore.h>
-#import "SimpleGoogleServiceHelpers.h"
 #import "FTSQLQuery.h"
+#import <QuartzCore/QuartzCore.h>
 
 // Defines rows in section
 enum SampleViewControllerFTInsertSectionRows {
@@ -78,10 +77,6 @@ enum FTActionTypes {
         {
             cell.textLabel.text = @"Insert FT Rows";
             [actionButton.layer setValue:@(kFTActionInsert) forKey:FT_ACTION_TYPE_KEY];
-            if (self.fusionTableID) {
-                cell.backgroundColor = [UIColor whiteColor];
-                cell.userInteractionEnabled = YES;
-            }
             if (lastInsertedRowID > 0) {
                 cell.accessoryView = nil;
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -132,25 +127,21 @@ enum FTActionTypes {
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    if (self.fusionTableID) {
-        switch (ftInsertRowState) {
-            case kFTStateIdle:
-                footerString = @"Fusion Tables SQL operations";
-                break;
-            case kFTStateInsertingRows:
-                footerString = @"Inserting Fusion Tables Rows...";
-                break;
-            case kFTStateUpdatingRows:
-                footerString = @"Updating Fusion Tables Rows...";
-                break;
-            case kFTStateDeletingRows:
-                footerString = @"Deleting Fusion Tables Rows...";
-                break;
-            default:
-                break;
-        }
-    } else {
-        footerString = @"Create Table before SQL rows ops";
+    switch (ftInsertRowState) {
+        case kFTStateIdle:
+            footerString = @"Fusion Tables SQL operations";
+            break;
+        case kFTStateInsertingRows:
+            footerString = @"Inserting Fusion Tables Rows...";
+            break;
+        case kFTStateUpdatingRows:
+            footerString = @"Updating Fusion Tables Rows...";
+            break;
+        case kFTStateDeletingRows:
+            footerString = @"Deleting Fusion Tables Rows...";
+            break;
+        default:
+            break;
     }
     return footerString;
 }
@@ -188,7 +179,7 @@ enum FTActionTypes {
         NSString *lineColor = [ftResource buildFTStringValueString:insertEntry[@"lineColor"]];
         NSString *insertEntryString = [ftResource
                                                 builSQLInsertStringForColumnNames:[self columnNames]
-                                                FTTableID:self.fusionTableID,
+                                                FTTableID:[self ftTableID],
                   [ftResource buildFTStringValueString:insertEntry[@"entryDate"]],
                   [ftResource buildFTStringValueString:insertEntry[@"entryName"]],
                   [ftResource buildFTStringValueString:insertEntry[@"entryThumbImageURL"]],
@@ -250,7 +241,7 @@ enum FTActionTypes {
         NSDictionary *updateEntry = updatetArray[sampleUpdateDataIndex];
         NSString *ftUpdateEntryString = [ftResource builSQLUpdateStringForRowID:lastInsertedRowID
                                                     ColumnNames:[self columnNames]
-                           FTTableID:self.fusionTableID,
+                           FTTableID:[self ftTableID],
                            [ftResource buildFTStringValueString:updateEntry[@"entryDate"]],
                            [ftResource buildFTStringValueString:updateEntry[@"entryName"]],
                            [ftResource buildFTStringValueString:updateEntry[@"entryThumbImageURL"]],
@@ -294,7 +285,7 @@ enum FTActionTypes {
 }
 - (void)deleteInsertedRows {
     FTSQLQuery *ftResource = [[FTSQLQuery alloc] init];
-    NSString *ftDeleteString = [ftResource buildDeleteAllRowStringForFusionTableID:self.fusionTableID];
+    NSString *ftDeleteString = [ftResource buildDeleteAllRowStringForFusionTableID:[self ftTableID]];
     
     ftInsertRowState = kFTStateDeletingRows;
     [self reloadSection];

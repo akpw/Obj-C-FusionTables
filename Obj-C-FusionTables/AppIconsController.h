@@ -17,6 +17,7 @@
 + (NSDictionary *)navBaAddBarButtonImage;
 + (NSDictionary *)navBarItemEditButtonImage;
 + (NSDictionary *)navBarItemDoneButtonImage;
++ (NSDictionary *)cellAccessoryActionBtnImage;
 
 + (UIImage *)fusionTablesImage;
 

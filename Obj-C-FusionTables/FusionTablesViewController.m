@@ -309,6 +309,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         self.selectedFusionTableID = self.ftTableObjects[indexPath.row - 1][@"tableId"];
         SampleViewController *ftDetailViewController = [[SampleViewController alloc]
                                                         initWithNibName:@"GroupedTableViewController" bundle:nil];
+        ftDetailViewController.fusionTableID = self.selectedFusionTableID;
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
                                                                                  style:UIBarButtonItemStylePlain target:nil action:nil];
         [self.navigationController pushViewController:ftDetailViewController animated:YES];
