@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		5704C5B317AFDC0F0026A12D /* m_type_fusion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5704C5B217AFDC0F0026A12D /* m_type_fusion@2x.png */; };
+		57124BDA17B0D3BF0003A1F9 /* AppGeneralServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */; };
+		57124BDD17B0D50F0003A1F9 /* DefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BDC17B0D50F0003A1F9 /* DefaultTheme.m */; };
+		57124BE017B0D5260003A1F9 /* TintedTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BDF17B0D5260003A1F9 /* TintedTheme.m */; };
+		57124BE417B0D64A0003A1F9 /* custom-back-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57124BE217B0D64A0003A1F9 /* custom-back-btn@2x.png */; };
+		57124BE517B0D64A0003A1F9 /* custom-back-brn-high@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57124BE317B0D64A0003A1F9 /* custom-back-brn-high@2x.png */; };
+		57124BE717B0D78F0003A1F9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57124BE617B0D78F0003A1F9 /* QuartzCore.framework */; };
+		57124BEB17B0DAA40003A1F9 /* done-editing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57124BE917B0DAA40003A1F9 /* done-editing@2x.png */; };
+		57124BED17B0DC590003A1F9 /* start-editing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57124BEC17B0DC590003A1F9 /* start-editing@2x.png */; };
+		57124BEF17B0DDE40003A1F9 /* add-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57124BEE17B0DDE40003A1F9 /* add-icon@2x.png */; };
 		57162A5117AE4DBA007DDDD2 /* FusionTablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */; };
 		57162A5217AE4DBA007DDDD2 /* FusionTablesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */; };
 		578180E017AA995A00434135 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180D817AA995A00434135 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -73,6 +82,18 @@
 
 /* Begin PBXFileReference section */
 		5704C5B217AFDC0F0026A12D /* m_type_fusion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "m_type_fusion@2x.png"; sourceTree = "<group>"; };
+		57124BD817B0D3BF0003A1F9 /* AppGeneralServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGeneralServicesController.h; sourceTree = "<group>"; };
+		57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGeneralServicesController.m; sourceTree = "<group>"; };
+		57124BDB17B0D50F0003A1F9 /* DefaultTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultTheme.h; sourceTree = "<group>"; };
+		57124BDC17B0D50F0003A1F9 /* DefaultTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultTheme.m; sourceTree = "<group>"; };
+		57124BDE17B0D5260003A1F9 /* TintedTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TintedTheme.h; sourceTree = "<group>"; };
+		57124BDF17B0D5260003A1F9 /* TintedTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TintedTheme.m; sourceTree = "<group>"; };
+		57124BE217B0D64A0003A1F9 /* custom-back-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-back-btn@2x.png"; sourceTree = "<group>"; };
+		57124BE317B0D64A0003A1F9 /* custom-back-brn-high@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-back-brn-high@2x.png"; sourceTree = "<group>"; };
+		57124BE617B0D78F0003A1F9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		57124BE917B0DAA40003A1F9 /* done-editing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-editing@2x.png"; sourceTree = "<group>"; };
+		57124BEC17B0DC590003A1F9 /* start-editing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start-editing@2x.png"; sourceTree = "<group>"; };
+		57124BEE17B0DDE40003A1F9 /* add-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-icon@2x.png"; sourceTree = "<group>"; };
 		57162A4E17AE4DBA007DDDD2 /* FusionTablesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FusionTablesViewController.h; sourceTree = "<group>"; };
 		57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FusionTablesViewController.m; sourceTree = "<group>"; };
 		57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FusionTablesViewController.xib; sourceTree = "<group>"; };
@@ -158,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57124BE717B0D78F0003A1F9 /* QuartzCore.framework in Frameworks */,
 				578180E817ABF19700434135 /* MessageUI.framework in Frameworks */,
 				57A7DF3617AA3AAE00E74167 /* Security.framework in Frameworks */,
 				57A7DF3417AA3AA700E74167 /* SystemConfiguration.framework in Frameworks */,
@@ -180,6 +202,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57124BD717B0D33B0003A1F9 /* App Services */ = {
+			isa = PBXGroup;
+			children = (
+				57124BE117B0D52C0003A1F9 /* Themes */,
+				57124BD817B0D3BF0003A1F9 /* AppGeneralServicesController.h */,
+				57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */,
+			);
+			name = "App Services";
+			sourceTree = "<group>";
+		};
+		57124BE117B0D52C0003A1F9 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				57124BE217B0D64A0003A1F9 /* custom-back-btn@2x.png */,
+				57124BE317B0D64A0003A1F9 /* custom-back-brn-high@2x.png */,
+				57124BEE17B0DDE40003A1F9 /* add-icon@2x.png */,
+				57124BEC17B0DC590003A1F9 /* start-editing@2x.png */,
+				57124BE917B0DAA40003A1F9 /* done-editing@2x.png */,
+				57124BDB17B0D50F0003A1F9 /* DefaultTheme.h */,
+				57124BDC17B0D50F0003A1F9 /* DefaultTheme.m */,
+				57124BDE17B0D5260003A1F9 /* TintedTheme.h */,
+				57124BDF17B0D5260003A1F9 /* TintedTheme.m */,
+			);
+			name = Themes;
+			sourceTree = "<group>";
+		};
 		57A7DE8617AA37FA00E74167 = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +250,7 @@
 		57A7DE9117AA37FB00E74167 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57124BE617B0D78F0003A1F9 /* QuartzCore.framework */,
 				578180E717ABF19700434135 /* MessageUI.framework */,
 				57A7DF3517AA3AAE00E74167 /* Security.framework */,
 				57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */,
@@ -216,6 +265,7 @@
 		57A7DE9817AA37FB00E74167 /* Obj-C-FusionTables */ = {
 			isa = PBXGroup;
 			children = (
+				57124BD717B0D33B0003A1F9 /* App Services */,
 				57A7DECD17AA385A00E74167 /* AppDelegate.h */,
 				57A7DECE17AA385A00E74167 /* AppDelegate.m */,
 				5704C5B217AFDC0F0026A12D /* m_type_fusion@2x.png */,
@@ -457,6 +507,11 @@
 				578180E417AA995A00434135 /* GTMOAuth2ViewTouch.xib in Resources */,
 				57162A5217AE4DBA007DDDD2 /* FusionTablesViewController.xib in Resources */,
 				5704C5B317AFDC0F0026A12D /* m_type_fusion@2x.png in Resources */,
+				57124BE417B0D64A0003A1F9 /* custom-back-btn@2x.png in Resources */,
+				57124BE517B0D64A0003A1F9 /* custom-back-brn-high@2x.png in Resources */,
+				57124BEB17B0DAA40003A1F9 /* done-editing@2x.png in Resources */,
+				57124BED17B0DC590003A1F9 /* start-editing@2x.png in Resources */,
+				57124BEF17B0DDE40003A1F9 /* add-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +570,9 @@
 				578180E317AA995A00434135 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				57FBFBC617AD6B9B00A275BA /* FTSQLQuery.m in Sources */,
 				57162A5117AE4DBA007DDDD2 /* FusionTablesViewController.m in Sources */,
+				57124BDA17B0D3BF0003A1F9 /* AppGeneralServicesController.m in Sources */,
+				57124BDD17B0D50F0003A1F9 /* DefaultTheme.m in Sources */,
+				57124BE017B0D5260003A1F9 /* TintedTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

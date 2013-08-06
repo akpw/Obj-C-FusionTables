@@ -8,6 +8,7 @@
 
 #import "SampleViewController.h"
 #import "SampleViewControllerUIController.h"
+#import "AppGeneralServicesController.h"
 
 @interface SampleViewController ()
 
@@ -20,10 +21,15 @@
     [super didReceiveMemoryWarning];
 }
 
-
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.leftBarButtonItems = [[AppGeneralServicesController sharedAppTheme]     customBarButtonItemsBackForTarget:self WithAction:@selector(goBack)];
+
     
     self.title = @"Fusion Tables Sample";
     
