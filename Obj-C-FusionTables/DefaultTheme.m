@@ -7,7 +7,7 @@
 //
 
 #import "DefaultTheme.h"
-#import <QuartzCore/QuartzCore.h>
+#import "AppIconsController.h"
 
 @implementation DefaultTheme
 
@@ -15,40 +15,36 @@
     return nil;
 }
 - (NSArray *)customBarButtonItemsBackForTarget:(id)target WithAction:(SEL)actionSelector {
-    UIImage * customBackButtonImage = [UIImage imageNamed:@"custom-back-btn.png"];
-    UIImage * customBackButtonImageHigh = [UIImage imageNamed:@"custom-back-btn-high.png"];
-
+    UIImage *customImage = [AppIconsController
+                               navBarCustomBackButtonImage][IconsControllerIconTypeNormal];
+    UIImage *customImageHigh = [AppIconsController
+                               navBarCustomBackButtonImage][IconsControllerIconTypeHighlighted];
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     backButton.frame = CGRectMake(0.0, 0.0,
-                                  customBackButtonImage.size.width,
-                                  customBackButtonImage.size.height);
-    
-    [backButton setImage:customBackButtonImage forState:UIControlStateNormal];
-    [backButton setImage:customBackButtonImageHigh forState:UIControlStateHighlighted];
-    
+                                  customImage.size.width,
+                                  customImage.size.height);    
+    [backButton setImage:customImage forState:UIControlStateNormal];
+    [backButton setImage:customImageHigh forState:UIControlStateHighlighted];
     [backButton addTarget:target action:actionSelector forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];    
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc]
                                initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spacer.width = 2;
     return @[spacer, customBarItem];
 }
 - (NSArray *)customAddBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector {
-    UIImage * controlStateNormalImage = [UIImage imageNamed:@"add-icon.png"];
-    UIImage *controlStateHighlightedImage = [AppGeneralServicesController
-                                             colorizeImage:controlStateNormalImage
-                                             color:[UIColor grayColor]];
-    
+    UIImage *customImage = [AppIconsController
+                                navBaAddBarButtonImage][IconsControllerIconTypeNormal];
+    UIImage *customImageHigh = [AppIconsController
+                                navBaAddBarButtonImage][IconsControllerIconTypeHighlighted];
     UIButton *editButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     editButton.frame = CGRectMake(0.0, 0.0,
-                                  controlStateNormalImage.size.width,
-                                  controlStateNormalImage.size.height);
+                                  customImage.size.width,
+                                  customImage.size.height);
     
-    [editButton setImage:controlStateNormalImage forState:UIControlStateNormal];
-    [editButton setImage:controlStateHighlightedImage forState:UIControlStateHighlighted];
-    
+    [editButton setImage:customImage forState:UIControlStateNormal];
+    [editButton setImage:customImageHigh forState:UIControlStateHighlighted];    
     [editButton addTarget:target action:actionSelector forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:editButton];
@@ -58,19 +54,17 @@
     return @[spacer, customBarItem];
 }
 - (NSArray *)customEditBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector {
-    UIImage *controlStateNormalImage = [UIImage imageNamed:@"start-editing.png"];
-    UIImage *controlStateHighlightedImage = [AppGeneralServicesController
-                                             colorizeImage:controlStateNormalImage
-                                             color:[UIColor grayColor]];
-    
+    UIImage *customImage = [AppIconsController
+                                            navBarItemEditButtonImage][IconsControllerIconTypeNormal];
+    UIImage *customImageHigh = [AppIconsController
+                                             navBarItemEditButtonImage][IconsControllerIconTypeHighlighted];    
     UIButton *editButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     editButton.frame = CGRectMake(0.0, 0.0,
-                                  controlStateNormalImage.size.width,
-                                  controlStateNormalImage.size.height);
+                                  customImage.size.width,
+                                  customImage.size.height);
     
-    [editButton setImage:controlStateNormalImage forState:UIControlStateNormal];
-    [editButton setImage:controlStateHighlightedImage forState:UIControlStateHighlighted];
-    
+    [editButton setImage:customImage forState:UIControlStateNormal];
+    [editButton setImage:customImageHigh forState:UIControlStateHighlighted];
     [editButton addTarget:target action:actionSelector forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:editButton];
@@ -80,18 +74,17 @@
     return @[spacer, customBarItem];
 }
 - (NSArray *)customDoneBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector {
-    UIImage *controlStateNormalImage = [UIImage imageNamed:@"done-editing.png"];
-    UIImage *controlStateHighlightedImage = [AppGeneralServicesController
-                                             colorizeImage:controlStateNormalImage
-                                             color:[UIColor grayColor]];
-    
+    UIImage *customImage = [AppIconsController
+                                            navBarItemDoneButtonImage][IconsControllerIconTypeNormal];
+    UIImage *customImageHigh = [AppIconsController
+                                             navBarItemDoneButtonImage][IconsControllerIconTypeHighlighted];
     UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     doneButton.frame = CGRectMake(0.0, 0.0,
-                                  controlStateNormalImage.size.width,
-                                  controlStateNormalImage.size.height);
+                                  customImage.size.width,
+                                  customImage.size.height);
     
-    [doneButton setImage:controlStateNormalImage forState:UIControlStateNormal];
-    [doneButton setImage:controlStateHighlightedImage forState:UIControlStateHighlighted];
+    [doneButton setImage:customImage forState:UIControlStateNormal];
+    [doneButton setImage:customImageHigh forState:UIControlStateHighlighted];
     
     [doneButton addTarget:target action:actionSelector forControlEvents:UIControlEventTouchUpInside];
     
@@ -104,21 +97,6 @@
 - (UIButton *)tableViewCellAccessoryCopyLinButtonForTarget:(id)target WithAction:(SEL)actionSelector {
     return nil;
 }
-- (void)addGlassGradientToView:(UIView *)view Alpha:(CGFloat)alpha {
-    CAGradientLayer *glassGradient = [CAGradientLayer layer];
-    glassGradient.frame =  view.bounds;
-    glassGradient.colors = @[(id)[UIColor colorWithWhite:1.0f alpha:alpha].CGColor,
-                             (id)[UIColor colorWithWhite:1.0f alpha:alpha/2].CGColor,
-                             (id)[UIColor colorWithWhite:0.75f alpha:alpha/2].CGColor,
-                             (id)[UIColor colorWithWhite:0.4f alpha:alpha/2].CGColor,
-                             (id)[UIColor colorWithWhite:1.0f alpha:alpha].CGColor];
-    glassGradient.locations = @[@0.0f,
-                                @0.5f,
-                                @0.5f,
-                                @0.8f,
-                                @1.0f];
-    glassGradient.cornerRadius = view.layer.cornerRadius;
-    [view.layer addSublayer:glassGradient];
-}
+
 
 @end

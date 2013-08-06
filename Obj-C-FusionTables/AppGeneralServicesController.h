@@ -30,6 +30,5 @@
 - (NSArray *)customDoneBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
 
 - (UIButton *)tableViewCellAccessoryCopyLinButtonForTarget:(id)target WithAction:(SEL)actionSelector;
-- (void)addGlassGradientToView:(UIView *)view Alpha:(CGFloat)alpha;
 
 @end

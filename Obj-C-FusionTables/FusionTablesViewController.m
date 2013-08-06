@@ -9,6 +9,7 @@
 #import "FusionTablesViewController.h"
 #import "SampleViewController.h"
 #import "AppGeneralServicesController.h"
+#import "AppIconsController.h"
 
 // FTable processing states
 typedef NS_ENUM (NSUInteger, FTProcessingStates) {
@@ -262,7 +263,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         NSDictionary *ftObject = _ftTableObjects[row - 1];
         cell.textLabel.text = ftObject[@"name"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"TableID: %@", ftObject[@"tableId"]];
-        cell.imageView.image = [UIImage imageNamed:@"m_type_fusion.png"];
+        cell.imageView.image = [AppIconsController fusionTablesImage];
         cell.contentView.backgroundColor = [UIColor whiteColor];
         cell.detailTextLabel.backgroundColor = [UIColor whiteColor];
         cell.detailTextLabel.textColor = [UIColor grayColor];
