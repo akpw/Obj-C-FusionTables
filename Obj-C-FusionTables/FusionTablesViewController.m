@@ -28,7 +28,6 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 @property (nonatomic, strong) NSString *selectedFusionTableID;
 @property (nonatomic, strong) NSArray *editButton;
 @property (nonatomic, strong) NSArray *doneButton;
-
 @end
 
 @implementation FusionTablesViewController
@@ -69,8 +68,8 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     isInEditingMode = NO;
     ftProcessingStates = kFTStateIdle;
     self.navigationItem.rightBarButtonItems = [[AppGeneralServicesController sharedAppTheme]
-                                               customAddBarButtonItemsForTarget:self
-                                               WithAction:@selector(insertNewFusionTable)];
+                                                        customAddBarButtonItemsForTarget:self
+                                                        WithAction:@selector(insertNewFusionTable)];
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshFusionTablesList:)
                                                forControlEvents:UIControlEventValueChanged];
@@ -85,7 +84,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 }
 
 #pragma mark - FT Action Handlers
-#pragma mark loads list of Fusion Tables for authenticated user
+// loads list of Fusion Tables for authenticated user
 - (void)loadFusionTables {
     if (ftProcessingStates == kFTStateIdle) {
         ftProcessingStates = kFTStateRetrieving;
@@ -113,7 +112,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         }];
     }
 }
-#pragma mark inserts a new Fusion Tables
+// inserts a new Fusion Tables
 - (void)insertNewFusionTable {
     if (ftProcessingStates == kFTStateIdle) {
         ftProcessingStates = kFTStateInserting;
@@ -154,7 +153,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     }
 }
 
-#pragma mark deletes a Fusion Tables with specified ID
+// deletes a Fusion Tables with specified ID
 - (void)deleteFusionTableWithCompletionHandler:(void_completion_handler_block)completionHandler {
     if (ftProcessingStates == kFTStateIdle) {
         ftProcessingStates = kFTStateDeleting;
@@ -187,7 +186,8 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     // a quick way of setting a name for the table
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
-    return [NSString stringWithFormat:@"Sample_FT_%@", [formatter stringFromDate:[NSDate date]]];
+    return [NSString stringWithFormat:@"%@%@",
+            SAMPLE_FUSION_TABLE_PREFIX, [formatter stringFromDate:[NSDate date]]];
 }
 // Sample Fusion Table Columns Definition
 - (NSArray *)ftColumns {
@@ -279,20 +279,34 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         [self deleteFusionTableObjectWithIndex:(indexPath.row - 1)];
     }
 }
+#define DELETE_BUTTON_TITLE (@"Delete Table")
 - (void)deleteFusionTableObjectWithIndex:(NSUInteger)rowIndex {
-    NSString *titleString = [NSString stringWithFormat:
-                             @"About to delete Fusion Table %@. This operation can not be undone",
-                             self.ftTableObjects[rowIndex][@"name"]];
-    UIActionSheet *deleteActionSheet = [[UIActionSheet alloc] initWithTitle:titleString
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"Cancel"
-                                                     destructiveButtonTitle:@"Delete Table"
-                                                          otherButtonTitles:nil];
-    deleteActionSheet.tag = rowIndex;
+    UIActionSheet *deleteActionSheet;
+    NSString *tableName = self.ftTableObjects[rowIndex][@"name"];
+    if ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound) {
+        NSString *titleString = [NSString stringWithFormat:
+                                 @"About to delete Fusion Table %@\n This operation can not be undone",
+                                 self.ftTableObjects[rowIndex][@"name"]];
+        deleteActionSheet = [[UIActionSheet alloc] initWithTitle:titleString
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"Cancel"
+                                                         destructiveButtonTitle:DELETE_BUTTON_TITLE
+                                                              otherButtonTitles:nil];
+        deleteActionSheet.tag = rowIndex;
+    } else {
+        NSString *titleString = @"To protect your existing Fusion Tables,\n"
+                                 "delete is enabled only for tables\n created with this App";
+        deleteActionSheet = [[UIActionSheet alloc] initWithTitle:titleString
+                                                        delegate:self
+                                               cancelButtonTitle:@"OK"
+                                          destructiveButtonTitle:nil
+                                               otherButtonTitles:nil];
+        deleteActionSheet.tag = rowIndex;
+    }
     [deleteActionSheet showInView:self.navigationController.view];
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:DELETE_BUTTON_TITLE]) {
         NSUInteger rowIndex = actionSheet.tag;
         self.selectedFusionTableID = self.ftTableObjects[rowIndex][@"tableId"];
         [self deleteFusionTableWithCompletionHandler:^{
@@ -304,12 +318,15 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         }];
     }
 }
+#undef DELETE_BUTTON_TITLE
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row > 0) {
         self.selectedFusionTableID = self.ftTableObjects[indexPath.row - 1][@"tableId"];
         SampleViewController *ftDetailViewController = [[SampleViewController alloc]
                                                         initWithNibName:@"GroupedTableViewController" bundle:nil];
         ftDetailViewController.fusionTableID = self.selectedFusionTableID;
+        ftDetailViewController.fusionTableName = self.ftTableObjects[indexPath.row - 1][@"name"];
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
                                                                                  style:UIBarButtonItemStylePlain target:nil action:nil];
         [self.navigationController pushViewController:ftDetailViewController animated:YES];

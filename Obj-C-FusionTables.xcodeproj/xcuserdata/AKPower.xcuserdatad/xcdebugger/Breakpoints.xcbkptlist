@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Obj-C-FusionTables/SampleViewControllerFTSharingSection.m"
-         timestampString = "397492909.229332"
+         timestampString = "397575155.554574"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
+         startingLineNumber = "99"
+         endingLineNumber = "99"
          landmarkName = "-shortenURLWithCompletionHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Obj-C-FusionTables/SampleViewControllerFTSharingSection.m"
-         timestampString = "397492909.229332"
+         timestampString = "397575155.554574"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
          landmarkName = "-shareFusionTableWithCompletionHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,16 +34,16 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Obj-C-FusionTables/FusionTablesViewController.m"
-         timestampString = "397472690.690564"
+         timestampString = "397559344.297272"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "307"
-         endingLineNumber = "307"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Obj-C-FusionTables/FTTable.m"
@@ -53,6 +53,32 @@
          startingLineNumber = "18"
          endingLineNumber = "18"
          landmarkName = "-ftStructureDictionary"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Obj-C-FusionTables/SampleViewControllerFTBaseSection.m"
+         timestampString = "397557009.50789"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "19"
+         endingLineNumber = "19"
+         landmarkName = "-isSampleAppFusionTable"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Obj-C-FusionTables/FusionTablesViewController.m"
+         timestampString = "397559344.297272"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "309"
+         endingLineNumber = "309"
+         landmarkName = "-actionSheet:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

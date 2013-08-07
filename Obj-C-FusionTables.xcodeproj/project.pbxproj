@@ -62,8 +62,8 @@
 		57A7DF2E17AA3A8900E74167 /* CellAccessoryActionBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2817AA3A8900E74167 /* CellAccessoryActionBtn.png */; };
 		57A7DF2F17AA3A8900E74167 /* CellAccessoryActionBtnPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2917AA3A8900E74167 /* CellAccessoryActionBtnPressed@2x.png */; };
 		57A7DF3017AA3A8900E74167 /* CellAccessoryActionBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2A17AA3A8900E74167 /* CellAccessoryActionBtn@2x.png */; };
-		57A7DF3117AA3A8900E74167 /* GenericButtonNormal_54.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2B17AA3A8900E74167 /* GenericButtonNormal_54.png */; };
-		57A7DF3217AA3A8900E74167 /* GenericButtonPushed_54.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2C17AA3A8900E74167 /* GenericButtonPushed_54.png */; };
+		57A7DF3117AA3A8900E74167 /* GenericButtonNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2B17AA3A8900E74167 /* GenericButtonNormal@2x.png */; };
+		57A7DF3217AA3A8900E74167 /* GenericButtonPushed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF2C17AA3A8900E74167 /* GenericButtonPushed@2x.png */; };
 		57A7DF3417AA3AA700E74167 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */; };
 		57A7DF3617AA3AAE00E74167 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DF3517AA3AAE00E74167 /* Security.framework */; };
 		57F0B16D17B0EBAA00302E3C /* AppIconsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F0B16C17B0EBAA00302E3C /* AppIconsController.m */; };
@@ -165,8 +165,8 @@
 		57A7DF2817AA3A8900E74167 /* CellAccessoryActionBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellAccessoryActionBtn.png; sourceTree = "<group>"; };
 		57A7DF2917AA3A8900E74167 /* CellAccessoryActionBtnPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellAccessoryActionBtnPressed@2x.png"; sourceTree = "<group>"; };
 		57A7DF2A17AA3A8900E74167 /* CellAccessoryActionBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellAccessoryActionBtn@2x.png"; sourceTree = "<group>"; };
-		57A7DF2B17AA3A8900E74167 /* GenericButtonNormal_54.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericButtonNormal_54.png; sourceTree = "<group>"; };
-		57A7DF2C17AA3A8900E74167 /* GenericButtonPushed_54.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericButtonPushed_54.png; sourceTree = "<group>"; };
+		57A7DF2B17AA3A8900E74167 /* GenericButtonNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GenericButtonNormal@2x.png"; sourceTree = "<group>"; };
+		57A7DF2C17AA3A8900E74167 /* GenericButtonPushed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GenericButtonPushed@2x.png"; sourceTree = "<group>"; };
 		57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		57A7DF3517AA3AAE00E74167 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		57F0B16B17B0EBAA00302E3C /* AppIconsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppIconsController.h; sourceTree = "<group>"; };
@@ -413,8 +413,6 @@
 		57A7DF2617AA3A7700E74167 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				57A7DF2B17AA3A8900E74167 /* GenericButtonNormal_54.png */,
-				57A7DF2C17AA3A8900E74167 /* GenericButtonPushed_54.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -441,6 +439,8 @@
 				57A7DF2717AA3A8900E74167 /* CellAccessoryActionBtnPressed.png */,
 				57A7DF2A17AA3A8900E74167 /* CellAccessoryActionBtn@2x.png */,
 				57A7DF2917AA3A8900E74167 /* CellAccessoryActionBtnPressed@2x.png */,
+				57A7DF2B17AA3A8900E74167 /* GenericButtonNormal@2x.png */,
+				57A7DF2C17AA3A8900E74167 /* GenericButtonPushed@2x.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -528,8 +528,8 @@
 				57A7DF2E17AA3A8900E74167 /* CellAccessoryActionBtn.png in Resources */,
 				57A7DF2F17AA3A8900E74167 /* CellAccessoryActionBtnPressed@2x.png in Resources */,
 				57A7DF3017AA3A8900E74167 /* CellAccessoryActionBtn@2x.png in Resources */,
-				57A7DF3117AA3A8900E74167 /* GenericButtonNormal_54.png in Resources */,
-				57A7DF3217AA3A8900E74167 /* GenericButtonPushed_54.png in Resources */,
+				57A7DF3117AA3A8900E74167 /* GenericButtonNormal@2x.png in Resources */,
+				57A7DF3217AA3A8900E74167 /* GenericButtonPushed@2x.png in Resources */,
 				578180E417AA995A00434135 /* GTMOAuth2ViewTouch.xib in Resources */,
 				57162A5217AE4DBA007DDDD2 /* FusionTablesViewController.xib in Resources */,
 				5704C5B317AFDC0F0026A12D /* fusion_tables_img@2x.png in Resources */,

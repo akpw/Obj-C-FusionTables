@@ -9,6 +9,7 @@
 
 #import "SampleViewControllerFTSharingSection.h"
 #import "AppDelegate.h"
+#import "AppIconsController.h"
 
 // Defines rows in section
 enum SampleViewControllerFTSharingSectionRows {
@@ -35,20 +36,29 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 - (NSUInteger)numberOfRows {
     return SampleViewControllerFTSharingSectionNumRows;
 }
-- (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
-    
-    switch (row) {
-        case kSampleViewControllerFTSharingRowSection:
-            cell.textLabel.text = @"Share Fusion Table";
-            cell.accessoryView = [self ftActionButton];
-            break;
-        default:
-            break;
+- (UITableViewCell *)tableView:(UITableView *)tableView CellForRow:(NSUInteger)row {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.defaultCellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:self.defaultCellIdentifier];
     }
+    return cell;
 }
-- (void)executeFTAction:(id)sender {
+- (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
+    cell.textLabel.font = [UIFont systemFontOfSize:16];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.text = @"Share Fusion Table";
+    
+    cell.backgroundView = [[UIImageView alloc] init];
+    cell.selectedBackgroundView = [[UIImageView alloc] init];
+    
+    ((UIImageView *)cell.backgroundView).image =
+                    [AppIconsController cellGenericBtnImage][IconsControllerIconTypeNormal];
+    ((UIImageView *)cell.selectedBackgroundView).image =
+                    [AppIconsController cellGenericBtnImage][IconsControllerIconTypeHighlighted];
+}
+- (void)tableView:(UITableView *)tableView DidSelectRow:(NSInteger)row {
     [self shareFusionTableWithCompletionHandler:^{
         [self shortenURLWithCompletionHandler:^{
             [self reloadSection];
@@ -102,22 +112,21 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
      }];
 }
 - (NSString *)longShareURL {
-    NSString *shareURLString = nil;
-        shareURLString = [NSString stringWithFormat:@"https://www.google.com/fusiontables/embedviz?q=select+col9+from+%@&viz=MAP&h=false&lat=50.088555878607316&lng=14.429294793701292&t=1&z=15&l=col9", [self ftTableID]];
-    return shareURLString;
+    return [NSString stringWithFormat:
+                @"https://www.google.com/fusiontables/embedviz?q=select+col9+from+%@&viz=MAP"
+                "&h=false&lat=50.088555878607316&lng=14.429294793701292&t=1&z=15&l=col9&noCache=%@",
+                [self ftTableID],
+                [[SimpleGoogleServiceHelpers sharedInstance] random4DigitNumberString]];
 }
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
     switch (ftSharingRowState) {
-        case kFTStateIdle:
-            footerString = @"Share Fusion Tables";
-            break;
         case kFTStateSharing:
             footerString = @"Sharing Fusion Table...";
             break;
         case kFTStateShorteningURL:
-            footerString = @"Shortening Sharing URL...";
+            footerString = @"Shortening the sharing URL...";
             break;
         default:
             break;
@@ -128,7 +137,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     return 40.0f;
 }
 - (float)heightForRow:(NSInteger)row {
-    return 36.0f;
+    return 50.0f;
 }
 
 #pragma mark - Sharing ActionSheets Handlers

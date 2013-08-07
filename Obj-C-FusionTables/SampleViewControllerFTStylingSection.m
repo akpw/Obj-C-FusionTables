@@ -56,27 +56,33 @@ enum FTActionTypes {
     cell.accessoryView = actionButton;    
     switch (row) {
         case kSampleViewControllerFTStylingSectionStyleRow:
-            cell.textLabel.text = @"Set FT Table Styling";
             if (!ftStylingApplied) {
+                cell.textLabel.text = @"Set sample FT style";
                 cell.accessoryView = actionButton;
                 [actionButton.layer setValue:@(kFTActionTypeStyle) forKey:FT_ACTION_TYPE_KEY];
             } else {
+                cell.textLabel.text = @"Sample FT style set";
                 cell.accessoryView = nil;
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
             break;
         case kSampleViewControllerFTStylingSectionSetInfoWindowRow:
-            cell.textLabel.text = @"Set Info Window Template";
             if (!ftInfoWindowTemplateApplied) {
+                cell.textLabel.text = @"Set sample Info Window Template";
                 cell.accessoryView = actionButton;
                 [actionButton.layer setValue:@(kFTActionTypeInfoWindow) forKey:FT_ACTION_TYPE_KEY];
             } else {
+                cell.textLabel.text = @"Sample Info Window Template set";
                 cell.accessoryView = nil;
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }            
             break;
         default:
             break;
+    }
+    if (![self isSampleAppFusionTable]) {
+        cell.userInteractionEnabled = NO;
+        cell.backgroundColor = [UIColor clearColor];
     }
 }
 - (void)executeFTAction:(id)sender {
@@ -194,26 +200,34 @@ enum FTActionTypes {
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    switch (ftStylingState) {
-        case kFTStateIdle:
-            footerString = @"Sets Fusion Table Info Window & Styling";
-            break;
-        case kFTStateApplyingStyling:
-            footerString = @"Setting Fusion Table Styling...";
-            break;
-        case kFTStateApplyingInfoWindoTemplate:
-            footerString = @"Setting Info Window Template..";
-            break;
-        default:
-            break;
+    if ([self isSampleAppFusionTable]) {
+        switch (ftStylingState) {
+            case kFTStateIdle:
+                footerString = @"Sets Fusion Table Map Styling";
+                break;
+            case kFTStateApplyingStyling:
+                footerString = @"Setting Fusion Table Styling...";
+                break;
+            case kFTStateApplyingInfoWindoTemplate:
+                footerString = @"Setting Info Window Template..";
+                break;
+            default:
+                break;
+        }
+    } else {
+        footerString = @"To protect your existing Fusion Tables,\n"
+                        "choose a table created with this App";
     }
     return footerString;
 }
+- (NSString *)titleForHeaderInSection {
+    return @"Fusion Table Map Styling";
+}
 - (CGFloat)heightForHeaderInSection {
-    return 10.0f;
+    return 32.0f;
 }
 - (CGFloat)heightForFooterInSection {
-    return 40.0f;
+    return ([self isSampleAppFusionTable]) ? 40.0f : 60.0f;
 }
 - (float)heightForRow:(NSInteger)row {
     return 36.0f;

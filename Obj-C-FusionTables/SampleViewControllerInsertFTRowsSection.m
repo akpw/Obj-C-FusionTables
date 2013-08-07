@@ -27,7 +27,7 @@ typedef NS_ENUM (NSUInteger, FTSQLQueryStates) {
 };
 
 // Sample data for update
-// updates a route photo, rotating basis
+// updates a route photo, on rotating basis
 typedef NS_ENUM (NSUInteger, FTSampleUpdateDataIndex) {
     kFTSampleUpdateData_idx0 = 0,
     kFTSampleUpdateData_idx1,
@@ -69,12 +69,17 @@ enum FTActionTypes {
     UIButton *actionButton = [self ftActionButton];
     cell.accessoryView = actionButton;
     
-    cell.userInteractionEnabled = YES;
-    cell.backgroundColor = [UIColor whiteColor];
+    if (![self isSampleAppFusionTable]) {
+        cell.userInteractionEnabled = NO;
+        cell.backgroundColor = [UIColor clearColor];
+    } else {    
+        cell.userInteractionEnabled = YES;
+        cell.backgroundColor = [UIColor whiteColor];
+    }
     switch (row) {
         case kSampleViewControllerFTInsertRowSection:
         {
-            cell.textLabel.text = @"Insert FT Rows";
+            cell.textLabel.text = @"Insert sample rows";
             [actionButton.layer setValue:@(kFTActionInsert) forKey:FT_ACTION_TYPE_KEY];
             if (lastInsertedRowID > 0) {
                 cell.accessoryView = nil;
@@ -84,7 +89,7 @@ enum FTActionTypes {
         }
         case kSampleViewControllerFTUpdateRowSection:
         {
-            cell.textLabel.text = @"Update FT Last Row";
+            cell.textLabel.text = @"Update last sample row";
             [actionButton.layer setValue:@(kFTActionUpdate) forKey:FT_ACTION_TYPE_KEY];
             if (lastInsertedRowID == 0) {
                 cell.userInteractionEnabled = NO;
@@ -94,7 +99,7 @@ enum FTActionTypes {
         }
         case kSampleViewControllerFTDeleteRowSection:
         {
-            cell.textLabel.text = @"Delete FT Rows";
+            cell.textLabel.text = @"Delete sample rows";
             [actionButton.layer setValue:@(kFTActionDelete) forKey:FT_ACTION_TYPE_KEY];
             if (lastInsertedRowID == 0) {
                 cell.userInteractionEnabled = NO;
@@ -126,26 +131,31 @@ enum FTActionTypes {
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    switch (ftInsertRowState) {
-        case kFTStateIdle:
-            footerString = @"Fusion Tables SQL operations";
-            break;
-        case kFTStateInsertingRows:
-            footerString = @"Inserting Fusion Tables Rows...";
-            break;
-        case kFTStateUpdatingRows:
-            footerString = @"Updating Fusion Tables Rows...";
-            break;
-        case kFTStateDeletingRows:
-            footerString = @"Deleting Fusion Tables Rows...";
-            break;
-        default:
-            break;
+    if ([self isSampleAppFusionTable]) {
+        switch (ftInsertRowState) {
+            case kFTStateIdle:
+                footerString = @"Fusion Tables SQL operations";
+                break;
+            case kFTStateInsertingRows:
+                footerString = @"Inserting Fusion Tables Rows...";
+                break;
+            case kFTStateUpdatingRows:
+                footerString = @"Updating Fusion Tables Rows...";
+                break;
+            case kFTStateDeletingRows:
+                footerString = @"Deleting Fusion Tables Rows...";
+                break;
+            default:
+                break;
+        }
+    } else {
+        footerString = @"To protect your existing Fusion Tables,\n"
+        "choose a table created with this App";
     }
     return footerString;
 }
 - (CGFloat)heightForFooterInSection {
-    return 40.0f;
+    return ([self isSampleAppFusionTable]) ? 40.0f : 60.0f;
 }
 - (float)heightForRow:(NSInteger)row {
     return 36.0f;

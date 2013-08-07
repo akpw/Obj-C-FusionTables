@@ -12,6 +12,14 @@
 
 @implementation SampleViewControllerFTBaseSection
 
+#pragma mark - Obj-C-FusionTables Sample Table check
+// we will display all user FT tables,
+// but will change only ones created with this app. Safety first :)
+- (BOOL)isSampleAppFusionTable {
+    NSString *tableName = [(SampleViewController *)self.parentVC fusionTableName];
+    return ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound);
+}
+
 #pragma mark - FTDelegate Methods
 - (NSString *)ftTableID {
     return [(SampleViewController *)self.parentVC fusionTableID];
