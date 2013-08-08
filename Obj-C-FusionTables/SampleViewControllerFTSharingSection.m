@@ -66,6 +66,8 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
         }];
     }];
 }
+
+#pragma mark - FT user permissions / sharing
 - (void)shareFusionTableWithCompletionHandler:(void_completion_handler_block)completionHandler {
     ftSharingRowState = kFTStateSharing;
     [self reloadSection];
@@ -86,7 +88,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
         }
      }];
 }
-
+// Simple URL Shortener 
 - (void)shortenURLWithCompletionHandler:(void_completion_handler_block)completionHandler {
     ftSharingRowState = kFTStateShorteningURL;
     [self reloadSection];
@@ -118,6 +120,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
                 [self ftTableID],
                 [[SimpleGoogleServiceHelpers sharedInstance] random4DigitNumberString]];
 }
+
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
@@ -141,8 +144,6 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 }
 
 #pragma mark - Sharing ActionSheets Handlers
-
-#pragma mark Device Clipboard
 #define QUICK_SHARE_TO_CLIPBOARD (@"Copy to Clipboard")
 #define QUICK_SHARE_TO_EMAIL (@"Send via Email")
 #define QUICK_SHARE_TO_SAFARI (@"Open in Safari")
@@ -230,12 +231,3 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 
 
 
-
-
-/*
- cell.backgroundColor = (self.fusionTableID) ? [UIColor whiteColor] : [UIColor clearColor];
- cell.userInteractionEnabled = (self.fusionTableID) ? YES : NO;
- 
-
- 
- */

@@ -8,8 +8,11 @@
 
 #import "GroupedTableUIController.h"
 
-@interface SampleViewControllerUIController : GroupedTableUIController
+/****
+    Specific GroupedUITableViews dispatcher class
+    described in details at: https://github.com/akpw/GroupedUITableViews
+****/
 
-@property (nonatomic, strong) NSString *fusionTableID;
+@interface SampleViewControllerUIController : GroupedTableUIController
 
 @end

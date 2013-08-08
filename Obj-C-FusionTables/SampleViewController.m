@@ -10,33 +10,23 @@
 #import "SampleViewControllerUIController.h"
 #import "AppGeneralServicesController.h"
 
-@interface SampleViewController ()
-
-@end
-
 @implementation SampleViewController
 
-#pragma mark - Memory management
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
+#pragma mark - View lifecycle
 - (void)goBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
-#pragma mark - View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.leftBarButtonItems = [[AppGeneralServicesController sharedAppTheme]     customBarButtonItemsBackForTarget:self WithAction:@selector(goBack)];
-
-    
-    self.title = @"Fusion Tables Sample";
+    self.navigationItem.leftBarButtonItems = [[AppGeneralServicesController sharedAppTheme]
+                                                        customBarButtonItemsBackForTarget:self
+                                                        WithAction:@selector(goBack)];
+    self.title = @"FT API Example";
     
     // the UI controller that will be dispatching related TableView messages to individual section controllers
     self.uiController = [[SampleViewControllerUIController alloc] initWithParentViewController:self];
 }
-
 
 
 

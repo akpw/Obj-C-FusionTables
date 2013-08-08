@@ -9,6 +9,10 @@
 #import "SampleViewControllerFTBaseSection.h"
 #import <MessageUI/MessageUI.h>
 
+/****
+    Shows usage of Obj-C-FusionTables for setting Fusion Tables user permissions / sharing
+****/
+
 @interface SampleViewControllerFTSharingSection : SampleViewControllerFTBaseSection
                                 <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 

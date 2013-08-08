@@ -15,8 +15,7 @@
     UIImage *controlStateNormalImage = [UIImage imageNamed:@"custom-back-btn.png"];
     UIImage *controlStateHighlightedImage = [AppGeneralServicesController
                                                  colorizeImage:controlStateNormalImage
-                                                 color:[UIColor grayColor]];
-    
+                                                 color:[UIColor grayColor]];    
     NSDictionary *customBackButtonImageDictionary = @{
                                     IconsControllerIconTypeNormal : controlStateNormalImage,
                                     IconsControllerIconTypeHighlighted : controlStateHighlightedImage

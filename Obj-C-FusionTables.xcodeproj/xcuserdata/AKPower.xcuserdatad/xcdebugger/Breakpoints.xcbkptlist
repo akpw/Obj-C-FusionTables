@@ -68,18 +68,5 @@
          landmarkName = "-isSampleAppFusionTable"
          landmarkType = "5">
       </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Obj-C-FusionTables/FusionTablesViewController.m"
-         timestampString = "397559344.297272"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "309"
-         endingLineNumber = "309"
-         landmarkName = "-actionSheet:clickedButtonAtIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

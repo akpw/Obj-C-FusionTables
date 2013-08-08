@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/*
+ Simple organization of app images
+*/
+
 #import <Foundation/Foundation.h>
 
 #define IconsControllerIconTypeNormal (@"IconsControllerIconTypeNormal")

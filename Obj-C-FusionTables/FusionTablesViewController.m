@@ -11,14 +11,13 @@
 #import "AppGeneralServicesController.h"
 #import "AppIconsController.h"
 
-// FTable processing states
+// FTables processing states
 typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     kFTStateIdle = 0,
     kFTStateRetrieving,
     kFTStateInserting,
     kFTStateDeleting
 };
-
 @interface FusionTablesViewController () {
     FTProcessingStates ftProcessingStates;
     BOOL isInEditingMode;
@@ -112,6 +111,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         }];
     }
 }
+
 // inserts a new Fusion Tables
 - (void)insertNewFusionTable {
     if (ftProcessingStates == kFTStateIdle) {
@@ -183,7 +183,6 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     return self.selectedFusionTableID;
 }
 - (NSString *)ftTitle {
-    // a quick way of setting a name for the table
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
     return [NSString stringWithFormat:@"%@%@",
@@ -228,10 +227,11 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // +1 for the info row
     return [_ftTableObjects count] + 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"CellIdentifier";
+    static NSString *CellIdentifier = @"TheCellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];

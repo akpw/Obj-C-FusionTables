@@ -94,9 +94,5 @@
     spacer.width = 8;
     return @[spacer, customBarItem];
 }
-- (UIButton *)tableViewCellAccessoryCopyLinButtonForTarget:(id)target WithAction:(SEL)actionSelector {
-    return nil;
-}
-
 
 @end

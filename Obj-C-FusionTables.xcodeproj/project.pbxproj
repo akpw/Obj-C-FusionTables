@@ -42,7 +42,6 @@
 		57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED717AA394700E74167 /* sampleInsertData.plist */; };
 		57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED817AA394700E74167 /* sampleUpdateData.plist */; };
 		57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */; };
-		57A7DEEB17AA39A900E74167 /* SampleViewControllerFTCreateSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE317AA39A900E74167 /* SampleViewControllerFTCreateSection.m */; };
 		57A7DEEC17AA39A900E74167 /* SampleViewControllerFTStylingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE517AA39A900E74167 /* SampleViewControllerFTStylingSection.m */; };
 		57A7DEED17AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE717AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m */; };
 		57A7DEEE17AA39A900E74167 /* SampleViewControllerFTSharingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE917AA39A900E74167 /* SampleViewControllerFTSharingSection.m */; };
@@ -131,8 +130,6 @@
 		57A7DED817AA394700E74167 /* sampleUpdateData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleUpdateData.plist; sourceTree = "<group>"; };
 		57A7DEE017AA39A900E74167 /* SampleViewControllerFTBaseSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTBaseSection.h; sourceTree = "<group>"; };
 		57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerFTBaseSection.m; sourceTree = "<group>"; };
-		57A7DEE217AA39A900E74167 /* SampleViewControllerFTCreateSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTCreateSection.h; sourceTree = "<group>"; };
-		57A7DEE317AA39A900E74167 /* SampleViewControllerFTCreateSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerFTCreateSection.m; sourceTree = "<group>"; };
 		57A7DEE417AA39A900E74167 /* SampleViewControllerFTStylingSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTStylingSection.h; sourceTree = "<group>"; };
 		57A7DEE517AA39A900E74167 /* SampleViewControllerFTStylingSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewControllerFTStylingSection.m; sourceTree = "<group>"; };
 		57A7DEE617AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerInsertFTRowsSection.h; sourceTree = "<group>"; };
@@ -223,15 +220,6 @@
 				57124BDF17B0D5260003A1F9 /* TintedTheme.m */,
 			);
 			name = Themes;
-			sourceTree = "<group>";
-		};
-		5752BB7117B1288900A74440 /* xArchive */ = {
-			isa = PBXGroup;
-			children = (
-				57A7DEE217AA39A900E74167 /* SampleViewControllerFTCreateSection.h */,
-				57A7DEE317AA39A900E74167 /* SampleViewControllerFTCreateSection.m */,
-			);
-			name = xArchive;
 			sourceTree = "<group>";
 		};
 		57A7DE8617AA37FA00E74167 = {
@@ -341,7 +329,6 @@
 		57A7DED517AA38EA00E74167 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				5752BB7117B1288900A74440 /* xArchive */,
 				57124BD717B0D33B0003A1F9 /* App Services */,
 				57A7DED617AA392800E74167 /* Sample Data */,
 				57A7DEDC17AA396000E74167 /* UI Sections */,
@@ -420,9 +407,9 @@
 		57F0B16A17B0EAFC00302E3C /* Icons Controller */ = {
 			isa = PBXGroup;
 			children = (
+				57F0B16E17B0ECEE00302E3C /* Icons */,
 				57F0B16B17B0EBAA00302E3C /* AppIconsController.h */,
 				57F0B16C17B0EBAA00302E3C /* AppIconsController.m */,
-				57F0B16E17B0ECEE00302E3C /* Icons */,
 			);
 			name = "Icons Controller";
 			sourceTree = "<group>";
@@ -575,7 +562,6 @@
 				57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */,
 				57A7DED317AA387A00E74167 /* SimpleGoogleServiceHelpers.m in Sources */,
 				57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */,
-				57A7DEEB17AA39A900E74167 /* SampleViewControllerFTCreateSection.m in Sources */,
 				57A7DEEC17AA39A900E74167 /* SampleViewControllerFTStylingSection.m in Sources */,
 				57A7DEED17AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m in Sources */,
 				57A7DEEE17AA39A900E74167 /* SampleViewControllerFTSharingSection.m in Sources */,

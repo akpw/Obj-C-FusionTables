@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+/*
+ General-level App Services Helper
+*/
+
+
 @protocol AppTheme;
 
 @interface AppGeneralServicesController : NSObject
@@ -28,7 +33,5 @@
 - (NSArray *)customAddBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
 - (NSArray *)customEditBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
 - (NSArray *)customDoneBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
-
-- (UIButton *)tableViewCellAccessoryCopyLinButtonForTarget:(id)target WithAction:(SEL)actionSelector;
 
 @end

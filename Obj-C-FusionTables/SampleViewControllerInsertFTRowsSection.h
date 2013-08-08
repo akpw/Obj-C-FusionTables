@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "SampleViewControllerFTBaseSection.h"
 
+/****
+    Shows usage of Obj-C-FusionTables for Fusion Tables rows operations
+****/
+
 @interface SampleViewControllerInsertFTRowsSection : SampleViewControllerFTBaseSection
 
 @end
