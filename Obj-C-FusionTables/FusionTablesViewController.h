@@ -10,9 +10,9 @@
 #import "FTTable.h"
 
 /****
-    Shows usage of Obj-C-FusionTables for retrieving & displaing 
+    Shows usage of Obj-C-FusionTables, retrieving & displaying 
     a list of Fusion Tables for a given google auth.
-    allows editing only for Fusion Tables created within this app
+    for data safety, allows editing only Fusion Tables created in this app
 ****/
 
 @interface FusionTablesViewController : UITableViewController <FTDelegate, UIActionSheetDelegate>

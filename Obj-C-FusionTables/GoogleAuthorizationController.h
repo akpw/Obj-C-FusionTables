@@ -10,6 +10,9 @@
 #import "SimpleGoogleServiceHelpers.h"
 #import "GTMHTTPFetcher.h"
 
+/****
+    Google Authorization wrapper class
+****/
 @interface GoogleAuthorizationController : NSObject
 
 @property (nonatomic, readonly) NSString *authenticatedUserID;
@@ -17,7 +20,7 @@
 #pragma mark - Singleton instance
 + (GoogleAuthorizationController *)sharedInstance;
 
-#pragma mark - Google Authorization Methods
+#pragma mark - General Authorization Methods
 - (BOOL)isAuthorised;
 - (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler
                               CancelHandler:(void_completion_handler_block)cancelHandler;
@@ -25,6 +28,11 @@
 
 - (void)authorizedRequestWithCompletionHandler:(void_completion_handler_block)completionHandler
                                  CancelHandler:(void_completion_handler_block)cancelHandler;
+
+#pragma mark Fetcher Authorization Methods
+- (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
+                WithCompletionHandler:(void_completion_handler_block)completionHandler
+               CancelHandler:(void_completion_handler_block)cancelHandler;
 - (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
                 WithCompletionHandler:(void_completion_handler_block)completionHandler;
 

@@ -149,8 +149,8 @@ enum FTActionTypes {
                 break;
         }
     } else {
-        footerString = @"To protect your existing Fusion Tables,\n"
-        "choose a table created with this App";
+        footerString =  @"For rows operations, please choose\n"
+                        "a Fusion Table created with this App";
     }
     return footerString;
 }

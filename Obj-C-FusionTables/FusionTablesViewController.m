@@ -6,6 +6,13 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+
+/****
+     Shows usage of Obj-C-FusionTables, retrieving & displaying
+     a list of Fusion Tables for a given google auth.
+     for data safety, allows editing only Fusion Tables created in this app
+****/
+
 #import "FusionTablesViewController.h"
 #import "SampleViewController.h"
 #import "AppGeneralServicesController.h"
@@ -14,6 +21,7 @@
 // FTables processing states
 typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     kFTStateIdle = 0,
+    kFTStateAuthenticating,
     kFTStateRetrieving,
     kFTStateInserting,
     kFTStateDeleting
@@ -65,7 +73,6 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     self.title = @"FT API Example";
 
     isInEditingMode = NO;
-    ftProcessingStates = kFTStateIdle;
     self.navigationItem.rightBarButtonItems = [[AppGeneralServicesController sharedAppTheme]
                                                         customAddBarButtonItemsForTarget:self
                                                         WithAction:@selector(insertNewFusionTable)];
@@ -74,8 +81,10 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
                                                forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
-    // Load Fusion Tables list
-    [self loadFusionTables];
+    // Authenticate & Load Fusion Tables list
+    [self performSelector:@selector(loadFusionTables) withObject:self afterDelay:1.0f];
+    ftProcessingStates = kFTStateAuthenticating;
+    [self.tableView reloadData];
 }
 - (void)refreshFusionTablesList:(UIRefreshControl *)refreshControl {
     [self loadFusionTables];
@@ -85,29 +94,36 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 #pragma mark - FT Action Handlers
 // loads list of Fusion Tables for authenticated user
 - (void)loadFusionTables {
-    if (ftProcessingStates == kFTStateIdle) {
-        ftProcessingStates = kFTStateRetrieving;
+    if (ftProcessingStates == kFTStateIdle || ftProcessingStates == kFTStateAuthenticating) {
         self.ftTableObjects = nil;
+        ftProcessingStates =  kFTStateRetrieving;
         [self.tableView reloadData];
         
-        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
-        [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
+        void_completion_handler_block finishProcessingBlock = ^ {
             [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
-            if (error) {
-                NSData *data = [[error userInfo] valueForKey:@"data"];
-                NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                [[SimpleGoogleServiceHelpers sharedInstance]
-                        showAlertViewWithTitle:@"Fusion Tables Error"
-                        AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
-            } else {
-                NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
-                                                                 options:kNilOptions error:nil];
-                NSLog(@"Fusion Tables: %@", lines);
-                _ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
-                if ([_ftTableObjects count] > 0) self.navigationItem.leftBarButtonItems = self.editButton;
-            }
             ftProcessingStates = kFTStateIdle;
             [self.tableView reloadData];
+        };
+        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+        [[GoogleAuthorizationController sharedInstance] authorizedRequestWithCompletionHandler:^{
+            [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
+                if (error) {
+                    NSData *data = [[error userInfo] valueForKey:@"data"];
+                    NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    [[SimpleGoogleServiceHelpers sharedInstance]
+                     showAlertViewWithTitle:@"Fusion Tables Error"
+                     AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
+                } else {
+                    NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:kNilOptions error:nil];
+                    NSLog(@"Fusion Tables: %@", lines);
+                    _ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
+                    if ([_ftTableObjects count] > 0) self.navigationItem.leftBarButtonItems = self.editButton;
+                }
+                finishProcessingBlock ();
+            }];
+        } CancelHandler:^{
+                finishProcessingBlock ();
         }];
     }
 }
@@ -224,7 +240,6 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
              ];
 }
 
-
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // +1 for the info row
@@ -335,11 +350,20 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 
 #pragma mark - Info Cell Helpers
 - (NSString *)stringForProcessingState {
-    NSString *processingStateString = nil;
-    NSString *userID = [[GoogleAuthorizationController sharedInstance] authenticatedUserID];
+    NSString *processingStateString = @"";
     switch (ftProcessingStates) {
         case kFTStateIdle:
-            processingStateString = [NSString stringWithFormat:@"Fusion Tables for userID: %@", userID];
+        {
+            NSString *userID = [[GoogleAuthorizationController sharedInstance] authenticatedUserID];
+            if (userID) {
+                processingStateString = [NSString stringWithFormat:@"Fusion Tables for userID: %@", userID];
+            } else {
+                processingStateString = [NSString stringWithFormat:@"Pull down to retrieve your Fusion Tables"];
+            }
+            break;
+        }
+        case kFTStateAuthenticating:
+            processingStateString = @"... authenticating for a Google Account";
             break;
         case kFTStateRetrieving:
             processingStateString = @"... retrieving list of Fusion Tables";
@@ -353,8 +377,12 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         default:
             break;
     }
-    // a quick way to center text within UITableViewCellStyleSubtitle cell without adding custom lables
-    return [[@"" stringByPaddingToLength:(46 - [processingStateString length])
+    // a quick way to center text within UITableViewCellStyleSubtitle cell without adding a custom lable
+    NSUInteger pStringLength = [processingStateString length];
+    NSUInteger padding = (pStringLength < 46) ? (46 - pStringLength) : 0;
+    return [[@"" stringByPaddingToLength:padding
                               withString:@" " startingAtIndex:0] stringByAppendingString:processingStateString];
 }
 @end
+
+

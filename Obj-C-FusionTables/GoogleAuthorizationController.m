@@ -6,6 +6,9 @@
 //  Copyright 2011 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Google Authorization wrapper class
+****/
 
 #import "GoogleAuthorizationController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
@@ -109,8 +112,7 @@
     }
 }
 
-#pragma mark - Google Authorization Methods
-#pragma mark - Authorization Methods
+#pragma mark General Authorization Methods
 - (NSString *)authenticatedUserID {
     return [self.theAuth userEmail];
 }
@@ -128,16 +130,26 @@
         [self signInToGoogleWithCompletionHandler:completionHandler CancelHandler:cancelHandler];
     }
 }
+
+#pragma mark Fetcher Authorization Methods
 - (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
-                WithCompletionHandler:(void_completion_handler_block)completionHandler {
-    
+                WithCompletionHandler:(void_completion_handler_block)completionHandler
+                                CancelHandler:(void_completion_handler_block)cancelHandler {
+
     void_completion_handler_block authFetcherBlock = ^ {
         [fetcher setAuthorizer:self.theAuth];
-        if (completionHandler) {
-            completionHandler();
-        }
+        if (completionHandler) completionHandler();
     };
-    [self authorizedRequestWithCompletionHandler:authFetcherBlock CancelHandler:nil];
+    [self authorizedRequestWithCompletionHandler:authFetcherBlock CancelHandler:cancelHandler];
+}
+- (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
+       WithCompletionHandler:(void_completion_handler_block)completionHandler {    
+
+    void_completion_handler_block authFetcherBlock = ^ {
+        [fetcher setAuthorizer:self.theAuth];
+        if (completionHandler) completionHandler();
+    };
+    [self authorizeHTTPFetcher:fetcher WithCompletionHandler:authFetcherBlock CancelHandler:nil];
 }
 
 #define GOOGLE_KEYCHAIN_ID (@"Obj-C FT Google KeyChain ID")
@@ -175,15 +187,13 @@
                                 [error localizedDescription]]];
                  
                  // cancel handler
-                 if (cancelHandler) {
-                     cancelHandler();
-                 }
+                 if (cancelHandler) cancelHandler();
              } else {
                  // Authentication succeeded
                  self.theAuth = auth;
                  
                  // Execute the request
-                 completionHandler();
+                 if (completionHandler) completionHandler();
              }     
         }];
     

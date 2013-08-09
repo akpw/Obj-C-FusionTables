@@ -53,10 +53,19 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     cell.backgroundView = [[UIImageView alloc] init];
     cell.selectedBackgroundView = [[UIImageView alloc] init];
     
-    ((UIImageView *)cell.backgroundView).image =
-                    [AppIconsController cellGenericBtnImage][IconsControllerIconTypeNormal];
     ((UIImageView *)cell.selectedBackgroundView).image =
                     [AppIconsController cellGenericBtnImage][IconsControllerIconTypeHighlighted];
+    if (![self isSampleAppFusionTable]) {
+        cell.userInteractionEnabled = NO;
+        cell.backgroundColor = [UIColor clearColor];
+        ((UIImageView *)cell.backgroundView).image =
+                    [AppIconsController cellGenericBtnImage][IconsControllerIconTypeHighlighted];
+    } else {
+        cell.userInteractionEnabled = YES;
+        cell.backgroundColor = [UIColor whiteColor];
+        ((UIImageView *)cell.backgroundView).image =
+                    [AppIconsController cellGenericBtnImage][IconsControllerIconTypeNormal];
+    }
 }
 - (void)tableView:(UITableView *)tableView DidSelectRow:(NSInteger)row {
     [self shareFusionTableWithCompletionHandler:^{
@@ -124,15 +133,22 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    switch (ftSharingRowState) {
-        case kFTStateSharing:
-            footerString = @"Sharing Fusion Table...";
-            break;
-        case kFTStateShorteningURL:
-            footerString = @"Shortening the sharing URL...";
-            break;
-        default:
-            break;
+    if ([self isSampleAppFusionTable]) {
+        switch (ftSharingRowState) {
+            case kFTStateIdle:
+                footerString = @"Shares a Fusion Table";
+                break;
+            case kFTStateSharing:
+                footerString = @"Sharing Fusion Table...";
+                break;
+            case kFTStateShorteningURL:
+                footerString = @"Shortening the sharing URL...";
+                break;
+            default:
+                break;
+        }
+    } else {
+        footerString = @"Choose a table created with this App";
     }
     return footerString;
 }

@@ -13,7 +13,7 @@
 @implementation SampleViewControllerFTBaseSection
 
 #pragma mark - Obj-C-FusionTables Sample Table check
-// a simple Fusion Table name prefix check,
+// simple Fusion Table name prefix check,
 // used to recognise tables created within this app
 - (BOOL)isSampleAppFusionTable {
     NSString *tableName = [(SampleViewController *)self.parentVC fusionTableName];
