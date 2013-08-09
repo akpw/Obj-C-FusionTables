@@ -111,8 +111,8 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
                     NSData *data = [[error userInfo] valueForKey:@"data"];
                     NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     [[SimpleGoogleServiceHelpers sharedInstance]
-                     showAlertViewWithTitle:@"Fusion Tables Error"
-                     AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
+                            showAlertViewWithTitle:@"Fusion Tables Error"
+                            AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
                 } else {
                     NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
                                                                           options:kNilOptions error:nil];
@@ -242,7 +242,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // +1 for the info row
+    // adding +1 for the info row
     return [_ftTableObjects count] + 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
