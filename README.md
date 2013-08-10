@@ -1,7 +1,7 @@
 Obj-C-FusionTables
 ==================
 
-![obj-c](http://alwawee.com/wordpress/wp-content/uploads/2011/07/objc.png)
+![obj-c](http://goo.gl/S71pRK)
 
 
 [Google Fusion Tables](http://www.google.com/drive/apps.html#fusiontables) is a powerful combination of a big web store and variety of ways to access and visualise the data. While marked as 'experimental', it has reached its maturity with [Fusion Tables API v1.0](https://developers.google.com/fusiontables/) and now offers developers some clean & easy ways to enrich their apps across variety of development platforms. 
