@@ -17,8 +17,8 @@ And that's pretty much it!
 
 # Usage
 * Start with setting your own Google API Key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
-* Take a quick look at the Obj-C-FusionTables to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is an Objective-C represeantation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with same main methods such as ````list....````, ````insert....````, ````update....````, ````delete````. Similarly, the same goes for other Fusion Tables resources such as Templates, Styles, and SQL Queries. 
-
+* Take a quick look at the Obj-C-FusionTables to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is an Objective-C represeantation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with same main methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. Similarly, the same goes for other Fusion Tables resources such as Templates, Styles, and SQL Queries. 
+The ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
 
 
 # Compatibility
