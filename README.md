@@ -87,6 +87,27 @@ After a brief glance on the delete table code above, the first question is proba
 
 This way things are more flexible, letting you implement the delegate where it makes sense in your app rather than going into parametrising or subclassing the ```FTTable``` class. A similar approach is used for other Obj-C-FusionTables core classes such as ````FTStyle```` and ````FTTemplate````.
 
+A simple way to learn about implementing specific delagates is to look at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v1/reference/) knowledge, the Objective-C part of it as quite straightforward. A quick code sample:
+
+````
+// Sample Fusion Table Title
+- (NSString *)ftTitle {
+	return @"My new cool table";
+}
+// Sample Fusion Table Columns Definition
+- (NSArray *)ftColumns {
+    return @[
+     @{@"name": @"entryDate",
+       @"type": @"STRING"
+       },
+     @{@"name": @"entryName",
+       @"type": @"STRING"
+       },
+     @{@"name": @"geometry",
+       @"type": @"LOCATION"
+       }];
+}
+````
 
 # Compatibility
 GroupedUITableViews requires ARC and was optimised for iOS6 and above.
