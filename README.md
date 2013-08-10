@@ -1,6 +1,3 @@
-Obj-C-FusionTables
-==================
-
 ![obj-c](https://lh5.googleusercontent.com/-TH8uCw5a-mQ/UgXybJ1FkoI/AAAAAAAAEOw/s39de35VHp0/w850-h480-no/u_1.png)
 
 
