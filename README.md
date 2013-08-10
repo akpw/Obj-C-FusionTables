@@ -20,7 +20,7 @@ And that's pretty much it!
 * Take a quick look at the Obj-C-FusionTables to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is an Objective-C represeantation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with same main methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. Similarly, the same goes for other Fusion Tables resources such as Templates, Styles, and SQL Queries. 
 The ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
 
-# A few code samples
+# A few quick code samples
 * read a list of Fusion Tables
 
 ````
@@ -68,6 +68,24 @@ __block NSArray *ftTableObjects = nil;
 }];
 ````
 
+Similar approach works for Fusion Tables Templates, Styles, and SQL Queries.
+
+
+* The Delegates
+After a brief glance on the delete table code above, the first question is probably "where the heck is the table ID coming from? some property, or what?" Well, as the ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
+
+````
+@protocol FTDelegate <NSObject>
+@optional
+- (NSString *)ftTableID;
+- (NSArray *)ftColumns;
+- (NSString *)ftTitle;
+- (NSString *)ftDescription;
+- (BOOL)ftIsExportable;
+@end
+````
+
+This way things are more flexible, letting you implement the delegate where it makes sense in your app rather than going into parametrising or subclassing the ```FTTable``` class. A similar approach is used for other Obj-C-FusionTables core classes such as ````FTStyle```` and ````FTTemplate````.
 
 
 # Compatibility
