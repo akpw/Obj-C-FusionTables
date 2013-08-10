@@ -22,6 +22,7 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 
 # A few code samples
 * read a list of Fusion Tables
+
 ````
         __block NSArray *ftTableObjects;
         [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
