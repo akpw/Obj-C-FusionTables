@@ -7,14 +7,19 @@ One potential obstacle for Fusion Tables in iOS apps is that there is no officia
 
 Obj-C-FusionTables is a light-weight soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries. 
 
-
 # Sample Project
 The main purpose of the sample project was to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, SQL rows operations, etc. For data safety, only Fusion Tables created within the sample app can be modified.
+To run the sample project, you will need to set your own Google API key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
 
 # Installation
-* Drag & drop the ''''Obj-C-Fusion Tables Base'''' folder from sample app into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcheras classes as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
+Drag & drop the ''''Obj-C-Fusion Tables Base'''' folder from sample app into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcheras classes as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
 And that's pretty much it!
 
+# Usage
+* Start with setting your own Google API Key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
+* 
 
-# Obj-C-FusionTables Basics
 
+
+# Compatibility
+GroupedUITableViews requires ARC and was optimised for iOS6 and above.
