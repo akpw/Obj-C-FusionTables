@@ -50,7 +50,7 @@ __block NSArray *ftTableObjects = nil;
     } else {
         NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:data
                                                                     options:kNilOptions error:nil];
-		NSLog(@"Created a new Fusion Table: %@", contentDict);
+	NSLog(@"Created a new Fusion Table: %@", contentDict);
     }
 }];
 ````
