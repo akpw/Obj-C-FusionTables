@@ -20,6 +20,24 @@ And that's pretty much it!
 * Take a quick look at the Obj-C-FusionTables to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is an Objective-C represeantation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with same main methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. Similarly, the same goes for other Fusion Tables resources such as Templates, Styles, and SQL Queries. 
 The ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
 
+# A few code samples
+* read a list of Fusion Tables
+````
+        __block NSArray *ftTableObjects;
+        [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
+                if (error) {
+                    NSData *data = [[error userInfo] valueForKey:@"data"];
+                    NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    [[SimpleGoogleServiceHelpers sharedInstance]
+                            showAlertViewWithTitle:@"Fusion Tables Error"
+                            AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
+                } else {
+                    NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:kNilOptions error:nil];
+                    NSLog(@"Fusion Tables: %@", lines);
+                    ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
+                }
+````
 
 # Compatibility
 GroupedUITableViews requires ARC and was optimised for iOS6 and above.
