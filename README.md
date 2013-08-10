@@ -46,11 +46,11 @@ __block NSArray *ftTableObjects = nil;
     if (error) {
         NSData *data = [[error userInfo] valueForKey:@"data"];
         NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	NSLog(@"Error Creating Fusion Table: %@", errorStr);
+		NSLog(@"Error Creating Fusion Table: %@", errorStr);
     } else {
         NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:data
                                                                     options:kNilOptions error:nil];
-	NSLog(@"Created a new Fusion Table: %@", contentDict);
+		NSLog(@"Created a new Fusion Table: %@", contentDict);
     }
 }];
 ````
