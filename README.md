@@ -26,12 +26,10 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 ````
 __block NSArray *ftTableObjects = nil;
 [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
-        if (error) {
+	if (error) {
 	    NSData *data = [[error userInfo] valueForKey:@"data"];
 	    NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	    [[SimpleGoogleServiceHelpers sharedInstance]
-	            showAlertViewWithTitle:@"Fusion Tables Error"
-	            AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
+	    NSLog(@"Error Creating Fusion Table: %@", errorStr);
 	} else {
 	    NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
 	                                                          options:kNilOptions error:nil];
@@ -40,6 +38,37 @@ __block NSArray *ftTableObjects = nil;
 }];
 
 ````
+
+* insert a new Fusion Table
+
+````
+[self.ftTable insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+    if (error) {
+        NSData *data = [[error userInfo] valueForKey:@"data"];
+        NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	NSLog(@"Error Creating Fusion Table: %@", errorStr);
+    } else {
+        NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                    options:kNilOptions error:nil];
+		NSLog(@"Created a new Fusion Table: %@", contentDict);
+    }
+}];
+````
+
+* delete a Fusion Table
+
+````
+[self.ftTable deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+    [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+    if (error) {
+        NSData *data = [[error userInfo] valueForKey:@"data"];
+        NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"Error Creating Fusion Table: %@", errorStr);
+    }
+}];
+````
+
+
 
 # Compatibility
 GroupedUITableViews requires ARC and was optimised for iOS6 and above.
