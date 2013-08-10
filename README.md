@@ -8,7 +8,7 @@ One potential obstacle for Fusion Tables in iOS apps is that there is no officia
 Obj-C-FusionTables is a light-weight soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries. 
 
 # Sample Project
-The main purpose of the sample project was to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, SQL rows operations, etc. For data safety, only Fusion Tables created within the sample app can be modified.
+The main purpose of the sample project was to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, SQL rows operations, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
 To run the sample project, you will need to set your own Google API key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
 
 # Installation
@@ -17,7 +17,7 @@ And that's pretty much it!
 
 # Usage
 * Start with setting your own Google API Key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
-* 
+* Take a quick look at the Obj-C-FusionTables to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is an Objective-C represeantation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with same main methods such as ````list....````, ````insert....````, ````update....````, ````delete````. Similarly, the same goes for other Fusion Tables resources such as Templates, Styles, and SQL Queries. 
 
 
 
