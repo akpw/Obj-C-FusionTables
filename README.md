@@ -24,20 +24,21 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 * read a list of Fusion Tables
 
 ````
-        __block NSArray *ftTableObjects;
-        [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
-                if (error) {
-                    NSData *data = [[error userInfo] valueForKey:@"data"];
-                    NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    [[SimpleGoogleServiceHelpers sharedInstance]
-                            showAlertViewWithTitle:@"Fusion Tables Error"
-                            AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
-                } else {
-                    NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
-                                                                          options:kNilOptions error:nil];
-                    NSLog(@"Fusion Tables: %@", lines);
-                    ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
-                }
+__block NSArray *ftTableObjects = nil;
+[self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
+        if (error) {
+	    NSData *data = [[error userInfo] valueForKey:@"data"];
+	    NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	    [[SimpleGoogleServiceHelpers sharedInstance]
+	            showAlertViewWithTitle:@"Fusion Tables Error"
+	            AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
+	} else {
+	    NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
+	                                                          options:kNilOptions error:nil];
+	    ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
+	}
+}];
+
 ````
 
 # Compatibility
