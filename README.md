@@ -71,7 +71,7 @@ __block NSArray *ftTableObjects = nil;
 Similar approach works for Fusion Tables Templates, Styles, and SQL Queries.
 
 
-* The Delegates
+# The Delegates
 After a brief glance on the delete table code above, the first question is probably "where the heck is the table ID coming from? some property, or what?" Well, as the ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
 
 ````
