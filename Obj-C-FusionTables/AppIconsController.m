@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/*****
+    Simple organization of sample app images
+*****/
+
 #import "AppIconsController.h"
 #import "AppGeneralServicesController.h"
 

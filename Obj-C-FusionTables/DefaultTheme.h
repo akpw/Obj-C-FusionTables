@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Sample App Appearance customization, default theme
+****/
+
 #import <Foundation/Foundation.h>
 #import "AppGeneralServicesController.h"
 

@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/****
+    A simple Google Services Helper class
+****/
+
 typedef void(^ServiceAPIHandler)(NSData *data, NSError *error);
 typedef void (^void_completion_handler_block)(void);
 

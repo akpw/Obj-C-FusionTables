@@ -6,14 +6,21 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Sample App Appearance customization, default theme
+****/
+
 #import "DefaultTheme.h"
 #import "AppIconsController.h"
 
 @implementation DefaultTheme
 
+#pragma mark - App tint color customization, default impl
 - (UIColor *)baseTintColor {
     return nil;
 }
+
+#pragma mark - UIBarButtonItem customization, default impl
 - (NSArray *)customBarButtonItemsBackForTarget:(id)target WithAction:(SEL)actionSelector {
     UIImage *customImage = [AppIconsController
                                navBarCustomBackButtonImage][IconsControllerIconTypeNormal];

@@ -13,6 +13,7 @@
 /****
     Google Authorization wrapper class
 ****/
+
 @interface GoogleAuthorizationController : NSObject
 
 @property (nonatomic, readonly) NSString *authenticatedUserID;

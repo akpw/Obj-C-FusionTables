@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-/*
- Simple organization of app images
-*/
+/*****
+    Simple organization of sample app images
+*****/
 
 #import <Foundation/Foundation.h>
 

@@ -262,8 +262,8 @@
 				57A7DECD17AA385A00E74167 /* AppDelegate.h */,
 				57A7DECE17AA385A00E74167 /* AppDelegate.m */,
 				57A7DED517AA38EA00E74167 /* Example */,
-				57A7DEF717AA39ED00E74167 /* GroupedUITableViews */,
 				57A7DED417AA38C900E74167 /* Obj-C-Fusion Tables Base */,
+				57A7DEF717AA39ED00E74167 /* GroupedUITableViews */,
 				57A7DE9917AA37FB00E74167 /* Supporting Files */,
 			);
 			path = "Obj-C-FusionTables";
@@ -330,15 +330,8 @@
 			isa = PBXGroup;
 			children = (
 				57124BD717B0D33B0003A1F9 /* App Services */,
+				57BD698817B77B1F003EF96C /* View Controllers */,
 				57A7DED617AA392800E74167 /* Sample Data */,
-				57A7DEDC17AA396000E74167 /* UI Sections */,
-				57A7DEEF17AA39C000E74167 /* SampleViewControllerUIController.h */,
-				57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */,
-				57A7DEF117AA39C000E74167 /* SampleViewController.h */,
-				57A7DEF217AA39C000E74167 /* SampleViewController.m */,
-				57162A4E17AE4DBA007DDDD2 /* FusionTablesViewController.h */,
-				57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */,
-				57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -402,6 +395,37 @@
 			children = (
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		57BD698817B77B1F003EF96C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57BD698917B77B55003EF96C /* Master */,
+				57BD698A17B77B68003EF96C /* Detail */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		57BD698917B77B55003EF96C /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				57162A4E17AE4DBA007DDDD2 /* FusionTablesViewController.h */,
+				57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */,
+				57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */,
+			);
+			name = Master;
+			sourceTree = "<group>";
+		};
+		57BD698A17B77B68003EF96C /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				57A7DEDC17AA396000E74167 /* UI Sections */,
+				57A7DEEF17AA39C000E74167 /* SampleViewControllerUIController.h */,
+				57A7DEF017AA39C000E74167 /* SampleViewControllerUIController.m */,
+				57A7DEF117AA39C000E74167 /* SampleViewController.h */,
+				57A7DEF217AA39C000E74167 /* SampleViewController.m */,
+			);
+			name = Detail;
 			sourceTree = "<group>";
 		};
 		57F0B16A17B0EAFC00302E3C /* Icons Controller */ = {

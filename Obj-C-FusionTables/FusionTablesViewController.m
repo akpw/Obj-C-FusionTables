@@ -6,17 +6,16 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-
 /****
-     Shows usage of Obj-C-FusionTables, retrieving & displaying
-     a list of Fusion Tables for a given google auth.
-     for data safety, allows editing only Fusion Tables created in this app
+    Shows usage of Obj-C-FusionTables, 
+    retrieving & displaying a list of Fusion Tables (requiring & setting a Google auth).
+    For the sake data safety, allows editing only Fusion Tables created in this app.
 ****/
 
 #import "FusionTablesViewController.h"
-#import "SampleViewController.h"
 #import "AppGeneralServicesController.h"
 #import "AppIconsController.h"
+#import "SampleViewController.h"
 
 // FTables processing states
 typedef NS_ENUM (NSUInteger, FTProcessingStates) {
@@ -49,14 +48,16 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 - (NSArray *)editButton {
     if (!_editButton) {
         _editButton = [[AppGeneralServicesController sharedAppTheme]
-                       customEditBarButtonItemsForTarget:self WithAction:@selector(setEditingMode)];
+                                        customEditBarButtonItemsForTarget:self 
+                                        WithAction:@selector(setEditingMode)];
     }
     return _editButton;
 }
 - (NSArray *)doneButton {
     if (!_doneButton) {
         _doneButton = [[AppGeneralServicesController sharedAppTheme]
-                       customDoneBarButtonItemsForTarget:self WithAction:@selector(setEditingMode)];
+                                        customDoneBarButtonItemsForTarget:self 
+                                        WithAction:@selector(setEditingMode)];
     }
     return _doneButton;
 }
@@ -82,9 +83,8 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     [self.tableView addSubview:refreshControl];
     
     // Authenticate & Load Fusion Tables list
-    [self performSelector:@selector(loadFusionTables) withObject:self afterDelay:1.0f];
     ftProcessingStates = kFTStateAuthenticating;
-    [self.tableView reloadData];
+    [self performSelector:@selector(loadFusionTables) withObject:self afterDelay:1.0f];
 }
 - (void)refreshFusionTablesList:(UIRefreshControl *)refreshControl {
     [self loadFusionTables];
@@ -98,7 +98,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         self.ftTableObjects = nil;
         ftProcessingStates =  kFTStateRetrieving;
         [self.tableView reloadData];
-        
+
         void_completion_handler_block finishProcessingBlock = ^ {
             [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
             ftProcessingStates = kFTStateIdle;
@@ -112,12 +112,12 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
                     NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     [[SimpleGoogleServiceHelpers sharedInstance]
                             showAlertViewWithTitle:@"Fusion Tables Error"
-                            AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", errorStr]];
+                            AndText: [NSString stringWithFormat:@"Error Fetching Fusion Tables: %@", errorStr]];
                 } else {
                     NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
                                                                           options:kNilOptions error:nil];
                     NSLog(@"Fusion Tables: %@", lines);
-                    _ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
+                    self.ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
                     if ([_ftTableObjects count] > 0) self.navigationItem.leftBarButtonItems = self.editButton;
                 }
                 finishProcessingBlock ();
@@ -139,16 +139,15 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
             [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
             if (error) {
                 NSData *data = [[error userInfo] valueForKey:@"data"];
-                NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                
+                NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                
                 [[SimpleGoogleServiceHelpers sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
-                        AndText: [NSString stringWithFormat:@"Error Creating Fusion Table: %@", str]];
+                        AndText: [NSString stringWithFormat:@"Error Inserting Fusion Table: %@", errorStr]];
             } else {
                 NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:data
                                                                             options:kNilOptions error:nil];
                 if (contentDict) {
-                    NSLog(@"Created a new Fusion Table: %@", contentDict);
+                    NSLog(@"Inserted a new Fusion Table: %@", contentDict);
                     
                     [_ftTableObjects insertObject:contentDict atIndex:0];
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
@@ -157,10 +156,10 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
                     if (!self.navigationItem.leftBarButtonItem)
                                 self.navigationItem.leftBarButtonItem = self.editButtonItem;
                 } else {
-                    // the FT Create Table did not return tableid
+                    // the FT Create Table did not return sound info
                     [[SimpleGoogleServiceHelpers sharedInstance]
                             showAlertViewWithTitle:@"Fusion Tables Error"
-                            AndText:  @"Error Fetching the Fusion Table ID"];
+                            AndText:  @"Error processsing inserted Fusion Table data"];
                 }
             }
             ftProcessingStates = kFTStateIdle;
@@ -297,11 +296,11 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 #define DELETE_BUTTON_TITLE (@"Delete Table")
 - (void)deleteFusionTableObjectWithIndex:(NSUInteger)rowIndex {
     UIActionSheet *deleteActionSheet;
-    NSString *tableName = self.ftTableObjects[rowIndex][@"name"];
+    NSString *tableName = _ftTableObjects[rowIndex][@"name"];
     if ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound) {
         NSString *titleString = [NSString stringWithFormat:
                                  @"About to delete Fusion Table %@\n This operation can not be undone",
-                                 self.ftTableObjects[rowIndex][@"name"]];
+                                 _ftTableObjects[rowIndex][@"name"]];
         deleteActionSheet = [[UIActionSheet alloc] initWithTitle:titleString
                                                                        delegate:self
                                                               cancelButtonTitle:@"Cancel"
@@ -323,7 +322,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:DELETE_BUTTON_TITLE]) {
         NSUInteger rowIndex = actionSheet.tag;
-        self.selectedFusionTableID = self.ftTableObjects[rowIndex][@"tableId"];
+        self.selectedFusionTableID = _ftTableObjects[rowIndex][@"tableId"];
         [self deleteFusionTableWithCompletionHandler:^{
             [_ftTableObjects removeObjectAtIndex:rowIndex];
             if ([_ftTableObjects count] == 0) self.navigationItem.leftBarButtonItem = nil;
@@ -337,13 +336,11 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row > 0) {
-        self.selectedFusionTableID = self.ftTableObjects[indexPath.row - 1][@"tableId"];
+        self.selectedFusionTableID = _ftTableObjects[indexPath.row - 1][@"tableId"];
         SampleViewController *ftDetailViewController = [[SampleViewController alloc]
                                                         initWithNibName:@"GroupedTableViewController" bundle:nil];
-        ftDetailViewController.fusionTableID = self.selectedFusionTableID;
-        ftDetailViewController.fusionTableName = self.ftTableObjects[indexPath.row - 1][@"name"];
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                                 style:UIBarButtonItemStylePlain target:nil action:nil];
+        ftDetailViewController.fusionTableID = _selectedFusionTableID;
+        ftDetailViewController.fusionTableName = _ftTableObjects[indexPath.row - 1][@"name"];
         [self.navigationController pushViewController:ftDetailViewController animated:YES];
     }
 }
@@ -383,6 +380,8 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     return [[@"" stringByPaddingToLength:padding
                               withString:@" " startingAtIndex:0] stringByAppendingString:processingStateString];
 }
+
+
 @end
 
 

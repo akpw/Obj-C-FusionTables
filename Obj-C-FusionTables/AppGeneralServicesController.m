@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    General-level Sample App Services Helper
+****/
+
 #import "AppGeneralServicesController.h"
 #import "TintedTheme.h"
 
@@ -21,6 +25,7 @@
     return sharedAppTheme;
 }
 
+#pragma mark - Theme-based appearance customization
 + (void)customizeAppearance {
     id <AppTheme> theme = [self sharedAppTheme];
     
@@ -32,7 +37,7 @@
     }
 }
 
-#pragma mark - Helpers / Utilitles
+#pragma mark - UIColor Helpers
 + (UIColor *)UIColorFromRGB:(NSInteger)rgbValue {
     return [self UIColorFromRGB:rgbValue AndAlpha:1.0f];
 }
@@ -47,6 +52,7 @@
                            alpha:theAlpha];
 }
 
+#pragma mark - UIImage Helpers
 + (UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor {
     UIGraphicsBeginImageContext(baseImage.size);
     

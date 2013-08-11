@@ -9,6 +9,10 @@
 #import "SimpleGoogleServiceHelpers.h"
 #import "GoogleAuthorizationController.h"
 
+/****
+    A simple Google Services Helper class
+****/
+
 @interface SimpleGoogleServiceHelpers ()
     @property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @end
