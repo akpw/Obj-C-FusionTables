@@ -113,7 +113,7 @@ A simple way to learn about implementing specific delagates is to look at the sa
 GroupedUITableViews requires ARC and was optimised for iOS6 and above.
 
 # TODOs
-* write tests
+* unit tests
 * better code comments / docs
 * extend the example with listing Styles / Templates, etc.
 
