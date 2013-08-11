@@ -9,7 +9,7 @@ Obj-C-FusionTables is a light-weight soluition for integrating Fusion Tables int
 
 # Sample Project
 The main purpose of the sample project was to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, SQL rows operations, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
-To run the sample project, you will need to set your own Google API key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
+To run the sample project, you will need to set your own Google API key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey).
 
 # Installation
 Drag & drop the ''''Obj-C-Fusion Tables Base'''' folder from sample app into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcheras classes as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
@@ -17,7 +17,7 @@ And that's pretty much it!
 
 # Usage
 * Start with setting your own Google API Key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
-* Take a quick look at the Obj-C-FusionTables to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is an Objective-C represeantation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with same main methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. Similarly, the same goes for other Fusion Tables resources such as Templates, Styles, and SQL Queries. 
+* Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is an Objective-C represeantation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. Similarly, the same goes for other Fusion Tables resources such as Templates, Styles, and SQL Queries. 
 The ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
 
 # A few quick code samples
@@ -68,11 +68,11 @@ __block NSArray *ftTableObjects = nil;
 }];
 ````
 
-Similar approach works for Fusion Tables Templates, Styles, and SQL Queries.
+Similar coding patterns work for Fusion Tables Templates, Styles, and SQL Queries.
 
 
 # The Delegates
-After a brief glance on the delete table code above, the first question is probably "where the heck is the table ID coming from? some property, or what?" Well, as the ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
+After a brief glance on the delete table code above, the first question is probably "where the heck is the table ID coming from? is it in some property, or what?" Well, as the ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
 
 ````
 @protocol FTDelegate <NSObject>
@@ -85,9 +85,9 @@ After a brief glance on the delete table code above, the first question is proba
 @end
 ````
 
-This way things are more flexible, letting you implement the delegate where it makes sense in your app rather than going into parametrising or subclassing the ```FTTable``` class. A similar approach is used for other Obj-C-FusionTables core classes such as ````FTStyle```` and ````FTTemplate````.
+This way things are more flexible, letting you implement the delegate where it makes sense in your app rather than going into parametrising / subclassing the ```FTTable``` class. A similar approach is used for other Obj-C-FusionTables core classes such as ````FTStyle```` and ````FTTemplate````.
 
-A simple way to learn about implementing specific delagates is to look at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v1/reference/) knowledge, the Objective-C part of it as quite straightforward. A quick code sample:
+A simple way to learn about implementing specific delagates is to look at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v1/reference/) knowledge itself, the Objective-C part of it as quite straightforward. A quick code sample:
 
 ````
 // Sample Fusion Table Title
@@ -111,3 +111,9 @@ A simple way to learn about implementing specific delagates is to look at the sa
 
 # Compatibility
 GroupedUITableViews requires ARC and was optimised for iOS6 and above.
+
+# TODOs
+* write tests
+* better code comments / docs
+* extend the example with listing Styles / Templates, etc.
+
