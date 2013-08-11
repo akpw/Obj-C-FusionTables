@@ -13,12 +13,6 @@
 #import "FTTable.h"
 #import "GoogleAuthorizationController.h"
 
-@protocol FTStyleDelegate <NSObject>
-@required
-- (NSString *)ftTableID;
-- (NSString *)ftColumnNames;
-@end
-
 @interface FTSQLQuery : NSObject
 
 #pragma mark - Fusion Tables SQL API
