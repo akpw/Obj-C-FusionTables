@@ -63,7 +63,7 @@ __block NSArray *ftTableObjects = nil;
     if (error) {
         NSData *data = [[error userInfo] valueForKey:@"data"];
         NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"Error Creating Fusion Table: %@", errorStr);
+        NSLog(@"Error Deleting Fusion Table: %@", errorStr);
     }
 }];
 ````
