@@ -6,6 +6,11 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Represents a Fusion Table. 
+    Suports common table operations, such as insert / list / update delete
+****/
+
 #import "FTTable.h"
 
 @implementation FTTable

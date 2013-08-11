@@ -6,13 +6,13 @@
 //  Copyright 2011 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "SimpleGoogleServiceHelpers.h"
-#import "GTMHTTPFetcher.h"
-
 /****
     Google Authorization wrapper class
 ****/
+
+#import <Foundation/Foundation.h>
+#import "SimpleGoogleServiceHelpers.h"
+#import "GTMHTTPFetcher.h"
 
 @interface GoogleAuthorizationController : NSObject
 

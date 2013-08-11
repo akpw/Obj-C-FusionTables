@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-/*
+/****
     Represents a Fusion Table. 
-    Allows common table operations such as insert / list / update delete
-*/
+    Suports common table operations, such as insert / list / update delete
+****/
 
 #import "FTAPIResource.h"
 

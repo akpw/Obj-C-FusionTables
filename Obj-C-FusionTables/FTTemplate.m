@@ -6,6 +6,11 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Represents a Fusion Table Info Window Template. 
+    Suports common table operations, such as insert / list / update delete
+****/
+
 #import "FTTemplate.h"
 
 @implementation FTTemplate

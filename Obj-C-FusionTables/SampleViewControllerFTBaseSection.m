@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Base class for SampleViewController UITableView section controllers
+****/
+
 #import "SampleViewControllerFTBaseSection.h"
 #import "AppIconsController.h"
 #import "SampleViewController.h"
@@ -13,8 +17,8 @@
 @implementation SampleViewControllerFTBaseSection
 
 #pragma mark - Obj-C-FusionTables Sample Table check
-// simple Fusion Table name prefix check,
-// used to recognise tables created within this app
+// a simple Fusion Table name prefix check,
+// used to recognise tables created with this app
 - (BOOL)isSampleAppFusionTable {
     NSString *tableName = [(SampleViewController *)self.parentVC fusionTableName];
     return ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound);

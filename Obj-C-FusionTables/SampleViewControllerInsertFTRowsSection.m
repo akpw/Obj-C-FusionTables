@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Shows usage of Obj-C-FusionTables for Fusion Tables rows operations
+****/
+
 #import "SampleViewControllerInsertFTRowsSection.h"
 #import "FTSQLQuery.h"
 #import <QuartzCore/QuartzCore.h>

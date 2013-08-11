@@ -6,6 +6,14 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    A specific SampleViewController dispatcher class.
+ 
+    SampleViewController is using GroupedUITableViews (https://github.com/akpw/GroupedUITableViews),
+    to isolate sample logic of Fusion Table ops in small dedicated UITableView sections controller classes.
+****/
+
+
 #import "SampleViewControllerUIController.h"
 #import "SampleViewControllerFTStylingSection.h"
 #import "SampleViewControllerInsertFTRowsSection.h"

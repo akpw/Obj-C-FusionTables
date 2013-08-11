@@ -6,6 +6,11 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Enables read-write access to Fusion Table rows.
+****/
+
+
 #import "FTSQLQuery.h"
 
 @implementation FTSQLQuery

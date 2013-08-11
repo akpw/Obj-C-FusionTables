@@ -6,6 +6,12 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Represents a Fusion Table Info Window Template. 
+    Suports common table operations, such as insert / list / update delete
+****/
+
+
 #import "FTAPIResource.h"
 
 @protocol FTTemplateDelegate <NSObject>

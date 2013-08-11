@@ -6,16 +6,17 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "GroupedTableViewController.h"
-
 /****
-    Allows setting Fusion Table Map Styles and Templates, as well as base rows ops
-    only for Fusion Tables created within this app.
+    Shows usage of Obj-C-FusionTables for 
+    setting Fusion Table Map Styles and Templates, as well as for base Fusion Tables rows ops.
+    For the sake data safety, changes are allowed only for Fusion Tables created in this app.
  
     SampleViewController is using GroupedUITableViews (https://github.com/akpw/GroupedUITableViews),
-    to isolate sample logic of Fusion Table ops in small dedicated UITableView sections controller classes.
+    isolating the logic of Fusion Table ops in small dedicated UITableView sections controller classes.
 ****/
+
+#import <UIKit/UIKit.h>
+#import "GroupedTableViewController.h"
 
 #define SAMPLE_FUSION_TABLE_PREFIX (@"ObjC-API_Sample_FT_")
 

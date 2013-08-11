@@ -6,12 +6,12 @@
 //  Copyright 2011 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import "SimpleGoogleServiceHelpers.h"
-#import "GoogleAuthorizationController.h"
-
 /****
     A simple Google Services Helper class
 ****/
+
+#import "SimpleGoogleServiceHelpers.h"
+#import "GoogleAuthorizationController.h"
 
 @interface SimpleGoogleServiceHelpers ()
     @property (nonatomic, strong) UIActivityIndicatorView *spinner;

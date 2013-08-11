@@ -9,8 +9,10 @@
 #import "GroupedTableUIController.h"
 
 /****
-    Specific GroupedUITableViews dispatcher class
-    described in details at: https://github.com/akpw/GroupedUITableViews
+    A specific SampleViewController dispatcher class.
+    
+    SampleViewController is using GroupedUITableViews (https://github.com/akpw/GroupedUITableViews),
+    to isolate sample logic of Fusion Table ops in small dedicated UITableView sections controller classes.
 ****/
 
 @interface SampleViewControllerUIController : GroupedTableUIController

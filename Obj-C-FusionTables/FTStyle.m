@@ -6,6 +6,12 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Represents a Fusion Table Style. 
+    Suports common table operations, such as insert / list / update delete
+****/
+
+
 #import "FTStyle.h"
 #import "GoogleAuthorizationController.h"
 

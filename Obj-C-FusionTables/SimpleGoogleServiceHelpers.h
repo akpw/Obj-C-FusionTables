@@ -6,11 +6,11 @@
 //  Copyright 2011 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 /****
     A simple Google Services Helper class
 ****/
+
+#import <Foundation/Foundation.h>
 
 typedef void(^ServiceAPIHandler)(NSData *data, NSError *error);
 typedef void (^void_completion_handler_block)(void);

@@ -10,6 +10,10 @@
 #import "GroupedTableSectionController.h"
 #import "FTTable.h"
 
+/****
+    Base class for SampleViewController UITableView section controllers
+****/
+
 @interface SampleViewControllerFTBaseSection : GroupedTableSectionController <FTDelegate>
 
 - (UIButton *)ftActionButton;
