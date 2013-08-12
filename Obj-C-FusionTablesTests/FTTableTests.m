@@ -19,6 +19,30 @@
     [super tearDown];
 }
 
+- (void)testGoogleConnect {
+    [[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
+    if ([[GoogleAuthorizationController sharedInstance] isAuthorised]) {
+        NSLog(@"connected to Google with userID: %@", 
+              [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
+    } else {
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+        [[GoogleAuthorizationController sharedInstance] signInToGoogleWithCompletionHandler:^{
+            NSLog(@"connected to Google with userID: %@", 
+                  [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
+            dispatch_semaphore_signal(semaphore);
+        } CancelHandler:^{
+            STFail(@"failed connect to Google");
+            dispatch_semaphore_signal(semaphore);
+        }];   
+        while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) {
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
+        }
+    }
+    STAssertNotNil([[GoogleAuthorizationController sharedInstance] 
+                                        authenticatedUserID], 
+                                        @"authenticatedUserID should not be nil");
+}
+
 - (void)testLoadFusionTablesList {
     FTTable *ftTable = [[FTTable alloc] init];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
@@ -38,7 +62,6 @@
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
     }
 }
-
 
 - (void)googleConnectionCheck {
     if ([[GoogleAuthorizationController sharedInstance] isAuthorised]) {

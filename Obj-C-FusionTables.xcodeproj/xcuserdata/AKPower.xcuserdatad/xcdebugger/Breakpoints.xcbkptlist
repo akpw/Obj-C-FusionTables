@@ -8,12 +8,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Obj-C-FusionTablesTests/FTTableTests.m"
-         timestampString = "398011280.836666"
+         timestampString = "398011953.609589"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "26"
-         endingLineNumber = "26"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
          landmarkName = "-testLoadFusionTablesList"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Obj-C-FusionTablesTests/FTTableTests.m"
+         timestampString = "398011931.663409"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "24"
+         endingLineNumber = "24"
+         landmarkName = "-testGoogleConnect"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
