@@ -36,7 +36,6 @@
 		57A7DEB817AA37FB00E74167 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9217AA37FB00E74167 /* UIKit.framework */; };
 		57A7DEB917AA37FB00E74167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9417AA37FB00E74167 /* Foundation.framework */; };
 		57A7DEC117AA37FB00E74167 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */; };
-		57A7DEC417AA37FB00E74167 /* Obj_C_FusionTablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEC317AA37FB00E74167 /* Obj_C_FusionTablesTests.m */; };
 		57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DECE17AA385A00E74167 /* AppDelegate.m */; };
 		57A7DED317AA387A00E74167 /* SimpleGoogleServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DED217AA387A00E74167 /* SimpleGoogleServiceHelpers.m */; };
 		57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED717AA394700E74167 /* sampleInsertData.plist */; };
@@ -120,8 +119,6 @@
 		57A7DEB617AA37FB00E74167 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		57A7DEBE17AA37FB00E74167 /* Obj-C-FusionTablesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Obj-C-FusionTablesTests-Info.plist"; sourceTree = "<group>"; };
 		57A7DEC017AA37FB00E74167 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		57A7DEC217AA37FB00E74167 /* Obj_C_FusionTablesTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Obj_C_FusionTablesTests.h; sourceTree = "<group>"; };
-		57A7DEC317AA37FB00E74167 /* Obj_C_FusionTablesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Obj_C_FusionTablesTests.m; sourceTree = "<group>"; };
 		57A7DECD17AA385A00E74167 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		57A7DECE17AA385A00E74167 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		57A7DED117AA387A00E74167 /* SimpleGoogleServiceHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleGoogleServiceHelpers.h; sourceTree = "<group>"; };
@@ -287,8 +284,6 @@
 		57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesTests */ = {
 			isa = PBXGroup;
 			children = (
-				57A7DEC217AA37FB00E74167 /* Obj_C_FusionTablesTests.h */,
-				57A7DEC317AA37FB00E74167 /* Obj_C_FusionTablesTests.m */,
 				57A7DEBD17AA37FB00E74167 /* Supporting Files */,
 			);
 			path = "Obj-C-FusionTablesTests";
@@ -616,7 +611,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57A7DEC417AA37FB00E74167 /* Obj_C_FusionTablesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

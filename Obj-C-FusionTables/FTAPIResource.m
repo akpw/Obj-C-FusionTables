@@ -22,7 +22,7 @@
     
     NSString *resourceTypeIDString = (resourceTypeID) ? resourceTypeID : @"";
     NSString *url = [NSString stringWithFormat:@"%@%@", GOOGLE_FT_QUERY_API_URL, resourceTypeIDString];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{

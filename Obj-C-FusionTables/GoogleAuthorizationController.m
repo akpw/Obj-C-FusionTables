@@ -144,12 +144,8 @@
 }
 - (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
        WithCompletionHandler:(void_completion_handler_block)completionHandler {    
-
-    void_completion_handler_block authFetcherBlock = ^ {
-        [fetcher setAuthorizer:self.theAuth];
-        if (completionHandler) completionHandler();
-    };
-    [self authorizeHTTPFetcher:fetcher WithCompletionHandler:authFetcherBlock CancelHandler:nil];
+    
+    [self authorizeHTTPFetcher:fetcher WithCompletionHandler:completionHandler CancelHandler:nil];
 }
 
 #define GOOGLE_KEYCHAIN_ID (@"Obj-C FT Google KeyChain ID")
