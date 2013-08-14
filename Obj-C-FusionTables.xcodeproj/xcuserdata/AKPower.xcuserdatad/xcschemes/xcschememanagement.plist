@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Obj-C-FusionTablesTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>57A7DEB417AA37FB00E74167</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>57FAD01817BA0F500055BE35</key>
 		<dict>
 			<key>primary</key>
 			<true/>

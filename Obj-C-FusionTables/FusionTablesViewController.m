@@ -156,7 +156,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
                     if (!self.navigationItem.leftBarButtonItem)
                                 self.navigationItem.leftBarButtonItem = self.editButtonItem;
                 } else {
-                    // the FT Create Table did not return sound info
+                    // the FT Create Insert did not return sound info
                     [[SimpleGoogleServiceHelpers sharedInstance]
                             showAlertViewWithTitle:@"Fusion Tables Error"
                             AndText:  @"Error processsing inserted Fusion Table data"];

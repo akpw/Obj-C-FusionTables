@@ -9,44 +9,55 @@
 #import "FTTableTests.h"
 #import "GoogleAuthorizationController.h"
 
+static NSString *_sFusionTableID;
 
-@implementation FTTableTests
+@implementation FTTableTests 
+
 - (void)setUp {
-    [super setUp];   
-    [self googleConnectionCheck];
+    [super setUp]; 
+    [self checkGoogleConnection];
 }
 - (void)tearDown {
     [super tearDown];
 }
 
-- (void)testGoogleConnect {
-    [[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
-    if ([[GoogleAuthorizationController sharedInstance] isAuthorised]) {
-        NSLog(@"connected to Google with userID: %@", 
-              [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
-    } else {
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
-        [[GoogleAuthorizationController sharedInstance] signInToGoogleWithCompletionHandler:^{
-            NSLog(@"connected to Google with userID: %@", 
-                  [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
-            dispatch_semaphore_signal(semaphore);
-        } CancelHandler:^{
-            STFail(@"failed connect to Google");
-            dispatch_semaphore_signal(semaphore);
-        }];   
-        while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) {
-            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
-        }
-    }
-    STAssertNotNil([[GoogleAuthorizationController sharedInstance] 
-                                        authenticatedUserID], 
-                                        @"authenticatedUserID should not be nil");
+#pragma mark - FTDelegate methods
+- (NSString *)ftTableID {
+    return _sFusionTableID;
 }
 
-- (void)testLoadFusionTablesList {
-    FTTable *ftTable = [[FTTable alloc] init];
+#pragma mark Fusion Table Insert Test
+- (void)testObjCFusionTables_00_Insert {
+    STAssertNotNil([self ftTitle], @"for Insert, the FTDelegate Fusion Table Name the should not be nil");
+    STAssertNotNil([self ftColumns], @"for Delete, the FTDelegate Fusion Table Columns the should not be nil");
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self.ftTableResource insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+        dispatch_semaphore_signal(semaphore);
+        if (error) {
+            NSData *data = [[error userInfo] valueForKey:@"data"];            
+            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                
+            STFail (@"Error Inserting Fusion Table: %@", errorStr);
+        } else {
+            NSDictionary *ftTableDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                        options:kNilOptions error:nil];
+            if (ftTableDict) {
+                NSLog(@"Inserted a new Fusion Table: %@", ftTableDict);
+                STAssertNotNil(ftTableDict[@"name"], @"Returned Inserted Fusion Table Name should not be nil");
+                STAssertNotNil(ftTableDict[@"tableId"], @"Return Inserted Fusion Table IDs should not be nil");
+                _sFusionTableID = ftTableDict[@"tableId"];
+            } else {
+                STFail (@"Error processsing inserted Fusion Table data");
+            }
+        }
+    }];    
+    [self waitForSemaphore:semaphore WithTimeout:10];
+}
+
+
+#pragma mark Fusion Tables Load Test
+- (void)testObjCFusionTables_01_LoadList {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
-    [ftTable listFusionTablesWithCompletionHandler: ^(NSData *data, NSError *error) {
+    [self.ftTableResource listFusionTablesWithCompletionHandler: ^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
             NSData *data = [[error userInfo] valueForKey:@"data"];
@@ -54,46 +65,34 @@
             STFail (@"Error Fetching Fusion Tables: %@", errorStr);
         } else {
             NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
-                                                                  options:kNilOptions error:nil];
+                                                                  options:kNilOptions error:nil];            
+            NSArray *ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
             NSLog(@"Fusion Tables: %@", lines);
+            for (NSDictionary *ftTable in ftTableObjects) {
+                STAssertNotNil(ftTable[@"name"], @"Loaded Fusion Table Name should not be nil");
+                STAssertNotNil(ftTable[@"tableId"], @"Loaded Fusion Table ID should not be nil");
+            }
         }
     }];
-    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) {
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
-    }
+    [self waitForSemaphore:semaphore WithTimeout:10];
 }
 
-- (void)googleConnectionCheck {
-    if ([[GoogleAuthorizationController sharedInstance] isAuthorised]) {
-        NSLog(@"Connected to Google with userID: %@", 
-              [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
-    } else {
-        STFail(@"Please connect to a Google account before testing");
-    }
-    STAssertNotNil([[GoogleAuthorizationController sharedInstance] authenticatedUserID], 
-                   @"authenticatedUserID should not be nil");    
+#pragma mark Fusion Table Delete Test
+- (void)testObjCFusionTables_02_Delete {
+    STAssertNotNil([self ftTableID], @"for Delete, the FTDelegate Fusion Table IDs the should not be nil");
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+    [self.ftTableResource deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+        dispatch_semaphore_signal(semaphore);
+        if (error) {
+            NSData *data = [[error userInfo] valueForKey:@"data"];
+            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            STFail (@"Error Deleting Fusion Table With ID: %@, %@", [self ftTableID], errorStr);
+        } else {
+            NSLog(@"Deleted Fusion Tables with ID: %@", [self ftTableID]);
+        }
+    }];
+    [self waitForSemaphore:semaphore WithTimeout:10];
 }
+
 
 @end
-
-/*
- - (void)waitForCompletionWithTimeout:(NSTimeInterval)timeoutInSeconds {
- NSDate* giveUpDate = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
- 
- // Loop until the callbacks have been called and released, and until
- // the connection is no longer pending, or until the timeout has expired
- BOOL isMainThread = [NSThread isMainThread];
- 
- while ([giveUpDate timeIntervalSinceNow] > 0) {
- // Run the current run loop 1/1000 of a second to give the networking
- // code a chance to work
- if (isMainThread) {
- NSDate *stopDate = [NSDate dateWithTimeIntervalSinceNow:0.001];
- [[NSRunLoop currentRunLoop] runUntilDate:stopDate];
- } else {
- [NSThread sleepForTimeInterval:0.001];
- }
- }
- }
-
- */

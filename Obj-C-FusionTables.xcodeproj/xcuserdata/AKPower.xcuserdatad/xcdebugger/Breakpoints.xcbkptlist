@@ -8,12 +8,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Obj-C-FusionTablesTests/FTTableTests.m"
-         timestampString = "398011953.609589"
+         timestampString = "398148464.889024"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "49"
-         endingLineNumber = "49"
-         landmarkName = "-testLoadFusionTablesList"
+         startingLineNumber = "60"
+         endingLineNumber = "60"
+         landmarkName = "-testObjCFusionTables_01_LoadList"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -21,12 +21,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Obj-C-FusionTablesTests/FTTableTests.m"
-         timestampString = "398011931.663409"
+         timestampString = "398148232.243526"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "24"
-         endingLineNumber = "24"
-         landmarkName = "-testGoogleConnect"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
+         landmarkName = "-testObjCFusionTables_00_Insert"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Obj-C-FusionTablesTests/FTTableTests.m"
+         timestampString = "398148464.889024"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
+         landmarkName = "-testObjCFusionTables_02_Delete"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Obj-C-FusionTablesTests/FTResourceTestBase.m"
+         timestampString = "398148490.563994"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
+         landmarkName = "-checkGoogleConnection"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

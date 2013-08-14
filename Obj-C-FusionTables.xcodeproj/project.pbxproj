@@ -19,6 +19,7 @@
 		57124BEF17B0DDE40003A1F9 /* add-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57124BEE17B0DDE40003A1F9 /* add-icon@2x.png */; };
 		57162A5117AE4DBA007DDDD2 /* FusionTablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */; };
 		57162A5217AE4DBA007DDDD2 /* FusionTablesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */; };
+		5778303E17B9FBDC002A5CF6 /* FTResourceTestBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5778303D17B9FBDC002A5CF6 /* FTResourceTestBase.m */; };
 		578180E017AA995A00434135 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180D817AA995A00434135 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E117AA995A00434135 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DA17AA995A00434135 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E217AA995A00434135 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DC17AA995A00434135 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -97,6 +98,8 @@
 		57162A4E17AE4DBA007DDDD2 /* FusionTablesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FusionTablesViewController.h; sourceTree = "<group>"; };
 		57162A4F17AE4DBA007DDDD2 /* FusionTablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FusionTablesViewController.m; sourceTree = "<group>"; };
 		57162A5017AE4DBA007DDDD2 /* FusionTablesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FusionTablesViewController.xib; sourceTree = "<group>"; };
+		5778303C17B9FBDC002A5CF6 /* FTResourceTestBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTResourceTestBase.h; sourceTree = "<group>"; };
+		5778303D17B9FBDC002A5CF6 /* FTResourceTestBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTResourceTestBase.m; sourceTree = "<group>"; };
 		578180D717AA995A00434135 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
 		578180D817AA995A00434135 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
 		578180D917AA995A00434135 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
@@ -168,6 +171,10 @@
 		57A7DF3517AA3AAE00E74167 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		57F0B16B17B0EBAA00302E3C /* AppIconsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppIconsController.h; sourceTree = "<group>"; };
 		57F0B16C17B0EBAA00302E3C /* AppIconsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppIconsController.m; sourceTree = "<group>"; };
+		57FAD01B17BA0F500055BE35 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		57FAD01E17BA0F500055BE35 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		57FAD01F17BA0F500055BE35 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		57FAD02017BA0F500055BE35 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		57FBFBC417AD6B9B00A275BA /* FTSQLQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQuery.h; sourceTree = "<group>"; };
 		57FBFBC517AD6B9B00A275BA /* FTSQLQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQuery.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -252,6 +259,8 @@
 				57A7DE9417AA37FB00E74167 /* Foundation.framework */,
 				57A7DE9617AA37FB00E74167 /* CoreGraphics.framework */,
 				57A7DEB617AA37FB00E74167 /* SenTestingKit.framework */,
+				57FAD01B17BA0F500055BE35 /* Cocoa.framework */,
+				57FAD01D17BA0F500055BE35 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -287,6 +296,8 @@
 		57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesTests */ = {
 			isa = PBXGroup;
 			children = (
+				5778303C17B9FBDC002A5CF6 /* FTResourceTestBase.h */,
+				5778303D17B9FBDC002A5CF6 /* FTResourceTestBase.m */,
 				570E673117B92D5100EB8425 /* FTTableTests.h */,
 				570E673217B92D5100EB8425 /* FTTableTests.m */,
 				57A7DEBD17AA37FB00E74167 /* Supporting Files */,
@@ -456,6 +467,16 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
+		57FAD01D17BA0F500055BE35 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57FAD01E17BA0F500055BE35 /* AppKit.framework */,
+				57FAD01F17BA0F500055BE35 /* CoreData.framework */,
+				57FAD02017BA0F500055BE35 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -617,6 +638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				570E673317B92D5100EB8425 /* FTTableTests.m in Sources */,
+				5778303E17B9FBDC002A5CF6 /* FTResourceTestBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

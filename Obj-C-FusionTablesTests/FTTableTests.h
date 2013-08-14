@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
 #import "FTTable.h"
+#import "FTResourceTestBase.h"
 
-@interface FTTableTests : SenTestCase <FTDelegate>
+@interface FTTableTests : FTResourceTestBase <FTDelegate>
 
 @end
