@@ -47,7 +47,6 @@
     return tableDictionary;
 }
 
-#pragma mark - Public Methods
 #pragma mark - Fusion Table Lifecycle Methods
 #pragma mark Retrieves a list of tables for an authenticated user
 - (void)listFusionTablesWithCompletionHandler:(ServiceAPIHandler)handler {
