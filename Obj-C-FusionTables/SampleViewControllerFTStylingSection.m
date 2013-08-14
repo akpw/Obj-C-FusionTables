@@ -126,9 +126,9 @@ enum FTActionTypes {
                         infoString]];
             } else {
                 ftStylingApplied = YES;
-                NSArray *lines = [NSJSONSerialization JSONObjectWithData:data
+                NSDictionary *styleObject = [NSJSONSerialization JSONObjectWithData:data
                                                                  options:kNilOptions error:nil];
-                NSLog(@"Set Fusion Table Styling: %@", lines);
+                NSLog(@"Set Fusion Table Styling: %@", styleObject);
             }
             ftStylingState = kFTStateIdle;
             [self reloadSection];
@@ -174,9 +174,9 @@ enum FTActionTypes {
                       infoString]];
            } else {
                ftInfoWindowTemplateApplied = YES;
-               NSArray *lines = [NSJSONSerialization JSONObjectWithData:data
+               NSDictionary *ftTemplateDict = [NSJSONSerialization JSONObjectWithData:data
                                                                 options:kNilOptions error:nil];
-               NSLog(@"Set Fusion Table Info Window Template: %@", lines);
+               NSLog(@"Set Fusion Table Info Window Template: %@", ftTemplateDict);
            }
            ftStylingState = kFTStateIdle;
            [self reloadSection];

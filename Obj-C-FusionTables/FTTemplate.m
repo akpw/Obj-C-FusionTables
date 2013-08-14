@@ -66,7 +66,7 @@
     }
     if (![self.ftTemplateDelegate respondsToSelector:@selector(ftTemplateID)]) {
         [NSException raise:@"Obj-C-FusionTables Exception"
-                    format:@"For this operation, templateID needs to be be provided  by FTStyleDelegate"];
+                    format:@"For this operation, templateID needs to be be provided  by FTTemplateDelegate"];
     }
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self ftTemplateDictionary]
                                                        options:NSJSONWritingPrettyPrinted error:nil];
@@ -87,10 +87,10 @@
     }
     if (![self.ftTemplateDelegate respondsToSelector:@selector(ftTemplateID)]) {
         [NSException raise:@"Obj-C-FusionTables Exception"
-                    format:@"For this operation, templateID needs to be be provided  by FTStyleDelegate"];
+                    format:@"For this operation, templateID needs to be be provided  by FTTemplateDelegate"];
     }
     NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@/%@/%@",
-                                      [self.ftTemplateDelegate ftTableID], @"styles",
+                                      [self.ftTemplateDelegate ftTableID], @"templates",
                                       [self.ftTemplateDelegate ftTemplateID]];
     [self deleteFusionTablesResource:resourceTypeIDString WithCompletionHandler:handler];
 }

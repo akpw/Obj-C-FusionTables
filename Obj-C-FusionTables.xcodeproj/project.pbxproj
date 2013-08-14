@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5704C5B317AFDC0F0026A12D /* fusion_tables_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5704C5B217AFDC0F0026A12D /* fusion_tables_img@2x.png */; };
-		570E673317B92D5100EB8425 /* FTTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 570E673217B92D5100EB8425 /* FTTableTests.m */; };
+		570E673317B92D5100EB8425 /* ObjCFusionTablesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 570E673217B92D5100EB8425 /* ObjCFusionTablesTests.m */; };
 		57124BDA17B0D3BF0003A1F9 /* AppGeneralServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */; };
 		57124BDD17B0D50F0003A1F9 /* DefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BDC17B0D50F0003A1F9 /* DefaultTheme.m */; };
 		57124BE017B0D5260003A1F9 /* TintedTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BDF17B0D5260003A1F9 /* TintedTheme.m */; };
@@ -82,8 +82,8 @@
 
 /* Begin PBXFileReference section */
 		5704C5B217AFDC0F0026A12D /* fusion_tables_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fusion_tables_img@2x.png"; sourceTree = "<group>"; };
-		570E673117B92D5100EB8425 /* FTTableTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTableTests.h; sourceTree = "<group>"; };
-		570E673217B92D5100EB8425 /* FTTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTableTests.m; sourceTree = "<group>"; };
+		570E673117B92D5100EB8425 /* ObjCFusionTablesTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCFusionTablesTests.h; sourceTree = "<group>"; };
+		570E673217B92D5100EB8425 /* ObjCFusionTablesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFusionTablesTests.m; sourceTree = "<group>"; };
 		57124BD817B0D3BF0003A1F9 /* AppGeneralServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGeneralServicesController.h; sourceTree = "<group>"; };
 		57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGeneralServicesController.m; sourceTree = "<group>"; };
 		57124BDB17B0D50F0003A1F9 /* DefaultTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultTheme.h; sourceTree = "<group>"; };
@@ -296,11 +296,11 @@
 		57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesTests */ = {
 			isa = PBXGroup;
 			children = (
+				57A7DEBD17AA37FB00E74167 /* Supporting Files */,
 				5778303C17B9FBDC002A5CF6 /* FTResourceTestBase.h */,
 				5778303D17B9FBDC002A5CF6 /* FTResourceTestBase.m */,
-				570E673117B92D5100EB8425 /* FTTableTests.h */,
-				570E673217B92D5100EB8425 /* FTTableTests.m */,
-				57A7DEBD17AA37FB00E74167 /* Supporting Files */,
+				570E673117B92D5100EB8425 /* ObjCFusionTablesTests.h */,
+				570E673217B92D5100EB8425 /* ObjCFusionTablesTests.m */,
 			);
 			path = "Obj-C-FusionTablesTests";
 			sourceTree = "<group>";
@@ -637,7 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				570E673317B92D5100EB8425 /* FTTableTests.m in Sources */,
+				570E673317B92D5100EB8425 /* ObjCFusionTablesTests.m in Sources */,
 				5778303E17B9FBDC002A5CF6 /* FTResourceTestBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

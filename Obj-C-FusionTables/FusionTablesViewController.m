@@ -144,12 +144,12 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
                         showAlertViewWithTitle:@"Fusion Tables Error"
                         AndText: [NSString stringWithFormat:@"Error Inserting Fusion Table: %@", errorStr]];
             } else {
-                NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:data
+                NSDictionary *ftTableDict = [NSJSONSerialization JSONObjectWithData:data
                                                                             options:kNilOptions error:nil];
-                if (contentDict) {
-                    NSLog(@"Inserted a new Fusion Table: %@", contentDict);
+                if (ftTableDict) {
+                    NSLog(@"Inserted a new Fusion Table: %@", ftTableDict);
                     
-                    [_ftTableObjects insertObject:contentDict atIndex:0];
+                    [_ftTableObjects insertObject:ftTableDict atIndex:0];
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
                     [self.tableView insertRowsAtIndexPaths:@[indexPath]
                                           withRowAnimation:UITableViewRowAnimationAutomatic];

@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 //
 
+/****
+    Base class for  Obj-C-FusionTables Tests
+****/
+
 #import <SenTestingKit/SenTestingKit.h>
 #import "FTTable.h"
 #import "FTTemplate.h"

@@ -33,15 +33,26 @@
     return _ftTemplateResource;
 }
 
+#pragma mark - setup / cleanup
+- (void)setUp {
+    [super setUp]; 
+    [self checkGoogleConnection];
+}
+- (void)tearDown {
+    [super tearDown];
+}
+
+
 #pragma mark - FTDelegate methods
-#define TESTE_FUSION_TABLE_PREFIX (@"ObjC-API_Test_FT_")
+#define TEST_FUSION_TABLE_PREFIX (@"ObjC-API_Test_FT_")
 - (NSString *)ftTitle {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
     return [NSString stringWithFormat:@"%@%@",
-            TESTE_FUSION_TABLE_PREFIX, [formatter stringFromDate:[NSDate date]]];
+            TEST_FUSION_TABLE_PREFIX, [formatter stringFromDate:[NSDate date]]];
 }
-// Sample Fusion Table Columns Definition
+#undef TEST_FUSION_TABLE_PREFIX
+// Test Fusion Table Columns Definition
 - (NSArray *)ftColumns {
     return @[
              @{@"name": @"entryDate",
@@ -75,6 +86,41 @@
                @"type": @"LOCATION"
                }
              ];
+}
+
+#pragma mark - FTStyleDelegate methods
+- (NSDictionary *)ftMarkerOptions {
+    return @{
+             @"iconStyler": @{
+                     @"kind": @"fusiontables#fromColumn",
+                     @"columnName": @"markerIcon"}
+             };
+}
+- (NSDictionary *)ftPolylineOptions {
+    return @{
+             @"strokeWeight" : @"4",
+             @"strokeColorStyler" : @{
+                     @"kind": @"fusiontables#fromColumn",
+                     @"columnName": @"lineColor"}
+             };
+}
+
+#pragma mark - FTTemplateDelegate methods
+- (NSString *)ftTemplateBody {
+    return
+    @"<div class='googft-info-window'"
+    "style='font-family: sans-serif; width: 19em; height: 20em; overflow: auto;'>"
+    "<img src='{entryThumbImageURL}' style='float:left; width:2em; vertical-align: top; margin-right:.5em'/>"
+    "<b>{entryName}</b>"
+    "<br>{entryDate}<br>"
+    "<p><a href='{entryURL}'>{entryURLDescription}</a>"
+    "<p>{entryNote}"
+    "<a href='{entryImageURL}' target='_blank'> "
+    "<img src='{entryImageURL}' style='width:18.5em; margin-top:.5em; margin-bottom:.5em'/>"
+    "</a>"
+    "<p>"
+    "<p>"
+    "</div>";
 }
 
 #pragma mark - Helper Methods
