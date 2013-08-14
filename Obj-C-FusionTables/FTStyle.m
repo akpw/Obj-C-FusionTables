@@ -29,7 +29,7 @@
         ftStyleObject[@"tableId"] = [self.ftStyleDelegate ftTableID];
     } else {
         [NSException raise:@"Obj-C-FusionTables Exception"
-                    format:@"For this operation, tableID needs to be be provided  by FTStyleDelegate"];
+                    format:@"For this operation, tableID needs to be be provided by FTStyleDelegate"];
     }    
     // Default for Fusion Table?
     if ([self.ftStyleDelegate respondsToSelector:@selector(isDefaulForTable)]) {
@@ -81,11 +81,11 @@
 - (void)updateFTStyleWithCompletionHandler:(ServiceAPIHandler)handler {
     if (![self.ftStyleDelegate respondsToSelector:@selector(ftTableID)]) {
         [NSException raise:@"Obj-C-FusionTables Exception"
-                    format:@"For this operation, tableID needs to be be provided  by FTStyleDelegate"];
+                    format:@"For this operation, tableID needs to be be provided by FTStyleDelegate"];
     }
     if (![self.ftStyleDelegate respondsToSelector:@selector(ftStyleID)]) {
         [NSException raise:@"Obj-C-FusionTables Exception"
-                    format:@"For this operation, styleID needs to be be provided  by FTStyleDelegate"];
+                    format:@"For this operation, styleID needs to be be provided by FTStyleDelegate"];
     }
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self ftStyleDictionary]
                                                        options:NSJSONWritingPrettyPrinted error:nil];
@@ -102,11 +102,11 @@
 - (void)deleteFTStyleWithCompletionHandler:(ServiceAPIHandler)handler {
     if (![self.ftStyleDelegate respondsToSelector:@selector(ftTableID)]) {
         [NSException raise:@"Obj-C-FusionTables Exception"
-                    format:@"For this operation, tableID needs to be be provided  by FTStyleDelegate"];
+                    format:@"For this operation, tableID needs to be be provided by FTStyleDelegate"];
     }
     if (![self.ftStyleDelegate respondsToSelector:@selector(ftStyleID)]) {
         [NSException raise:@"Obj-C-FusionTables Exception"
-                    format:@"For this operation, styleID needs to be be provided  by FTStyleDelegate"];
+                    format:@"For this operation, styleID needs to be be provided by FTStyleDelegate"];
     }
     NSString *resourceTypeIDString = [NSString stringWithFormat:@"/%@/%@/%@",
                                       [self.ftStyleDelegate ftTableID], @"styles", [self.ftStyleDelegate ftStyleID]];
