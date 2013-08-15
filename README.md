@@ -114,4 +114,5 @@ GroupedUITableViews requires ARC and was optimised for iOS6 and above.
 
 # TODOs
 * extend the example with listing Styles / Templates, etc.
+* add more tests, to cover SQL rows operations etc.
 
