@@ -270,8 +270,8 @@
 			children = (
 				57A7DECD17AA385A00E74167 /* AppDelegate.h */,
 				57A7DECE17AA385A00E74167 /* AppDelegate.m */,
-				57A7DED517AA38EA00E74167 /* Example */,
 				57A7DED417AA38C900E74167 /* Obj-C-Fusion Tables Base */,
+				57A7DED517AA38EA00E74167 /* Example */,
 				57A7DEF717AA39ED00E74167 /* GroupedUITableViews */,
 				57A7DE9917AA37FB00E74167 /* Supporting Files */,
 			);
