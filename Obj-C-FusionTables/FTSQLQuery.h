@@ -15,41 +15,33 @@
 
 //  FTSQLQuery.h
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
-    Enables read-write access to Fusion Table rows.
+    Represents a Fusion Table SQL query resource
+    Suports common table rows operations, 
+    such as handling rows of data and executing queries 
 ****/
 
-#import "FTTable.h"
-#import "GoogleAuthorizationController.h"
+#import "FTSQLQueryResource.h"
 
-@interface FTSQLQuery : NSObject
+@protocol FTSQLQueryDelegate <NSObject>
+@optional
+- (NSString *)ftSQLSelectStatement;
+- (NSString *)ftSQLInsertStatement;
+- (NSString *)ftSQLUpdateStatement;
+- (NSString *)ftSQLDeleteStatement;
+@end
 
-#pragma mark - Fusion Tables SQL API
-#pragma mark SQL API for accessing FT data rows
-- (void)queryFusionTablesSQL:(NSString *)sql WithCompletionHandler:(ServiceAPIHandler)handler;
+@interface FTSQLQuery : FTSQLQueryResource
 
-#pragma mark SQL API for modifying FT data rows
-- (void)modifyFusionTablesSQL:(NSString *)sql WithCompletionHandler:(ServiceAPIHandler)handler;
+@property (nonatomic, weak) id<FTSQLQueryDelegate> ftSQLQueryDelegate;
 
-
-#pragma mark - Query Statements Helpers
-- (NSString *)builDescribeStringForFusionTableID:(NSString *)fusionTableID;
-
-- (NSString *)builSQLInsertStringForColumnNames:(NSArray *)columnNames FTTableID:(NSString *)fusionTableID, ...;
-
-- (NSString *)builSQLUpdateStringForRowID:(NSUInteger)rowID ColumnNames:(NSArray *)columnNames FTTableID:(NSString *)fusionTableID, ...;
-
-- (NSString *)buildDeleteAllRowStringForFusionTableID:(NSString *)fusionTableID;
-- (NSString *)buildDeleteRowStringForFusionTableID:(NSString *)fusionTableID RowID:(NSUInteger)rowID;
-
-- (NSString *)buildFTStringValueString:(NSString *)sourceString;
-
-- (NSString *)buildKMLLineString:(NSString *)coordinatesString;
-- (NSString *)buildKMLPointString:(NSString *)coordinatesString;
-- (NSString *)buildKMLPolygonString:(NSString *)coordinatesString;
-
-
+#pragma mark - Fusion Table SQL query Methods
+- (void)sqlSelectWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)sqlInsertWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)sqlUpdateWithCompletionHandler:(ServiceAPIHandler)handler;
+- (void)sqlDeleteWithCompletionHandler:(ServiceAPIHandler)handler;
 
 
 @end
