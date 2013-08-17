@@ -15,6 +15,11 @@
 
 //  FTResourceTestBase.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
+
+/****
+    Base class for  Obj-C-FusionTables Tests
+****/
 
 #import "FTResourceTestBase.h"
 
@@ -28,20 +33,6 @@
     }
     return _ftTableResource;
 }
-- (FTStyle *)ftStyleResource {
-    if (!_ftStyleResource) {
-        _ftStyleResource = [[FTStyle alloc] init];
-        _ftStyleResource.ftStyleDelegate = self;
-    }
-    return _ftStyleResource;
-}
-- (FTTemplate *)ftTemplateResource {
-    if (!_ftTemplateResource) {
-        _ftTemplateResource = [[FTTemplate alloc] init];
-        _ftTemplateResource.ftTemplateDelegate = self;
-    }
-    return _ftTemplateResource;
-}
 
 #pragma mark - setup / cleanup
 - (void)setUp {
@@ -50,6 +41,89 @@
 }
 - (void)tearDown {
     [super tearDown];
+}
+
+#pragma mark - Helper Methods
+// waits for the semaphore, allowing the tests run their network ops code
+- (void)waitForSemaphore:(dispatch_semaphore_t)semaphore WithTimeout:(NSTimeInterval)timeoutInSeconds {
+    NSDate *giveUpDate = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
+    BOOL isMainThread = [NSThread isMainThread];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) && [giveUpDate timeIntervalSinceNow] > 0) {
+        if (isMainThread) {
+            [[NSRunLoop currentRunLoop] 
+             runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+        } else {
+            [NSThread sleepForTimeInterval:0.01];
+        }
+    }    
+}
+// Checks Google Auth status, attemps to connect if needed
+- (void)checkGoogleConnection {
+    if ([[GoogleAuthorizationController sharedInstance] isAuthorised]) {
+        NSLog(@"connected to Google with userID: %@", 
+              [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
+    } else {
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+        [[GoogleAuthorizationController sharedInstance] signInToGoogleWithCompletionHandler:^{
+            NSLog(@"connected to Google with userID: %@", 
+                  [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
+            dispatch_semaphore_signal(semaphore);
+        } CancelHandler:^{
+            STFail(@"failed connect to Google");
+            dispatch_semaphore_signal(semaphore);
+        }];   
+        [self waitForSemaphore:semaphore WithTimeout:10];
+    }
+    STAssertNotNil([[GoogleAuthorizationController sharedInstance] 
+                    authenticatedUserID], 
+                   @"authenticatedUserID should not be nil");
+}
+
+#pragma mark - Test Fusion Table Methods
+- (void)insertTestTableWithCompletionHandler:(TableIDProcessingBlock)handler {
+    STAssertNotNil([self ftName], 
+                   @"for Insert Table, the FTDelegate Fusion Table Name the should not be nil");
+    STAssertNotNil([self ftColumns], 
+                   @"for Insert Table, the FTDelegate Fusion Table Columns the should not be nil");
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self.ftTableResource insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+        dispatch_semaphore_signal(semaphore);
+        if (error) {
+            NSData *data = [[error userInfo] valueForKey:@"data"];            
+            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                
+            STFail (@"Error Inserting Fusion Table: %@", errorStr);
+        } else {
+            NSDictionary *ftTableDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                        options:kNilOptions error:nil];
+            if (ftTableDict) {
+                STAssertNotNil(ftTableDict[@"name"], @"Returned Inserted Fusion Table Name should not be nil");
+                STAssertNotNil(ftTableDict[@"tableId"], @"Return Inserted Fusion Table IDs should not be nil");
+                NSLog(@"Inserted a new Fusion Table: %@", ftTableDict);
+
+                if (handler)handler(ftTableDict[@"tableId"]);
+            } else {
+                STFail (@"Error processsing inserted Fusion Table data");
+            }
+        }
+    }];    
+    [self waitForSemaphore:semaphore WithTimeout:10];
+}
+- (void)deleteTestTableWithCompletionHandler:(void_completion_handler_block)handler {
+    STAssertNotNil([self ftTableID], 
+                   @"for Delete Table, the FTDelegate Fusion Table ID the should not be nil");
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+    [self.ftTableResource deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+        dispatch_semaphore_signal(semaphore);
+        if (error) {
+            NSData *data = [[error userInfo] valueForKey:@"data"];
+            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            STFail (@"Error Deleting Fusion Table With ID: %@, %@", [self ftTableID], errorStr);
+        } else {
+            NSLog(@"Deleted Fusion Tables with ID: %@", [self ftTableID]);
+            if (handler) handler();
+        }
+    }];
+    [self waitForSemaphore:semaphore WithTimeout:10];
 }
 
 
@@ -98,73 +172,5 @@
              ];
 }
 
-#pragma mark - FTStyleDelegate methods
-- (NSDictionary *)ftMarkerOptions {
-    return @{
-             @"iconStyler": @{
-                     @"kind": @"fusiontables#fromColumn",
-                     @"columnName": @"markerIcon"}
-             };
-}
-- (NSDictionary *)ftPolylineOptions {
-    return @{
-             @"strokeWeight" : @"4",
-             @"strokeColorStyler" : @{
-                     @"kind": @"fusiontables#fromColumn",
-                     @"columnName": @"lineColor"}
-             };
-}
-
-#pragma mark - FTTemplateDelegate methods
-- (NSString *)ftTemplateBody {
-    return
-    @"<div class='googft-info-window'"
-    "style='font-family: sans-serif; width: 19em; height: 20em; overflow: auto;'>"
-    "<img src='{entryThumbImageURL}' style='float:left; width:2em; vertical-align: top; margin-right:.5em'/>"
-    "<b>{entryName}</b>"
-    "<br>{entryDate}<br>"
-    "<p><a href='{entryURL}'>{entryURLDescription}</a>"
-    "<p>{entryNote}"
-    "<a href='{entryImageURL}' target='_blank'> "
-    "<img src='{entryImageURL}' style='width:18.5em; margin-top:.5em; margin-bottom:.5em'/>"
-    "</a>"
-    "<p>"
-    "<p>"
-    "</div>";
-}
-
-#pragma mark - Helper Methods
-- (void)waitForSemaphore:(dispatch_semaphore_t)semaphore WithTimeout:(NSTimeInterval)timeoutInSeconds {
-    NSDate *giveUpDate = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
-    BOOL isMainThread = [NSThread isMainThread];
-    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) && [giveUpDate timeIntervalSinceNow] > 0) {
-        if (isMainThread) {
-            [[NSRunLoop currentRunLoop] 
-             runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
-        } else {
-            [NSThread sleepForTimeInterval:0.01];
-        }
-    }    
-}
-- (void)checkGoogleConnection {
-    if ([[GoogleAuthorizationController sharedInstance] isAuthorised]) {
-        NSLog(@"connected to Google with userID: %@", 
-              [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
-    } else {
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
-        [[GoogleAuthorizationController sharedInstance] signInToGoogleWithCompletionHandler:^{
-            NSLog(@"connected to Google with userID: %@", 
-                  [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
-            dispatch_semaphore_signal(semaphore);
-        } CancelHandler:^{
-            STFail(@"failed connect to Google");
-            dispatch_semaphore_signal(semaphore);
-        }];   
-        [self waitForSemaphore:semaphore WithTimeout:10];
-    }
-    STAssertNotNil([[GoogleAuthorizationController sharedInstance] 
-                    authenticatedUserID], 
-                   @"authenticatedUserID should not be nil");
-}
 
 @end

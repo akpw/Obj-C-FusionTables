@@ -13,29 +13,23 @@
  * limitations under the License.
  */
 
-//  FTResourceTestBase.h
+//  ObjCFusionTablesSQLQueryTests.h
 //  Obj-C-FusionTables
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
-    Base class for  Obj-C-FusionTables Tests
+     Tests  Obj-C-FusionTables SQL Query Resources Base Operations
+     
+     The test cases goes sequentially from creating a table
+     through inserting/updating/deleting rows to restoring 
+     the tested Google account to its initial state
 ****/
 
-#import <SenTestingKit/SenTestingKit.h>
-#import "FTTable.h"
+#import "FTResourceTestBase.h"
+#import "FTSQLQuery.h"
 
-typedef void(^TableIDProcessingBlock)(NSString *tableID);
+@interface ObjCFusionTablesSQLQueryResourceTests : FTResourceTestBase <FTSQLQueryDelegate>
 
-@interface FTResourceTestBase : SenTestCase <FTDelegate> 
-
-@property (nonatomic, strong) FTTable *ftTableResource;
-
-#pragma mark - Test Fusion Table Methods
-- (void)insertTestTableWithCompletionHandler:(TableIDProcessingBlock)handler ;
-- (void)deleteTestTableWithCompletionHandler:(void_completion_handler_block)handler;
-
-#pragma mark - Helper Methods
-- (void)checkGoogleConnection;
-- (void)waitForSemaphore:(dispatch_semaphore_t)semaphore WithTimeout:(NSTimeInterval)timeoutInSeconds;
+@property (nonatomic, strong) FTSQLQuery *ftSQLQuery;
 
 @end

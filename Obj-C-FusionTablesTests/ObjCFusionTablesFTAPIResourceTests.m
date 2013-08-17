@@ -13,66 +13,96 @@
  * limitations under the License.
  */
 
-//  ObjCFusionTablesTests.m
+//  ObjCFusionTablesFTAPIResourceTests.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
-    Tests  Obj-C-FusionTables Base Operations
+     Tests  Obj-C-FusionTables FT API Resources Base Operations
         * Fusion Table: insert, list, delete
         * Fusion Table Style: insert, list, delete
         * Fusion Table Template: insert, list, delete 
- 
-    The test cases goes sequentially from creating a table / style / template 
-    through deleting & restoring the tested Google account to its initial state
+     
+     The test cases goes sequentially from creating a table / style / template 
+     through deleting and restoring the tested Google account to its initial state
 ****/
 
 
-#import "ObjCFusionTablesTests.h"
+#import "ObjCFusionTablesFTAPIResourceTests.h"
 
 static NSString *_sFusionTableID;
 static NSString *_sFusionTableStyleID;
 static NSString *_sFusionTableTemplateID;
 
-@implementation ObjCFusionTablesTests 
+@implementation ObjCFusionTablesFTAPIResourceTests 
 
-#pragma mark - FTDelegate / FTStyleDelegate / FTTemplateDelegate ID methods
+#pragma mark - Initialization
+- (FTStyle *)ftStyleResource {
+    if (!_ftStyleResource) {
+        _ftStyleResource = [[FTStyle alloc] init];
+        _ftStyleResource.ftStyleDelegate = self;
+    }
+    return _ftStyleResource;
+}
+- (FTTemplate *)ftTemplateResource {
+    if (!_ftTemplateResource) {
+        _ftTemplateResource = [[FTTemplate alloc] init];
+        _ftTemplateResource.ftTemplateDelegate = self;
+    }
+    return _ftTemplateResource;
+}
+
+#pragma mark - FTDelegate methods
 - (NSString *)ftTableID {
     return _sFusionTableID;
 }
+
+#pragma mark - FTStyleDelegate methods
 - (NSString *)ftStyleID {
     return _sFusionTableStyleID;
 }
+- (NSDictionary *)ftMarkerOptions {
+    return @{
+             @"iconStyler": @{
+                     @"kind": @"fusiontables#fromColumn",
+                     @"columnName": @"markerIcon"}
+             };
+}
+- (NSDictionary *)ftPolylineOptions {
+    return @{
+             @"strokeWeight" : @"4",
+             @"strokeColorStyler" : @{
+                     @"kind": @"fusiontables#fromColumn",
+                     @"columnName": @"lineColor"}
+             };
+}
+
+#pragma mark - FTTemplateDelegate methods
 - (NSString *)ftTemplateID {
     return _sFusionTableTemplateID;
+}
+- (NSString *)ftTemplateBody {
+    return
+    @"<div class='googft-info-window'"
+    "style='font-family: sans-serif; width: 19em; height: 20em; overflow: auto;'>"
+    "<img src='{entryThumbImageURL}' style='float:left; width:2em; vertical-align: top; margin-right:.5em'/>"
+    "<b>{entryName}</b>"
+    "<br>{entryDate}<br>"
+    "<p><a href='{entryURL}'>{entryURLDescription}</a>"
+    "<p>{entryNote}"
+    "<a href='{entryImageURL}' target='_blank'> "
+    "<img src='{entryImageURL}' style='width:18.5em; margin-top:.5em; margin-bottom:.5em'/>"
+    "</a>"
+    "<p>"
+    "<p>"
+    "</div>";
 }
 
 #pragma mark Fusion Tables - Inserts Tests
 - (void)testObjCFusionTables_000_InsertTable {
-    STAssertNotNil([self ftName], 
-                   @"for Insert Table, the FTDelegate Fusion Table Name the should not be nil");
-    STAssertNotNil([self ftColumns], 
-                   @"for Insert Table, the FTDelegate Fusion Table Columns the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [self.ftTableResource insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
-        if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];            
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                
-            STFail (@"Error Inserting Fusion Table: %@", errorStr);
-        } else {
-            NSDictionary *ftTableDict = [NSJSONSerialization JSONObjectWithData:data
-                                                                        options:kNilOptions error:nil];
-            if (ftTableDict) {
-                STAssertNotNil(ftTableDict[@"name"], @"Returned Inserted Fusion Table Name should not be nil");
-                STAssertNotNil(ftTableDict[@"tableId"], @"Return Inserted Fusion Table IDs should not be nil");
-                _sFusionTableID = ftTableDict[@"tableId"];
-                NSLog(@"Inserted a new Fusion Table: %@", ftTableDict);
-            } else {
-                STFail (@"Error processsing inserted Fusion Table data");
-            }
-        }
-    }];    
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self insertTestTableWithCompletionHandler:^(NSString *tableID) {
+        _sFusionTableID = tableID;
+    }];
 }
 - (void)testObjCFusionTables_001_InsertStyle {
     STAssertNotNil([self ftTableID], 
@@ -229,20 +259,7 @@ static NSString *_sFusionTableTemplateID;
     [self waitForSemaphore:semaphore WithTimeout:10];
 }
 - (void)testObjCFusionTables_022_DeleteTable {
-    STAssertNotNil([self ftTableID], 
-                   @"for Delete Table, the FTDelegate Fusion Table ID the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
-    [self.ftTableResource deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
-        if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            STFail (@"Error Deleting Fusion Table With ID: %@, %@", [self ftTableID], errorStr);
-        } else {
-            NSLog(@"Deleted Fusion Tables with ID: %@", [self ftTableID]);
-        }
-    }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self deleteTestTableWithCompletionHandler:nil];
 }
 
 @end

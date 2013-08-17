@@ -54,7 +54,7 @@
         [NSException raise:@"Obj-C-FusionTables Exception"
                     format:@"For SQL Update, SQL Update Statement definition must be provided  by FTSQLQueryDelegate"];
     }       
-    [self modifyFusionTablesSQL:[self.ftSQLQueryDelegate ftSQLInsertStatement] WithCompletionHandler:handler];    
+    [self modifyFusionTablesSQL:[self.ftSQLQueryDelegate ftSQLUpdateStatement] WithCompletionHandler:handler];    
     
 }
 
@@ -64,7 +64,7 @@
         [NSException raise:@"Obj-C-FusionTables Exception"
                     format:@"For SQL Delete, SQL Delete Statement definition must be provided  by FTSQLQueryDelegate"];
     }       
-    [self modifyFusionTablesSQL:[self.ftSQLQueryDelegate ftSQLInsertStatement] WithCompletionHandler:handler];       
+    [self modifyFusionTablesSQL:[self.ftSQLQueryDelegate ftSQLDeleteStatement] WithCompletionHandler:handler];       
 }
 
 

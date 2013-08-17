@@ -13,13 +13,12 @@
  * limitations under the License.
  */
 
-//  ObjCFusionTablesTests.h
+//  ObjCFusionTablesFTAPIResourceTests.h
 //  Obj-C-FusionTables
-
-#import "FTResourceTestBase.h"
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
-    Tests  Obj-C-FusionTables Base Operations
+    Tests  Obj-C-FusionTables FT API Resources Base Operations
         * Fusion Table: insert, list, delete
         * Fusion Table Style: insert, list, delete
         * Fusion Table Template: insert, list, delete 
@@ -28,7 +27,13 @@
     through deleting and restoring the tested Google account to its initial state
 ****/
 
+#import "FTResourceTestBase.h"
+#import "FTTemplate.h"
+#import "FTStyle.h"
 
-@interface ObjCFusionTablesTests : FTResourceTestBase
+@interface ObjCFusionTablesFTAPIResourceTests : FTResourceTestBase <FTStyleDelegate, FTTemplateDelegate>
+
+@property (nonatomic, strong) FTStyle *ftStyleResource;
+@property (nonatomic, strong) FTTemplate *ftTemplateResource;
 
 @end
