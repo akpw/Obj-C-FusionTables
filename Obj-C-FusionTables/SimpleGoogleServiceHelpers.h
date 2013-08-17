@@ -15,6 +15,7 @@
 
 //  SimpleGoogleServiceHelpers.h
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     A simple Google Services Helper class

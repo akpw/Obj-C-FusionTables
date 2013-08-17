@@ -15,6 +15,7 @@
 
 //  AppGeneralServicesController.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     General-level Sample App Services Helper

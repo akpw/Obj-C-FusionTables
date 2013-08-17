@@ -15,6 +15,7 @@
 
 //  FusionTablesViewController.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Shows usage of Obj-C-FusionTables, 
@@ -207,7 +208,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 - (NSString *)ftTableID {
     return self.selectedFusionTableID;
 }
-- (NSString *)ftTitle {
+- (NSString *)ftName {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
     return [NSString stringWithFormat:@"%@%@",

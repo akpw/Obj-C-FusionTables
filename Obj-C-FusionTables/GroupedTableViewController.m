@@ -15,6 +15,7 @@
 
 //  GroupedTableViewController.m
 //  GroupedUITableViews
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 #import "GroupedTableViewController.h"
 

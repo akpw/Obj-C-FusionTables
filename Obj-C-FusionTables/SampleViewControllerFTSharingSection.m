@@ -15,6 +15,7 @@
 
 //  SampleViewControllerStartStopTickingButtonSection.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Shows usage of Obj-C-FusionTables for setting Fusion Tables user permissions / sharing

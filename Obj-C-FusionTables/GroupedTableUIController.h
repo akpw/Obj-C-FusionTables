@@ -15,6 +15,7 @@
 
 //  GroupedTableUIController.h
 //  GroupedUITableViews
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Dispatches TableView Data Source / Delegate methods to sections controllers.

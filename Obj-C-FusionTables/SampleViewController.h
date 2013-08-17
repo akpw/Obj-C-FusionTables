@@ -15,6 +15,7 @@
 
 //  SampleViewController.h
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Shows usage of Obj-C-FusionTables for 

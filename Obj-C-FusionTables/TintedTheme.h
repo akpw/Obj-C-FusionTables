@@ -15,6 +15,7 @@
 
 //  TintedTheme.h
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Sample App Appearance customization, tinted theme

@@ -26,6 +26,8 @@
 		578180E317AA995A00434135 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DE17AA995A00434135 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E417AA995A00434135 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578180DF17AA995A00434135 /* GTMOAuth2ViewTouch.xib */; };
 		578180E817ABF19700434135 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578180E717ABF19700434135 /* MessageUI.framework */; };
+		578CE61B17BE8D6D003CFD0A /* FTSQLQueryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */; };
+		578CE61E17BF5A02003CFD0A /* FTSQLQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */; };
 		57A7DE9317AA37FB00E74167 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9217AA37FB00E74167 /* UIKit.framework */; };
 		57A7DE9517AA37FB00E74167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9417AA37FB00E74167 /* Foundation.framework */; };
 		57A7DE9717AA37FB00E74167 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9617AA37FB00E74167 /* CoreGraphics.framework */; };
@@ -67,7 +69,7 @@
 		57A7DF3417AA3AA700E74167 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */; };
 		57A7DF3617AA3AAE00E74167 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DF3517AA3AAE00E74167 /* Security.framework */; };
 		57F0B16D17B0EBAA00302E3C /* AppIconsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F0B16C17B0EBAA00302E3C /* AppIconsController.m */; };
-		57FBFBC617AD6B9B00A275BA /* FTSQLQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FBFBC517AD6B9B00A275BA /* FTSQLQuery.m */; };
+		57FBFBC617AD6B9B00A275BA /* FTSQLQueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +112,10 @@
 		578180DE17AA995A00434135 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		578180DF17AA995A00434135 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		578180E717ABF19700434135 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		578CE61917BE8D6C003CFD0A /* FTSQLQueryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQueryResource.h; sourceTree = "<group>"; };
+		578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQueryResource.m; sourceTree = "<group>"; };
+		578CE61C17BF5A01003CFD0A /* FTSQLQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQuery.h; sourceTree = "<group>"; };
+		578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQuery.m; sourceTree = "<group>"; };
 		57A7DE8F17AA37FB00E74167 /* Obj-C-FusionTables.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Obj-C-FusionTables.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57A7DE9217AA37FB00E74167 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		57A7DE9417AA37FB00E74167 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -175,8 +181,8 @@
 		57FAD01E17BA0F500055BE35 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		57FAD01F17BA0F500055BE35 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		57FAD02017BA0F500055BE35 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		57FBFBC417AD6B9B00A275BA /* FTSQLQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQuery.h; sourceTree = "<group>"; };
-		57FBFBC517AD6B9B00A275BA /* FTSQLQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQuery.m; sourceTree = "<group>"; };
+		57FBFBC417AD6B9B00A275BA /* FTSQLQueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQueryBuilder.h; sourceTree = "<group>"; };
+		57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQueryBuilder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,8 +337,12 @@
 				57A7DF0B17AA3A1F00E74167 /* FTStyle.m */,
 				57A7DF0C17AA3A1F00E74167 /* FTTemplate.h */,
 				57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */,
-				57FBFBC417AD6B9B00A275BA /* FTSQLQuery.h */,
-				57FBFBC517AD6B9B00A275BA /* FTSQLQuery.m */,
+				578CE61917BE8D6C003CFD0A /* FTSQLQueryResource.h */,
+				578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */,
+				578CE61C17BF5A01003CFD0A /* FTSQLQuery.h */,
+				578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */,
+				57FBFBC417AD6B9B00A275BA /* FTSQLQueryBuilder.h */,
+				57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */,
 			);
 			name = "Obj-C-Fusion Tables Base";
 			sourceTree = "<group>";
@@ -624,12 +634,14 @@
 				578180E117AA995A00434135 /* GTMOAuth2Authentication.m in Sources */,
 				578180E217AA995A00434135 /* GTMOAuth2SignIn.m in Sources */,
 				578180E317AA995A00434135 /* GTMOAuth2ViewControllerTouch.m in Sources */,
-				57FBFBC617AD6B9B00A275BA /* FTSQLQuery.m in Sources */,
+				57FBFBC617AD6B9B00A275BA /* FTSQLQueryBuilder.m in Sources */,
 				57162A5117AE4DBA007DDDD2 /* FusionTablesViewController.m in Sources */,
 				57124BDA17B0D3BF0003A1F9 /* AppGeneralServicesController.m in Sources */,
 				57124BDD17B0D50F0003A1F9 /* DefaultTheme.m in Sources */,
 				57124BE017B0D5260003A1F9 /* TintedTheme.m in Sources */,
 				57F0B16D17B0EBAA00302E3C /* AppIconsController.m in Sources */,
+				578CE61B17BE8D6D003CFD0A /* FTSQLQueryResource.m in Sources */,
+				578CE61E17BF5A02003CFD0A /* FTSQLQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

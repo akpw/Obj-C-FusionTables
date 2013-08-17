@@ -15,14 +15,16 @@
 
 //  SampleViewControllerInsertFTRowsSection.h
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import "SampleViewControllerFTBaseSection.h"
+#import "FTSQLQuery.h"
 
 /****
     Shows usage of Obj-C-FusionTables for Fusion Tables rows operations
 ****/
 
-@interface SampleViewControllerInsertFTRowsSection : SampleViewControllerFTBaseSection
+@interface SampleViewControllerInsertFTRowsSection : SampleViewControllerFTBaseSection <FTSQLQueryDelegate>
 
 @end

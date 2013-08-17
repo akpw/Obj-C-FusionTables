@@ -15,6 +15,7 @@
 
 //  FTTemplate.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Represents a Fusion Table Info Window Template. 

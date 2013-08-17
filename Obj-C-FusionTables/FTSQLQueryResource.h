@@ -13,22 +13,25 @@
  * limitations under the License.
  */
 
-//  GroupedTableViewController.h
-//  GroupedUITableViews
+//  FTSQLQueryResource.h
+//  Obj-C-FusionTables
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
-#import <UIKit/UIKit.h>
-#import "GroupedTableUIController.h"
-
 /****
-    A grouped UITableView controller that dispatches its 
-    Data Source / Delegate methods to dedicated section controllers
-    via the UI Controller. 
+    Provides read-write access to Fusion Table SQL Query API Resource
 ****/
 
+#import <Foundation/Foundation.h>
+#import "GoogleAuthorizationController.h"
 
-@interface GroupedTableViewController : UITableViewController
+@interface FTSQLQueryResource : NSObject
 
-@property (nonatomic, strong) GroupedTableUIController *uiController;
+#pragma mark - Fusion Tables SQL API
+#pragma mark SQL API for accessing FT data rows
+- (void)queryFusionTablesSQL:(NSString *)sql WithCompletionHandler:(ServiceAPIHandler)handler;
+
+#pragma mark SQL API for modifying FT data rows
+- (void)modifyFusionTablesSQL:(NSString *)sql WithCompletionHandler:(ServiceAPIHandler)handler;
+
 
 @end

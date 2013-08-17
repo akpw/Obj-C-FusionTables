@@ -15,6 +15,7 @@
 
 //  FTTable.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Represents a Fusion Table. 
@@ -30,8 +31,8 @@
 - (NSDictionary *)ftStructureDictionary {
     NSMutableDictionary *tableDictionary = [NSMutableDictionary dictionary];    
     // Table Title
-    if ([self.ftTableDelegate respondsToSelector:@selector(ftTitle)]) {
-        tableDictionary[@"name"] = [self.ftTableDelegate ftTitle];
+    if ([self.ftTableDelegate respondsToSelector:@selector(ftName)]) {
+        tableDictionary[@"name"] = [self.ftTableDelegate ftName];
     } else {        
         [NSException raise:@"Obj-C-FusionTables Exception"
                     format:@"For Insert / Update, a table name must be provided  by FTDelegate"];
@@ -43,16 +44,16 @@
         [NSException raise:@"Obj-C-FusionTables Exception"
                     format:@"For Insert / Update, columns definition must be provided  by FTDelegate"];
     }    
-    // Table Description
-    if ([self.ftTableDelegate respondsToSelector:@selector(ftDescription)]) {
-        tableDictionary[@"description"] = [self.ftTableDelegate ftDescription];
-    }    
     // Exportable?
     if ([self.ftTableDelegate respondsToSelector:@selector(ftIsExportable)]) {
         tableDictionary[@"isExportable"] = ([self.ftTableDelegate ftIsExportable]) ? @"true" : @"false";
     } else {
         tableDictionary[@"isExportable"] = @"true";
     }
+    // Table Description
+    if ([self.ftTableDelegate respondsToSelector:@selector(ftDescription)]) {
+        tableDictionary[@"description"] = [self.ftTableDelegate ftDescription];
+    }    
     
     return tableDictionary;
 }

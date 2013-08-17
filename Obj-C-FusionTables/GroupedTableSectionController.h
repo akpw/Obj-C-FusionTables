@@ -15,6 +15,7 @@
 
 //  GroupedTableSectionController.h
 //  GroupedUITableViews
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Represents a section in a grouped UITableView.

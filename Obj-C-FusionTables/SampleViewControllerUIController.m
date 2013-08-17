@@ -15,6 +15,7 @@
 
 //  SampleViewControllerUIController.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     A specific SampleViewController dispatcher class.

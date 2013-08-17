@@ -16,6 +16,7 @@
 
 //  AppDelegate.h
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 #import <UIKit/UIKit.h>
 

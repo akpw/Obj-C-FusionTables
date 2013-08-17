@@ -48,7 +48,7 @@ static NSString *_sFusionTableTemplateID;
 
 #pragma mark Fusion Tables - Inserts Tests
 - (void)testObjCFusionTables_000_InsertTable {
-    STAssertNotNil([self ftTitle], 
+    STAssertNotNil([self ftName], 
                    @"for Insert Table, the FTDelegate Fusion Table Name the should not be nil");
     STAssertNotNil([self ftColumns], 
                    @"for Insert Table, the FTDelegate Fusion Table Columns the should not be nil");

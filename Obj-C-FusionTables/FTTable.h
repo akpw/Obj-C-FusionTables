@@ -15,6 +15,7 @@
 
 //  FTTable.h
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
     Represents a Fusion Table. 
@@ -27,9 +28,9 @@
 @optional
 - (NSString *)ftTableID;
 - (NSArray *)ftColumns;
-- (NSString *)ftTitle;
-- (NSString *)ftDescription;
+- (NSString *)ftName;
 - (BOOL)ftIsExportable;
+- (NSString *)ftDescription;
 @end
 
 @interface FTTable : FTAPIResource

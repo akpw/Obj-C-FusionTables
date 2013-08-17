@@ -15,6 +15,7 @@
 
 //  AppDelegate.m
 //  Obj-C-FusionTables
+//  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 #import "AppDelegate.h"
 #import "FusionTablesViewController.h"

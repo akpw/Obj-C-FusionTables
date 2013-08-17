@@ -55,7 +55,7 @@
 
 #pragma mark - FTDelegate methods
 #define TEST_FUSION_TABLE_PREFIX (@"ObjC-API_Test_FT_")
-- (NSString *)ftTitle {
+- (NSString *)ftName {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
     return [NSString stringWithFormat:@"%@%@",
