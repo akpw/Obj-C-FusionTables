@@ -42,7 +42,7 @@
 		57A7DEB917AA37FB00E74167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9417AA37FB00E74167 /* Foundation.framework */; };
 		57A7DEC117AA37FB00E74167 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */; };
 		57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DECE17AA385A00E74167 /* AppDelegate.m */; };
-		57A7DED317AA387A00E74167 /* SimpleGoogleServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DED217AA387A00E74167 /* SimpleGoogleServiceHelpers.m */; };
+		57A7DED317AA387A00E74167 /* GoogleServicesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DED217AA387A00E74167 /* GoogleServicesHelper.m */; };
 		57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED717AA394700E74167 /* sampleInsertData.plist */; };
 		57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED817AA394700E74167 /* sampleUpdateData.plist */; };
 		57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */; };
@@ -136,8 +136,8 @@
 		57A7DEC017AA37FB00E74167 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		57A7DECD17AA385A00E74167 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		57A7DECE17AA385A00E74167 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		57A7DED117AA387A00E74167 /* SimpleGoogleServiceHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleGoogleServiceHelpers.h; sourceTree = "<group>"; };
-		57A7DED217AA387A00E74167 /* SimpleGoogleServiceHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleGoogleServiceHelpers.m; sourceTree = "<group>"; };
+		57A7DED117AA387A00E74167 /* GoogleServicesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleServicesHelper.h; sourceTree = "<group>"; };
+		57A7DED217AA387A00E74167 /* GoogleServicesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleServicesHelper.m; sourceTree = "<group>"; };
 		57A7DED717AA394700E74167 /* sampleInsertData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleInsertData.plist; sourceTree = "<group>"; };
 		57A7DED817AA394700E74167 /* sampleUpdateData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleUpdateData.plist; sourceTree = "<group>"; };
 		57A7DEE017AA39A900E74167 /* SampleViewControllerFTBaseSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTBaseSection.h; sourceTree = "<group>"; };
@@ -332,8 +332,8 @@
 				57A7DF0317AA3A1F00E74167 /* GoogleAPIKeys.plist */,
 				57A7DF0417AA3A1F00E74167 /* GoogleAuthorizationController.h */,
 				57A7DF0517AA3A1F00E74167 /* GoogleAuthorizationController.m */,
-				57A7DED117AA387A00E74167 /* SimpleGoogleServiceHelpers.h */,
-				57A7DED217AA387A00E74167 /* SimpleGoogleServiceHelpers.m */,
+				57A7DED117AA387A00E74167 /* GoogleServicesHelper.h */,
+				57A7DED217AA387A00E74167 /* GoogleServicesHelper.m */,
 				57A7DF0617AA3A1F00E74167 /* FTAPIResource.h */,
 				57A7DF0717AA3A1F00E74167 /* FTAPIResource.m */,
 				57A7DF0817AA3A1F00E74167 /* FTTable.h */,
@@ -620,7 +620,7 @@
 			files = (
 				57A7DE9F17AA37FB00E74167 /* main.m in Sources */,
 				57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */,
-				57A7DED317AA387A00E74167 /* SimpleGoogleServiceHelpers.m in Sources */,
+				57A7DED317AA387A00E74167 /* GoogleServicesHelper.m in Sources */,
 				57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */,
 				57A7DEEC17AA39A900E74167 /* SampleViewControllerFTStylingSection.m in Sources */,
 				57A7DEED17AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m in Sources */,

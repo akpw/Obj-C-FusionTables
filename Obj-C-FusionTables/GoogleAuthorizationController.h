@@ -22,7 +22,7 @@
 ****/
 
 #import <Foundation/Foundation.h>
-#import "SimpleGoogleServiceHelpers.h"
+#import "GoogleServicesHelper.h"
 #import "GTMHTTPFetcher.h"
 
 @interface GoogleAuthorizationController : NSObject

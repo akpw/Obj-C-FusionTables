@@ -111,17 +111,16 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         [self.tableView reloadData];
 
         void_completion_handler_block finishProcessingBlock = ^ {
-            [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+            [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
             ftProcessingStates = kFTStateIdle;
             [self.tableView reloadData];
         };
-        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         [[GoogleAuthorizationController sharedInstance] authorizedRequestWithCompletionHandler:^{
             [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
                 if (error) {
-                    NSData *data = [[error userInfo] valueForKey:@"data"];
-                    NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    [[SimpleGoogleServiceHelpers sharedInstance]
+                    NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+                    [[GoogleServicesHelper sharedInstance]
                             showAlertViewWithTitle:@"Fusion Tables Error"
                             AndText: [NSString stringWithFormat:@"Error Fetching Fusion Tables: %@", errorStr]];
                 } else {
@@ -145,13 +144,12 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         ftProcessingStates = kFTStateInserting;
         [self.tableView reloadData];
 
-        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         [self.ftTable insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
-            [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+            [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
             if (error) {
-                NSData *data = [[error userInfo] valueForKey:@"data"];
-                NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                
-                [[SimpleGoogleServiceHelpers sharedInstance]
+                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];                
+                [[GoogleServicesHelper sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
                         AndText: [NSString stringWithFormat:@"Error Inserting Fusion Table: %@", errorStr]];
             } else {
@@ -168,7 +166,7 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
                                 self.navigationItem.leftBarButtonItem = self.editButtonItem;
                 } else {
                     // the FT Create Insert did not return sound info
-                    [[SimpleGoogleServiceHelpers sharedInstance]
+                    [[GoogleServicesHelper sharedInstance]
                             showAlertViewWithTitle:@"Fusion Tables Error"
                             AndText:  @"Error processsing inserted Fusion Table data"];
                 }
@@ -185,13 +183,12 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
         ftProcessingStates = kFTStateDeleting;
         [self.tableView reloadData];
         
-        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         [self.ftTable deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
-            [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+            [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
             if (error) {
-                NSData *data = [[error userInfo] valueForKey:@"data"];
-                NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                [[SimpleGoogleServiceHelpers sharedInstance]
+                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+                [[GoogleServicesHelper sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
                         AndText: [NSString stringWithFormat:@"Error deleting Fusion Table: %@", errorStr]];
             } else {

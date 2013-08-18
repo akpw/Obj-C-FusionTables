@@ -95,17 +95,16 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     ftSharingRowState = kFTStateSharing;
     [self reloadSection];
     
-    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
-    [[SimpleGoogleServiceHelpers sharedInstance] setPublicSharingForFileWithID:[self ftTableID]
+    [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+    [[GoogleServicesHelper sharedInstance] setPublicSharingForFileWithID:[self ftTableID]
                                                          WithCompletionHandler:^(NSData *data, NSError *error) {
-    [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+    [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
         ftSharingRowState = kFTStateIdle;
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[SimpleGoogleServiceHelpers sharedInstance]
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+            [[GoogleServicesHelper sharedInstance]
                     showAlertViewWithTitle:@"Fusion Tables Error"
-                    AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", str]];
+                    AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", errorStr]];
         } else {
             completionHandler ();
         }
@@ -116,17 +115,16 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     ftSharingRowState = kFTStateShorteningURL;
     [self reloadSection];
     
-    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
-    [[SimpleGoogleServiceHelpers sharedInstance] shortenURL:[self longShareURL]
+    [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+    [[GoogleServicesHelper sharedInstance] shortenURL:[self longShareURL]
                                       WithCompletionHandler:^(NSData *data, NSError *error) {
-         [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+         [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
          ftSharingRowState = kFTStateIdle;
          if (error) {
-             NSData *data = [[error userInfo] valueForKey:@"data"];
-             NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             [[SimpleGoogleServiceHelpers sharedInstance]
+             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+             [[GoogleServicesHelper sharedInstance]
                     showAlertViewWithTitle:@"Fusion Tables Error"
-                    AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", str]];
+                    AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", errorStr]];
          } else {
              NSDictionary *lines = [NSJSONSerialization
                                     JSONObjectWithData:data options:kNilOptions error:nil];
@@ -141,7 +139,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
                 @"https://www.google.com/fusiontables/embedviz?q=select+col9+from+%@&viz=MAP"
                 "&h=false&lat=50.088555878607316&lng=14.429294793701292&t=1&z=15&l=col9&noCache=%@",
                 [self ftTableID],
-                [[SimpleGoogleServiceHelpers sharedInstance] random4DigitNumberString]];
+                [[GoogleServicesHelper sharedInstance] random4DigitNumberString]];
 }
 
 #pragma mark - GroupedTableSectionsController Table View Delegate
@@ -240,7 +238,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         [appDelegate.navigationController presentViewController:mailController animated:YES completion:nil];
     } else {
-        [[SimpleGoogleServiceHelpers sharedInstance]
+        [[GoogleServicesHelper sharedInstance]
             showAlertViewWithTitle:@"Email not set"
             AndText:@"To send emails from this device, please first set up an email account in the device Settings"];
     }

@@ -111,8 +111,7 @@ static NSString *_sFusionTableTemplateID;
     [self.ftStyleResource insertFTStyleWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Inserting Fusion Table Style: %@", errorStr);
         } else {
             NSDictionary *ftStyleDict = [NSJSONSerialization JSONObjectWithData:data
@@ -136,8 +135,7 @@ static NSString *_sFusionTableTemplateID;
     [self.ftTemplateResource insertFTTemplateWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Inserting Fusion Table Template: %@", errorStr);
         } else {
             NSDictionary *ftTemplateDict = [NSJSONSerialization JSONObjectWithData:data
@@ -162,8 +160,7 @@ static NSString *_sFusionTableTemplateID;
     [self.ftTableResource listFusionTablesWithCompletionHandler: ^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Fetching Fusion Tables: %@", errorStr);
         } else {
             NSDictionary *ftItems = [NSJSONSerialization JSONObjectWithData:data
@@ -183,8 +180,7 @@ static NSString *_sFusionTableTemplateID;
     [self.ftStyleResource lisFTStylesWithCompletionHandler: ^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Fetching Fusion Table Styles: %@", errorStr);
         } else {
             NSDictionary *ftItems = [NSJSONSerialization JSONObjectWithData:data
@@ -204,8 +200,7 @@ static NSString *_sFusionTableTemplateID;
     [self.ftTemplateResource lisFTTemplatesWithCompletionHandler: ^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Fetching Fusion Table Templates: %@", errorStr);
         } else {
             NSDictionary *ftItems = [NSJSONSerialization JSONObjectWithData:data
@@ -231,8 +226,7 @@ static NSString *_sFusionTableTemplateID;
     [self.ftStyleResource deleteFTStyleWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Deleting Fusion Table Style With ID: %@, %@", [self ftStyleID], errorStr);
         } else {
             NSLog(@"Deleted Fusion Table Style with ID: %@", [self ftStyleID]);
@@ -249,8 +243,7 @@ static NSString *_sFusionTableTemplateID;
     [self.ftTemplateResource deleteFTTemplateWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Deleting Fusion Table Template With ID: %@, %@", [self ftTemplateID], errorStr);
         } else {
             NSLog(@"Deleted Fusion Table Template with ID: %@", [self ftTemplateID]);

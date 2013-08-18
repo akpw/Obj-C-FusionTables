@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-//  SimpleGoogleServiceHelpers.m
+//  GoogleServicesHelper.m
 //  Obj-C-FusionTables
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
@@ -21,20 +21,20 @@
     A simple Google Services Helper class
 ****/
 
-#import "SimpleGoogleServiceHelpers.h"
+#import "GoogleServicesHelper.h"
 #import "GoogleAuthorizationController.h"
 
-@interface SimpleGoogleServiceHelpers ()
+@interface GoogleServicesHelper ()
     @property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @end
 
-@implementation SimpleGoogleServiceHelpers {
+@implementation GoogleServicesHelper {
     NSUInteger networkActivityIndicatorCounter;
 }
 
 #pragma mark - Singleton instance
-+ (SimpleGoogleServiceHelpers *)sharedInstance {
-    static SimpleGoogleServiceHelpers *sharedSimpleGoogleServiceHelperInstance = nil;
++ (GoogleServicesHelper *)sharedInstance {
+    static GoogleServicesHelper *sharedSimpleGoogleServiceHelperInstance = nil;
     static dispatch_once_t onceToken = 0;
     dispatch_once(&onceToken, ^{
         sharedSimpleGoogleServiceHelperInstance = [[[self class] alloc] init];
@@ -107,6 +107,12 @@
         [fetcher setPostData:jsonData];
         [fetcher beginFetchWithCompletionHandler:completionHandler];
     }];
+}
+
+#pragma mark - Google GTMHTTPFetcher error processing
++ (NSString *)remoteErrorDataString:(NSError *)error {
+    NSData *data = [[error userInfo] valueForKey:kGTMHTTPFetcherStatusDataKey];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                    
 }
 
 #pragma mark - Google URL Shortener helper

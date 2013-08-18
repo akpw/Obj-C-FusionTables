@@ -58,8 +58,7 @@ static NSUInteger _lastInsertedRowID;
     [self.ftSQLQuery sqlInsertWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Inserting Fusion Table Style: %@", errorStr);
         } else {
             NSDictionary *responceDict = [NSJSONSerialization
@@ -87,8 +86,7 @@ static NSUInteger _lastInsertedRowID;
         [self.ftSQLQuery sqlUpdateWithCompletionHandler:^(NSData *data, NSError *error) {
             dispatch_semaphore_signal(semaphore);
             if (error) {
-                NSData *data = [[error userInfo] valueForKey:@"data"];
-                NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
                 STFail (@"Error Updating Fusion Table Style: %@", errorStr);                
             } else {
                 NSDictionary *responceDict = [NSJSONSerialization
@@ -115,8 +113,7 @@ static NSUInteger _lastInsertedRowID;
     [self.ftSQLQuery sqlDeleteWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Inserting Fusion Table Style: %@", errorStr);            
         } else {
             NSDictionary *responceDict = [NSJSONSerialization

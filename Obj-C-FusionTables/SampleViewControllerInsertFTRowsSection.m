@@ -267,16 +267,15 @@ enum FTActionTypes {
     lastInsertedRowID = 0;
     [self reloadSection];
     
-    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+    [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
     [self.ftSQLQuery sqlInsertWithCompletionHandler:^(NSData *data, NSError *error) {
-        [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
         ftInsertRowState = kFTStateIdle;
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[SimpleGoogleServiceHelpers sharedInstance]
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+            [[GoogleServicesHelper sharedInstance]
                     showAlertViewWithTitle:@"Fusion Tables Error"
-                    AndText: [NSString stringWithFormat:@"Error inserting Rows: %@", infoString]];
+                    AndText: [NSString stringWithFormat:@"Error inserting Rows: %@", errorStr]];
         } else {
             NSDictionary *responceDict = [NSJSONSerialization
                                           JSONObjectWithData:data options:kNilOptions error:nil];
@@ -303,16 +302,15 @@ enum FTActionTypes {
         ftInsertRowState = kFTStateUpdatingRows;
         [self reloadSection];
         
-        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         [self.ftSQLQuery sqlUpdateWithCompletionHandler:^(NSData *data, NSError *error) {
-            [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+            [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
             ftInsertRowState = kFTStateIdle;
             if (error) {
-                NSData *data = [[error userInfo] valueForKey:@"data"];
-                NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                [[SimpleGoogleServiceHelpers sharedInstance]
+                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+                [[GoogleServicesHelper sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
-                        AndText: [NSString stringWithFormat:@"Error updating rows: %@", infoString]];
+                        AndText: [NSString stringWithFormat:@"Error updating rows: %@", errorStr]];
             } else {
                 [self rotateSampleUpdateDataIndex];
                 
@@ -334,16 +332,15 @@ enum FTActionTypes {
     ftInsertRowState = kFTStateDeletingRows;
     [self reloadSection];
 
-    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+    [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
     [self.ftSQLQuery sqlDeleteWithCompletionHandler:^(NSData *data, NSError *error) {
-        [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
         ftInsertRowState = kFTStateIdle;
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[SimpleGoogleServiceHelpers sharedInstance]
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+            [[GoogleServicesHelper sharedInstance]
                     showAlertViewWithTitle:@"Fusion Tables Error"
-                    AndText: [NSString stringWithFormat:@"Error deleting rows: %@", infoString]];
+                    AndText: [NSString stringWithFormat:@"Error deleting rows: %@", errorStr]];
             
         } else {
             lastInsertedRowID = 0;

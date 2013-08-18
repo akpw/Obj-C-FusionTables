@@ -121,20 +121,18 @@ enum FTActionTypes {
 - (void)ftSetStyle {
     if (ftStylingState == kFTStateIdle) {
         ftStylingState = kFTStateApplyingStyling;
-        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         [self reloadSection];
 
         FTStyle *ftStyle = [[FTStyle alloc] init];
         ftStyle.ftStyleDelegate = self;
         [ftStyle insertFTStyleWithCompletionHandler:^(NSData *data, NSError *error) {
-            [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+            [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
             if (error) {
-                NSData *data = [[error userInfo] valueForKey:@"data"];
-                NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                [[SimpleGoogleServiceHelpers sharedInstance]
+                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+                [[GoogleServicesHelper sharedInstance]
                         showAlertViewWithTitle:@"Fusion Tables Error"
-                        AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@",
-                        infoString]];
+                        AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@", errorStr]];
             } else {
                 ftStylingApplied = YES;
                 NSDictionary *styleObject = [NSJSONSerialization JSONObjectWithData:data
@@ -173,16 +171,14 @@ enum FTActionTypes {
         FTTemplate *ftTemplate = [[FTTemplate alloc] init];
         ftTemplate.ftTemplateDelegate = self;
         
-        [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         [ftTemplate insertFTTemplateWithCompletionHandler:^(NSData *data, NSError *error) {
-           [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+           [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
            if (error) {
-               NSData *data = [[error userInfo] valueForKey:@"data"];
-               NSString *infoString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-               [[SimpleGoogleServiceHelpers sharedInstance]
+               NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error]; 
+               [[GoogleServicesHelper sharedInstance]
                       showAlertViewWithTitle:@"Fusion Tables Error"
-                      AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@",
-                      infoString]];
+                      AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@", errorStr]];
            } else {
                ftInfoWindowTemplateApplied = YES;
                NSDictionary *ftTemplateDict = [NSJSONSerialization JSONObjectWithData:data

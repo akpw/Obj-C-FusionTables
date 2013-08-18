@@ -108,14 +108,14 @@
 
 #pragma mark - Network connectivity indication
 - (void)incrementNetworkActivity:(NSNotification *)notify {
-    [[SimpleGoogleServiceHelpers sharedInstance] incrementNetworkActivityIndicator];
+    [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
 }
 - (void)decrementNetworkActivity:(NSNotification *)notify {
-    [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
+    [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
 }
 - (void)signInNetworkLostOrFound:(NSNotification *)notification {
     if ([[notification name] isEqual:kGTMOAuth2NetworkLost]) {
-        [[SimpleGoogleServiceHelpers sharedInstance] showAlertViewWithTitle:@"Network Connection Lost"
+        [[GoogleServicesHelper sharedInstance] showAlertViewWithTitle:@"Network Connection Lost"
                                             AndText:@"Network connection was lost while connecting to Google"];         
         [[[notification object] delegate] cancelSigningIn];
     } else {
@@ -188,7 +188,7 @@
                                                           encoding:NSUTF8StringEncoding];
                  }
                  NSLog(@"Authentication error: %@ Failure response body: %@", error, responseBody);
-                 [[SimpleGoogleServiceHelpers sharedInstance]
+                 [[GoogleServicesHelper sharedInstance]
                                 showAlertViewWithTitle:@"Authentication error" AndText:
                                 [NSString stringWithFormat:@"Error while signing-in in to Google: %@",
                                 [error localizedDescription]]];

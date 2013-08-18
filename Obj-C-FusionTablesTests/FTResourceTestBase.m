@@ -89,8 +89,7 @@
     [self.ftTableResource insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];            
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Inserting Fusion Table: %@", errorStr);
         } else {
             NSDictionary *ftTableDict = [NSJSONSerialization JSONObjectWithData:data
@@ -115,8 +114,7 @@
     [self.ftTableResource deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
-            NSData *data = [[error userInfo] valueForKey:@"data"];
-            NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             STFail (@"Error Deleting Fusion Table With ID: %@, %@", [self ftTableID], errorStr);
         } else {
             NSLog(@"Deleted Fusion Tables with ID: %@", [self ftTableID]);

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-//  SimpleGoogleServiceHelpers.h
+//  GoogleServicesHelper.h
 //  Obj-C-FusionTables
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
@@ -26,10 +26,10 @@
 typedef void(^ServiceAPIHandler)(NSData *data, NSError *error);
 typedef void (^void_completion_handler_block)(void);
 
-@interface SimpleGoogleServiceHelpers : NSObject
+@interface GoogleServicesHelper : NSObject
 
 #pragma mark - Singleton instance
-+ (SimpleGoogleServiceHelpers *)sharedInstance;
++ (GoogleServicesHelper *)sharedInstance;
 
 #pragma mark - Network connectivity helpers
 - (void)incrementNetworkActivityIndicator;
@@ -42,6 +42,9 @@ typedef void (^void_completion_handler_block)(void);
 #pragma mark - Google Drive permissions helper
 - (void)setPublicSharingForFileWithID:(NSString *)fileID
                 WithCompletionHandler:(ServiceAPIHandler)completionHandler;
+
+#pragma mark - Google GTMHTTPFetcher error processing
++ (NSString *)remoteErrorDataString:(NSError *)error;
 
 #pragma mark - Google URL Shortener helper
 - (void)shortenURL:(NSString *)longURL
