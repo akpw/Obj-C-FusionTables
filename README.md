@@ -28,8 +28,7 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 ````
 [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
 	if (error) {
-	    NSData *data = [[error userInfo] valueForKey:@"data"];
-	    NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	    NSString *errorStr = [SimpleGoogleServiceHelpers remoteErrorDataString:error];
 	    NSLog(@"Error Listing Fusion Tables: %@", errorStr);
 	} else {
 	    NSDictionary *ftItems = [NSJSONSerialization JSONObjectWithData:data
