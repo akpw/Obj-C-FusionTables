@@ -42,6 +42,7 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 }];
 ````
 
+
 * insert a new Fusion Table
 
 ````
