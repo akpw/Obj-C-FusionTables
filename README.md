@@ -13,7 +13,7 @@ The main purpose of the sample project is to show typical usage of ````Obj-C-Fus
 To run the sample project, you will need to set <b>your own Google API</b> key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey).
 
 # Installation
-Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcheras classes as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
+Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcher classes in the ````Google Toolbox```` subfolder as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
 And that's pretty much it!
 
 # Usage
