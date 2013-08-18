@@ -34,14 +34,13 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 	} else {
 	    NSDictionary *ftItems = [NSJSONSerialization JSONObjectWithData:data
                                                                   options:kNilOptions error:nil];            
-            NSArray *ftTableObjects = [NSMutableArray arrayWithArray:ftItems[@"items"]];
-            for (NSDictionary *ftTable in ftTableObjects) {
-            	NSLog(@"Table Name: %@", ftTable[@"name"]);
-            	NSLog(@"Table ID: %@", ftTable[@"tableId"]);
-            }
+        NSArray *ftTableObjects = [NSMutableArray arrayWithArray:ftItems[@"items"]];
+        for (NSDictionary *ftTable in ftTableObjects) {
+        	NSLog(@"Table Name: %@", ftTable[@"name"]);
+			NSLog(@"Table ID: %@", ftTable[@"tableId"]);
+		}
 	}
 }];
-
 ````
 
 * insert a new Fusion Table
@@ -51,7 +50,7 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
     if (error) {
         NSData *data = [[error userInfo] valueForKey:@"data"];
         NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-		NSLog(@"Error Creating Fusion Table: %@", errorStr);
+		NSLog(@"Error Inserting Fusion Table: %@", errorStr);
     } else {
         NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:data
                                                                     options:kNilOptions error:nil];
