@@ -1,41 +1,44 @@
 ![obj-c](https://lh3.googleusercontent.com/--n6ytfyWEo8/UgX1o20eHjI/AAAAAAAAEPw/EufyyeKjl9E/w856-h523-no/u3.png)
 
 
-[Google Fusion Tables](http://www.google.com/drive/apps.html#fusiontables) is a powerful combination of a big web store and variety of ways to access and visualise the data. While marked as 'experimental', it has reached its maturity with [Fusion Tables API v1.0](https://developers.google.com/fusiontables/) and now offers developers some clean & easy ways to enrich their apps across variety of development platforms. 
+[Google Fusion Tables](http://www.google.com/drive/apps.html#fusiontables) is a powerful combination of a big web store and variety of ways to access and visualise the data. While still marked as 'experimental', it has reached its maturity with [Fusion Tables API v1.0](https://developers.google.com/fusiontables/) and offers developers some clean & easy ways to enrich their apps across variety of development platforms. 
 
 One potential obstacle for Fusion Tables in iOS apps is that there is no official, dedicated Google API Objective-C API. While the existing libraries such as [gtm-oauth2](https://code.google.com/p/gtm-oauth2/) and [gtm-http-fetcher](https://code.google.com/p/gtm-http-fetcher/) are well-written and provide all that is needed to work with Fusion Tables, being general and a bit lower-level they can also put a lot of extra weight on developers's shoulders.
 
 Obj-C-FusionTables is a light-weight soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries. 
 
 # Sample Project
-The main purpose of the sample project was to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, SQL rows operations, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
+The main purpose of the sample project is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, executing SQL queries, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
 
 To run the sample project, you will need to set <b>your own Google API</b> key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey).
 
 # Installation
-Drag & drop the ''''Obj-C-Fusion Tables Base'''' folder from sample app into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcheras classes as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
+Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcheras classes as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
 And that's pretty much it!
 
 # Usage
 * Start with setting <b>your own Google API Key</b> in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
-* Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is an Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. Similarly, the same goes for other Fusion Tables resources such as Templates and Styles. 
-The ````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````. The ````FTSQLQueryBuilder```` class serves helps build SQL statements as shown below.
+* Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is the Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. The same applies to other Fusion Tables resources such as Templates and Styles. 
+The ````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````. The ````FTSQLQueryBuilder```` class helps build SQL statements as shown below.
 The ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
 
 # A few quick code samples
 * read a list of Fusion Tables
 
 ````
-__block NSArray *ftTableObjects = nil;
 [self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
 	if (error) {
 	    NSData *data = [[error userInfo] valueForKey:@"data"];
 	    NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	    NSLog(@"Error Creating Fusion Table: %@", errorStr);
+	    NSLog(@"Error Listing Fusion Tables: %@", errorStr);
 	} else {
-	    NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
-	                                                          options:kNilOptions error:nil];
-	    ftTableObjects = [NSMutableArray arrayWithArray:lines[@"items"]];
+	    NSDictionary *ftItems = [NSJSONSerialization JSONObjectWithData:data
+                                                                  options:kNilOptions error:nil];            
+            NSArray *ftTableObjects = [NSMutableArray arrayWithArray:ftItems[@"items"]];
+            for (NSDictionary *ftTable in ftTableObjects) {
+            	NSLog(@"Table Name: %@", ftTable[@"name"]);
+            	NSLog(@"Table ID: %@", ftTable[@"tableId"]);
+            }
 	}
 }];
 
