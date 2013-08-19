@@ -60,7 +60,7 @@ ftTable.ftTableDelegate = self;
     } else {
         NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:data
                                                                     options:kNilOptions error:nil];
-		NSLog(@"Created a new Fusion Table: %@", contentDict);
+		NSLog(@"Inserted a new Fusion Table: %@", contentDict);
     }
 }];
 ````
@@ -130,7 +130,7 @@ ftSQLQuery.ftSQLQueryDelegate = self;
 
 
 # The Delegates
-After a brief glance on the e.g. delete table code above, one question is probably "where the heck is the table ID coming from? some property, or what?" Well, as ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
+After a brief glance on e.g. the Delete Table code above, one question might probably be "OK but where the heck is the table ID coming from? some property or what?" Well, as ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
 
 ````
 @protocol FTDelegate <NSObject>
@@ -157,7 +157,7 @@ This way things are more flexible, letting you implement the delegate where it m
 @end
 ````
 
-A simple way to learn about implementing specific delagates is to look at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v1/reference/) knowledge itself, the Objective-C part of it as quite straightforward. A quick code sample:
+A simple way to learn more about implementing specific delagates is via looking at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v1/reference/) knowledge, the Objective-C part of it as quite straightforward. A quick code sample:
 
 ````
 // Sample Fusion Table Title
@@ -179,7 +179,7 @@ A simple way to learn about implementing specific delagates is to look at the sa
 }
 ````
 
-Another simple way to learn the API is of course to look at the ````Obj-C-FusionTablesTests```` (see below).
+Another easy way to learn the API is of course via taking a look at the ````Obj-C-FusionTablesTests```` (see below).
 
 
 # The Tests
