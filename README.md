@@ -96,7 +96,6 @@ ftSQLQuery.ftSQLQueryDelegate = self;
         if (rows) {
             NSLog(@"Inserted %d %@", [rows count], ([rows count] == 1) ? @"row" : @"rows");
             NSLog(@"%@", rows);
-            NSUInteger lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
         } else {
             NSLog (@"Error processing Insert Rows responce");                
         }
