@@ -81,7 +81,7 @@ ftTable.ftTableDelegate = self;
 Similar coding patterns work for Fusion Tables Templates and Styles.
 
 * Insert Fusion Table rows
-* 
+
 ````
 FTSQLQuery *ftSQLQuery = [[FTSQLQuery alloc] init];
 ftSQLQuery.ftSQLQueryDelegate = self;
