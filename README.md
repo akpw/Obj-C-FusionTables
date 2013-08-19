@@ -96,6 +96,7 @@ ftSQLQuery.ftSQLQueryDelegate = self;
         if (rows) {
             NSLog(@"Inserted %d %@", [rows count], ([rows count] == 1) ? @"row" : @"rows");
             NSLog(@"%@", rows);
+            NSUInteger lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
         } else {
             NSLog (@"Error processing Insert Rows responce");                
         }
@@ -103,9 +104,32 @@ ftSQLQuery.ftSQLQueryDelegate = self;
 }];
 ````
 
+* Delete Fusion Table rows
+ 
+````
+FTSQLQuery *ftSQLQuery = [[FTSQLQuery alloc] init];
+ftSQLQuery.ftSQLQueryDelegate = self;
+[ftSQLQuery sqlDeleteWithCompletionHandler:^(NSData *data, NSError *error) {
+    if (error) {
+        NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+        STFail (@"Error Inserting Fusion Table Style: %@", errorStr);            
+    } else {
+        NSDictionary *responceDict = [NSJSONSerialization
+                                      JSONObjectWithData:data options:kNilOptions error:nil];
+        NSArray *rows = responceDict[@"rows"];
+        if (rows) {
+            NSUInteger numRowsDeleted = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
+            NSLog(@"Deleted %d %@", numRowsDeleted, (numRowsDeleted == 1) ? @"row" : @"rows");
+        } else {
+            NSLog (@"Error processing Delete Rows responce");                
+        }
+    }
+}];
+````
+
 
 # The Delegates
-After a brief glance on the delete table code above, the first question is probably "where the heck is the table ID coming from? is it in some property, or what?" Well, as the ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
+After a brief glance on the e.g. delete table code above, one question is probably "where the heck is the table ID coming from? some property, or what?" Well, as ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
 
 ````
 @protocol FTDelegate <NSObject>
@@ -119,6 +143,18 @@ After a brief glance on the delete table code above, the first question is proba
 ````
 
 This way things are more flexible, letting you implement the delegate where it makes sense in your app rather than going into parametrising / subclassing the ```FTTable``` class. A similar approach is used for other Obj-C-FusionTables core classes such as ````FTStyle```` and ````FTTemplate````.
+
+````FTSQLQuery```` delegate is slightly different though essentially follows the same design pattern:
+
+````
+@protocol FTSQLQueryDelegate <NSObject>
+@optional
+- (NSString *)ftSQLSelectStatement;
+- (NSString *)ftSQLInsertStatement;
+- (NSString *)ftSQLUpdateStatement;
+- (NSString *)ftSQLDeleteStatement;
+@end
+````
 
 A simple way to learn about implementing specific delagates is to look at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v1/reference/) knowledge itself, the Objective-C part of it as quite straightforward. A quick code sample:
 
@@ -142,10 +178,14 @@ A simple way to learn about implementing specific delagates is to look at the sa
 }
 ````
 
+Another simple way to learn the API is of course to look at the ````Obj-C-FusionTablesTests```` (see below).
+
+
+# The Tests
+The tests are intended to  cover all essential Obj-C-FusionTables API operations.  The test cases goe sequentially from creating a table / style / template / inserting sample rows through cleaning everything up and restoring the tested Google account to its initial state.
+
+
 # Compatibility
 GroupedUITableViews requires ARC and was optimised for iOS6 and above.
 
-# TODOs
-* extend the example with listing Styles / Templates, etc.
-* add more tests, to cover SQL rows operations etc.
 
