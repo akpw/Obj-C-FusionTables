@@ -18,15 +18,17 @@ And that's pretty much it!
 
 # Usage
 * Start with setting <b>your own Google API Key</b> in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
-* Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. the ````FTTable```` class is the Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. The same applies to other Fusion Tables resources such as Templates and Styles. 
-The ````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````. The ````FTSQLQueryBuilder```` class helps build SQL statements as shown below.
-The ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
+* Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory. E.g. ````FTTable```` class is the Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. The same applies to other Fusion Tables resources such as Templates and Styles. 
+````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````. ````FTSQLQueryBuilder```` helps build SQL statements as shown below.
+````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
 
 # A few quick code samples
 * read a list of Fusion Tables
 
 ````
-[self.ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
+FTTable *ftTable = [[FTTable alloc] init];
+ftTable.ftTableDelegate = self;
+[ftTable listFusionTablesWithCompletionHandler:^(NSData *data, NSError *error) {
 	if (error) {
 	    NSString *errorStr = [SimpleGoogleServiceHelpers remoteErrorDataString:error];
 	    NSLog(@"Error Listing Fusion Tables: %@", errorStr);
@@ -46,7 +48,9 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 * insert a new Fusion Table
 
 ````
-[self.ftTable insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+FTTable *ftTable = [[FTTable alloc] init];
+ftTable.ftTableDelegate = self;
+[ftTable insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
     if (error) {
         NSData *data = [[error userInfo] valueForKey:@"data"];
         NSString *errorStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -62,7 +66,9 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 * delete a Fusion Table
 
 ````
-[self.ftTable deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
+FTTable *ftTable = [[FTTable alloc] init];
+ftTable.ftTableDelegate = self;
+[ftTable deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
     [[SimpleGoogleServiceHelpers sharedInstance] decrementNetworkActivityIndicator];
     if (error) {
         NSData *data = [[error userInfo] valueForKey:@"data"];
@@ -72,7 +78,31 @@ The ````GoogleAuthorizationController```` class conviniently wraps around Google
 }];
 ````
 
-Similar coding patterns work for Fusion Tables Templates, Styles, and SQL Queries.
+Similar coding patterns work for Fusion Tables Templates and Styles.
+
+* Insert Fusion Table rows
+* 
+````
+FTSQLQuery *ftSQLQuery = [[FTSQLQuery alloc] init];
+ftSQLQuery.ftSQLQueryDelegate = self;
+[ftSQLQuery sqlInsertWithCompletionHandler:^(NSData *data, NSError *error) {
+    if (error) {
+        NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+        NSLog (@"Error Inserting Fusion Table Style: %@", errorStr);
+    } else {
+        NSDictionary *responceDict = [NSJSONSerialization
+                                      JSONObjectWithData:data options:kNilOptions error:nil];
+        NSArray *rows = responceDict[@"rows"];
+        if (rows) {
+            NSLog(@"Inserted %d %@", [rows count], ([rows count] == 1) ? @"row" : @"rows");
+            NSLog(@"%@", rows);
+            NSUInteger lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
+        } else {
+            NSLog (@"Error processing Insert Rows responce");                
+        }
+    }
+}];
+````
 
 
 # The Delegates
