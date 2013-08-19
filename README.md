@@ -5,7 +5,7 @@
 
 One potential obstacle for Fusion Tables in iOS apps is that there is no official, dedicated Google API Objective-C API. While the existing libraries such as [gtm-oauth2](https://code.google.com/p/gtm-oauth2/) and [gtm-http-fetcher](https://code.google.com/p/gtm-http-fetcher/) are well-written and provide all that is needed to work with Fusion Tables, being general and a bit lower-level they can also put a lot of extra weight on developers's shoulders.
 
-Obj-C-FusionTables is a light-weight soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries. 
+Obj-C-FusionTables is an easy-to-use soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries. 
 
 # Sample Project
 The main purpose of the sample project is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, executing SQL queries, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
