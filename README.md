@@ -182,7 +182,7 @@ Another simple way to learn the API is of course to look at the ````Obj-C-Fusion
 
 
 # The Tests
-The tests are intended to  cover all essential Obj-C-FusionTables API operations.  The test cases goe sequentially from creating a table / style / template / inserting sample rows through cleaning everything up and restoring the tested Google account to its initial state.
+The tests are intended to  cover all essential Obj-C-FusionTables API operations.  The test cases go sequentially from creating a table / style / template / inserting sample rows through cleaning everything up and restoring the tested Google account to its initial state.
 
 
 # Compatibility
