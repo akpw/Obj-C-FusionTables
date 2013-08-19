@@ -10,11 +10,10 @@ Obj-C-FusionTables is an easy-to-use soluition for integrating Fusion Tables int
 # Sample Project
 The main purpose of the sample project is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, executing SQL queries, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
 
-To run the sample project, you will need to set <b>your own Google API</b> key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey).
+To run the sample project, you will need to fill in <b>your own Google API</b> key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey).
 
 # Installation
-Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcher classes in the ````Google Toolbox```` subfolder as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
-And that's pretty much it!
+Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the -fno-objc-arc compiler flag for the gtm-oauth2 /  gtm-http-fetcher classes in the ````Google Toolbox```` subfolder as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project). Then  fill in <b>[your own Google API](https://developers.google.com/fusiontables/docs/v1/using#APIKey)</b> key in ````GoogleAPIKeys.plist````, and that's pretty much it!
 
 # Usage
 * Start with setting <b>your own Google API Key</b> in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
