@@ -130,7 +130,7 @@ ftSQLQuery.ftSQLQueryDelegate = self;
 
 
 # The Delegates
-After a brief glance on e.g. the Delete Table code above, one question might probably be "OK but where the heck is the table ID coming from? some property or what?" Well, as ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
+After a brief glance on e.g. the Delete Table code above, one question might probably be "OK but where the heck is the table ID coming from? a property or what?" Well, as ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
 
 ````
 @protocol FTDelegate <NSObject>
@@ -187,6 +187,6 @@ The tests are intended to  cover all essential Obj-C-FusionTables API operations
 
 
 # Compatibility
-GroupedUITableViews requires ARC and was optimised for iOS6 and above.
+GroupedUITableViews requires ARC and are optimised for iOS6 and above.
 
 
