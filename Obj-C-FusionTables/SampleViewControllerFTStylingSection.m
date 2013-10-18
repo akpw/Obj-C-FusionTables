@@ -56,25 +56,22 @@ typedef NS_ENUM (NSUInteger, FTStylingStates) {
 - (NSUInteger)numberOfRows {
     return kSampleViewControllerFTStylingSectionNumRows;
 }
-
-#pragma mark - GroupedTableSectionsController Table View Data Source
 enum FTActionTypes {
     kFTActionTypeStyle = 0,
     kFTActionTypeInfoWindow
 };
-#define FT_ACTION_TYPE_KEY (@"FT_Action_Type_Key")
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
+    cell.textLabel.font = ([self isSampleAppFusionTable]) ? 
+                    [UIFont systemFontOfSize:16] : [UIFont systemFontOfSize:14];
     
     UIButton *actionButton = [self ftActionButton];
-    cell.accessoryView = actionButton;    
     switch (row) {
         case kSampleViewControllerFTStylingSectionStyleRow:
             if (!ftStylingApplied) {
                 cell.textLabel.text = @"Set sample FT style";
                 cell.accessoryView = actionButton;
-                [actionButton.layer setValue:@(kFTActionTypeStyle) forKey:FT_ACTION_TYPE_KEY];
+                actionButton.tag = kFTActionTypeStyle;
             } else {
                 cell.textLabel.text = @"Sample FT style set";
                 cell.accessoryView = nil;
@@ -85,7 +82,7 @@ enum FTActionTypes {
             if (!ftInfoWindowTemplateApplied) {
                 cell.textLabel.text = @"Set sample Info Window Template";
                 cell.accessoryView = actionButton;
-                [actionButton.layer setValue:@(kFTActionTypeInfoWindow) forKey:FT_ACTION_TYPE_KEY];
+                actionButton.tag = kFTActionTypeInfoWindow;
             } else {
                 cell.textLabel.text = @"Sample Info Window Template set";
                 cell.accessoryView = nil;
@@ -96,14 +93,14 @@ enum FTActionTypes {
             break;
     }
     if (![self isSampleAppFusionTable]) {
+        cell.accessoryView = nil;
         cell.userInteractionEnabled = NO;
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor  = [UIColor clearColor];
     }
 }
 - (void)executeFTAction:(id)sender {
     UIButton *button = (UIButton *)sender;
-    NSNumber *actionType =  (NSNumber *)[button.layer valueForKey:FT_ACTION_TYPE_KEY];
-    switch ([actionType integerValue]) {
+    switch (button.tag) {
         case kFTActionTypeStyle:
             [self ftSetStyle];
             break;
@@ -114,7 +111,6 @@ enum FTActionTypes {
             break;
     }
 }
-#undef FT_ACTION_TYPE_KEY
 
 
 #pragma mark - FT Map Styling
@@ -234,17 +230,6 @@ enum FTActionTypes {
 - (NSString *)titleForHeaderInSection {
     return @"Fusion Table Map Styling";
 }
-- (CGFloat)heightForHeaderInSection {
-    return 32.0f;
-}
-- (CGFloat)heightForFooterInSection {
-    return ([self isSampleAppFusionTable]) ? 40.0f : 60.0f;
-}
-- (float)heightForRow:(NSInteger)row {
-    return 36.0f;
-}
-
-
 
 
 @end

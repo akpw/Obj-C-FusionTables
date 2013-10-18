@@ -21,14 +21,15 @@
     Shows usage of Obj-C-FusionTables for setting Fusion Tables user permissions / sharing
 ****/
 
-#import "SampleViewControllerFTSharingSection.h"
+#import "SampleViewControllerFTSharingInfoSection.h"
 #import "AppDelegate.h"
 #import "AppIconsController.h"
+#import "SampleViewController.h"
 
 // Defines rows in section
-enum SampleViewControllerFTSharingSectionRows {
-    kSampleViewControllerFTSharingRowSection = 0,
-    SampleViewControllerFTSharingSectionNumRows
+enum SampleViewControllerFTSharingInfoSectionRows {
+    kSampleViewControllerFTSharingInfoRowSection = 0,
+    SampleViewControllerFTSharingInfoSectionNumRows
 };
 
 // FTable sharing states
@@ -38,56 +39,66 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     kFTStateShorteningURL
 };
 
-@interface SampleViewControllerFTSharingSection ()
+@interface SampleViewControllerFTSharingInfoSection ()
     @property (nonatomic, strong) NSString *sharingURL;
 @end
 
-@implementation SampleViewControllerFTSharingSection {
+@implementation SampleViewControllerFTSharingInfoSection {
     FTSharingStates ftSharingRowState;
+}
+
+#pragma mark - Memory management
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Section Init
+- (void)initSpecifics {
+    __weak typeof(self) weakSelf = self;
+    [[NSNotificationCenter defaultCenter] 
+        addObserverForName:START_FT_SHARING_NOTIFICATION 
+        object:nil queue:[NSOperationQueue mainQueue] 
+        usingBlock:^(NSNotification *notification) {
+            [weakSelf shareFusionTableWithCompletionHandler:^{
+                [weakSelf shortenURLWithCompletionHandler:^{
+                    [weakSelf reloadSection];
+                    [weakSelf showFTShareActionSheet];
+                }];
+            }];            
+    }];
 }
 
 #pragma mark - GroupedTableSectionsController Table View Data Source
 - (NSUInteger)numberOfRows {
-    return SampleViewControllerFTSharingSectionNumRows;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView CellForRow:(NSUInteger)row {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.defaultCellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:self.defaultCellIdentifier];
-    }
-    return cell;
+    return (ftSharingRowState == kFTStateIdle) ? 0 : SampleViewControllerFTSharingInfoSectionNumRows;
 }
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    cell.textLabel.text = @"Share Fusion Table";
-    
-    cell.backgroundView = [[UIImageView alloc] init];
-    cell.selectedBackgroundView = [[UIImageView alloc] init];
-    
-    ((UIImageView *)cell.selectedBackgroundView).image =
-                    [AppIconsController cellGenericBtnImage][IconsControllerIconTypeHighlighted];
-    if (![self isSampleAppFusionTable]) {
-        cell.userInteractionEnabled = NO;
-        cell.backgroundColor = [UIColor clearColor];
-        ((UIImageView *)cell.backgroundView).image =
-                    [AppIconsController cellGenericBtnImage][IconsControllerIconTypeHighlighted];
-    } else {
-        cell.userInteractionEnabled = YES;
-        cell.backgroundColor = [UIColor whiteColor];
-        ((UIImageView *)cell.backgroundView).image =
-                    [AppIconsController cellGenericBtnImage][IconsControllerIconTypeNormal];
+    switch (ftSharingRowState) {
+        case kFTStateSharing:
+            cell.textLabel.text = @"Sharing Fusion Table...";
+            break;
+        case kFTStateShorteningURL:
+            cell.textLabel.text = @"Shortening the sharing URL...";
+            break;
+        default:
+            break;
     }
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.userInteractionEnabled = NO;
+    cell.backgroundColor = [UIColor lightGrayColor];
 }
-- (void)tableView:(UITableView *)tableView DidSelectRow:(NSInteger)row {
-    [self shareFusionTableWithCompletionHandler:^{
-        [self shortenURLWithCompletionHandler:^{
-            [self reloadSection];
-            [self showFTShareActionSheet];
-        }];
-    }];
+
+
+#pragma mark - GroupedTableSectionsController Table View Delegate
+- (CGFloat)heightForRow:(NSInteger)row {
+    return 44.0f;
+}
+- (CGFloat)heightForFooterInSection {
+    return 1;
+}
+- (CGFloat)heightForHeaderInSection {
+    return 1;
 }
 
 #pragma mark - FT user permissions / sharing
@@ -140,35 +151,6 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
                 "&h=false&lat=50.088555878607316&lng=14.429294793701292&t=1&z=15&l=col9&noCache=%@",
                 [self ftTableID],
                 [[GoogleServicesHelper sharedInstance] random4DigitNumberString]];
-}
-
-#pragma mark - GroupedTableSectionsController Table View Delegate
-- (NSString *)titleForFooterInSection {
-    NSString *footerString = nil;
-    if ([self isSampleAppFusionTable]) {
-        switch (ftSharingRowState) {
-            case kFTStateIdle:
-                footerString = @"Shares a Fusion Table";
-                break;
-            case kFTStateSharing:
-                footerString = @"Sharing Fusion Table...";
-                break;
-            case kFTStateShorteningURL:
-                footerString = @"Shortening the sharing URL...";
-                break;
-            default:
-                break;
-        }
-    } else {
-        footerString = @"Choose a table created with this App";
-    }
-    return footerString;
-}
-- (CGFloat)heightForFooterInSection {
-    return 40.0f;
-}
-- (float)heightForRow:(NSInteger)row {
-    return 50.0f;
 }
 
 #pragma mark - Sharing ActionSheets Handlers

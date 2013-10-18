@@ -30,10 +30,13 @@
 #import "GroupedTableViewController.h"
 
 #define SAMPLE_FUSION_TABLE_PREFIX (@"ObjC-API_Sample_FT_")
+#define START_FT_SHARING_NOTIFICATION (@"StartFTSharingNotification")
 
 @interface SampleViewController : GroupedTableViewController
 
 @property (nonatomic, strong) NSString *fusionTableID;
 @property (nonatomic, strong) NSString *fusionTableName;
+
+- (BOOL)isSampleAppFusionTable;
 
 @end

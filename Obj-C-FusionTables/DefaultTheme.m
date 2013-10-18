@@ -113,4 +113,25 @@
     return @[spacer, customBarItem];
 }
 
+- (NSArray *)customShareBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector {
+    UIImage *customImage = [AppIconsController navBarItemShareButtonImage][IconsControllerIconTypeNormal];
+    UIImage *customImageHigh = [AppIconsController navBarItemShareButtonImage][IconsControllerIconTypeHighlighted];
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    shareButton.frame = CGRectMake(0.0, 0.0,
+                                  customImage.size.width,
+                                  customImage.size.height);
+    
+    [shareButton setImage:customImage forState:UIControlStateNormal];
+    [shareButton setImage:customImageHigh forState:UIControlStateHighlighted];
+    
+    [shareButton addTarget:target action:actionSelector forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spacer.width = 6;
+    return @[spacer, customBarItem];
+   
+}
+
 @end

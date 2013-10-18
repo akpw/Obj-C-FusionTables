@@ -90,12 +90,13 @@ enum FTActionTypes {
 };
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
+    cell.textLabel.font = ([self isSampleAppFusionTable]) ? 
+                [UIFont systemFontOfSize:16] : [UIFont systemFontOfSize:14];
     
     UIButton *actionButton = [self ftActionButton];
     cell.accessoryView = actionButton;
-    
     if (![self isSampleAppFusionTable]) {
+        cell.accessoryView = nil;
         cell.userInteractionEnabled = NO;
         cell.backgroundColor = [UIColor clearColor];
     } else {    
@@ -106,30 +107,35 @@ enum FTActionTypes {
         case kSampleViewControllerFTInsertRowSection:
         {
             cell.textLabel.text = @"Insert sample rows";
-            [actionButton.layer setValue:@(kFTActionInsert) forKey:FT_ACTION_TYPE_KEY];
             if (lastInsertedRowID > 0) {
                 cell.accessoryView = nil;
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            } else {
+                [actionButton.layer setValue:@(kFTActionInsert) forKey:FT_ACTION_TYPE_KEY];                
             }
             break;
         }
         case kSampleViewControllerFTUpdateRowSection:
         {
             cell.textLabel.text = @"Update last sample row";
-            [actionButton.layer setValue:@(kFTActionUpdate) forKey:FT_ACTION_TYPE_KEY];
             if (lastInsertedRowID == 0) {
+                cell.accessoryView = nil;
+                cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.userInteractionEnabled = NO;
-                cell.backgroundColor = [UIColor clearColor];
+            } else {
+                [actionButton.layer setValue:@(kFTActionUpdate) forKey:FT_ACTION_TYPE_KEY];
             }
             break;
         }
         case kSampleViewControllerFTDeleteRowSection:
         {
             cell.textLabel.text = @"Delete sample rows";
-            [actionButton.layer setValue:@(kFTActionDelete) forKey:FT_ACTION_TYPE_KEY];
             if (lastInsertedRowID == 0) {
+                cell.accessoryView = nil;
                 cell.userInteractionEnabled = NO;
-                cell.backgroundColor = [UIColor clearColor];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            } else {
+                [actionButton.layer setValue:@(kFTActionDelete) forKey:FT_ACTION_TYPE_KEY];                
             }
             break;
         }
@@ -175,18 +181,14 @@ enum FTActionTypes {
                 break;
         }
     } else {
-        footerString =  @"For rows operations, please choose\n"
+        footerString =  @"To enable rows operations, choose\n"
                         "a Fusion Table created with this App";
     }
     return footerString;
 }
-- (CGFloat)heightForFooterInSection {
-    return ([self isSampleAppFusionTable]) ? 40.0f : 60.0f;
+- (NSString *)titleForHeaderInSection {
+    return @"Fusion Table Rows Operations";
 }
-- (float)heightForRow:(NSInteger)row {
-    return 36.0f;
-}
-
 
 #pragma mark - FT Action Handlers
 #pragma mark - Columns Names for Insert / Update
@@ -348,8 +350,6 @@ enum FTActionTypes {
         [self reloadSection];
     }];
 }
-
-
 
 @end
 

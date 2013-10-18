@@ -28,13 +28,13 @@
 #import "SampleViewControllerUIController.h"
 #import "SampleViewControllerFTStylingSection.h"
 #import "SampleViewControllerInsertFTRowsSection.h"
-#import "SampleViewControllerFTSharingSection.h"
+#import "SampleViewControllerFTSharingInfoSection.h"
 
 // defines the TableView Sections
 enum SampleViewControllerSections {
-    kSampleViewControllerFTStylingSection = 0,
+    kSampleViewControllerFTSharingSection = 0,
+    kSampleViewControllerFTStylingSection,
     kSampleViewControllerInsertFTRowsSection,
-    kSampleViewControllerFTSharingSection,
     kSampleViewControllerNumSections
 };
 
@@ -54,7 +54,7 @@ enum SampleViewControllerSections {
                                   DefaultCellID:@"kSampleViewControllerInsertFTRowsSection"],
 
         @(kSampleViewControllerFTSharingSection):
-                                  [[SampleViewControllerFTSharingSection alloc]
+                                  [[SampleViewControllerFTSharingInfoSection alloc]
                                   initWithParentViewController:self.parentVC
                                   SectionID:kSampleViewControllerFTSharingSection
                                   DefaultCellID:@"kSampleViewControllerFTSharingSection"]

@@ -31,8 +31,7 @@
 // a simple Fusion Table name prefix check,
 // used to recognise tables created with this app
 - (BOOL)isSampleAppFusionTable {
-    NSString *tableName = [(SampleViewController *)self.parentVC fusionTableName];
-    return ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound);
+    return [(SampleViewController *)self.parentVC isSampleAppFusionTable];
 }
 
 #pragma mark - FTDelegate Methods
@@ -46,7 +45,7 @@
     UIImage *buttonImage = [AppIconsController cellAccessoryActionBtnImage][IconsControllerIconTypeNormal];
     UIImage *selectedButtonImage = [AppIconsController cellAccessoryActionBtnImage][IconsControllerIconTypeHighlighted];
     
-    UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
     actionButton.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
     
     [actionButton setImage:buttonImage forState:UIControlStateNormal];
@@ -59,10 +58,18 @@
 - (void)executeFTAction:(id)sender {
 }
 
+
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (CGFloat)heightForHeaderInSection {
-    return 2.0f;
+    return 40.0f;
+}
+- (CGFloat)heightForFooterInSection {
+    CGFloat multilineHeight = ([[[UIDevice currentDevice] systemVersion] doubleValue] < 7) ? 58.0f : 40.0f;
+    return ([self isSampleAppFusionTable]) ? 32.0f : multilineHeight;
+}
+- (float)heightForRow:(NSInteger)row {
+    return ([self isSampleAppFusionTable]) ? 38.0f : 28.0f;
 }
 
-
 @end
+

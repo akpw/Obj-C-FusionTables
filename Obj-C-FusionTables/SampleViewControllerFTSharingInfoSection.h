@@ -24,7 +24,7 @@
 #import "SampleViewControllerFTBaseSection.h"
 #import <MessageUI/MessageUI.h>
 
-@interface SampleViewControllerFTSharingSection : SampleViewControllerFTBaseSection
+@interface SampleViewControllerFTSharingInfoSection : SampleViewControllerFTBaseSection
                                 <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
 @end

@@ -32,6 +32,7 @@
 + (NSDictionary *)navBaAddBarButtonImage;
 + (NSDictionary *)navBarItemEditButtonImage;
 + (NSDictionary *)navBarItemDoneButtonImage;
++ (NSDictionary *)navBarItemShareButtonImage;
 + (NSDictionary *)cellAccessoryActionBtnImage;
 + (NSDictionary *)cellGenericBtnImage;
 

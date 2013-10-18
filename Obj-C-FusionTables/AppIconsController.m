@@ -70,7 +70,17 @@
                                                       };
     return customBackButtonImageDictionary;
 }
-
++ (NSDictionary *)navBarItemShareButtonImage {
+    UIImage *controlStateNormalImage = [UIImage imageNamed:@"ft_share.png"];
+    UIImage *controlStateHighlightedImage = [AppGeneralServicesController
+                                             colorizeImage:controlStateNormalImage
+                                             color:[UIColor grayColor]];
+    NSDictionary *customBackButtonImageDictionary = @{
+                                                      IconsControllerIconTypeNormal : controlStateNormalImage,
+                                                      IconsControllerIconTypeHighlighted : controlStateHighlightedImage
+                                                      };
+    return customBackButtonImageDictionary;
+}
 
 + (NSDictionary *)cellAccessoryActionBtnImage {
     UIImage *controlStateNormalImage = [UIImage imageNamed:@"CellAccessoryActionBtn.png"];

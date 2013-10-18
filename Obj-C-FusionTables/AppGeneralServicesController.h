@@ -48,5 +48,6 @@
 - (NSArray *)customAddBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
 - (NSArray *)customEditBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
 - (NSArray *)customDoneBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
+- (NSArray *)customShareBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
 
 @end

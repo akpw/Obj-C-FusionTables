@@ -38,16 +38,36 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.title = @"FT API Example";
     
     self.navigationItem.leftBarButtonItems = [[AppGeneralServicesController sharedAppTheme]
                                                         customBarButtonItemsBackForTarget:self
                                                         WithAction:@selector(goBack)];
-    self.title = @"FT API Example";
+    if ([self isSampleAppFusionTable]) { 
+            self.navigationItem.rightBarButtonItems = [[AppGeneralServicesController sharedAppTheme]
+                                               customShareBarButtonItemsForTarget:self
+                                               WithAction:@selector(shareFusionTable)];
+    }
     
     // the UI controller that will be dispatching related TableView messages to individual section controllers
     self.uiController = [[SampleViewControllerUIController alloc] initWithParentViewController:self];
 }
 
+#pragma mark - Fusion Table Name Check
+// a simple Fusion Table name prefix check,
+// used to recognise tables created with this app
+- (BOOL)isSampleAppFusionTable {
+    NSString *tableName = [self fusionTableName];
+    return ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound);
+}
+
+#pragma mark - Fusion Table Sharing
+- (void)shareFusionTable {
+    [[NSNotificationCenter defaultCenter] 
+        postNotificationName:START_FT_SHARING_NOTIFICATION
+        object:self userInfo:nil];
+}
 
 
 @end
