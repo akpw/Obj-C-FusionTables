@@ -97,12 +97,19 @@
 #pragma mark - Google API Keys Helpers
 #define GOOGLE_CLIENT_ID_KEY (@"GOOGLE_CLIENT_ID_KEY")
 #define GOOGLE_CLIENT_SECRET_KEY (@"GOOGLE_CLIENT_SECRET_KEY")
+#define GOOGLE_NON_VALID_ID_KEY (@"GET Your Google API Key")
+- (BOOL)isDefaultNonValidGoogleClientID {
+    NSString *theAPIKey = [self googleClientID];
+    NSString *apiKeyCheck = [theAPIKey substringWithRange:NSMakeRange(0, 23)];
+    return ([apiKeyCheck isEqualToString:GOOGLE_NON_VALID_ID_KEY]) ? YES : NO;                                                                    
+}
 - (NSString *)googleClientID {
     return self.googleAPIKeys[GOOGLE_CLIENT_ID_KEY];
 }
 - (NSString *)googleClientSecret {
     return self.googleAPIKeys[GOOGLE_CLIENT_SECRET_KEY];
 }
+#undef GOOGLE_NON_VALID_ID_KEY
 #undef GOOGLE_CLIENT_ID_KEY
 #undef GOOGLE_CLIENT_SECRET_KEY
 
@@ -161,14 +168,25 @@
 
 #define GOOGLE_KEYCHAIN_ID (@"Obj-C FT Google KeyChain ID")
 - (void)restoreFromKeyChain {
-    self.theAuth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:GOOGLE_KEYCHAIN_ID
-                                                                         clientID:[self googleClientID]
-                                                                     clientSecret:[self googleClientSecret]];
+    if ([self isDefaultNonValidGoogleClientID]) {
+        [[GoogleServicesHelper sharedInstance]
+             showAlertViewWithTitle:@"Google API Key Not Set"
+             AndText:[NSString stringWithFormat:
+              @"Before using Obj-C-FusionTables, you need to set your Google API Key in GoogleAPIKeys.plist\n\n"
+              "You can get a Google API Key from: https://developers.google.com/fusiontables/docs/v1/using#APIKey"]];        
+    }
+    else {
+        self.theAuth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:GOOGLE_KEYCHAIN_ID
+                                                                             clientID:[self googleClientID]
+                                                                         clientSecret:[self googleClientSecret]];
+        
+    }
 }
 
 #pragma mark - Google SignIn
 - (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler
                                         CancelHandler:(void_completion_handler_block)cancelHandler {
+    
     GTMOAuth2ViewControllerTouch *viewController = [GTMOAuth2ViewControllerTouch
                                                             controllerWithScope:self.theScope
                                                             clientID:[self googleClientID]
