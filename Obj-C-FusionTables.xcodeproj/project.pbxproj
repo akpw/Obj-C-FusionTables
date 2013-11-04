@@ -182,10 +182,6 @@
 		57A7DF3517AA3AAE00E74167 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		57F0B16B17B0EBAA00302E3C /* AppIconsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppIconsController.h; sourceTree = "<group>"; };
 		57F0B16C17B0EBAA00302E3C /* AppIconsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppIconsController.m; sourceTree = "<group>"; };
-		57FAD01B17BA0F500055BE35 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		57FAD01E17BA0F500055BE35 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		57FAD01F17BA0F500055BE35 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		57FAD02017BA0F500055BE35 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		57FBFBC417AD6B9B00A275BA /* FTSQLQueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQueryBuilder.h; sourceTree = "<group>"; };
 		57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQueryBuilder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -270,7 +266,6 @@
 				57A7DE9417AA37FB00E74167 /* Foundation.framework */,
 				57A7DE9617AA37FB00E74167 /* CoreGraphics.framework */,
 				57A7DEB617AA37FB00E74167 /* SenTestingKit.framework */,
-				57FAD01B17BA0F500055BE35 /* Cocoa.framework */,
 				57FAD01D17BA0F500055BE35 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -279,20 +274,17 @@
 		57A7DE9817AA37FB00E74167 /* Obj-C-FusionTables */ = {
 			isa = PBXGroup;
 			children = (
-				57A7DECD17AA385A00E74167 /* AppDelegate.h */,
-				57A7DECE17AA385A00E74167 /* AppDelegate.m */,
 				57A7DED417AA38C900E74167 /* Obj-C-Fusion Tables Base */,
-				57A7DED517AA38EA00E74167 /* Example */,
-				57A7DEF717AA39ED00E74167 /* GroupedUITableViews */,
+				57A7DED517AA38EA00E74167 /* Obj-C-Fusion Tables Sample */,
 				57A7DE9917AA37FB00E74167 /* Supporting Files */,
 			);
-			path = "Obj-C-FusionTables";
+			name = "Obj-C-FusionTables";
+			path = "Obj-C-FusionTables-Sample";
 			sourceTree = "<group>";
 		};
 		57A7DE9917AA37FB00E74167 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				57A7DF2617AA3A7700E74167 /* Resources */,
 				57A7DE9A17AA37FB00E74167 /* Obj-C-FusionTables-Info.plist */,
 				57A7DE9B17AA37FB00E74167 /* InfoPlist.strings */,
 				57A7DE9E17AA37FB00E74167 /* main.m */,
@@ -302,6 +294,7 @@
 				57A7DEA817AA37FB00E74167 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			path = "../Obj-C-FusionTables-Sample";
 			sourceTree = "<group>";
 		};
 		57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesTests */ = {
@@ -352,16 +345,20 @@
 				57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */,
 			);
 			name = "Obj-C-Fusion Tables Base";
+			path = "../Obj-C-FusionTables-Base";
 			sourceTree = "<group>";
 		};
-		57A7DED517AA38EA00E74167 /* Example */ = {
+		57A7DED517AA38EA00E74167 /* Obj-C-Fusion Tables Sample */ = {
 			isa = PBXGroup;
 			children = (
+				57A7DEF717AA39ED00E74167 /* GroupedUITableViews */,
+				57A7DECD17AA385A00E74167 /* AppDelegate.h */,
+				57A7DECE17AA385A00E74167 /* AppDelegate.m */,
 				57124BD717B0D33B0003A1F9 /* App Services */,
 				57BD698817B77B1F003EF96C /* View Controllers */,
 				57A7DED617AA392800E74167 /* Sample Data */,
 			);
-			name = Example;
+			name = "Obj-C-Fusion Tables Sample";
 			sourceTree = "<group>";
 		};
 		57A7DED617AA392800E74167 /* Sample Data */ = {
@@ -399,7 +396,7 @@
 				57A7DEFD17AA3A0900E74167 /* GroupedTableViewController.m */,
 				57A7DEFE17AA3A0900E74167 /* GroupedTableViewController.xib */,
 			);
-			name = GroupedUITableViews;
+			path = GroupedUITableViews;
 			sourceTree = "<group>";
 		};
 		57A7DF1717AA3A2500E74167 /* Google Toolbox */ = {
@@ -416,13 +413,7 @@
 				578180DF17AA995A00434135 /* GTMOAuth2ViewTouch.xib */,
 			);
 			name = "Google Toolbox";
-			sourceTree = "<group>";
-		};
-		57A7DF2617AA3A7700E74167 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
+			path = "../Obj-C-FusionTables-Base/GoogleToolbox";
 			sourceTree = "<group>";
 		};
 		57BD698817B77B1F003EF96C /* View Controllers */ = {
@@ -488,9 +479,6 @@
 		57FAD01D17BA0F500055BE35 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				57FAD01E17BA0F500055BE35 /* AppKit.framework */,
-				57FAD01F17BA0F500055BE35 /* CoreData.framework */,
-				57FAD02017BA0F500055BE35 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -767,8 +755,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Obj-C-FusionTables/Obj-C-FusionTables-Prefix.pch";
-				INFOPLIST_FILE = "Obj-C-FusionTables/Obj-C-FusionTables-Info.plist";
+				GCC_PREFIX_HEADER = "Obj-C-FusionTables-Sample/Obj-C-FusionTables-Prefix.pch";
+				INFOPLIST_FILE = "Obj-C-FusionTables-Sample/Obj-C-FusionTables-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -781,8 +769,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Obj-C-FusionTables/Obj-C-FusionTables-Prefix.pch";
-				INFOPLIST_FILE = "Obj-C-FusionTables/Obj-C-FusionTables-Info.plist";
+				GCC_PREFIX_HEADER = "Obj-C-FusionTables-Sample/Obj-C-FusionTables-Prefix.pch";
+				INFOPLIST_FILE = "Obj-C-FusionTables-Sample/Obj-C-FusionTables-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -798,7 +786,7 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Obj-C-FusionTables/Obj-C-FusionTables-Prefix.pch";
+				GCC_PREFIX_HEADER = "Obj-C-FusionTables-Sample/Obj-C-FusionTables-Prefix.pch";
 				INFOPLIST_FILE = "Obj-C-FusionTablesTests/Obj-C-FusionTablesTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -815,7 +803,7 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Obj-C-FusionTables/Obj-C-FusionTables-Prefix.pch";
+				GCC_PREFIX_HEADER = "Obj-C-FusionTables-Sample/Obj-C-FusionTables-Prefix.pch";
 				INFOPLIST_FILE = "Obj-C-FusionTablesTests/Obj-C-FusionTablesTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
