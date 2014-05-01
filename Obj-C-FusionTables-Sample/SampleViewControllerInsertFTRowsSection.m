@@ -321,7 +321,7 @@ enum FTActionTypes {
                 NSArray *rows = responceDict[@"rows"];
                 if (rows) {
                     NSUInteger numRowsUpdated = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
-                    NSLog(@"Updated %d %@", numRowsUpdated, (numRowsUpdated == 1) ? @"row" : @"rows");
+                    NSLog(@"Updated %lu %@", (unsigned long)numRowsUpdated, (numRowsUpdated == 1) ? @"row" : @"rows");
                 }
             }
             [self reloadSection];

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5704C5B317AFDC0F0026A12D /* fusion_tables_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5704C5B217AFDC0F0026A12D /* fusion_tables_img@2x.png */; };
-		570E673317B92D5100EB8425 /* ObjCFusionTablesFTAPIResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 570E673217B92D5100EB8425 /* ObjCFusionTablesFTAPIResourceTests.m */; };
 		57124BDA17B0D3BF0003A1F9 /* AppGeneralServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */; };
 		57124BDD17B0D50F0003A1F9 /* DefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BDC17B0D50F0003A1F9 /* DefaultTheme.m */; };
 		57124BE017B0D5260003A1F9 /* TintedTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BDF17B0D5260003A1F9 /* TintedTheme.m */; };
@@ -30,6 +29,9 @@
 		578CE61B17BE8D6D003CFD0A /* FTSQLQueryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */; };
 		578CE61E17BF5A02003CFD0A /* FTSQLQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */; };
 		578CE62117BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE62017BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m */; };
+		578D658019122C0100253F8F /* ObjCFTAPIResourceTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D657F19122C0100253F8F /* ObjCFTAPIResourceTableTests.m */; };
+		578D65821912304100253F8F /* ObjCFTAPIResourceStyleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D65811912304100253F8F /* ObjCFTAPIResourceStyleTests.m */; };
+		578D6585191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D6584191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m */; };
 		57A7DE9317AA37FB00E74167 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9217AA37FB00E74167 /* UIKit.framework */; };
 		57A7DE9517AA37FB00E74167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9417AA37FB00E74167 /* Foundation.framework */; };
 		57A7DE9717AA37FB00E74167 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9617AA37FB00E74167 /* CoreGraphics.framework */; };
@@ -38,7 +40,6 @@
 		57A7DEA517AA37FB00E74167 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEA417AA37FB00E74167 /* Default.png */; };
 		57A7DEA717AA37FB00E74167 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEA617AA37FB00E74167 /* Default@2x.png */; };
 		57A7DEA917AA37FB00E74167 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEA817AA37FB00E74167 /* Default-568h@2x.png */; };
-		57A7DEB717AA37FB00E74167 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DEB617AA37FB00E74167 /* SenTestingKit.framework */; };
 		57A7DEB817AA37FB00E74167 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9217AA37FB00E74167 /* UIKit.framework */; };
 		57A7DEB917AA37FB00E74167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9417AA37FB00E74167 /* Foundation.framework */; };
 		57A7DEC117AA37FB00E74167 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */; };
@@ -86,8 +87,6 @@
 
 /* Begin PBXFileReference section */
 		5704C5B217AFDC0F0026A12D /* fusion_tables_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fusion_tables_img@2x.png"; sourceTree = "<group>"; };
-		570E673117B92D5100EB8425 /* ObjCFusionTablesFTAPIResourceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCFusionTablesFTAPIResourceTests.h; sourceTree = "<group>"; };
-		570E673217B92D5100EB8425 /* ObjCFusionTablesFTAPIResourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFusionTablesFTAPIResourceTests.m; sourceTree = "<group>"; };
 		57124BD817B0D3BF0003A1F9 /* AppGeneralServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGeneralServicesController.h; sourceTree = "<group>"; };
 		57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGeneralServicesController.m; sourceTree = "<group>"; };
 		57124BDB17B0D50F0003A1F9 /* DefaultTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultTheme.h; sourceTree = "<group>"; };
@@ -119,8 +118,11 @@
 		578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQueryResource.m; sourceTree = "<group>"; };
 		578CE61C17BF5A01003CFD0A /* FTSQLQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQuery.h; sourceTree = "<group>"; };
 		578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQuery.m; sourceTree = "<group>"; };
-		578CE61F17BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCFusionTablesSQLQueryResourceTests.h; sourceTree = "<group>"; };
 		578CE62017BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFusionTablesSQLQueryResourceTests.m; sourceTree = "<group>"; };
+		578D657F19122C0100253F8F /* ObjCFTAPIResourceTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceTableTests.m; sourceTree = "<group>"; };
+		578D65811912304100253F8F /* ObjCFTAPIResourceStyleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceStyleTests.m; sourceTree = "<group>"; };
+		578D6583191233CC00253F8F /* ObjCFTAPIResourceTableTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCFTAPIResourceTableTests.h; sourceTree = "<group>"; };
+		578D6584191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceTemplateTests.m; sourceTree = "<group>"; };
 		57A7DE8F17AA37FB00E74167 /* Obj-C-FusionTables.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Obj-C-FusionTables.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57A7DE9217AA37FB00E74167 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		57A7DE9417AA37FB00E74167 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -132,8 +134,7 @@
 		57A7DEA417AA37FB00E74167 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		57A7DEA617AA37FB00E74167 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		57A7DEA817AA37FB00E74167 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		57A7DEB517AA37FB00E74167 /* Obj-C-FusionTablesTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Obj-C-FusionTablesTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		57A7DEB617AA37FB00E74167 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		57A7DEB517AA37FB00E74167 /* Obj-C-FusionTablesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Obj-C-FusionTablesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57A7DEBE17AA37FB00E74167 /* Obj-C-FusionTablesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Obj-C-FusionTablesTests-Info.plist"; sourceTree = "<group>"; };
 		57A7DEC017AA37FB00E74167 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		57A7DECD17AA385A00E74167 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -205,7 +206,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57A7DEB717AA37FB00E74167 /* SenTestingKit.framework in Frameworks */,
 				57A7DEB817AA37FB00E74167 /* UIKit.framework in Frameworks */,
 				57A7DEB917AA37FB00E74167 /* Foundation.framework in Frameworks */,
 			);
@@ -250,7 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				57A7DE8F17AA37FB00E74167 /* Obj-C-FusionTables.app */,
-				57A7DEB517AA37FB00E74167 /* Obj-C-FusionTablesTests.octest */,
+				57A7DEB517AA37FB00E74167 /* Obj-C-FusionTablesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -265,7 +265,6 @@
 				57A7DE9217AA37FB00E74167 /* UIKit.framework */,
 				57A7DE9417AA37FB00E74167 /* Foundation.framework */,
 				57A7DE9617AA37FB00E74167 /* CoreGraphics.framework */,
-				57A7DEB617AA37FB00E74167 /* SenTestingKit.framework */,
 				57FAD01D17BA0F500055BE35 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -303,9 +302,10 @@
 				57A7DEBD17AA37FB00E74167 /* Supporting Files */,
 				5778303C17B9FBDC002A5CF6 /* FTResourceTestBase.h */,
 				5778303D17B9FBDC002A5CF6 /* FTResourceTestBase.m */,
-				570E673117B92D5100EB8425 /* ObjCFusionTablesFTAPIResourceTests.h */,
-				570E673217B92D5100EB8425 /* ObjCFusionTablesFTAPIResourceTests.m */,
-				578CE61F17BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.h */,
+				578D6583191233CC00253F8F /* ObjCFTAPIResourceTableTests.h */,
+				578D657F19122C0100253F8F /* ObjCFTAPIResourceTableTests.m */,
+				578D65811912304100253F8F /* ObjCFTAPIResourceStyleTests.m */,
+				578D6584191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m */,
 				578CE62017BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m */,
 			);
 			path = "Obj-C-FusionTablesTests";
@@ -519,8 +519,8 @@
 			);
 			name = "Obj-C-FusionTablesTests";
 			productName = "Obj-C-FusionTablesTests";
-			productReference = 57A7DEB517AA37FB00E74167 /* Obj-C-FusionTablesTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 57A7DEB517AA37FB00E74167 /* Obj-C-FusionTablesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -528,6 +528,7 @@
 		57A7DE8717AA37FA00E74167 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Arseniy Kuznetsov";
 				TargetAttributes = {
@@ -651,8 +652,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				570E673317B92D5100EB8425 /* ObjCFusionTablesFTAPIResourceTests.m in Sources */,
+				578D658019122C0100253F8F /* ObjCFTAPIResourceTableTests.m in Sources */,
+				578D6585191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m in Sources */,
 				5778303E17B9FBDC002A5CF6 /* FTResourceTestBase.m in Sources */,
+				578D65821912304100253F8F /* ObjCFTAPIResourceStyleTests.m in Sources */,
 				578CE62117BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -784,13 +787,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Obj-C-FusionTables-Sample/Obj-C-FusionTables-Prefix.pch";
 				INFOPLIST_FILE = "Obj-C-FusionTablesTests/Obj-C-FusionTablesTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -801,13 +804,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Obj-C-FusionTables-Sample/Obj-C-FusionTables-Prefix.pch";
 				INFOPLIST_FILE = "Obj-C-FusionTablesTests/Obj-C-FusionTablesTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

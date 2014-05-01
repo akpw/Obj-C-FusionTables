@@ -13,34 +13,23 @@
  * limitations under the License.
  */
 
-//  FTResourceTestBase.m
+//  FTResourceTestBase.h
 //  Obj-C-FusionTables
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
-    Base class for  Obj-C-FusionTables Tests
+    Base class for  all Obj-C-FusionTables Tests
 ****/
 
 #import "FTResourceTestBase.h"
+#import "GoogleAuthorizationController.h"
 
 @implementation FTResourceTestBase
 
-#pragma mark - Init
-- (FTTable *)ftTableResource {
-    if (!_ftTableResource) {
-        _ftTableResource = [[FTTable alloc] init];
-        _ftTableResource.ftTableDelegate = self;
-    }
-    return _ftTableResource;
-}
-
-#pragma mark - setup / cleanup
+#pragma mark -  XCTestCase setup / teardown
 - (void)setUp {
     [super setUp]; 
     [self checkGoogleConnection];
-}
-- (void)tearDown {
-    [super tearDown];
 }
 
 #pragma mark - Helper Methods
@@ -69,106 +58,17 @@
                   [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
             dispatch_semaphore_signal(semaphore);
         } CancelHandler:^{
-            STFail(@"failed connect to Google");
+            XCTFail(@"failed connect to Google");
             dispatch_semaphore_signal(semaphore);
         }];   
         [self waitForSemaphore:semaphore WithTimeout:10];
     }
-    STAssertNotNil([[GoogleAuthorizationController sharedInstance] 
+    XCTAssertNotNil([[GoogleAuthorizationController sharedInstance] 
                     authenticatedUserID], 
                    @"authenticatedUserID should not be nil");
 }
 
-#pragma mark - Test Fusion Table Methods
-- (void)insertTestTableWithCompletionHandler:(TableIDProcessingBlock)handler {
-    STAssertNotNil([self ftName], 
-                   @"for Insert Table, the FTDelegate Fusion Table Name the should not be nil");
-    STAssertNotNil([self ftColumns], 
-                   @"for Insert Table, the FTDelegate Fusion Table Columns the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [self.ftTableResource insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
-        if (error) {
-            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-            STFail (@"Error Inserting Fusion Table: %@", errorStr);
-        } else {
-            NSDictionary *ftTableDict = [NSJSONSerialization JSONObjectWithData:data
-                                                                        options:kNilOptions error:nil];
-            if (ftTableDict) {
-                STAssertNotNil(ftTableDict[@"name"], @"Returned Inserted Fusion Table Name should not be nil");
-                STAssertNotNil(ftTableDict[@"tableId"], @"Return Inserted Fusion Table IDs should not be nil");
-                NSLog(@"Inserted a new Fusion Table: %@", ftTableDict);
 
-                if (handler)handler(ftTableDict[@"tableId"]);
-            } else {
-                STFail (@"Error processsing inserted Fusion Table data");
-            }
-        }
-    }];    
-    [self waitForSemaphore:semaphore WithTimeout:10];
-}
-- (void)deleteTestTableWithCompletionHandler:(void_completion_handler_block)handler {
-    STAssertNotNil([self ftTableID], 
-                   @"for Delete Table, the FTDelegate Fusion Table ID the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
-    [self.ftTableResource deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
-        if (error) {
-            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-            STFail (@"Error Deleting Fusion Table With ID: %@, %@", [self ftTableID], errorStr);
-        } else {
-            NSLog(@"Deleted Fusion Tables with ID: %@", [self ftTableID]);
-            if (handler) handler();
-        }
-    }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
-}
-
-
-#pragma mark - FTDelegate methods
-#define TEST_FUSION_TABLE_PREFIX (@"ObjC-API_Test_FT_")
-- (NSString *)ftName {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
-    return [NSString stringWithFormat:@"%@%@",
-            TEST_FUSION_TABLE_PREFIX, [formatter stringFromDate:[NSDate date]]];
-}
-#undef TEST_FUSION_TABLE_PREFIX
-// Test Fusion Table Columns Definition
-- (NSArray *)ftColumns {
-    return @[
-             @{@"name": @"entryDate",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryName",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryThumbImageURL",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryURL",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryURLDescription",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryNote",
-               @"type": @"STRING"
-               },
-             @{@"name": @"entryImageURL",
-               @"type": @"STRING"
-               },
-             @{@"name": @"markerIcon",
-               @"type": @"STRING"
-               },
-             @{@"name": @"lineColor",
-               @"type": @"STRING"
-               },
-             @{@"name": @"geometry",
-               @"type": @"LOCATION"
-               }
-             ];
-}
 
 
 @end

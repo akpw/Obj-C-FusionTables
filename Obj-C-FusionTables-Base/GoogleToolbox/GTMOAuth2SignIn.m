@@ -15,7 +15,6 @@
 
 #if GTM_INCLUDE_OAUTH2 || !GDATA_REQUIRE_SERVICE_INCLUDES
 
-#define GTMOAUTH2SIGNIN_DEFINE_GLOBALS 1
 #import "GTMOAuth2SignIn.h"
 
 // we'll default to timing out if the network becomes unreachable for more
@@ -56,6 +55,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
    finishedWithData:(NSData *)data
               error:(NSError *)error;
 + (NSData *)decodeWebSafeBase64:(NSString *)base64Str;
+- (void)updateGoogleUserInfoWithData:(NSData *)data;
 #endif
 
 - (void)closeTheWindow;
@@ -106,7 +106,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 + (NSURL *)googleUserInfoURL {
-  NSString *urlStr = @"https://www.googleapis.com/oauth2/v1/userinfo";
+  NSString *urlStr = @"https://www.googleapis.com/oauth2/v3/userinfo";
   return [NSURL URLWithString:urlStr];
 }
 #endif
@@ -254,7 +254,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
     NSAssert(hasClientID, @"GTMOAuth2SignIn: clientID needed");
     NSAssert(hasRedirect, @"GTMOAuth2SignIn: redirectURI needed");
 #endif
-    return NO;
+    return nil;
   }
 
   // invoke the UI controller's web request selector to display
@@ -579,7 +579,12 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   fetcher.authorizer = auth;
   fetcher.retryEnabled = YES;
   fetcher.maxRetryInterval = 15.0;
-  fetcher.comment = @"user info";
+#if !STRIP_GTM_FETCH_LOGGING
+  // The user email address is known at token refresh time, not during the initial code exchange.
+  NSString *userEmail = auth.userEmail;
+  NSString *forStr = userEmail ? [NSString stringWithFormat:@"for \"%@\"", userEmail] : @"";
+  [fetcher setCommentWithFormat:@"GTMOAuth2 user info %@", forStr];
+#endif
   return fetcher;
 }
 
@@ -657,21 +662,29 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   GTMOAuth2Authentication *auth = self.authentication;
   NSDictionary *profileDict = [[auth class] dictionaryWithJSONData:data];
   if (profileDict) {
+    // Profile dictionary keys mostly conform to
+    // http://openid.net/specs/openid-connect-messages-1_0.html#StandardClaims
+
     self.userProfile = profileDict;
 
     // Save the ID into the auth object
-    NSString *identifier = [profileDict objectForKey:@"id"];
-    [auth setUserID:identifier];
+    NSString *subjectID = [profileDict objectForKey:@"sub"];
+    [auth setUserID:subjectID];
 
     // Save the email into the auth object
     NSString *email = [profileDict objectForKey:@"email"];
     [auth setUserEmail:email];
 
-    // The verified_email key is a boolean NSNumber in the userinfo
+#if DEBUG
+    NSAssert([subjectID length] > 0 && [email length] > 0,
+             @"profile lacks userID or userEmail: %@", profileDict);
+#endif
+
+    // The email_verified key is a boolean NSNumber in the userinfo
     // endpoint response, but it is a string like "true" in the id_token.
     // We want to consistently save it as a string of the boolean value,
     // like @"1".
-    id verified = [profileDict objectForKey:@"verified_email"];
+    id verified = [profileDict objectForKey:@"email_verified"];
     if ([verified isKindOfClass:[NSString class]]) {
       verified = [NSNumber numberWithBool:[verified boolValue]];
     }
@@ -852,7 +865,7 @@ static void ReachabilityCallBack(SCNetworkReachabilityRef target,
       } else {
         fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
       }
-      fetcher.comment = @"revoke token";
+      [fetcher setCommentWithFormat:@"GTMOAuth2 revoke token for %@", auth.userEmail];
 
       // Use a completion handler fetch for better debugging, but only if we're
       // guaranteed that blocks are available in the runtime

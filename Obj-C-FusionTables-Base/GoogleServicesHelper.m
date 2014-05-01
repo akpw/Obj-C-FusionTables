@@ -143,7 +143,7 @@
 
 #pragma mark - Random Number Helpers
 - (NSString *)random4DigitNumberStringFrom:(NSUInteger)from To:(NSUInteger)to {
-    return [NSString stringWithFormat:@"%i", (arc4random()%(to-from)) + from];
+    return [NSString stringWithFormat:@"%u", (arc4random()%(to-from)) + from];
 }
 - (NSString *)random4DigitNumberString {
     return [self random4DigitNumberStringFrom:1000 To:9999];

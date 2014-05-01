@@ -25,11 +25,14 @@
     the tested Google account to its initial state
 ****/
 
-
-#import "ObjCFusionTablesSQLQueryResourceTests.h"
+#import "ObjCFTAPIResourceTableTests.h"
 #import "FTSQLQueryBuilder.h"
+#import "FTSQLQuery.h"
 
-static NSString *_sFusionTableID;
+@interface ObjCFusionTablesSQLQueryResourceTests : ObjCFTAPIResourceTableTests <FTSQLQueryDelegate>
+    @property (nonatomic, strong) FTSQLQuery *ftSQLQuery;
+@end
+
 static NSUInteger _lastInsertedRowID;
 
 @implementation ObjCFusionTablesSQLQueryResourceTests
@@ -43,61 +46,37 @@ static NSUInteger _lastInsertedRowID;
     return _ftSQLQuery;
 }
 
-#pragma mark Fusion Tables - Inserts Sample Table Test
-- (void)testObjCFusionTables_000_InsertTable {
-    [self insertTestTableWithCompletionHandler:^(NSString *tableID) {
-        _sFusionTableID = tableID;
-    }];
+#pragma mark -  XCTestCase setup / teardown
+- (void)setUp {
+    [super setUp];
+    [self insertSampleRows];
+}
+- (void)tearDown {
+    [self deleteInsertedSampleRows];
+    [super tearDown];
 }
 
-#pragma mark - Insert Sample Rows Test
-- (void)testObjCFusionTables_010_InsertSampleRows {   
-    STAssertNotNil([self ftSQLInsertStatement], 
-                   @"for Insert Rows, the FTSQLQueryDelegate SQL Insert Statement should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [self.ftSQLQuery sqlInsertWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
-        if (error) {
-            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-            STFail (@"Error Inserting Fusion Table Style: %@", errorStr);
-        } else {
-            NSDictionary *responceDict = [NSJSONSerialization
-                                          JSONObjectWithData:data options:kNilOptions error:nil];
-            NSArray *rows = responceDict[@"rows"];
-            if (rows) {
-                NSLog(@"%@", rows);
-                _lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
-                STAssertTrue(_lastInsertedRowID > 0, @"Last inserted row ID should not be 0");
-                NSLog(@"Inserted %d %@", [rows count], ([rows count] == 1) ? @"row" : @"rows");
-            } else {
-                STFail (@"Error processing Insert Rows responce");                
-            }
-        }
-    }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
-}
-
-#pragma mark - Update Last Inserted Row Test
-- (void)testObjCFusionTables_011_UpdateLastInsertedRow {
-    STAssertNotNil([self ftSQLUpdateStatement], 
-                   @"for Update Rows, the FTSQLQueryDelegate SQL Update Statement should not be nil");
+#pragma mark -  XCTestCases
+- (void)testUpdateLastInsertedRow {
+    XCTAssertNotNil([self ftSQLUpdateStatement], 
+                    @"for Update Rows, the FTSQLQueryDelegate SQL Update Statement should not be nil");
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     if (_lastInsertedRowID > 0) {
         [self.ftSQLQuery sqlUpdateWithCompletionHandler:^(NSData *data, NSError *error) {
             dispatch_semaphore_signal(semaphore);
             if (error) {
                 NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-                STFail (@"Error Updating Fusion Table Style: %@", errorStr);                
+                XCTFail (@"Error Updating Last Inserted Row: %@", errorStr);                
             } else {
                 NSDictionary *responceDict = [NSJSONSerialization
                                               JSONObjectWithData:data options:kNilOptions error:nil];
                 NSArray *rows = responceDict[@"rows"];
                 if (rows) {
                     NSUInteger numRowsUpdated = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
-                    STAssertTrue(numRowsUpdated > 0, @"Number of update rows should not be 0");
+                    XCTAssertTrue(numRowsUpdated > 0, @"Number of update rows should not be 0");
                     NSLog(@"Updated %d %@", numRowsUpdated, (numRowsUpdated == 1) ? @"row" : @"rows");
                 } else {
-                    STFail (@"Error processing Update Rows responce");                
+                    XCTFail (@"Error processing Update Rows responce");                
                 }
             }
         }];
@@ -105,39 +84,55 @@ static NSUInteger _lastInsertedRowID;
     [self waitForSemaphore:semaphore WithTimeout:10];
 }
 
-#pragma mark - Delete All Rows Test
-- (void)testObjCFusionTables_012_DeleteInsertedRows {
-    STAssertNotNil([self ftSQLDeleteStatement], 
+#pragma mark - Test Fusion Table SQL  Insert / Delete Sample Rows Methods
+- (void)insertSampleRows {   
+    XCTAssertNotNil([self ftSQLInsertStatement], 
+                   @"for Insert Rows, the FTSQLQueryDelegate SQL Insert Statement should not be nil");
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self.ftSQLQuery sqlInsertWithCompletionHandler:^(NSData *data, NSError *error) {
+        dispatch_semaphore_signal(semaphore);
+        if (error) {
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+            XCTFail (@"Error Inserting Sample Rows: %@", errorStr);
+        } else {
+            NSDictionary *responceDict = [NSJSONSerialization
+                                          JSONObjectWithData:data options:kNilOptions error:nil];
+            NSArray *rows = responceDict[@"rows"];
+            if (rows) {
+                NSLog(@"%@", rows);
+                _lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
+                XCTAssertTrue(_lastInsertedRowID > 0, @"Last inserted row ID should not be 0");
+                NSLog(@"Inserted %d %@", [rows count], ([rows count] == 1) ? @"row" : @"rows");
+            } else {
+                XCTFail (@"Error processing Insert Rows responce");                
+            }
+        }
+    }];
+    [self waitForSemaphore:semaphore WithTimeout:10];
+}
+- (void)deleteInsertedSampleRows {
+    XCTAssertNotNil([self ftSQLDeleteStatement], 
                    @"for Delete Rows, the FTSQLQueryDelegate SQL Delete Statement should not be nil");
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     [self.ftSQLQuery sqlDeleteWithCompletionHandler:^(NSData *data, NSError *error) {
         dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-            STFail (@"Error Inserting Fusion Table Style: %@", errorStr);            
+            XCTFail (@"Error Deleting Inserted Rows: %@", errorStr);            
         } else {
             NSDictionary *responceDict = [NSJSONSerialization
                                           JSONObjectWithData:data options:kNilOptions error:nil];
             NSArray *rows = responceDict[@"rows"];
             if (rows) {
                 NSUInteger numRowsDeleted = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
-                STAssertTrue(numRowsDeleted > 0, @"Number of deleted rows should not be 0");
+                //XCTAssertTrue(numRowsDeleted > 0, @"Number of deleted rows should not be 0");
                 NSLog(@"Deleted %d %@", numRowsDeleted, (numRowsDeleted == 1) ? @"row" : @"rows");
             } else {
-                STFail (@"Error processing Delete Rows responce");                
+                XCTFail (@"Error processing Delete Rows responce");                
             }
         }
     }];
     [self waitForSemaphore:semaphore WithTimeout:10];
-}
-
-- (void)testObjCFusionTables_022_DeleteTable {
-    [self deleteTestTableWithCompletionHandler:nil];
-}
-
-#pragma mark - FTDelegate methods
-- (NSString *)ftTableID {
-    return _sFusionTableID;
 }
 
 #pragma mark - FTSQLQueryDelegate Methods

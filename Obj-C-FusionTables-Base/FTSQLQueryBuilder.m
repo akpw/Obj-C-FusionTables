@@ -71,7 +71,7 @@
             columnsCount--;
             sqlUPdateTemplateString = (columnsCount == 0) ?
             [NSString stringWithFormat:@"%@%@ = %@ WHERE ROWID = '%@'", sqlUPdateTemplateString,
-             columumnNameString, @"%@", [NSString stringWithFormat:@"%d", rowID]] :
+             columumnNameString, @"%@", [NSString stringWithFormat:@"%lu", (unsigned long)rowID]] :
             [NSString stringWithFormat:@"%@%@ = %@, ", sqlUPdateTemplateString, columumnNameString, @"%@"];
         }
         va_list args;
@@ -90,7 +90,7 @@
 }
 + (NSString *)buildDeleteRowStringForFusionTableID:(NSString *)fusionTableID RowID:(NSUInteger)rowID {
     NSString *sqlString = [NSString stringWithFormat:
-                           @"DELETE FROM %@ WHERE ROWID = '%u'", fusionTableID, rowID];
+                           @"DELETE FROM %@ WHERE ROWID = '%lu'", fusionTableID, (unsigned long)rowID];
     return sqlString;
 }
 

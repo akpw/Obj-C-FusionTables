@@ -18,22 +18,16 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
-    Tests  Obj-C-FusionTables FT API Resources Base Operations
-        * Fusion Table: insert, list, delete
-        * Fusion Table Style: insert, list, delete
-        * Fusion Table Template: insert, list, delete 
+ Tests  Obj-C-FusionTables FT API Resources Base Operations
+ * Fusion Table: insert, list, delete
  
-    The test cases goes sequentially from creating a table / style / template 
-    through deleting and restoring the tested Google account to its initial state
-****/
+ Tests creating / lising / deletion of a Fusion Table,
+ then restores the tested Google account to its initial state
+ ****/
 
 #import "FTResourceTestBase.h"
-#import "FTTemplate.h"
-#import "FTStyle.h"
+#import "FTTable.h"
 
-@interface ObjCFusionTablesFTAPIResourceTests : FTResourceTestBase <FTStyleDelegate, FTTemplateDelegate>
-
-@property (nonatomic, strong) FTStyle *ftStyleResource;
-@property (nonatomic, strong) FTTemplate *ftTemplateResource;
+@interface ObjCFTAPIResourceTableTests : FTResourceTestBase <FTDelegate>
 
 @end

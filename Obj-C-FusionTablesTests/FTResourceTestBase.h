@@ -18,21 +18,12 @@
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
 /****
-    Base class for  Obj-C-FusionTables Tests
+    Base class for  all Obj-C-FusionTables Tests
 ****/
 
-#import <SenTestingKit/SenTestingKit.h>
-#import "FTTable.h"
+#import <XCTest/XCTest.h>
 
-typedef void(^TableIDProcessingBlock)(NSString *tableID);
-
-@interface FTResourceTestBase : SenTestCase <FTDelegate> 
-
-@property (nonatomic, strong) FTTable *ftTableResource;
-
-#pragma mark - Test Fusion Table Methods
-- (void)insertTestTableWithCompletionHandler:(TableIDProcessingBlock)handler ;
-- (void)deleteTestTableWithCompletionHandler:(void_completion_handler_block)handler;
+@interface FTResourceTestBase : XCTestCase
 
 #pragma mark - Helper Methods
 - (void)checkGoogleConnection;

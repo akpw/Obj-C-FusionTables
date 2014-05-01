@@ -67,7 +67,7 @@
     CGFloat multilineHeight = ([[[UIDevice currentDevice] systemVersion] doubleValue] < 7) ? 58.0f : 40.0f;
     return ([self isSampleAppFusionTable]) ? 32.0f : multilineHeight;
 }
-- (float)heightForRow:(NSInteger)row {
+- (CGFloat)heightForRow:(NSInteger)row {
     return ([self isSampleAppFusionTable]) ? 38.0f : 28.0f;
 }
 
