@@ -100,7 +100,7 @@
         NSMutableDictionary *permissionsDict = [NSMutableDictionary dictionary];
         permissionsDict[@"role"] = @"reader";
         permissionsDict[@"type"] = @"anyone";
-        permissionsDict[@"value"] = @"";
+       // permissionsDict[@"value"] = @"";
         
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:permissionsDict
                                                            options:NSJSONWritingPrettyPrinted error:nil];

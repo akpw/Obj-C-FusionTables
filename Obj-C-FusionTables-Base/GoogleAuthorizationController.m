@@ -124,7 +124,7 @@
     if ([[notification name] isEqual:kGTMOAuth2NetworkLost]) {
         [[GoogleServicesHelper sharedInstance] showAlertViewWithTitle:@"Network Connection Lost"
                                             AndText:@"Network connection was lost while connecting to Google"];         
-        [[[notification object] delegate] cancelSigningIn];
+        //[[[notification object] delegate] cancelSigningIn];
     } else {
         // network connection was found again
     }

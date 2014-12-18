@@ -26,6 +26,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AppGeneralServicesController customizeAppearance];
     
+    // [[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
+    
     FusionTablesViewController *viewController = [[FusionTablesViewController alloc]
                                             initWithNibName:@"FusionTablesViewController" bundle:nil];
     self.navigationController = [[UINavigationController alloc]
