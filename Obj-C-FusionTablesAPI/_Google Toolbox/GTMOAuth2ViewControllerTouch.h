@@ -39,6 +39,12 @@ extern "C" {
 
 extern NSString *const kGTMOAuth2KeychainErrorDomain;
 
+// Notifications that the view controller is swapping out and back in cookies.
+// Apps may use this to avoid relying on the cookie store while view controller
+// has them swapped out.
+extern NSString *const kGTMOAuth2CookiesWillSwapOut;
+extern NSString *const kGTMOAuth2CookiesDidSwapIn;
+
 #ifdef __cplusplus
 }
 #endif
@@ -175,8 +181,8 @@ typedef void (^GTMOAuth2ViewControllerCompletionHandler)(GTMOAuth2ViewController
 
 // if set, cookies are deleted for this URL when the view is hidden
 //
-// For Google sign-ins, this is set by default to https://google.com/accounts
-// but it may be explicitly set to nil to disable clearing of browser cookies
+// This is now vestigial and ignored; all cookies are temporarily removed
+// from cookie storage when sign-in begins.
 @property (nonatomic, retain) NSURL *browserCookiesURL;
 
 // userData is retained for the convenience of the caller
@@ -276,6 +282,21 @@ typedef void (^GTMOAuth2ViewControllerCompletionHandler)(GTMOAuth2ViewController
 // subclasses may override setUpNavigation to provide their own navigation
 // controls
 - (void)setUpNavigation;
+
+// Swaps out the system cookies. The default implementation saves the system
+// cookies and then switches to the cookies used for sign-in, initally empty.
+//
+// subclasses may override swapOutCookies to implement their own cookie
+// management scheme.
+- (void)swapOutCookies;
+
+// Swaps in the system cookies that were swapped out. The default implementation
+// saves the cookies used for sign-in and then restores the system cookies
+// that were saved in |swapOutCookies|.
+//
+// subclasses may override swapInCookies to implement their own cookie
+// management scheme.
+- (void)swapInCookies;
 
 // apps may replace the sign-in class with their own subclass of it
 + (Class)signInClass;
