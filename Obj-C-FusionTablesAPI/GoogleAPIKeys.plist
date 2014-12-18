@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>GOOGLE_CLIENT_ID_KEY</key>
-	<string>557838838021.apps.googleusercontent.com</string>
-	<key>GOOGLE_CLIENT_SECRET_KEY</key>
-	<string>8cKrTYIcnyeZB9lrO23rgFVS</string>
+    <key>GOOGLE_CLIENT_ID_KEY</key>
+    <string>GET Your Google Client ID: https://developers.google.com/fusiontables/docs/v2/using#auth</string>
+    <key>GOOGLE_CLIENT_SECRET_KEY</key>
+    <string>GET Your Google Client secret: https://developers.google.com/fusiontables/docs/v2/using#auth</string>
 </dict>
 </plist>
