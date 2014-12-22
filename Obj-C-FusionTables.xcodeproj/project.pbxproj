@@ -277,19 +277,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>57162A5017AE4DBA007DDDD2</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>path</key>
-			<string>FusionTablesViewController.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>57162A5117AE4DBA007DDDD2</key>
 		<dict>
 			<key>fileRef</key>
@@ -297,10 +284,165 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>57162A5217AE4DBA007DDDD2</key>
+		<key>571A75A81A46B0F000CF0887</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>EmptyDetailViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75A91A46B0F000CF0887</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>EmptyDetailViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75AA1A46B0F000CF0887</key>
 		<dict>
 			<key>fileRef</key>
-			<string>57162A5017AE4DBA007DDDD2</string>
+			<string>571A75A91A46B0F000CF0887</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>571A75AB1A46B77B00CF0887</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>571A75B31A46DBEB00CF0887</string>
+				<string>571A75B41A46DBEB00CF0887</string>
+				<string>571A75AC1A46B81D00CF0887</string>
+				<string>571A75AD1A46B81D00CF0887</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Cells</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75AC1A46B81D00CF0887</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>FTInfoCellTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75AD1A46B81D00CF0887</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>FTInfoCellTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75AE1A46B81D00CF0887</key>
+		<dict>
+			<key>fileRef</key>
+			<string>571A75AD1A46B81D00CF0887</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>571A75AF1A46C9A400CF0887</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>571A75B01A46CA2900CF0887</string>
+				<string>571A75B11A46CA2900CF0887</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>FTDelegate</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75B01A46CA2900CF0887</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SampleFTTableDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75B11A46CA2900CF0887</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>SampleFTTableDelegate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75B21A46CA2900CF0887</key>
+		<dict>
+			<key>fileRef</key>
+			<string>571A75B11A46CA2900CF0887</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>571A75B31A46DBEB00CF0887</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>FTCellTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75B41A46DBEB00CF0887</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>FTCellTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>571A75B51A46DBEB00CF0887</key>
+		<dict>
+			<key>fileRef</key>
+			<string>571A75B41A46DBEB00CF0887</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -789,7 +931,11 @@
 			<key>files</key>
 			<array>
 				<string>57A7DE9F17AA37FB00E74167</string>
+				<string>571A75AE1A46B81D00CF0887</string>
+				<string>571A75AA1A46B0F000CF0887</string>
 				<string>57A7DECF17AA385A00E74167</string>
+				<string>571A75B51A46DBEB00CF0887</string>
+				<string>571A75B21A46CA2900CF0887</string>
 				<string>57A7DED317AA387A00E74167</string>
 				<string>57A7DEEA17AA39A900E74167</string>
 				<string>57A7DEEC17AA39A900E74167</string>
@@ -855,7 +1001,6 @@
 				<string>57A7DEA917AA37FB00E74167</string>
 				<string>57A7DED917AA394700E74167</string>
 				<string>57A7DEDA17AA394700E74167</string>
-				<string>57A7DF0217AA3A0900E74167</string>
 				<string>57A7DF1017AA3A1F00E74167</string>
 				<string>57A7DF2D17AA3A8900E74167</string>
 				<string>57A7DF2E17AA3A8900E74167</string>
@@ -864,7 +1009,6 @@
 				<string>57A7DF3117AA3A8900E74167</string>
 				<string>57A7DF3217AA3A8900E74167</string>
 				<string>578180E417AA995A00434135</string>
-				<string>57162A5217AE4DBA007DDDD2</string>
 				<string>5704C5B317AFDC0F0026A12D</string>
 				<string>57124BE417B0D64A0003A1F9</string>
 				<string>57124BEB17B0DAA40003A1F9</string>
@@ -1422,7 +1566,7 @@
 				<key>GCC_WARN_UNUSED_VARIABLE</key>
 				<string>YES</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>6.1</string>
+				<string>8.0</string>
 				<key>ONLY_ACTIVE_ARCH</key>
 				<string>YES</string>
 				<key>PROVISIONING_PROFILE</key>
@@ -1474,7 +1618,7 @@
 				<key>GCC_WARN_UNUSED_VARIABLE</key>
 				<string>YES</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>6.1</string>
+				<string>8.0</string>
 				<key>OTHER_CFLAGS</key>
 				<string>-DNS_BLOCK_ASSERTIONS=1</string>
 				<key>PROVISIONING_PROFILE</key>
@@ -1520,7 +1664,7 @@
 				<key>INFOPLIST_FILE</key>
 				<string>Obj-C-FusionTablesSampleApp/Supporting Files/Obj-C-FusionTables-Info.plist</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.1</string>
+				<string>8.0</string>
 				<key>PRODUCT_NAME</key>
 				<string>$(TARGET_NAME)</string>
 				<key>PROVISIONING_PROFILE</key>
@@ -1550,7 +1694,7 @@
 				<key>INFOPLIST_FILE</key>
 				<string>Obj-C-FusionTablesSampleApp/Supporting Files/Obj-C-FusionTables-Info.plist</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.1</string>
+				<string>8.0</string>
 				<key>PRODUCT_NAME</key>
 				<string>$(TARGET_NAME)</string>
 				<key>PROVISIONING_PROFILE</key>
@@ -1739,7 +1883,6 @@
 			<array>
 				<string>57A7DECD17AA385A00E74167</string>
 				<string>57A7DECE17AA385A00E74167</string>
-				<string>57A7DEF717AA39ED00E74167</string>
 				<string>57124BD717B0D33B0003A1F9</string>
 				<string>57BD698817B77B1F003EF96C</string>
 				<string>57A7DED617AA392800E74167</string>
@@ -2034,10 +2177,11 @@
 				<string>57A7DEFB17AA3A0900E74167</string>
 				<string>57A7DEFC17AA3A0900E74167</string>
 				<string>57A7DEFD17AA3A0900E74167</string>
-				<string>57A7DEFE17AA3A0900E74167</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
+			<key>name</key>
+			<string>GroupedUITableViews</string>
 			<key>path</key>
 			<string>GroupedUITableViews</string>
 			<key>sourceTree</key>
@@ -2121,19 +2265,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>57A7DEFE17AA3A0900E74167</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>path</key>
-			<string>GroupedTableViewController.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>57A7DEFF17AA3A0900E74167</key>
 		<dict>
 			<key>fileRef</key>
@@ -2152,13 +2283,6 @@
 		<dict>
 			<key>fileRef</key>
 			<string>57A7DEFD17AA3A0900E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57A7DF0217AA3A0900E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DEFE17AA3A0900E74167</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -2363,8 +2487,6 @@
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>_Google Toolbox</string>
 			<key>path</key>
 			<string>_Google Toolbox</string>
 			<key>sourceTree</key>
@@ -2522,6 +2644,7 @@
 		<dict>
 			<key>children</key>
 			<array>
+				<string>57A7DEF717AA39ED00E74167</string>
 				<string>57BD698917B77B55003EF96C</string>
 				<string>57BD698A17B77B68003EF96C</string>
 			</array>
@@ -2536,9 +2659,10 @@
 		<dict>
 			<key>children</key>
 			<array>
+				<string>571A75AF1A46C9A400CF0887</string>
+				<string>571A75AB1A46B77B00CF0887</string>
 				<string>57162A4E17AE4DBA007DDDD2</string>
 				<string>57162A4F17AE4DBA007DDDD2</string>
-				<string>57162A5017AE4DBA007DDDD2</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -2551,6 +2675,8 @@
 		<dict>
 			<key>children</key>
 			<array>
+				<string>571A75A81A46B0F000CF0887</string>
+				<string>571A75A91A46B0F000CF0887</string>
 				<string>57A7DEDC17AA396000E74167</string>
 				<string>57A7DEEF17AA39C000E74167</string>
 				<string>57A7DEF017AA39C000E74167</string>

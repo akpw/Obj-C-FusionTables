@@ -22,6 +22,14 @@
 
 #pragma mark - 
 @implementation GroupedTableViewController
+- (instancetype)init {
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    return self;
+}
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    self = [self init];
+    return self;
+}
 
 #pragma mark - Memory Management
 - (void)didReceiveMemoryWarning {

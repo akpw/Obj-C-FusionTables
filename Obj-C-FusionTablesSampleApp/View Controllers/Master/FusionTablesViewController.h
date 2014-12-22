@@ -26,6 +26,6 @@
 #import <UIKit/UIKit.h>
 #import "FTTable.h"
 
-@interface FusionTablesViewController : UITableViewController <FTDelegate, UIActionSheetDelegate>
+@interface FusionTablesViewController : UITableViewController <UIActionSheetDelegate>
 
 @end

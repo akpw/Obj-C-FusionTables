@@ -25,6 +25,7 @@
 
 typedef void(^ServiceAPIHandler)(NSData *data, NSError *error);
 typedef void (^void_completion_handler_block)(void);
+typedef void (^ErrorHandler)(NSError *error);
 
 @interface GoogleServicesHelper : NSObject
 

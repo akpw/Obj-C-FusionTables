@@ -80,9 +80,9 @@
 #pragma mark - Alert View Helper
 - (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text {
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title 
-                                                        message:text delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
+                                                          message:text delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
 	[alertView show];
 }
 

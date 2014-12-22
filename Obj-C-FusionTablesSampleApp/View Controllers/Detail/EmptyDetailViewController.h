@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-
-//  AppDelegate.h
+//  FusionTablesViewController.h
 //  Obj-C-FusionTables
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
-#import <UIKit/UIKit.h>
+/****
+ Shows usage of Obj-C-FusionTables, 
+ retrieving & displaying a list of Fusion Tables (requiring & setting a Google auth).
+ For the sake data safety, allows editing only Fusion Tables created in this app.
+ ****/
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UISplitViewControllerDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UINavigationController *navigationController;
+@interface EmptyDetailViewController : UIViewController
 
 @end

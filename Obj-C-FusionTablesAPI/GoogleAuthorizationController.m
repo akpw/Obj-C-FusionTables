@@ -230,9 +230,10 @@
             @"<html><body bgcolor=silver>"
             "<div align=center>Loading Google Secure Sign-In Page...</div>"
             "</body></html>";
-    viewController.initialHTMLString = html;    
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    [delegate.navigationController pushViewController:viewController animated:YES];
+    viewController.initialHTMLString = html;  
+    
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [delegate.navigationController showDetailViewController:viewController sender:self];
 }
 
 #pragma mark - Google SignOut

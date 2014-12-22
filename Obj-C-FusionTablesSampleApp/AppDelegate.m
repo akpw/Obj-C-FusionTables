@@ -20,6 +20,8 @@
 #import "AppDelegate.h"
 #import "FusionTablesViewController.h"
 #import "AppGeneralServicesController.h"
+#import "EmptyDetailViewController.h"
+#import "GTMOAuth2Authentication.h"
 
 @implementation AppDelegate
 
@@ -27,17 +29,36 @@
     [AppGeneralServicesController customizeAppearance];
     
     // [[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
-    
-    FusionTablesViewController *viewController = [[FusionTablesViewController alloc]
-                                            initWithNibName:@"FusionTablesViewController" bundle:nil];
-    self.navigationController = [[UINavigationController alloc]
-                                            initWithRootViewController:viewController];
-
+    // a way to despose Google Auth extra view, see link below
+    // https://groups.google.com/forum/#!topic/gdata-objectivec-client/4L1AwhwKKoc        
+    [[NSNotificationCenter defaultCenter] addObserverForName:kGTMOAuth2UserSignedIn 
+          object:nil queue:[NSOperationQueue mainQueue] 
+          usingBlock:^(NSNotification *note){
+              EmptyDetailViewController *emptyDetailVC = [[EmptyDetailViewController alloc] init];
+              [self.navigationController showDetailViewController:emptyDetailVC sender:self];                            
+          }];
+        
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = self.navigationController;
-    [self.window makeKeyAndVisible];
+     
+    UISplitViewController *splitVC = [[UISplitViewController alloc] init];
+    splitVC.delegate = self;
+    
+    FusionTablesViewController *ftMasterVC = [[FusionTablesViewController alloc] init];    
+    self.navigationController = [[UINavigationController alloc]
+                                                initWithRootViewController:ftMasterVC];       
+    EmptyDetailViewController *emptyDetailVC = [[EmptyDetailViewController alloc] init];
+    
+    splitVC.viewControllers = @[self.navigationController, emptyDetailVC];
+    splitVC.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    self.window.rootViewController = splitVC;
 
+    [self.window makeKeyAndVisible];
+    
     return YES;
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];    
 }
 
 @end
