@@ -126,8 +126,11 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
             }];
          } CancelHandler:^ {
              // if login was cancelled, give a user another chance to reconsider
-             [self loadFusionTablesWithPreprocessingBlock:preProcessingBlock 
-                                  FailedCompletionHandler:failHandler CompletionHandler:completionHandler];
+             [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];        
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ 
+                    [self loadFusionTablesWithPreprocessingBlock:preProcessingBlock 
+                              FailedCompletionHandler:failHandler CompletionHandler:completionHandler];
+             });              
          }];
     }
 }

@@ -38,6 +38,9 @@
         self.defaultCellIdentifier = defaultCellID;
         self.sectionID = sectionID;
         
+        [self.parentVC.tableView registerClass:[UITableViewCell class] 
+                                               forCellReuseIdentifier:self.defaultCellIdentifier];
+        
         // simple descendants' inits
         [self initSpecifics];
     }
@@ -71,10 +74,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView CellForRow:(NSUInteger)row {
     // default impl
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.defaultCellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 
-                                                reuseIdentifier:self.defaultCellIdentifier];
-    }
     return cell;
 }
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
@@ -92,15 +91,6 @@
 - (void)tableView:(UITableView *)tableView WillDisplayCell:(UITableViewCell *)cell forRow:(NSInteger)row {
     // descendants' specifics
 }
-- (CGFloat)heightForRow:(NSInteger)row {
-    return 42;
-}
-- (CGFloat)heightForHeaderInSection {
-    return 12;
-}
-- (CGFloat)heightForFooterInSection {
-    return 12;
-}
 - (NSString *)titleForHeaderInSection {
     // descendants' specifics
     return nil;
@@ -116,37 +106,8 @@
     return nil;
 }
 - (void)deselectRow {
-    [self.parentVC.tableView deselectRowAtIndexPath:[self.parentVC.tableView indexPathForSelectedRow] animated:YES];
+    [self.parentVC.tableView 
+            deselectRowAtIndexPath:[self.parentVC.tableView indexPathForSelectedRow] animated:YES];
 }
-
-
-#pragma mark - Search Bar methods, default impls
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    return NO;
-}
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller 
-                                shouldReloadTableForSearchScope:(NSInteger)searchOption {
-    return NO;
-}
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    return NO;
-}
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-    return NO;
-}
-- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    // descendants' specifics
-}
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    // descendants' specifics
-}
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
-    // descendants' specifics
-}
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
-    // descendants' specifics    
-}
-
-
 
 @end

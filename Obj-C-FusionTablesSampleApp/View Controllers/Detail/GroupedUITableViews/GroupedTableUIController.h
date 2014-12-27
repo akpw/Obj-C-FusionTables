@@ -33,7 +33,7 @@
 @interface GroupedTableUIController : NSObject
 
 @property (nonatomic, weak) GroupedTableViewController *parentVC;
-@property (nonatomic, strong) NSDictionary *grandDispatchTable;
+@property (nonatomic, strong) NSDictionary *sectionControllersDispatchTable;
 
 - (void)didReceiveMemoryWarning;
 - (GroupedTableUIController *)initWithParentViewController:(GroupedTableViewController *)theParentVC;

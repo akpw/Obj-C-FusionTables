@@ -26,11 +26,20 @@
 @implementation TintedTheme
 
 #define APP_FRAME_BRAND_COLOR 0x677494
+#define APP_TABLE_CELL_BUTTON_COLOR 0x0066CC
+#define APP_TABLE_CELL_BUTTON_BACKGROUND_COLOR 0xF2F2F2
+
 
 #pragma mark - App tint color customization
 - (UIColor *)baseTintColor {
-    return [AppGeneralServicesController UIColorFromRGB:(APP_FRAME_BRAND_COLOR)];
+    return [AppGeneralServicesController UIColorFromRGB:APP_FRAME_BRAND_COLOR];
+}
+- (UIColor *)tableViewCellButtonTextLabelColor {
+    return [AppGeneralServicesController UIColorFromRGB:APP_TABLE_CELL_BUTTON_COLOR];
 }
 
+- (UIColor *)tableViewCellButtonBackgroundColor {
+    return [UIColor groupTableViewBackgroundColor];   
+}
 
 @end

@@ -10,24 +10,6 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>5704C5B217AFDC0F0026A12D</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>fusion_tables_img@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5704C5B317AFDC0F0026A12D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5704C5B217AFDC0F0026A12D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>57124BD717B0D33B0003A1F9</key>
 		<dict>
 			<key>children</key>
@@ -159,24 +141,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>57124BE217B0D64A0003A1F9</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>custom-back-btn@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57124BE417B0D64A0003A1F9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57124BE217B0D64A0003A1F9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>57124BE617B0D78F0003A1F9</key>
 		<dict>
 			<key>isa</key>
@@ -197,57 +161,23 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>57124BE917B0DAA40003A1F9</key>
+		<key>5713134C1A4EA0D800546DF3</key>
 		<dict>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>image.png</string>
+			<string>folder.assetcatalog</string>
+			<key>name</key>
+			<string>Images.xcassets</string>
 			<key>path</key>
-			<string>done-editing@2x.png</string>
+			<string>Images.xcassets</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>57124BEB17B0DAA40003A1F9</key>
+		<key>5713134D1A4EA0D800546DF3</key>
 		<dict>
 			<key>fileRef</key>
-			<string>57124BE917B0DAA40003A1F9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57124BEC17B0DC590003A1F9</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>start-editing@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57124BED17B0DC590003A1F9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57124BEC17B0DC590003A1F9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57124BEE17B0DDE40003A1F9</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>add-icon@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57124BEF17B0DDE40003A1F9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57124BEE17B0DDE40003A1F9</string>
+			<string>5713134C1A4EA0D800546DF3</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -476,24 +406,6 @@
 		<dict>
 			<key>fileRef</key>
 			<string>5778303D17B9FBDC002A5CF6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5780721C180EB38500620301</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>ft_share@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5780721D180EB38500620301</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5780721C180EB38500620301</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -995,25 +907,11 @@
 			<key>files</key>
 			<array>
 				<string>57A7DE9D17AA37FB00E74167</string>
-				<string>57A7DEA517AA37FB00E74167</string>
-				<string>5780721D180EB38500620301</string>
-				<string>57A7DEA717AA37FB00E74167</string>
-				<string>57A7DEA917AA37FB00E74167</string>
 				<string>57A7DED917AA394700E74167</string>
 				<string>57A7DEDA17AA394700E74167</string>
 				<string>57A7DF1017AA3A1F00E74167</string>
-				<string>57A7DF2D17AA3A8900E74167</string>
-				<string>57A7DF2E17AA3A8900E74167</string>
-				<string>57A7DF2F17AA3A8900E74167</string>
-				<string>57A7DF3017AA3A8900E74167</string>
-				<string>57A7DF3117AA3A8900E74167</string>
-				<string>57A7DF3217AA3A8900E74167</string>
 				<string>578180E417AA995A00434135</string>
-				<string>5704C5B317AFDC0F0026A12D</string>
-				<string>57124BE417B0D64A0003A1F9</string>
-				<string>57124BEB17B0DAA40003A1F9</string>
-				<string>57124BED17B0DC590003A1F9</string>
-				<string>57124BEF17B0DDE40003A1F9</string>
+				<string>5713134D1A4EA0D800546DF3</string>
 			</array>
 			<key>isa</key>
 			<string>PBXResourcesBuildPhase</string>
@@ -1156,13 +1054,11 @@
 		<dict>
 			<key>children</key>
 			<array>
+				<string>5713134C1A4EA0D800546DF3</string>
 				<string>57A7DE9A17AA37FB00E74167</string>
 				<string>57A7DE9B17AA37FB00E74167</string>
 				<string>57A7DE9E17AA37FB00E74167</string>
 				<string>57A7DEA017AA37FB00E74167</string>
-				<string>57A7DEA417AA37FB00E74167</string>
-				<string>57A7DEA617AA37FB00E74167</string>
-				<string>57A7DEA817AA37FB00E74167</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1243,60 +1139,6 @@
 			<string>Obj-C-FusionTables-Prefix.pch</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DEA417AA37FB00E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>Default.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DEA517AA37FB00E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DEA417AA37FB00E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57A7DEA617AA37FB00E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>Default@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DEA717AA37FB00E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DEA617AA37FB00E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57A7DEA817AA37FB00E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>Default-568h@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DEA917AA37FB00E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DEA817AA37FB00E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>57A7DEB017AA37FB00E74167</key>
 		<dict>
@@ -1653,6 +1495,10 @@
 		<dict>
 			<key>buildSettings</key>
 			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
 				<key>CODE_SIGN_IDENTITY</key>
 				<string>iPhone Developer</string>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -1683,6 +1529,10 @@
 		<dict>
 			<key>buildSettings</key>
 			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
 				<key>CODE_SIGN_IDENTITY</key>
 				<string>iPhone Developer</string>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -2492,114 +2342,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>57A7DF2717AA3A8900E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>CellAccessoryActionBtnPressed.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DF2817AA3A8900E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>CellAccessoryActionBtn.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DF2917AA3A8900E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>CellAccessoryActionBtnPressed@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DF2A17AA3A8900E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>CellAccessoryActionBtn@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DF2B17AA3A8900E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>GenericButtonNormal@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DF2C17AA3A8900E74167</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>GenericButtonPushed@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>57A7DF2D17AA3A8900E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DF2717AA3A8900E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57A7DF2E17AA3A8900E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DF2817AA3A8900E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57A7DF2F17AA3A8900E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DF2917AA3A8900E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57A7DF3017AA3A8900E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DF2A17AA3A8900E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57A7DF3117AA3A8900E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DF2B17AA3A8900E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>57A7DF3217AA3A8900E74167</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57A7DF2C17AA3A8900E74167</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>57A7DF3317AA3AA700E74167</key>
 		<dict>
 			<key>isa</key>
@@ -2644,7 +2386,6 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>57A7DEF717AA39ED00E74167</string>
 				<string>57BD698917B77B55003EF96C</string>
 				<string>57BD698A17B77B68003EF96C</string>
 			</array>
@@ -2677,6 +2418,7 @@
 			<array>
 				<string>571A75A81A46B0F000CF0887</string>
 				<string>571A75A91A46B0F000CF0887</string>
+				<string>57A7DEF717AA39ED00E74167</string>
 				<string>57A7DEDC17AA396000E74167</string>
 				<string>57A7DEEF17AA39C000E74167</string>
 				<string>57A7DEF017AA39C000E74167</string>
@@ -2694,7 +2436,6 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>57F0B16E17B0ECEE00302E3C</string>
 				<string>57F0B16B17B0EBAA00302E3C</string>
 				<string>57F0B16C17B0EBAA00302E3C</string>
 			</array>
@@ -2737,30 +2478,6 @@
 			<string>57F0B16C17B0EBAA00302E3C</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>57F0B16E17B0ECEE00302E3C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5780721C180EB38500620301</string>
-				<string>57124BE217B0D64A0003A1F9</string>
-				<string>57124BEE17B0DDE40003A1F9</string>
-				<string>57124BEC17B0DC590003A1F9</string>
-				<string>57124BE917B0DAA40003A1F9</string>
-				<string>5704C5B217AFDC0F0026A12D</string>
-				<string>57A7DF2817AA3A8900E74167</string>
-				<string>57A7DF2717AA3A8900E74167</string>
-				<string>57A7DF2A17AA3A8900E74167</string>
-				<string>57A7DF2917AA3A8900E74167</string>
-				<string>57A7DF2B17AA3A8900E74167</string>
-				<string>57A7DF2C17AA3A8900E74167</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Icons</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>57FAD01D17BA0F500055BE35</key>
 		<dict>

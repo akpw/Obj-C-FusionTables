@@ -113,37 +113,107 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
 #pragma mark - FT Action Handlers
 // loads list of Fusion Tables for authenticated user
 - (void)loadFusionTables {
+    __weak typeof (self) weakSelf = self;
     [self.ftTableDelegate 
             loadFusionTablesWithPreprocessingBlock: ^{
-                [self.tableView reloadData];
+                [weakSelf.tableView reloadData];
             }
             FailedCompletionHandler: ^{                 
-                [self reloadInfoRow];
+                [weakSelf reloadInfoRow];
             }
             CompletionHandler: ^{
-               if ([self.ftTableDelegate.ftTableObjects count] > 0) 
-                   self.navigationItem.leftBarButtonItems = self.editButton;                
-                [self.tableView reloadData];
+               if ([weakSelf.ftTableDelegate.ftTableObjects count] > 0) 
+                   weakSelf.navigationItem.leftBarButtonItems = weakSelf.editButton;                
+                [weakSelf.tableView reloadData];
             }];
 }
 
 // inserts a new Fusion Tables
 - (void)insertNewFusionTable {
+    __weak typeof (self) weakSelf = self;
     [self.ftTableDelegate 
             insertNewFusionTableWithPreprocessingBlock: ^{
-                [self reloadInfoRow];
+                [weakSelf reloadInfoRow];
             } 
             FailedCompletionHandler: ^{                 
-                [self reloadInfoRow];
+                [weakSelf reloadInfoRow];
             }
             CompletionHandler:^{
                  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-                 [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                 [weakSelf.tableView insertRowsAtIndexPaths:@[indexPath]
                                            withRowAnimation:UITableViewRowAnimationAutomatic];
-                 if (!self.navigationItem.leftBarButtonItem)
-                     self.navigationItem.leftBarButtonItem = self.editButtonItem;    
-                [self reloadInfoRow];
+                 if (!weakSelf.navigationItem.leftBarButtonItem)
+                     weakSelf.navigationItem.leftBarButtonItem = weakSelf.editButtonItem;  
+                [weakSelf.tableView selectRowAtIndexPath:indexPath 
+                                            animated:YES scrollPosition:UITableViewScrollPositionNone];
+                [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:indexPath];
+                [weakSelf reloadInfoRow];                
             }];
+}
+
+// delete existing Fusion Tables
+- (void)deleteFusionTableObjectWithIndex:(NSUInteger)rowIndex {
+    NSString *tableName = self.ftTableDelegate.ftTableObjects[rowIndex][@"name"];
+    NSString *titleString = nil;
+    UIAlertController *deleteAlertVC = [UIAlertController 
+                                            alertControllerWithTitle:nil
+                                            message:nil 
+                                            preferredStyle:UIAlertControllerStyleActionSheet];    
+    if ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound) {        
+        titleString = [NSString stringWithFormat:
+                   @"About to delete Fusion Table:\n%@\nThis operation can not be undone",
+                                    self.ftTableDelegate.ftTableObjects[rowIndex][@"name"]];        
+        // configure delete action
+        UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete Table" 
+             style:UIAlertActionStyleDefault 
+             handler:^(UIAlertAction *action) {                                                                     
+                 self.ftTableDelegate.selectedFusionTableID = 
+                 self.ftTableDelegate.ftTableObjects[rowIndex][@"tableId"];            
+                 __weak typeof (self) weakSelf = self;
+                 [self.ftTableDelegate deleteFusionTableWithPreprocessingBlock:^{
+                     [weakSelf reloadInfoRow];
+                 }
+                 FailedCompletionHandler: ^{                 
+                     [weakSelf reloadInfoRow];
+                 }         
+                 CompletionHandler:^{
+                     [weakSelf.ftTableDelegate.ftTableObjects removeObjectAtIndex:rowIndex];
+                     if ([weakSelf.ftTableDelegate.ftTableObjects count] == 0) {
+                         weakSelf.navigationItem.leftBarButtonItem = nil;
+                     }
+                     [weakSelf.tableView deleteRowsAtIndexPaths:
+                      @[[NSIndexPath indexPathForRow:rowIndex inSection:0]]
+                                               withRowAnimation:UITableViewRowAnimationFade];
+                     [weakSelf reloadInfoRow];
+                 }];                                                                
+             }];        
+        [deleteAlertVC addAction:deleteAction];
+        
+        // cancel action
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" 
+                                                   style:UIAlertActionStyleDefault handler: nil];        
+        [deleteAlertVC addAction:cancelAction];
+        
+    } else {
+        titleString = @"To protect your existing Fusion Tables,\n"
+                        "delete is enabled only for tables\n created with this App";  
+        // OK action
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" 
+                                                   style:UIAlertActionStyleDefault handler:nil];        
+        [deleteAlertVC addAction:actionOK];        
+    }    
+    deleteAlertVC.title = titleString;
+
+    // configure popover
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:
+                             [NSIndexPath indexPathForRow:rowIndex inSection:0]];   
+    UIPopoverPresentationController *popover = deleteAlertVC.popoverPresentationController;
+    if (popover) {
+        popover.sourceView = cell.contentView;
+        popover.sourceRect = cell.contentView.bounds;
+        popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    }            
+    [self presentViewController:deleteAlertVC animated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -172,77 +242,31 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
 }
 
 #pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > 0) {
+        self.ftTableDelegate.selectedFusionTableID = 
+        self.ftTableDelegate.ftTableObjects[indexPath.row - 1][@"tableId"];
+        
+        SampleViewController *ftDetailViewController = [[SampleViewController alloc] init];
+        ftDetailViewController.fusionTableID = self.ftTableDelegate.selectedFusionTableID;
+        ftDetailViewController.fusionTableName = 
+        self.ftTableDelegate.ftTableObjects[indexPath.row - 1][@"name"];
+        
+        [self.navigationController showDetailViewController:ftDetailViewController sender:self];
+    }
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return (indexPath.row > 0) ? YES : NO;
 }
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete & indexPath.row > 0) {
         [self deleteFusionTableObjectWithIndex:(indexPath.row - 1)];
     }
 }
 
-#define DELETE_BUTTON_TITLE (@"Delete Table")
-- (void)deleteFusionTableObjectWithIndex:(NSUInteger)rowIndex {
-    UIActionSheet *deleteActionSheet;
-    NSString *tableName = self.ftTableDelegate.ftTableObjects[rowIndex][@"name"];
-    if ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound) {
-        NSString *titleString = [NSString stringWithFormat:
-                                 @"About to delete Fusion Table %@\n This operation can not be undone",
-                                 self.ftTableDelegate.ftTableObjects[rowIndex][@"name"]];
-        deleteActionSheet = [[UIActionSheet alloc] initWithTitle:titleString
-                                                                       delegate:self
-                                                              cancelButtonTitle:@"Cancel"
-                                                         destructiveButtonTitle:DELETE_BUTTON_TITLE
-                                                              otherButtonTitles:nil];
-        deleteActionSheet.tag = rowIndex;
-    } else {
-        NSString *titleString = @"To protect your existing Fusion Tables,\n"
-                                 "delete is enabled only for tables\n created with this App";
-        deleteActionSheet = [[UIActionSheet alloc] initWithTitle:titleString
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                          destructiveButtonTitle:nil
-                                               otherButtonTitles:nil];
-        deleteActionSheet.tag = rowIndex;
-    }
-    [deleteActionSheet showInView:self.navigationController.view];
-}
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:DELETE_BUTTON_TITLE]) {
-        NSUInteger rowIndex = actionSheet.tag;
-        self.ftTableDelegate.selectedFusionTableID = self.ftTableDelegate.ftTableObjects[rowIndex][@"tableId"];
-        [self.ftTableDelegate deleteFusionTableWithPreprocessingBlock:^{
-            [self reloadInfoRow];
-        }
-        FailedCompletionHandler: ^{                 
-            [self reloadInfoRow];
-        }         
-        CompletionHandler:^{
-            [self.ftTableDelegate.ftTableObjects removeObjectAtIndex:rowIndex];
-            if ([self.ftTableDelegate.ftTableObjects count] == 0) {
-                self.navigationItem.leftBarButtonItem = nil;
-            }
-            [self.tableView deleteRowsAtIndexPaths:
-                                    @[[NSIndexPath indexPathForRow:rowIndex inSection:0]]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [self reloadInfoRow];
-        }];
-    }
-}
-#undef DELETE_BUTTON_TITLE
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row > 0) {
-        self.ftTableDelegate.selectedFusionTableID = 
-                                self.ftTableDelegate.ftTableObjects[indexPath.row - 1][@"tableId"];
-        
-        SampleViewController *ftDetailViewController = [[SampleViewController alloc] init];
-        ftDetailViewController.fusionTableID = self.ftTableDelegate.selectedFusionTableID;
-        ftDetailViewController.fusionTableName = 
-                                self.ftTableDelegate.ftTableObjects[indexPath.row - 1][@"name"];
 
-        [self.navigationController showDetailViewController:ftDetailViewController sender:self];
-    }
-}
 
 
 @end

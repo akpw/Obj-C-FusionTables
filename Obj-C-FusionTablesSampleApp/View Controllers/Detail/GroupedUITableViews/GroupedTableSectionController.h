@@ -41,7 +41,6 @@
                                                    SectionID:(NSUInteger)sectionID
                                                    DefaultCellID:(NSString *) defaultCellID;
 - (void)initSpecifics;
-
 - (void)reloadSection;
 - (void)reloadSectionWithRowAnimation:(UITableViewRowAnimation)rowAnimation;
 - (void)reloadRow:(NSUInteger)row;
@@ -55,22 +54,10 @@
 - (void)deselectRow;
 - (void)tableView:(UITableView *)tableView WillDisplayCell:(UITableViewCell *)cell forRow:(NSInteger)row;
 - (UITableViewCellEditingStyle)editingStyleForRow:(NSUInteger)row;
-- (CGFloat)heightForRow:(NSInteger)row;
-- (CGFloat)heightForHeaderInSection;
-- (CGFloat)heightForFooterInSection;
 - (NSString *)titleForHeaderInSection;
 - (NSString *)titleForFooterInSection;
 - (UIView *)viewForHeaderInSection;
 - (UIView *)viewForFooterInSection;
 
-// Search Bar methods
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString;
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption;
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar;
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar;
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar;
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller;
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller;
 
 @end

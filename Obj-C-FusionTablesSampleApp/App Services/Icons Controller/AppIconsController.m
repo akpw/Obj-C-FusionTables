@@ -92,16 +92,6 @@
     return cellAccessoryActionBtnImage;
 }
 
-+ (NSDictionary *)cellGenericBtnImage {
-    UIImage *controlStateNormalImage = [UIImage imageNamed:@"GenericButtonNormal.png"];
-    UIImage *controlStateHighlightedImage = [UIImage imageNamed:@"GenericButtonPushed.png"];
-    NSDictionary *cellAccessoryActionBtnImage = @{
-                                      IconsControllerIconTypeNormal : controlStateNormalImage,
-                                      IconsControllerIconTypeHighlighted : controlStateHighlightedImage
-                                                  };
-    return cellAccessoryActionBtnImage;
-}
-
 + (UIImage *)fusionTablesImage {
     return [UIImage imageNamed:@"fusion_tables_img.png"];
 }

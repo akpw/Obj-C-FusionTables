@@ -37,6 +37,4 @@
 @property (nonatomic, strong) NSString *fusionTableID;
 @property (nonatomic, strong) NSString *fusionTableName;
 
-- (BOOL)isSampleAppFusionTable;
-
 @end

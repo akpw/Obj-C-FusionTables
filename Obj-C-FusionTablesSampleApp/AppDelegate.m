@@ -28,15 +28,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AppGeneralServicesController customizeAppearance];
     
-    // [[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
-    // a way to despose Google Auth extra view, see link below
-    // https://groups.google.com/forum/#!topic/gdata-objectivec-client/4L1AwhwKKoc        
+    //[[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
+    //__weak typeof (self) weakSelf = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:kGTMOAuth2UserSignedIn 
           object:nil queue:[NSOperationQueue mainQueue] 
           usingBlock:^(NSNotification *note){
-              EmptyDetailViewController *emptyDetailVC = [[EmptyDetailViewController alloc] init];
-              [self.navigationController showDetailViewController:emptyDetailVC sender:self];                            
-          }];
+              // to dispose Google Auth extra web view, see link below
+              // https://groups.google.com/forum/#!topic/gdata-objectivec-client/4L1AwhwKKoc      
+              //[weakSelf.navigationController dismissViewControllerAnimated:NO  completion:nil];
+      }];    
         
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
      
@@ -50,6 +50,8 @@
     
     splitVC.viewControllers = @[self.navigationController, emptyDetailVC];
     splitVC.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    
+   
     self.window.rootViewController = splitVC;
 
     [self.window makeKeyAndVisible];
@@ -57,9 +59,16 @@
     return YES;
 }
 
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController 
+                        collapseSecondaryViewController:(UIViewController *)secondaryViewController 
+                        ontoPrimaryViewController:(UIViewController *)primaryViewController {    
+    return ([secondaryViewController isKindOfClass:[EmptyDetailViewController class]]) ? YES : NO;
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     [[NSNotificationCenter defaultCenter] removeObserver:self];    
 }
+
 
 @end
 

@@ -30,6 +30,13 @@
 - (UIColor *)baseTintColor {
     return nil;
 }
+- (UIColor *)tableViewCellButtonTextLabelColor {
+    return nil;
+}
+- (UIColor *)tableViewCellButtonBackgroundColor {
+    return nil;   
+}
+
 
 #pragma mark - UIBarButtonItem customization, default impl
 - (NSArray *)customBarButtonItemsBackForTarget:(id)target WithAction:(SEL)actionSelector {

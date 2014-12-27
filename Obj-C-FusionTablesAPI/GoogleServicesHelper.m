@@ -23,6 +23,7 @@
 
 #import "GoogleServicesHelper.h"
 #import "GoogleAuthorizationController.h"
+#import "AppDelegate.h"
 
 @interface GoogleServicesHelper ()
     @property (nonatomic, strong) UIActivityIndicatorView *spinner;
@@ -79,11 +80,22 @@
 
 #pragma mark - Alert View Helper
 - (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text {
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title 
-                                                          message:text delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-	[alertView show];
+    UIAlertController *alertVC = [UIAlertController 
+                                 alertControllerWithTitle:title
+                                 message:text 
+                                 preferredStyle:UIAlertControllerStyleAlert];    
+    // OK action
+    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" 
+                                                      style:UIAlertActionStyleDefault handler:nil];        
+    [alertVC addAction:actionOK];        
+   
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    UIViewController *presentingViewController = delegate.window.rootViewController;
+    
+    while(presentingViewController.presentedViewController != nil) {
+        presentingViewController = presentingViewController.presentedViewController;
+    }    
+    [presentingViewController presentViewController:alertVC animated:YES completion:nil];    
 }
 
 #pragma mark - Google Drive permissions helper
@@ -100,7 +112,7 @@
         NSMutableDictionary *permissionsDict = [NSMutableDictionary dictionary];
         permissionsDict[@"role"] = @"reader";
         permissionsDict[@"type"] = @"anyone";
-       // permissionsDict[@"value"] = @"";
+        //permissionsDict[@"value"] = @"";
         
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:permissionsDict
                                                            options:NSJSONWritingPrettyPrinted error:nil];
@@ -143,7 +155,7 @@
 
 #pragma mark - Random Number Helpers
 - (NSString *)random4DigitNumberStringFrom:(NSUInteger)from To:(NSUInteger)to {
-    return [NSString stringWithFormat:@"%u", (arc4random()%(to-from)) + from];
+    return [NSString stringWithFormat:@"%lu", (arc4random()%(to-from)) + from];
 }
 - (NSString *)random4DigitNumberString {
     return [self random4DigitNumberStringFrom:1000 To:9999];

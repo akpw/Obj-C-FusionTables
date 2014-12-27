@@ -25,7 +25,7 @@
 #pragma mark - Memory Management
 - (void)didReceiveMemoryWarning {
     // dispatch to section controllers
-    [_grandDispatchTable enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    [_sectionControllersDispatchTable enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         [(GroupedTableSectionController *)obj didReceiveMemoryWarning];
     }];
 }
@@ -45,7 +45,7 @@
     // to be further specified in a concrete controller
 }
 - (GroupedTableSectionController *)sectionControllerForSection:(NSUInteger)theSection {
-    return (GroupedTableSectionController *)(_grandDispatchTable)[@(theSection)];
+    return (GroupedTableSectionController *)(_sectionControllersDispatchTable)[@(theSection)];
 }
 
 #pragma mark - number of UITableView sections

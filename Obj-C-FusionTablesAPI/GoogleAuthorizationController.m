@@ -54,6 +54,7 @@
 #define GOOGLE_FUSION_TABLES_SCOPE_READONLY (@"https://www.googleapis.com/auth/fusiontables.readonly")
 #define GOOGLE_URLSHORTENER_SCOPE (@"https://www.googleapis.com/auth/urlshortener")
 #define GOOGLE_DRIVE_SCOPE (@"https://www.googleapis.com/auth/drive")
+#define GOOGLE_DRIVE_FILE_SCOPE (@"https://www.googleapis.com/auth/drive.file")
 - (id)init {
     self = [super init];
     if (self) {
@@ -61,7 +62,7 @@
                                      GOOGLE_FUSION_TABLES_API_SCOPE,
                                      GOOGLE_FUSION_TABLES_SCOPE_READONLY,
                                      GOOGLE_URLSHORTENER_SCOPE,
-                                     GOOGLE_DRIVE_SCOPE,
+                                     GOOGLE_DRIVE_SCOPE, GOOGLE_DRIVE_FILE_SCOPE,
                                      nil];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(incrementNetworkActivity:)
@@ -177,8 +178,8 @@
     }
     else {
         self.theAuth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:GOOGLE_KEYCHAIN_ID
-                                                                             clientID:[self googleClientID]
-                                                                         clientSecret:[self googleClientSecret]];
+                                                         clientID:[self googleClientID]
+                                                         clientSecret:[self googleClientSecret]];
         
     }
 }
@@ -186,6 +187,11 @@
 #pragma mark - Google SignIn
 - (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler
                                         CancelHandler:(void_completion_handler_block)cancelHandler {
+    
+    void_completion_handler_block dismiss_block = ^ {
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [delegate.window.rootViewController dismissViewControllerAnimated:YES completion:NULL];
+    };
     
     GTMOAuth2ViewControllerTouch *viewController = [GTMOAuth2ViewControllerTouch
                                                             controllerWithScope:self.theScope
@@ -209,13 +215,17 @@
                  [[GoogleServicesHelper sharedInstance]
                                 showAlertViewWithTitle:@"Authentication error" AndText:
                                 [NSString stringWithFormat:@"Error while signing-in in to Google: %@",
-                                [error localizedDescription]]];
+                                [error localizedDescription]]];                 
+                 
+                 dismiss_block();
                  
                  // cancel handler
                  if (cancelHandler) cancelHandler();
              } else {
                  // Authentication succeeded
                  self.theAuth = auth;
+                 
+                 dismiss_block();
                  
                  // Execute the request
                  if (completionHandler) completionHandler();
@@ -233,7 +243,8 @@
     viewController.initialHTMLString = html;  
     
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [delegate.navigationController showDetailViewController:viewController sender:self];
+    viewController.modalPresentationStyle = UIModalPresentationPageSheet;
+    [delegate.window.rootViewController presentViewController:viewController animated:YES completion:NULL];
 }
 
 #pragma mark - Google SignOut

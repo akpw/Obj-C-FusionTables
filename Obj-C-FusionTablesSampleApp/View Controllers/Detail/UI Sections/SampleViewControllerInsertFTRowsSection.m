@@ -66,8 +66,6 @@ typedef NS_ENUM (NSUInteger, FTSampleUpdateDataIndex) {
     ftInsertRowState = kFTStateIdle;
     lastInsertedRowID = 0;
     sampleUpdateDataIndex = kFTSampleUpdateData_idx0;
-    
-    [super initSpecifics];
 }
 - (FTSQLQuery *)ftSQLQuery {
     if (!_ftSQLQuery) {
@@ -90,22 +88,19 @@ enum FTActionTypes {
 };
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.font = ([self isSampleAppFusionTable]) ? 
-                [UIFont systemFontOfSize:16] : [UIFont systemFontOfSize:14];
     
     UIButton *actionButton = [self ftActionButton];
     cell.accessoryView = actionButton;
     if (![self isSampleAppFusionTable]) {
         cell.accessoryView = nil;
         cell.userInteractionEnabled = NO;
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     } else {    
         cell.userInteractionEnabled = YES;
         cell.backgroundColor = [UIColor whiteColor];
     }
     switch (row) {
         case kSampleViewControllerFTInsertRowSection:
-        {
             cell.textLabel.text = @"Insert sample rows";
             if (lastInsertedRowID > 0) {
                 cell.accessoryView = nil;
@@ -114,9 +109,7 @@ enum FTActionTypes {
                 [actionButton.layer setValue:@(kFTActionInsert) forKey:FT_ACTION_TYPE_KEY];                
             }
             break;
-        }
         case kSampleViewControllerFTUpdateRowSection:
-        {
             cell.textLabel.text = @"Update last sample row";
             if (lastInsertedRowID == 0) {
                 cell.accessoryView = nil;
@@ -126,9 +119,7 @@ enum FTActionTypes {
                 [actionButton.layer setValue:@(kFTActionUpdate) forKey:FT_ACTION_TYPE_KEY];
             }
             break;
-        }
         case kSampleViewControllerFTDeleteRowSection:
-        {
             cell.textLabel.text = @"Delete sample rows";
             if (lastInsertedRowID == 0) {
                 cell.accessoryView = nil;
@@ -138,7 +129,6 @@ enum FTActionTypes {
                 [actionButton.layer setValue:@(kFTActionDelete) forKey:FT_ACTION_TYPE_KEY];                
             }
             break;
-        }
         default:
             break;
     }
@@ -181,8 +171,7 @@ enum FTActionTypes {
                 break;
         }
     } else {
-        footerString =  @"To enable rows operations, choose\n"
-                        "a Fusion Table created with this App";
+        footerString =  @"To enable row ops, choose Fusion Table created with this App";
     }
     return footerString;
 }

@@ -44,6 +44,9 @@
 #pragma mark - the App Theme protocol
 @protocol AppTheme <NSObject>
 - (UIColor *)baseTintColor;
+- (UIColor *)tableViewCellButtonTextLabelColor;
+- (UIColor *)tableViewCellButtonBackgroundColor;
+
 - (NSArray *)customBarButtonItemsBackForTarget:(id)target WithAction:(SEL)actionSelector;
 - (NSArray *)customAddBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;
 - (NSArray *)customEditBarButtonItemsForTarget:(id)target WithAction:(SEL)actionSelector;

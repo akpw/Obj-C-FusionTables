@@ -24,10 +24,10 @@
 @implementation GroupedTableViewController
 - (instancetype)init {
     self = [super initWithStyle:UITableViewStyleGrouped];
-    return self;
-}
-- (instancetype)initWithStyle:(UITableViewStyle)style {
-    self = [self init];
+    if (self) {
+        self.tableView.estimatedRowHeight = 44.0f;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+    }
     return self;
 }
 
@@ -57,11 +57,6 @@
 }
 
 #pragma mark - Table view delegate
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    GroupedTableSectionController *sectionController = [self.uiController
-                                                         sectionControllerForSection:indexPath.section];
-    return [sectionController heightForRow:indexPath.row];
-}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GroupedTableSectionController *sectionController = [self.uiController 
                                                          sectionControllerForSection:indexPath.section];
@@ -72,16 +67,6 @@
     GroupedTableSectionController *sectionController = [self.uiController 
                                                          sectionControllerForSection:indexPath.section];
     [sectionController tableView:tableView WillDisplayCell:(UITableViewCell *)cell forRow:indexPath.row];
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    GroupedTableSectionController *sectionController = [self.uiController 
-                                                         sectionControllerForSection:section];
-    return [sectionController heightForFooterInSection];
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    GroupedTableSectionController *sectionController = [self.uiController 
-                                                         sectionControllerForSection:section];
-    return [sectionController heightForHeaderInSection];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     GroupedTableSectionController *sectionController = [self.uiController 

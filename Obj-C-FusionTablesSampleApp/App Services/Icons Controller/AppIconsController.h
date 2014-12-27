@@ -34,7 +34,6 @@
 + (NSDictionary *)navBarItemDoneButtonImage;
 + (NSDictionary *)navBarItemShareButtonImage;
 + (NSDictionary *)cellAccessoryActionBtnImage;
-+ (NSDictionary *)cellGenericBtnImage;
 
 + (UIImage *)fusionTablesImage;
 

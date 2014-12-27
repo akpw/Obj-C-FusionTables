@@ -62,8 +62,6 @@ enum FTActionTypes {
 };
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.font = ([self isSampleAppFusionTable]) ? 
-                    [UIFont systemFontOfSize:16] : [UIFont systemFontOfSize:14];
     
     UIButton *actionButton = [self ftActionButton];
     switch (row) {
@@ -95,7 +93,7 @@ enum FTActionTypes {
     if (![self isSampleAppFusionTable]) {
         cell.accessoryView = nil;
         cell.userInteractionEnabled = NO;
-        cell.backgroundColor  = [UIColor clearColor];
+        cell.backgroundColor  = [UIColor groupTableViewBackgroundColor];
     }
 }
 - (void)executeFTAction:(id)sender {
@@ -222,8 +220,7 @@ enum FTActionTypes {
                 break;
         }
     } else {
-        footerString = @"To apply map styling, please choose\n"
-                        "a Fusion Table created with this App";
+        footerString = @"To enable styling, choose Fusion Table created with this App";
     }
     return footerString;
 }
