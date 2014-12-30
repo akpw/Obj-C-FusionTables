@@ -38,6 +38,9 @@ typedef void (^ErrorHandler)(NSError *error);
 - (void)hideNetworkActivityIndicator;
 
 #pragma mark - Google Drive permissions helper
+- (void)listSharingPermissionsForFileWithID:(NSString *)fileID 
+                      WithCompletionHandler:(ServiceAPIHandler)completionHandler;
+
 - (void)setPublicSharingForFileWithID:(NSString *)fileID
                 WithCompletionHandler:(ServiceAPIHandler)completionHandler;
 
