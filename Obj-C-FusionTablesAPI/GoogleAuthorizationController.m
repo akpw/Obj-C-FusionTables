@@ -55,6 +55,10 @@
 #define GOOGLE_URLSHORTENER_SCOPE (@"https://www.googleapis.com/auth/urlshortener")
 #define GOOGLE_DRIVE_SCOPE (@"https://www.googleapis.com/auth/drive")
 #define GOOGLE_DRIVE_FILE_SCOPE (@"https://www.googleapis.com/auth/drive.file")
+#define GOOGLE_DOCS_FILE_SCOPE (@"https://docs.google.com/feeds/") 
+/* GOOGLE_DOCS_FILE_SCOPE: 
+    a temporary workaround for the Drive API bug, see http://stackoverflow.com/questions/26761199/google-drive-api-call-to-insert-public-share-permissions-on-fusiontables-causes/27674201#27674201
+*/ 
 - (id)init {
     self = [super init];
     if (self) {
@@ -62,7 +66,8 @@
                                      GOOGLE_FUSION_TABLES_API_SCOPE,
                                      GOOGLE_FUSION_TABLES_SCOPE_READONLY,
                                      GOOGLE_URLSHORTENER_SCOPE,
-                                     GOOGLE_DRIVE_SCOPE, GOOGLE_DRIVE_FILE_SCOPE,
+                                     GOOGLE_DRIVE_SCOPE, 
+                                     GOOGLE_DRIVE_FILE_SCOPE, GOOGLE_DOCS_FILE_SCOPE,
                                      nil];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(incrementNetworkActivity:)
@@ -98,11 +103,11 @@
 #pragma mark - Google API Keys Helpers
 #define GOOGLE_CLIENT_ID_KEY (@"GOOGLE_CLIENT_ID_KEY")
 #define GOOGLE_CLIENT_SECRET_KEY (@"GOOGLE_CLIENT_SECRET_KEY")
-#define GOOGLE_NON_VALID_ID_KEY (@"GET Your Google API Key")
+#define GOOGLE_NON_VALID_ID_KEY (@"GET Your Google Client ID")
 - (BOOL)isDefaultNonValidGoogleClientID {
-    NSString *theAPIKey = [self googleClientID];
-    NSString *apiKeyCheck = [theAPIKey substringWithRange:NSMakeRange(0, 23)];
-    return ([apiKeyCheck isEqualToString:GOOGLE_NON_VALID_ID_KEY]) ? YES : NO;                                                                    
+    NSString *theAPIKey = [self googleClientID];    
+    return ([theAPIKey rangeOfString:GOOGLE_NON_VALID_ID_KEY 
+                    options:NSCaseInsensitiveSearch].location == NSNotFound) ? NO : YES;
 }
 - (NSString *)googleClientID {
     return self.googleAPIKeys[GOOGLE_CLIENT_ID_KEY];
@@ -123,9 +128,10 @@
 }
 - (void)signInNetworkLostOrFound:(NSNotification *)notification {
     if ([[notification name] isEqual:kGTMOAuth2NetworkLost]) {
-        [[GoogleServicesHelper sharedInstance] showAlertViewWithTitle:@"Network Connection Lost"
-                                            AndText:@"Network connection was lost while connecting to Google"];         
-        //[[[notification object] delegate] cancelSigningIn];
+        [[GoogleServicesHelper sharedInstance] 
+                            showAlertViewWithTitle:@"Network Connection Lost"
+                            AndText:@"Network connection was lost while connecting to Google"];         
+        [(GTMOAuth2SignIn *)[notification object] cancelSigningIn];
     } else {
         // network connection was found again
     }
@@ -154,16 +160,15 @@
 - (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
                 WithCompletionHandler:(void_completion_handler_block)completionHandler
                                 CancelHandler:(void_completion_handler_block)cancelHandler {
-
     void_completion_handler_block authFetcherBlock = ^ {
         [fetcher setAuthorizer:self.theAuth];
         if (completionHandler) completionHandler();
     };
     [self authorizedRequestWithCompletionHandler:authFetcherBlock CancelHandler:cancelHandler];
 }
+
 - (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
-       WithCompletionHandler:(void_completion_handler_block)completionHandler {    
-    
+       WithCompletionHandler:(void_completion_handler_block)completionHandler {        
     [self authorizeHTTPFetcher:fetcher WithCompletionHandler:completionHandler CancelHandler:nil];
 }
 
@@ -173,14 +178,16 @@
         [[GoogleServicesHelper sharedInstance]
              showAlertViewWithTitle:@"Google API Key Not Set"
              AndText:[NSString stringWithFormat:
-              @"Before using Obj-C-FusionTables, you need to set your Google API Key in GoogleAPIKeys.plist\n\n"
-              "You can get a Google API Key from: https://developers.google.com/fusiontables/docs/v1/using#APIKey"]];        
+                      @"Before using Obj-C-FusionTables, "
+                      "you need to set your Google API Key in GoogleAPIKeys.plist\n\n"
+                      "You can get a Google API Key from: "
+                      "https://developers.google.com/fusiontables/docs/v1/using#APIKey"]];        
     }
     else {
-        self.theAuth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:GOOGLE_KEYCHAIN_ID
-                                                         clientID:[self googleClientID]
-                                                         clientSecret:[self googleClientSecret]];
-        
+        self.theAuth = [GTMOAuth2ViewControllerTouch 
+                                authForGoogleFromKeychainForName:GOOGLE_KEYCHAIN_ID
+                                clientID:[self googleClientID]
+                                clientSecret:[self googleClientSecret]];        
     }
 }
 
@@ -262,23 +269,4 @@
 #undef GOOGLE_KEYCHAIN_ID
 
 
-
 @end
-
-
-/*
- 
- - (void)authorizationFailureHandlerForError:(NSError *)error {
- NSData *responseData = [error userInfo][kGTMHTTPFetcherStatusDataKey]; // kGTMHTTPFetcherStatusDataKey
- NSString *responseBody = nil;
- if ([responseData length] > 0) {
- // show the body of the server's authentication failure response
- responseBody = [[NSString alloc] initWithData:responseData
- encoding:NSUTF8StringEncoding];
- }
- NSLog(@"Authentication error: %@ Failure response body: %@", error, responseBody);
- [[SimpleGoogleServiceHelpers sharedInstance] showAlertViewWithTitle:@"Authentication error" AndText:
- [NSString stringWithFormat:@"Error while signing-in in to Google: %@",
- [error localizedDescription]]];
- }
- */

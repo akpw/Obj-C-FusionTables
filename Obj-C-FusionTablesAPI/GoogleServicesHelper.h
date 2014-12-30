@@ -37,12 +37,14 @@ typedef void (^ErrorHandler)(NSError *error);
 - (void)decrementNetworkActivityIndicator;
 - (void)hideNetworkActivityIndicator;
 
-#pragma mark - Alert View Helper
-- (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text;
-
 #pragma mark - Google Drive permissions helper
 - (void)setPublicSharingForFileWithID:(NSString *)fileID
                 WithCompletionHandler:(ServiceAPIHandler)completionHandler;
+
+/*  a temporary workaround for the Drive API bug, see http://stackoverflow.com/questions/26761199/google-drive-api-call-to-insert-public-share-permissions-on-fusiontables-causes/27674201#27674201
+*/ 
+- (void)gdataSetPublicSharingForFileWithID:(NSString *)fileID
+                     WithCompletionHandler:(ServiceAPIHandler)completionHandler;
 
 #pragma mark - Google GTMHTTPFetcher error processing
 + (NSString *)remoteErrorDataString:(NSError *)error;
@@ -50,6 +52,9 @@ typedef void (^ErrorHandler)(NSError *error);
 #pragma mark - Google URL Shortener helper
 - (void)shortenURL:(NSString *)longURL
                 WithCompletionHandler:(ServiceAPIHandler)completionHandler;
+
+#pragma mark - Alert View Helper
+- (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text;
 
 #pragma mark - Random Number Helpers
 - (NSString *)random4DigitNumberStringFrom:(NSUInteger)from To:(NSUInteger)to;

@@ -100,18 +100,19 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     [self reloadSection];
     
     [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
-    [[GoogleServicesHelper sharedInstance] setPublicSharingForFileWithID:[self ftTableID]
-                                                         WithCompletionHandler:^(NSData *data, NSError *error) {
-    [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
-        ftSharingRowState = kFTStateIdle;
-        if (error) {
-            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-            [[GoogleServicesHelper sharedInstance]
-                    showAlertViewWithTitle:@"Fusion Tables Error"
-                    AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", errorStr]];
-        } else {
-            completionHandler ();
-        }
+    [[GoogleServicesHelper sharedInstance] 
+                            setPublicSharingForFileWithID:[self ftTableID]
+                            WithCompletionHandler:^(NSData *data, NSError *error) {
+        [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
+            ftSharingRowState = kFTStateIdle;
+            if (error) {
+                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+                [[GoogleServicesHelper sharedInstance]
+                        showAlertViewWithTitle:@"Fusion Tables Error"
+                        AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", errorStr]];
+            } else {
+                completionHandler ();
+            }
      }];
 }
 // Simple URL Shortener 
