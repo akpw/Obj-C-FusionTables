@@ -94,7 +94,7 @@
     ServiceAPIHandler setPublicSharingBlock = ^(NSData *data, NSError *error) {
         /* a temporary workaround for the Drive API bug, see 
          http://stackoverflow.com/questions/26761199/google-drive-api-call-to-insert-public-share-permissions-on-fusiontables-causes/27674201#27674201
-         */
+        */
         ServiceAPIHandler theDriveAPiBugHandler = ^(NSData *data, NSError *error) {
             if (error && [error code] == GOOGLE_ERROR_DOMAIN_CODE_INTERNAL_ERROR) {
                 // let's try to share via old, XML-Based Google Docs API
