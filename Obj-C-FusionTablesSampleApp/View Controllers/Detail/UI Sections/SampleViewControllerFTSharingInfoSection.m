@@ -26,6 +26,7 @@
 #import "AppGeneralServicesController.h"
 #import "AppIconsController.h"
 #import "SampleViewController.h"
+#import "FusionTableViewerViewController.h"
 
 // Defines rows in section
 enum SampleViewControllerFTSharingInfoSectionRows {
@@ -57,42 +58,44 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     cell.backgroundColor = [[AppGeneralServicesController sharedAppTheme] 
                                                 tableViewCellButtonBackgroundColor];
     cell.userInteractionEnabled = (ftSharingRowState == kFTStateIdle) ? YES : NO;
-    cell.textLabel.text = @"Share Fusion Table";
+    cell.textLabel.text = @"Show Fusion Table";
     cell.textLabel.textColor = [[AppGeneralServicesController sharedAppTheme]
                                                                 tableViewCellButtonTextLabelColor];
 }
 
+#pragma mark - GroupedTableSectionsController Table View Data Delegate
 - (void)tableView:(UITableView *)tableView DidSelectRow:(NSInteger)row {
     [self shareFusionTableWithCompletionHandler:^{
         [self shortenURLWithCompletionHandler:^{
-            [self reloadSection];
-            [self showFTShareActionSheet];
+            [self showFTViewer];
         }];
     }];            
 }
-
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    if ([self isSampleAppFusionTable]) {
-        switch (ftSharingRowState) {
-            case kFTStateIdle:
-                footerString = @"Share this Fusion Table";
-                break;
-            case kFTStateSharing:
-                footerString = @"Sharing Fusion Table...";
-                break;
-            case kFTStateShorteningURL:
-                footerString = @"Shortening the sharing URL...";
-                break;
-            default:
-                break;
-        }
-    } else {
-        footerString =  @"To enable sharing, choose Fusion Table created with this App";
+    switch (ftSharingRowState) {
+        case kFTStateIdle:
+            footerString = @"";
+            break;
+        case kFTStateSharing:
+            footerString = @"Sharing the Fusion Table...";
+            break;
+        case kFTStateShorteningURL:
+            footerString = @"Shortening the sharing URL...";
+            break;
+        default:
+            break;
     }
     return footerString;
 }
-
+- (UIView *)viewForFooterInSection {
+    UILabel *footerLabel = [[UILabel alloc] init];
+    footerLabel.text = [self titleForFooterInSection];
+    footerLabel.textColor = [UIColor grayColor];
+    footerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    footerLabel.textAlignment = NSTextAlignmentCenter;
+    return footerLabel;
+}
 
 #pragma mark - FT user permissions / sharing
 - (void)shareFusionTableWithCompletionHandler:(void_completion_handler_block)completionHandler {
@@ -105,6 +108,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
                             WithCompletionHandler:^(NSData *data, NSError *error) {
         [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
             ftSharingRowState = kFTStateIdle;
+            [self reloadSection];                                
             if (error) {
                 NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
                 [[GoogleServicesHelper sharedInstance]
@@ -117,28 +121,35 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 }
 // Simple URL Shortener 
 - (void)shortenURLWithCompletionHandler:(void_completion_handler_block)completionHandler {
-    ftSharingRowState = kFTStateShorteningURL;
-    [self reloadSection];
-    
-    [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
-    [[GoogleServicesHelper sharedInstance] shortenURL:[self longShareURL]
-                                      WithCompletionHandler:^(NSData *data, NSError *error) {
-         [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
-         ftSharingRowState = kFTStateIdle;
-         if (error) {
-             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-             [[GoogleServicesHelper sharedInstance]
-                    showAlertViewWithTitle:@"Fusion Tables Error"
-                    AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", errorStr]];
-         } else {
-             NSDictionary *lines = [NSJSONSerialization
-                                    JSONObjectWithData:data options:kNilOptions error:nil];
-             NSLog(@"%@", lines);
-             self.sharingURL = lines[@"id"];
-             completionHandler ();
-         }
-     }];
+    if (self.sharingURL) {
+        completionHandler();
+    } else {
+        ftSharingRowState = kFTStateShorteningURL;
+        [self reloadSection];
+        
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+        [[GoogleServicesHelper sharedInstance] shortenURL:[self longShareURL]
+                                          WithCompletionHandler:^(NSData *data, NSError *error) {
+             [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
+             ftSharingRowState = kFTStateIdle;
+             [self reloadSection];
+
+             if (error) {
+                 NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+                 [[GoogleServicesHelper sharedInstance]
+                        showAlertViewWithTitle:@"Fusion Tables Error"
+                        AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", errorStr]];
+             } else {
+                 NSDictionary *lines = [NSJSONSerialization
+                                        JSONObjectWithData:data options:kNilOptions error:nil];
+                 NSLog(@"%@", lines);
+                 self.sharingURL = lines[@"id"];
+                 completionHandler ();
+             }
+         }];
+    }
 }
+
 //https://www.google.com/fusiontables/embedviz?q=select+col9+from+1tTPDYdESPK5YIE-
 - (NSString *)longShareURL {
     return [NSString stringWithFormat:
@@ -148,88 +159,27 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
                 [[GoogleServicesHelper sharedInstance] random4DigitNumberString]];
 }
 
-#pragma mark - Sharing ActionSheets Handlers
-#define QUICK_SHARE_TO_CLIPBOARD (@"Copy to Clipboard")
-#define QUICK_SHARE_TO_EMAIL (@"Send via Email")
-#define QUICK_SHARE_TO_SAFARI (@"Open in Safari")
-- (void)showFTShareActionSheet {
-    if (self.sharingURL) {
-        UIActionSheet *quickShareActionSheet = [[UIActionSheet alloc]
-                                                initWithTitle:@"Share Fusion Table"
-                                                delegate:self
-                                                cancelButtonTitle:nil
-                                                destructiveButtonTitle:nil
-                                                otherButtonTitles:nil];
-        [quickShareActionSheet addButtonWithTitle:QUICK_SHARE_TO_EMAIL];
-        [quickShareActionSheet addButtonWithTitle:QUICK_SHARE_TO_CLIPBOARD];
-        [quickShareActionSheet addButtonWithTitle:QUICK_SHARE_TO_SAFARI];
-        quickShareActionSheet.cancelButtonIndex = [quickShareActionSheet addButtonWithTitle:@"Cancel"];
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        [quickShareActionSheet showInView:appDelegate.navigationController.view ];
-    }
+#pragma mark - Fusion Table Viewer
+- (void)showFTViewer {
+    FusionTableViewerViewController *viewer = [[FusionTableViewerViewController alloc] init];
+    viewer.ftTableID = [self ftTableID];
+    viewer.ftSharingURL = self.sharingURL;
+    viewer.ftTableName = self.ftName;
+    viewer.navigationItem.rightBarButtonItem = 
+                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                                        target:self action:@selector(closeFTViewer:)];
+    
+    UINavigationController *navController = 
+            [[UINavigationController alloc] initWithRootViewController:viewer];    
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate.window.rootViewController presentViewController:navController animated:YES completion:nil];
 }
 
-#define CLIPBOARD_COPY_INFO_ACTION_SHEET_TAG 6548445
-- (void)copyToDeviceCLipboard {
-    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    pasteBoard.string = self.sharingURL;
-    
-    UIActionSheet *clipboardCopyActionSheet = [[UIActionSheet alloc] initWithTitle:@"URL copied to Clipboard"
-                                                                          delegate:self
-                                                                 cancelButtonTitle:@"OK"
-                                                            destructiveButtonTitle:nil
-                                                                 otherButtonTitles:nil];
-    clipboardCopyActionSheet.tag = CLIPBOARD_COPY_INFO_ACTION_SHEET_TAG;
+- (void)closeFTViewer:(id)sender {
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [clipboardCopyActionSheet showInView:appDelegate.navigationController.view ];
-}
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (actionSheet.tag != CLIPBOARD_COPY_INFO_ACTION_SHEET_TAG) {
-        if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:QUICK_SHARE_TO_CLIPBOARD]) {
-            [self copyToDeviceCLipboard];
-        } else {
-            if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:QUICK_SHARE_TO_EMAIL]) {
-                [self sendViaEmail];
-            } else {
-                if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:QUICK_SHARE_TO_SAFARI]) {
-                    [self openInSafari];
-                }
-            }
-        }
-    }
-}
-#undef QUICK_SHARE_TO_CLIPBOARD
-#undef QUICK_SHARE_TO_EMAIL
-#undef QUICK_SHARE_TO_SAFARI
-#undef CLIPBOARD_COPY_ACTION_SHEET_TAG
-
-- (void)sendViaEmail {
-    if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-        
-        [mailController setMailComposeDelegate:self];
-        [mailController setSubject:@"Sharing a new Fusion Table"];
-        [mailController setMessageBody:[NSString stringWithFormat:@"Sharing a new Fusion Table: %@",
-                                        self.sharingURL]
-                                        isHTML:YES];
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        [appDelegate.navigationController presentViewController:mailController animated:YES completion:nil];
-    } else {
-        [[GoogleServicesHelper sharedInstance]
-            showAlertViewWithTitle:@"Email not set"
-            AndText:@"To send emails from this device, please first set up an email account in the device Settings"];
-    }
-    
-}
-#pragma mark - MFMailComposeViewController
-- (void)mailComposeController:(MFMailComposeViewController*)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError*)error {
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-- (void)openInSafari {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.sharingURL]];
+    [appDelegate.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

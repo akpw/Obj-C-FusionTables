@@ -242,16 +242,10 @@
     return [self random4DigitNumberStringFrom:1000 To:9999];
 }
 
-#pragma mark - Alert View Helper
-- (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text {
-    UIAlertController *alertVC = [UIAlertController 
-                                  alertControllerWithTitle:title
-                                  message:text 
-                                  preferredStyle:UIAlertControllerStyleAlert];    
-    // OK action
-    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" 
-                                                       style:UIAlertActionStyleDefault handler:nil];        
-    [alertVC addAction:actionOK];        
+#pragma mark - Presentation View Helper
+- (void)presentController:(UIViewController *)controller
+                animated:(BOOL)animated
+                completionHandler:(void_completion_handler_block)completionHandler {
     
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     UIViewController *presentingViewController = delegate.window.rootViewController;
@@ -260,7 +254,19 @@
     while(presentingViewController.presentedViewController) {
         presentingViewController = presentingViewController.presentedViewController;
     }    
-    [presentingViewController presentViewController:alertVC animated:YES completion:nil];    
+    [presentingViewController presentViewController:controller animated:animated completion:completionHandler];    
+}
+
+- (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text {
+    UIAlertController *alertVC = [UIAlertController 
+                                  alertControllerWithTitle:title
+                                  message:text 
+                                  preferredStyle:UIAlertControllerStyleAlert];    
+    // OK action
+    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" 
+                                                       style:UIAlertActionStyleDefault handler:nil];        
+    [alertVC addAction:actionOK];           
+    [self presentController:alertVC animated:YES completionHandler:nil];
 }
 
 @end

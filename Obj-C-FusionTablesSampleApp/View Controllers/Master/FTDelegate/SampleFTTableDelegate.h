@@ -31,4 +31,7 @@
 
 - (NSString *)currentActionInfoString;
 
+// a simple Fusion Table name prefix check, to recognise tables created with this app
+- (BOOL)isSampleAppFusionTable:(NSUInteger)rowIndex;
+
 @end

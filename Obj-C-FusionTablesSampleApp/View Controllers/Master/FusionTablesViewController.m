@@ -30,6 +30,7 @@
 #import "FTInfoCellTableViewCell.h"
 #import "FTCellTableViewCell.h"
 #import "SampleFTTableDelegate.h"
+#import "EmptyDetailViewController.h"
 
 @interface FusionTablesViewController () {
     BOOL isInEditingMode;
@@ -153,13 +154,12 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
 
 // delete existing Fusion Tables
 - (void)deleteFusionTableObjectWithIndex:(NSUInteger)rowIndex {
-    NSString *tableName = self.ftTableDelegate.ftTableObjects[rowIndex][@"name"];
     NSString *titleString = nil;
     UIAlertController *deleteAlertVC = [UIAlertController 
                                             alertControllerWithTitle:nil
                                             message:nil 
                                             preferredStyle:UIAlertControllerStyleActionSheet];    
-    if ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound) {        
+    if ([self.ftTableDelegate isSampleAppFusionTable:rowIndex]) {        
         titleString = [NSString stringWithFormat:
                    @"About to delete Fusion Table:\n%@\nThis operation can not be undone",
                                     self.ftTableDelegate.ftTableObjects[rowIndex][@"name"]];        
@@ -168,7 +168,7 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
              style:UIAlertActionStyleDefault 
              handler:^(UIAlertAction *action) {                                                                     
                  self.ftTableDelegate.selectedFusionTableID = 
-                 self.ftTableDelegate.ftTableObjects[rowIndex][@"tableId"];            
+                    self.ftTableDelegate.ftTableObjects[rowIndex][@"tableId"];            
                  __weak typeof (self) weakSelf = self;
                  [self.ftTableDelegate deleteFusionTableWithPreprocessingBlock:^{
                      [weakSelf reloadInfoRow];
@@ -244,15 +244,26 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row > 0) {
+        NSUInteger rowIndex = indexPath.row - 1;
         self.ftTableDelegate.selectedFusionTableID = 
-        self.ftTableDelegate.ftTableObjects[indexPath.row - 1][@"tableId"];
+            self.ftTableDelegate.ftTableObjects[rowIndex][@"tableId"];
         
-        SampleViewController *ftDetailViewController = [[SampleViewController alloc] init];
-        ftDetailViewController.fusionTableID = self.ftTableDelegate.selectedFusionTableID;
-        ftDetailViewController.fusionTableName = 
-        self.ftTableDelegate.ftTableObjects[indexPath.row - 1][@"name"];
-        
-        [self.navigationController showDetailViewController:ftDetailViewController sender:self];
+        UIViewController *detailVC = nil;
+        if ([self.ftTableDelegate isSampleAppFusionTable:rowIndex]) {
+            SampleViewController *ftDetailViewController = [[SampleViewController alloc] init];
+            ftDetailViewController.fusionTableID = self.ftTableDelegate.selectedFusionTableID;
+            ftDetailViewController.fusionTableName = 
+                self.ftTableDelegate.ftTableObjects[rowIndex][@"name"];
+            detailVC = ftDetailViewController;
+        } else {
+            EmptyDetailViewController *emptyDetailVC = [[EmptyDetailViewController alloc] init];    
+            emptyDetailVC.infoLabel.text = @"Select a table created with this App\n\n"
+                                            "To protect your existing tables,\n"
+                                            "API operations here are enabled only\n"
+                                            "for the tables created with this App";
+            detailVC = emptyDetailVC;
+        }        
+        [self.navigationController showDetailViewController:detailVC sender:self];
     }
 }
 

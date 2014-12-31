@@ -29,6 +29,5 @@
 
 - (UIButton *)ftActionButton;
 - (void)executeFTAction:(id)sender;
-- (BOOL)isSampleAppFusionTable;
 
 @end

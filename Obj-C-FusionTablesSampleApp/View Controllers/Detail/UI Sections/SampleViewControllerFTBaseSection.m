@@ -27,18 +27,12 @@
 
 @implementation SampleViewControllerFTBaseSection
 
-#pragma mark - Obj-C-FusionTables Sample Table check
-// a simple Fusion Table name prefix check,
-// used to recognise tables created with this app
-- (BOOL)isSampleAppFusionTable {
-    NSString *tableName = [(SampleViewController *)self.parentVC fusionTableName];
-    return ([tableName rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound);    
-}
-
 #pragma mark - FTDelegate Methods
-// default impl
 - (NSString *)ftTableID {
     return [(SampleViewController *)self.parentVC fusionTableID];
+}
+- (NSString *)ftName {
+    return [(SampleViewController *)self.parentVC fusionTableName];
 }
 
 #pragma mark - Default Action Button for Section Rows Action Handlers

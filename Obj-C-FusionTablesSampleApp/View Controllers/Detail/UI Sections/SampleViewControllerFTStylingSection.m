@@ -90,11 +90,6 @@ enum FTActionTypes {
         default:
             break;
     }
-    if (![self isSampleAppFusionTable]) {
-        cell.accessoryView = nil;
-        cell.userInteractionEnabled = NO;
-        cell.backgroundColor  = [UIColor groupTableViewBackgroundColor];
-    }
 }
 - (void)executeFTAction:(id)sender {
     UIButton *button = (UIButton *)sender;
@@ -109,7 +104,6 @@ enum FTActionTypes {
             break;
     }
 }
-
 
 #pragma mark - FT Map Styling
 - (void)ftSetStyle {
@@ -205,22 +199,18 @@ enum FTActionTypes {
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    if ([self isSampleAppFusionTable]) {
-        switch (ftStylingState) {
-            case kFTStateIdle:
-                footerString = @"Sets Fusion Table Map Styling";
-                break;
-            case kFTStateApplyingStyling:
-                footerString = @"Setting Fusion Table Styling...";
-                break;
-            case kFTStateApplyingInfoWindoTemplate:
-                footerString = @"Setting Info Window Template..";
-                break;
-            default:
-                break;
-        }
-    } else {
-        footerString = @"To enable styling, choose Fusion Table created with this App";
+    switch (ftStylingState) {
+        case kFTStateIdle:
+            footerString = @"Sets Fusion Table Map Styling";
+            break;
+        case kFTStateApplyingStyling:
+            footerString = @"Setting Fusion Table Styling...";
+            break;
+        case kFTStateApplyingInfoWindoTemplate:
+            footerString = @"Setting Info Window Template..";
+            break;
+        default:
+            break;
     }
     return footerString;
 }

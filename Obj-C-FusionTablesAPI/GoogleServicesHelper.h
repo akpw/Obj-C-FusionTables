@@ -56,7 +56,10 @@ typedef void (^ErrorHandler)(NSError *error);
 - (void)shortenURL:(NSString *)longURL
                 WithCompletionHandler:(ServiceAPIHandler)completionHandler;
 
-#pragma mark - Alert View Helper
+#pragma mark - Presentation View Helper
+- (void)presentController:(UIViewController *)controller
+            animated:(BOOL)animated
+            completionHandler:(void_completion_handler_block)completionHandler;
 - (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text;
 
 #pragma mark - Random Number Helpers

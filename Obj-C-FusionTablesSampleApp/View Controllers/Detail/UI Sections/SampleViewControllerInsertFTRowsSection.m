@@ -91,14 +91,8 @@ enum FTActionTypes {
     
     UIButton *actionButton = [self ftActionButton];
     cell.accessoryView = actionButton;
-    if (![self isSampleAppFusionTable]) {
-        cell.accessoryView = nil;
-        cell.userInteractionEnabled = NO;
-        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    } else {    
-        cell.userInteractionEnabled = YES;
-        cell.backgroundColor = [UIColor whiteColor];
-    }
+    cell.userInteractionEnabled = YES;
+    cell.backgroundColor = [UIColor whiteColor];
     switch (row) {
         case kSampleViewControllerFTInsertRowSection:
             cell.textLabel.text = @"Insert sample rows";
@@ -153,25 +147,21 @@ enum FTActionTypes {
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    if ([self isSampleAppFusionTable]) {
-        switch (ftInsertRowState) {
-            case kFTStateIdle:
-                footerString = @"Fusion Tables SQL operations";
-                break;
-            case kFTStateInsertingRows:
-                footerString = @"Inserting Fusion Tables Rows...";
-                break;
-            case kFTStateUpdatingRows:
-                footerString = @"Updating Fusion Tables Rows...";
-                break;
-            case kFTStateDeletingRows:
-                footerString = @"Deleting Fusion Tables Rows...";
-                break;
-            default:
-                break;
-        }
-    } else {
-        footerString =  @"To enable row ops, choose Fusion Table created with this App";
+    switch (ftInsertRowState) {
+        case kFTStateIdle:
+            footerString = @"Fusion Tables SQL operations";
+            break;
+        case kFTStateInsertingRows:
+            footerString = @"Inserting Fusion Tables Rows...";
+            break;
+        case kFTStateUpdatingRows:
+            footerString = @"Updating Fusion Tables Rows...";
+            break;
+        case kFTStateDeletingRows:
+            footerString = @"Deleting Fusion Tables Rows...";
+            break;
+        default:
+            break;
     }
     return footerString;
 }

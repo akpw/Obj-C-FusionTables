@@ -25,4 +25,6 @@
 
 @interface EmptyDetailViewController : UIViewController
 
+@property(nonatomic, retain) UILabel *infoLabel;
+
 @end

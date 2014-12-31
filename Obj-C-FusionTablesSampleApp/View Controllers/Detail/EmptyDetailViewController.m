@@ -27,19 +27,38 @@
 
 @implementation EmptyDetailViewController
 
+- (UILabel *)infoLabel {
+    if (!_infoLabel) {
+        _infoLabel = [[UILabel alloc] init];
+        _infoLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _infoLabel.textColor = [UIColor colorWithWhite:0.0 alpha:0.4];
+        _infoLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+        _infoLabel.adjustsFontSizeToFitWidth = NO;
+        _infoLabel.numberOfLines = 0;
+    }
+    return _infoLabel;
+}
+
 - (void)loadView {
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor whiteColor];
     
-    UILabel *label = [[UILabel alloc] init];
-    label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.text = @"No Fusion Table Selected";
-    label.textColor = [UIColor colorWithWhite:0.0 alpha:0.4];
-    label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    [view addSubview:label];
+    [view addSubview:self.infoLabel];
     
-    NSLayoutConstraint *xConstraint = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *yConstraint = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *xConstraint = [NSLayoutConstraint constraintWithItem:self.infoLabel 
+                                              attribute:NSLayoutAttributeCenterX 
+                                              relatedBy:NSLayoutRelationEqual 
+                                              toItem:view 
+                                              attribute:NSLayoutAttributeCenterX 
+                                              multiplier:1.0 
+                                              constant:0.0];
+    NSLayoutConstraint *yConstraint = [NSLayoutConstraint constraintWithItem:self.infoLabel 
+                                              attribute:NSLayoutAttributeCenterY 
+                                              relatedBy:NSLayoutRelationEqual 
+                                              toItem:view 
+                                              attribute:NSLayoutAttributeCenterY 
+                                              multiplier:1.0 
+                                              constant:0.0];
     [NSLayoutConstraint activateConstraints:@[xConstraint, yConstraint]];
     
     self.view = view;

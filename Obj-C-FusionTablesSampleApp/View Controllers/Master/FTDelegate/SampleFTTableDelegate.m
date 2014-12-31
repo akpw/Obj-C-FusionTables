@@ -236,5 +236,12 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     return processingStateString;
 }
 
+// a simple Fusion Table name prefix check,
+// used to recognise tables created with this app
+- (BOOL)isSampleAppFusionTable:(NSUInteger)rowIndex {
+    return ([self.ftTableObjects[rowIndex][@"name"] 
+             rangeOfString:SAMPLE_FUSION_TABLE_PREFIX].location != NSNotFound);    
+}
+
 
 @end
