@@ -59,7 +59,7 @@
     
     return [UIColor colorWithRed:f16/255.0f
                            green:f8/255.0f
-                            blue:f/255.0f
+                           blue:f/255.0f
                            alpha:theAlpha];
 }
 

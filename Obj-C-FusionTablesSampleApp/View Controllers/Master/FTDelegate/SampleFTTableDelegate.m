@@ -27,12 +27,11 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 - (instancetype)init {
     self = [super init];
     if (self) {        
-        ftProcessingState = ([[GoogleAuthorizationController sharedInstance] isAuthorised]) ? 
+        ftProcessingState = [[GoogleAuthorizationController sharedInstance] isAuthorised] ? 
                                                             kFTStateIdle : kFTStateAuthenticating;
     }
     return self;
 }
-
 - (FTTable *)ftTable {
     if (!_ftTable) {
         _ftTable = [[FTTable alloc] init];
@@ -45,14 +44,12 @@ typedef NS_ENUM (NSUInteger, FTProcessingStates) {
 - (NSString *)ftTableID {
     return self.selectedFusionTableID;
 }
-
 - (NSString *)ftName {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd-hhmmss"];
     return [NSString stringWithFormat:@"%@%@",
             SAMPLE_FUSION_TABLE_PREFIX, [formatter stringFromDate:[NSDate date]]];
 }
-
 // Sample Fusion Table Columns Definition
 - (NSArray *)ftColumns {
     return @[

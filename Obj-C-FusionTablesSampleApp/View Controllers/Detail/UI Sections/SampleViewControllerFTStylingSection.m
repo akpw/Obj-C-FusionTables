@@ -119,8 +119,9 @@ enum FTActionTypes {
             if (error) {
                 NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
                 [[GoogleServicesHelper sharedInstance]
-                        showAlertViewWithTitle:@"Fusion Tables Error"
-                        AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@", errorStr]];
+                    showAlertViewWithTitle:@"Fusion Tables Error"
+                    AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@", 
+                                                                                            errorStr]];
             } else {
                 ftStylingApplied = YES;
                 NSDictionary *styleObject = [NSJSONSerialization JSONObjectWithData:data
@@ -132,6 +133,7 @@ enum FTActionTypes {
         }];
     }    
 }
+
 #pragma mark - FTStyleDelegate methods
 - (NSDictionary *)ftMarkerOptions {
     return @{

@@ -38,7 +38,7 @@
 
 @property (nonatomic, strong) SampleFTTableDelegate *ftTableDelegate;
 @property (nonatomic, strong) NSArray *editButton;
-@property (nonatomic, strong) NSArray *doneButton;
+@property (nonatomic, strong) NSArray *doneEditingButton;
 @end
 
 NSString *const FTTableViewControllerInfoCellIdentifier = @"FusionTableInfoCell";
@@ -72,18 +72,18 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
     }
     return _editButton;
 }
-- (NSArray *)doneButton {
-    if (!_doneButton) {
-        _doneButton = [[AppGeneralServicesController sharedAppTheme]
+- (NSArray *)doneEditingButton {
+    if (!_doneEditingButton) {
+        _doneEditingButton = [[AppGeneralServicesController sharedAppTheme]
                                         customDoneBarButtonItemsForTarget:self 
                                         WithAction:@selector(setEditingMode)];
     }
-    return _doneButton;
+    return _doneEditingButton;
 }
 
 #pragma mark - View lifecycle
 - (void)setEditingMode {
-    self.navigationItem.leftBarButtonItems = (isInEditingMode) ? self.editButton : self.doneButton;
+    self.navigationItem.leftBarButtonItems = (isInEditingMode) ? self.editButton : self.doneEditingButton;
     isInEditingMode = !isInEditingMode;
     [self.tableView setEditing:isInEditingMode animated:YES];
 }
@@ -92,8 +92,7 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
     [self.tableView registerClass:[FTInfoCellTableViewCell class] 
                         forCellReuseIdentifier:FTTableViewControllerInfoCellIdentifier];
     [self.tableView registerClass:[FTCellTableViewCell class] 
-                        forCellReuseIdentifier:FTTableViewControllerCellIdentifier];
-    
+                        forCellReuseIdentifier:FTTableViewControllerCellIdentifier];    
     isInEditingMode = NO;
     self.navigationItem.rightBarButtonItems = [[AppGeneralServicesController sharedAppTheme]
                                                         customAddBarButtonItemsForTarget:self
@@ -123,8 +122,8 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
                 [weakSelf reloadInfoRow];
             }
             CompletionHandler: ^{
-               if ([weakSelf.ftTableDelegate.ftTableObjects count] > 0) 
-                   weakSelf.navigationItem.leftBarButtonItems = weakSelf.editButton;                
+                weakSelf.navigationItem.leftBarButtonItems = 
+                    ([weakSelf.ftTableDelegate.ftTableObjects count] > 0) ? weakSelf.editButton : nil;
                 [weakSelf.tableView reloadData];
             }];
 }
@@ -143,11 +142,14 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
                  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
                  [weakSelf.tableView insertRowsAtIndexPaths:@[indexPath]
                                            withRowAnimation:UITableViewRowAnimationAutomatic];
-                 if (!weakSelf.navigationItem.leftBarButtonItem)
-                     weakSelf.navigationItem.leftBarButtonItem = weakSelf.editButtonItem;  
-                [weakSelf.tableView selectRowAtIndexPath:indexPath 
+                if (!weakSelf.navigationItem.leftBarButtonItem) {
+                     weakSelf.navigationItem.leftBarButtonItem = weakSelf.editButtonItem;     
+                }
+                if (![weakSelf isCollapsed]) {
+                    [weakSelf.tableView selectRowAtIndexPath:indexPath 
                                             animated:YES scrollPosition:UITableViewScrollPositionNone];
-                [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:indexPath];
+                    [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:indexPath];
+                }
                 [weakSelf reloadInfoRow];                
             }];
 }
@@ -168,7 +170,7 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
              style:UIAlertActionStyleDefault 
              handler:^(UIAlertAction *action) {                                                                     
                  self.ftTableDelegate.selectedFusionTableID = 
-                    self.ftTableDelegate.ftTableObjects[rowIndex][@"tableId"];            
+                            self.ftTableDelegate.ftTableObjects[rowIndex][@"tableId"];            
                  __weak typeof (self) weakSelf = self;
                  [self.ftTableDelegate deleteFusionTableWithPreprocessingBlock:^{
                      [weakSelf reloadInfoRow];
@@ -182,9 +184,14 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
                          weakSelf.navigationItem.leftBarButtonItem = nil;
                      }
                      [weakSelf.tableView deleteRowsAtIndexPaths:
-                      @[[NSIndexPath indexPathForRow:rowIndex inSection:0]]
-                                               withRowAnimation:UITableViewRowAnimationFade];
+                                        @[[NSIndexPath indexPathForRow:rowIndex inSection:0]]
+                                                    withRowAnimation:UITableViewRowAnimationFade];
                      [weakSelf reloadInfoRow];
+                     if (![weakSelf isCollapsed]) {
+                         EmptyDetailViewController *emptyDetailVC = [[EmptyDetailViewController alloc] init];    
+                         emptyDetailVC.infoLabel.text = @"No Fusion Table Selected";
+                         [self.navigationController showDetailViewController:emptyDetailVC sender:self];
+                     }                     
                  }];                                                                
              }];        
         [deleteAlertVC addAction:deleteAction];
@@ -266,19 +273,27 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
         [self.navigationController showDetailViewController:detailVC sender:self];
     }
 }
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return (indexPath.row > 0) ? YES : NO;
 }
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete & indexPath.row > 0) {
         [self deleteFusionTableObjectWithIndex:(indexPath.row - 1)];
     }
 }
 
-
-
+#pragma mark - internal helpers
+- (BOOL)isCollapsed {
+    UIViewController *parentVC = self.parentViewController;
+    while (parentVC) {
+        if ([parentVC isKindOfClass:[UISplitViewController class]]) {
+            return [(UISplitViewController *)parentVC isCollapsed];
+        } else {
+            parentVC = [parentVC parentViewController];
+        }
+    }
+    return NO;
+}
 
 @end
 

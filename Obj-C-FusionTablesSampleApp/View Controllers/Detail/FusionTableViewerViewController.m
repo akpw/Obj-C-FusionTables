@@ -9,26 +9,43 @@
 #import "FusionTableViewerViewController.h"
 #import "GoogleServicesHelper.h"
 
+@interface FusionTableViewerViewController ()
+    @property (nonatomic, retain) UILabel *infoLabel;
+    @property (nonatomic, retain) UIWebView *webView;
+@end
+
 @implementation FusionTableViewerViewController
 
-#define THE_WEB_VIEW_TAG 45
-#define GOOGLE_ERROR_DOMAIN_CODE_INTERNAL_ERROR 500
+- (UILabel *)infoLabel {
+    if (!_infoLabel) {
+        _infoLabel = [[UILabel alloc] init];
+        _infoLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _infoLabel.backgroundColor = [UIColor groupTableViewBackgroundColor];    
+        _infoLabel.textColor = [UIColor colorWithWhite:0.0 alpha:0.4];
+        _infoLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+        _infoLabel.text = @"Loading...";
+    }
+    return _infoLabel;
+}
+- (UIWebView *)webView {
+    if (!_webView) {
+        _webView = [[UIWebView alloc] initWithFrame:CGRectZero];  
+        _webView.translatesAutoresizingMaskIntoConstraints = NO;
+        _webView.delegate = self;
+        _webView.hidden = YES;
+    }
+    return _webView;
+}
+
 - (void)loadView {
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [UIColor groupTableViewBackgroundColor];    
     
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];  
-    webView.translatesAutoresizingMaskIntoConstraints = NO;
-    webView.delegate = self;
-    webView.tag = THE_WEB_VIEW_TAG;
+    [view addSubview:self.webView];
+    [view addSubview:self.infoLabel];   
     
-    NSURLRequest *urlReq = [NSURLRequest requestWithURL:[NSURL URLWithString:self.ftSharingURL]];
-    [webView loadRequest:urlReq];
-    
-    [view addSubview:webView];
-    self.view = view;    
-    
-    [self updateConstraintsForTraitCollection:self.traitCollection];
+    self.view = view;       
+    [self updateConstraints];
 }
 
 - (void)viewDidLoad {
@@ -39,36 +56,50 @@
     self.navigationItem.leftBarButtonItem = 
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
                                                   target:self action:@selector(showFTShareActionSheet)];
+
+    NSURLRequest *urlReq = [NSURLRequest requestWithURL:[NSURL URLWithString:self.ftSharingURL]];
+    [self.webView loadRequest:urlReq];    
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-}
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-}
-- (void)showWebView {
+    self.infoLabel.hidden = YES;
+    self.webView.hidden = NO;
 }
 
-- (void)updateConstraintsForTraitCollection:(UITraitCollection *)collection {
-    UIWebView *webView = (UIWebView *)[self.view viewWithTag:THE_WEB_VIEW_TAG];
+- (void)updateConstraints {
+    NSMutableArray *constraints = [NSMutableArray array];
+
+    // info label constraints
+    NSLayoutConstraint *xConstraint = [NSLayoutConstraint constraintWithItem:self.infoLabel 
+                                            attribute:NSLayoutAttributeCenterX 
+                                            relatedBy:NSLayoutRelationEqual 
+                                            toItem:self.view 
+                                            attribute:NSLayoutAttributeCenterX 
+                                            multiplier:1.0 
+                                            constant:0.0];
+    NSLayoutConstraint *yConstraint = [NSLayoutConstraint constraintWithItem:self.infoLabel 
+                                            attribute:NSLayoutAttributeCenterY 
+                                            relatedBy:NSLayoutRelationEqual 
+                                            toItem:self.view 
+                                            attribute:NSLayoutAttributeCenterY 
+                                            multiplier:1.0 
+                                            constant:0.0];    
+    [constraints addObjectsFromArray:@[xConstraint, yConstraint]];
+
+    // web view constraints
+    NSDictionary *views = @{@"webView": self.webView};    
+    NSArray *cH = [NSLayoutConstraint constraintsWithVisualFormat:@"|[webView]|" 
+                                                    options:0 metrics:nil views:views];
+    [constraints addObjectsFromArray:cH];
     
-    NSDictionary *views = @{
-                            @"webView": webView
-                            };
+    NSArray *cV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[webView]|" 
+                                                    options:0 metrics:nil views:views];
+    [constraints addObjectsFromArray:cV];
     
-    NSMutableArray *newConstraints = [NSMutableArray array];
-    
-    NSArray *cH = [NSLayoutConstraint 
-                                    constraintsWithVisualFormat:@"|[webView]|" 
-                                    options:0 metrics:nil views:views];
-    [newConstraints addObjectsFromArray:cH];
-    
-    NSArray *cV = [NSLayoutConstraint 
-                                    constraintsWithVisualFormat:@"V:|[webView]|" 
-                                    options:0 metrics:nil views:views];
-    [newConstraints addObjectsFromArray:cV];
-    
-    [NSLayoutConstraint activateConstraints:newConstraints];   
+    // activate contraints
+    [NSLayoutConstraint activateConstraints:constraints];   
 }
+
 
 #pragma mark - Sharing ActionSheets Handlers
 - (void)showFTShareActionSheet {

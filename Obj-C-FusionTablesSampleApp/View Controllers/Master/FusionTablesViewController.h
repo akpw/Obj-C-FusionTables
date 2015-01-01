@@ -24,7 +24,6 @@
 ****/
 
 #import <UIKit/UIKit.h>
-#import "FTTable.h"
 
 @interface FusionTablesViewController : UITableViewController 
 

@@ -21,13 +21,14 @@
 #import "FusionTablesViewController.h"
 #import "AppGeneralServicesController.h"
 #import "EmptyDetailViewController.h"
+#import "GoogleAuthorizationController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AppGeneralServicesController customizeAppearance];
     
-    [[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
+    //[[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
      
