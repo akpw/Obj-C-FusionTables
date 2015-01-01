@@ -17,7 +17,7 @@
 		571A75AE1A46B81D00CF0887 /* FTInfoCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 571A75AD1A46B81D00CF0887 /* FTInfoCellTableViewCell.m */; };
 		571A75B21A46CA2900CF0887 /* SampleFTTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 571A75B11A46CA2900CF0887 /* SampleFTTableDelegate.m */; };
 		571A75B51A46DBEB00CF0887 /* FTCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 571A75B41A46DBEB00CF0887 /* FTCellTableViewCell.m */; };
-		5778303E17B9FBDC002A5CF6 /* FTResourceTestBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5778303D17B9FBDC002A5CF6 /* FTResourceTestBase.m */; };
+		5778303E17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5778303D17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m */; };
 		578180E017AA995A00434135 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180D817AA995A00434135 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E117AA995A00434135 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DA17AA995A00434135 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		578180E217AA995A00434135 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 578180DC17AA995A00434135 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -27,7 +27,7 @@
 		578CE61B17BE8D6D003CFD0A /* FTSQLQueryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */; };
 		578CE61E17BF5A02003CFD0A /* FTSQLQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */; };
 		578CE62117BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE62017BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m */; };
-		578D658019122C0100253F8F /* ObjCFTAPIResourceTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D657F19122C0100253F8F /* ObjCFTAPIResourceTableTests.m */; };
+		578D658019122C0100253F8F /* FTTableResourceTestCaseBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D657F19122C0100253F8F /* FTTableResourceTestCaseBase.m */; };
 		578D65821912304100253F8F /* ObjCFTAPIResourceStyleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D65811912304100253F8F /* ObjCFTAPIResourceStyleTests.m */; };
 		578D6585191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D6584191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m */; };
 		579F704F1A53F88600C72985 /* FusionTableViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F704E1A53F88600C72985 /* FusionTableViewerViewController.m */; };
@@ -60,6 +60,7 @@
 		57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */; };
 		57A7DF3417AA3AA700E74167 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */; };
 		57A7DF3617AA3AAE00E74167 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DF3517AA3AAE00E74167 /* Security.framework */; };
+		57CDB26C1A554F94005DDD99 /* ObjCFTAPIResourceTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CDB26B1A554F94005DDD99 /* ObjCFTAPIResourceTableTests.m */; };
 		57F0B16D17B0EBAA00302E3C /* AppIconsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F0B16C17B0EBAA00302E3C /* AppIconsController.m */; };
 		57FBFBC617AD6B9B00A275BA /* FTSQLQueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */; };
 /* End PBXBuildFile section */
@@ -93,8 +94,8 @@
 		571A75B11A46CA2900CF0887 /* SampleFTTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleFTTableDelegate.m; sourceTree = "<group>"; };
 		571A75B31A46DBEB00CF0887 /* FTCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCellTableViewCell.h; sourceTree = "<group>"; };
 		571A75B41A46DBEB00CF0887 /* FTCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCellTableViewCell.m; sourceTree = "<group>"; };
-		5778303C17B9FBDC002A5CF6 /* FTResourceTestBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTResourceTestBase.h; sourceTree = "<group>"; };
-		5778303D17B9FBDC002A5CF6 /* FTResourceTestBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTResourceTestBase.m; sourceTree = "<group>"; };
+		5778303C17B9FBDC002A5CF6 /* FTResourceTestCaseBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTResourceTestCaseBase.h; sourceTree = "<group>"; };
+		5778303D17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTResourceTestCaseBase.m; sourceTree = "<group>"; };
 		578180D717AA995A00434135 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
 		578180D817AA995A00434135 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
 		578180D917AA995A00434135 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
@@ -110,9 +111,9 @@
 		578CE61C17BF5A01003CFD0A /* FTSQLQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQuery.h; sourceTree = "<group>"; };
 		578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQuery.m; sourceTree = "<group>"; };
 		578CE62017BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFusionTablesSQLQueryResourceTests.m; sourceTree = "<group>"; };
-		578D657F19122C0100253F8F /* ObjCFTAPIResourceTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceTableTests.m; sourceTree = "<group>"; };
+		578D657F19122C0100253F8F /* FTTableResourceTestCaseBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTableResourceTestCaseBase.m; sourceTree = "<group>"; };
 		578D65811912304100253F8F /* ObjCFTAPIResourceStyleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceStyleTests.m; sourceTree = "<group>"; };
-		578D6583191233CC00253F8F /* ObjCFTAPIResourceTableTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCFTAPIResourceTableTests.h; sourceTree = "<group>"; };
+		578D6583191233CC00253F8F /* FTTableResourceTestCaseBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTTableResourceTestCaseBase.h; sourceTree = "<group>"; };
 		578D6584191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceTemplateTests.m; sourceTree = "<group>"; };
 		579F704D1A53F88600C72985 /* FusionTableViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FusionTableViewerViewController.h; sourceTree = "<group>"; };
 		579F704E1A53F88600C72985 /* FusionTableViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FusionTableViewerViewController.m; sourceTree = "<group>"; };
@@ -164,6 +165,7 @@
 		57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTemplate.m; sourceTree = "<group>"; };
 		57A7DF3317AA3AA700E74167 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		57A7DF3517AA3AAE00E74167 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		57CDB26B1A554F94005DDD99 /* ObjCFTAPIResourceTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceTableTests.m; sourceTree = "<group>"; };
 		57F0B16B17B0EBAA00302E3C /* AppIconsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppIconsController.h; sourceTree = "<group>"; };
 		57F0B16C17B0EBAA00302E3C /* AppIconsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppIconsController.m; sourceTree = "<group>"; };
 		57FBFBC417AD6B9B00A275BA /* FTSQLQueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQueryBuilder.h; sourceTree = "<group>"; };
@@ -290,10 +292,11 @@
 			isa = PBXGroup;
 			children = (
 				57A7DEBD17AA37FB00E74167 /* Supporting Files */,
-				5778303C17B9FBDC002A5CF6 /* FTResourceTestBase.h */,
-				5778303D17B9FBDC002A5CF6 /* FTResourceTestBase.m */,
-				578D6583191233CC00253F8F /* ObjCFTAPIResourceTableTests.h */,
-				578D657F19122C0100253F8F /* ObjCFTAPIResourceTableTests.m */,
+				5778303C17B9FBDC002A5CF6 /* FTResourceTestCaseBase.h */,
+				5778303D17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m */,
+				578D6583191233CC00253F8F /* FTTableResourceTestCaseBase.h */,
+				578D657F19122C0100253F8F /* FTTableResourceTestCaseBase.m */,
+				57CDB26B1A554F94005DDD99 /* ObjCFTAPIResourceTableTests.m */,
 				578D65811912304100253F8F /* ObjCFTAPIResourceStyleTests.m */,
 				578D6584191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m */,
 				578CE62017BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m */,
@@ -614,9 +617,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				578D658019122C0100253F8F /* ObjCFTAPIResourceTableTests.m in Sources */,
+				578D658019122C0100253F8F /* FTTableResourceTestCaseBase.m in Sources */,
 				578D6585191234A400253F8F /* ObjCFTAPIResourceTemplateTests.m in Sources */,
-				5778303E17B9FBDC002A5CF6 /* FTResourceTestBase.m in Sources */,
+				5778303E17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m in Sources */,
+				57CDB26C1A554F94005DDD99 /* ObjCFTAPIResourceTableTests.m in Sources */,
 				578D65821912304100253F8F /* ObjCFTAPIResourceStyleTests.m in Sources */,
 				578CE62117BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m in Sources */,
 			);

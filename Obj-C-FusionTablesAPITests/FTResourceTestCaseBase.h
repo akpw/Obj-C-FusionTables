@@ -23,7 +23,7 @@
 
 #import <XCTest/XCTest.h>
 
-@interface FTResourceTestBase : XCTestCase
+@interface FTResourceTestCaseBase : XCTestCase
 
 #pragma mark - Helper Methods
 - (void)checkGoogleConnection;

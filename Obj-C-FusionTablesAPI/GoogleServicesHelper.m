@@ -250,8 +250,8 @@
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     UIViewController *presentingViewController = delegate.window.rootViewController;
     
-    // get to top controller on the stack
-    while(presentingViewController.presentedViewController) {
+    // get to top controller on the presentation stack
+    while (presentingViewController.presentedViewController) {
         presentingViewController = presentingViewController.presentedViewController;
     }    
     [presentingViewController presentViewController:controller animated:animated completion:completionHandler];    
@@ -259,9 +259,9 @@
 
 - (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text {
     UIAlertController *alertVC = [UIAlertController 
-                                  alertControllerWithTitle:title
-                                  message:text 
-                                  preferredStyle:UIAlertControllerStyleAlert];    
+                                      alertControllerWithTitle:title
+                                      message:text 
+                                      preferredStyle:UIAlertControllerStyleAlert];    
     // OK action
     UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" 
                                                        style:UIAlertActionStyleDefault handler:nil];        

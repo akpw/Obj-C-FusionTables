@@ -25,10 +25,10 @@
  then restores the tested Google account to its initial state
  ****/
 
-#import "ObjCFTAPIResourceTableTests.h"
+#import "FTTableResourceTestCaseBase.h"
 #import "FTStyle.h"
 
-@interface ObjCFTAPIResourceStyleTests : ObjCFTAPIResourceTableTests <FTStyleDelegate>
+@interface ObjCFTAPIResourceStyleTests : FTTableResourceTestCaseBase <FTStyleDelegate>
     @property (nonatomic, strong) FTStyle *ftStyleResource;
 @end
 

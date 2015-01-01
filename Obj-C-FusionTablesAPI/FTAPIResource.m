@@ -27,7 +27,7 @@
 
 #pragma mark - Fusion Tables API
 #pragma mark API for accessing FT metadata info (table structure, styles, and templates)
-#define GOOGLE_FT_QUERY_API_URL @"https://www.googleapis.com/fusiontables/v1/tables"
+#define GOOGLE_FT_QUERY_API_URL @"https://www.googleapis.com/fusiontables/v2/tables"
 - (void)queryFusionTablesResource:(NSString *)resourceTypeID
                     WithCompletionHandler:(ServiceAPIHandler)handler {
     

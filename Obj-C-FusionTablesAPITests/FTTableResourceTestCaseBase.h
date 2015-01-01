@@ -25,9 +25,11 @@
  then restores the tested Google account to its initial state
  ****/
 
-#import "FTResourceTestBase.h"
+#import "FTResourceTestCaseBase.h"
 #import "FTTable.h"
 
-@interface ObjCFTAPIResourceTableTests : FTResourceTestBase <FTDelegate>
+@interface FTTableResourceTestCaseBase : FTResourceTestCaseBase <FTDelegate>
+
+@property (nonatomic, strong) FTTable *ftTableResource;
 
 @end

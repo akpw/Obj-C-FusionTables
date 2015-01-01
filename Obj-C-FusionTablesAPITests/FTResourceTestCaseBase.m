@@ -21,10 +21,10 @@
     Base class for  all Obj-C-FusionTables Tests
 ****/
 
-#import "FTResourceTestBase.h"
+#import "FTResourceTestCaseBase.h"
 #import "GoogleAuthorizationController.h"
 
-@implementation FTResourceTestBase
+@implementation FTResourceTestCaseBase
 
 #pragma mark -  XCTestCase setup / teardown
 - (void)setUp {
@@ -40,7 +40,7 @@
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) && [giveUpDate timeIntervalSinceNow] > 0) {
         if (isMainThread) {
             [[NSRunLoop currentRunLoop] 
-             runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+                    runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
         } else {
             [NSThread sleepForTimeInterval:0.01];
         }
@@ -64,8 +64,7 @@
         [self waitForSemaphore:semaphore WithTimeout:10];
     }
     XCTAssertNotNil([[GoogleAuthorizationController sharedInstance] 
-                    authenticatedUserID], 
-                   @"authenticatedUserID should not be nil");
+                        authenticatedUserID], @"authenticatedUserID should not be nil");
 }
 
 

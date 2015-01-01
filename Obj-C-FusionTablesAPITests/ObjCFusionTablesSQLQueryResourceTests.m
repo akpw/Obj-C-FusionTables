@@ -25,11 +25,11 @@
     the tested Google account to its initial state
 ****/
 
-#import "ObjCFTAPIResourceTableTests.h"
+#import "FTTableResourceTestCaseBase.h"
 #import "FTSQLQueryBuilder.h"
 #import "FTSQLQuery.h"
 
-@interface ObjCFusionTablesSQLQueryResourceTests : ObjCFTAPIResourceTableTests <FTSQLQueryDelegate>
+@interface ObjCFusionTablesSQLQueryResourceTests : FTTableResourceTestCaseBase <FTSQLQueryDelegate>
     @property (nonatomic, strong) FTSQLQuery *ftSQLQuery;
 @end
 
@@ -74,7 +74,8 @@ static NSUInteger _lastInsertedRowID;
                 if (rows) {
                     NSUInteger numRowsUpdated = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
                     XCTAssertTrue(numRowsUpdated > 0, @"Number of update rows should not be 0");
-                    NSLog(@"Updated %d %@", numRowsUpdated, (numRowsUpdated == 1) ? @"row" : @"rows");
+                    NSLog(@"Updated %lu %@",                           
+                          (unsigned long)numRowsUpdated, (numRowsUpdated == 1) ? @"row" : @"rows");
                 } else {
                     XCTFail (@"Error processing Update Rows responce");                
                 }
@@ -102,7 +103,8 @@ static NSUInteger _lastInsertedRowID;
                 NSLog(@"%@", rows);
                 _lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
                 XCTAssertTrue(_lastInsertedRowID > 0, @"Last inserted row ID should not be 0");
-                NSLog(@"Inserted %d %@", [rows count], ([rows count] == 1) ? @"row" : @"rows");
+                NSLog(@"Inserted %lu %@", 
+                    (unsigned long)[rows count], ([rows count] == 1) ? @"row" : @"rows");
             } else {
                 XCTFail (@"Error processing Insert Rows responce");                
             }
@@ -126,7 +128,8 @@ static NSUInteger _lastInsertedRowID;
             if (rows) {
                 NSUInteger numRowsDeleted = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
                 //XCTAssertTrue(numRowsDeleted > 0, @"Number of deleted rows should not be 0");
-                NSLog(@"Deleted %d %@", numRowsDeleted, (numRowsDeleted == 1) ? @"row" : @"rows");
+                NSLog(@"Deleted %lu %@", 
+                      (unsigned long)numRowsDeleted, (numRowsDeleted == 1) ? @"row" : @"rows");
             } else {
                 XCTFail (@"Error processing Delete Rows responce");                
             }

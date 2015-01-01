@@ -27,7 +27,7 @@
 
 #pragma mark - Fusion Tables SQL Query Resource API
 #pragma mark SQL Query Resource API for accessing FT data rows
-#define GOOGLE_FT_QUERY_URL (@"https://www.googleapis.com/fusiontables/v1/query")
+#define GOOGLE_FT_QUERY_URL (@"https://www.googleapis.com/fusiontables/v2/query")
 - (void)queryFusionTablesSQL:(NSString *)sql WithCompletionHandler:(ServiceAPIHandler)handler {
     
     NSString *url = [NSString stringWithFormat:@"%@?sql=%@", GOOGLE_FT_QUERY_URL,
