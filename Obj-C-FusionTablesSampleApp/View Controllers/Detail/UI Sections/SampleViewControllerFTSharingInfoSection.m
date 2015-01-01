@@ -22,7 +22,6 @@
 ****/
 
 #import "SampleViewControllerFTSharingInfoSection.h"
-#import "AppDelegate.h"
 #import "AppGeneralServicesController.h"
 #import "AppIconsController.h"
 #import "SampleViewController.h"
@@ -173,13 +172,11 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
             [[UINavigationController alloc] initWithRootViewController:viewer];    
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
 
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate.window.rootViewController presentViewController:navController animated:YES completion:nil];
+    [[GoogleServicesHelper sharedInstance] presentController:navController 
+                                                    animated:YES completionHandler:nil];
 }
-
 - (void)closeFTViewer:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+    [[GoogleServicesHelper sharedInstance] dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

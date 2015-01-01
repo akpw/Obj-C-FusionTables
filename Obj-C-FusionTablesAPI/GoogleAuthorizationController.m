@@ -24,7 +24,6 @@
 #import "GoogleAuthorizationController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
-#import "AppDelegate.h"
 
 @interface GoogleAuthorizationController ()
     @property (nonatomic, strong) NSDictionary *googleAPIKeys;
@@ -195,11 +194,6 @@
 - (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler
                                         CancelHandler:(void_completion_handler_block)cancelHandler {
     
-    void_completion_handler_block dismiss_block = ^ {
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        [delegate.window.rootViewController dismissViewControllerAnimated:YES completion:NULL];
-    };
-    
     GTMOAuth2ViewControllerTouch *viewController = [GTMOAuth2ViewControllerTouch
                                                             controllerWithScope:self.theScope
                                                             clientID:[self googleClientID]
@@ -222,18 +216,16 @@
                  [[GoogleServicesHelper sharedInstance]
                                 showAlertViewWithTitle:@"Authentication error" AndText:
                                 [NSString stringWithFormat:@"Error while signing-in in to Google: %@",
-                                [error localizedDescription]]];                 
-                 
-                 dismiss_block();
-                 
+                                [error localizedDescription]]];                                  
+                 [[GoogleServicesHelper sharedInstance] 
+                                dismissViewControllerAnimated:YES completion:nil];                  
                  // cancel handler
                  if (cancelHandler) cancelHandler();
              } else {
                  // Authentication succeeded
                  self.theAuth = auth;
-                 
-                 dismiss_block();
-                 
+                 [[GoogleServicesHelper sharedInstance] 
+                                dismissViewControllerAnimated:YES completion:nil];                  
                  // Execute the request
                  if (completionHandler) completionHandler();
              }     
@@ -249,9 +241,9 @@
             "</body></html>";
     viewController.initialHTMLString = html;  
     
-    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     viewController.modalPresentationStyle = UIModalPresentationPageSheet;
-    [delegate.window.rootViewController presentViewController:viewController animated:YES completion:NULL];
+    [[GoogleServicesHelper sharedInstance] 
+        presentController:viewController animated:YES completionHandler:nil];
 }
 
 #pragma mark - Google SignOut

@@ -23,7 +23,6 @@
 
 #import "GoogleServicesHelper.h"
 #import "GoogleAuthorizationController.h"
-#import "AppDelegate.h"
 
 @interface GoogleServicesHelper ()
 @end
@@ -242,13 +241,13 @@
     return [self random4DigitNumberStringFrom:1000 To:9999];
 }
 
-#pragma mark - Presentation View Helper
+#pragma mark - Presentation Helper
 - (void)presentController:(UIViewController *)controller
                 animated:(BOOL)animated
-                completionHandler:(void_completion_handler_block)completionHandler {
-    
-    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    UIViewController *presentingViewController = delegate.window.rootViewController;
+                completionHandler:(void_completion_handler_block)completionHandler {    
+
+    UIViewController *presentingViewController = 
+                [[UIApplication sharedApplication] delegate].window.rootViewController;
     
     // get to top controller on the presentation stack
     while (presentingViewController.presentedViewController) {
@@ -256,7 +255,11 @@
     }    
     [presentingViewController presentViewController:controller animated:animated completion:completionHandler];    
 }
-
+- (void)dismissViewControllerAnimated:(BOOL)animated 
+                           completion:(void_completion_handler_block)completionHandler {
+    [[[UIApplication sharedApplication] delegate].window.rootViewController
+                        dismissViewControllerAnimated:animated completion:completionHandler];
+}
 - (void)showAlertViewWithTitle:(NSString *)title AndText:(NSString *)text {
     UIAlertController *alertVC = [UIAlertController 
                                       alertControllerWithTitle:title

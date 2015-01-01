@@ -21,40 +21,29 @@
 #import "FusionTablesViewController.h"
 #import "AppGeneralServicesController.h"
 #import "EmptyDetailViewController.h"
-#import "GTMOAuth2Authentication.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AppGeneralServicesController customizeAppearance];
     
-    //[[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
-    //__weak typeof (self) weakSelf = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:kGTMOAuth2UserSignedIn 
-          object:nil queue:[NSOperationQueue mainQueue] 
-          usingBlock:^(NSNotification *note){
-              // to dispose Google Auth extra web view, see link below
-              // https://groups.google.com/forum/#!topic/gdata-objectivec-client/4L1AwhwKKoc      
-              //[weakSelf.navigationController dismissViewControllerAnimated:NO  completion:nil];
-      }];    
-        
+    [[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
      
     UISplitViewController *splitVC = [[UISplitViewController alloc] init];
     splitVC.delegate = self;
     
     FusionTablesViewController *ftMasterVC = [[FusionTablesViewController alloc] init];    
-    self.navigationController = [[UINavigationController alloc]
-                                                initWithRootViewController:ftMasterVC];       
+    UINavigationController *navigationController = [[UINavigationController alloc]
+                                                        initWithRootViewController:ftMasterVC];       
     EmptyDetailViewController *emptyDetailVC = [[EmptyDetailViewController alloc] init];    
     emptyDetailVC.infoLabel.text = @"No Fusion Table Selected";
     
-    splitVC.viewControllers = @[self.navigationController, emptyDetailVC];
+    splitVC.viewControllers = @[navigationController, emptyDetailVC];
     splitVC.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-    
-   
+       
     self.window.rootViewController = splitVC;
-
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -74,3 +63,20 @@
 @end
 
 
+
+
+
+
+/*
+ #import "GTMOAuth2Authentication.h"
+
+ __weak typeof (self) weakSelf = self;
+ [[NSNotificationCenter defaultCenter] addObserverForName:kGTMOAuth2UserSignedIn 
+ object:nil queue:[NSOperationQueue mainQueue] 
+ usingBlock:^(NSNotification *note){
+ // to dispose Google Auth extra web view, see link below
+ // https://groups.google.com/forum/#!topic/gdata-objectivec-client/4L1AwhwKKoc      
+ [weakSelf.window.rootViewController dismissViewControllerAnimated:NO  completion:nil];
+ }];     
+
+*/

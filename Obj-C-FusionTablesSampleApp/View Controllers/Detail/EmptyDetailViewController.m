@@ -13,15 +13,10 @@
  * limitations under the License.
  */
 
-//  FusionTablesViewController.h
+//  EmptyDetailViewController.h
 //  Obj-C-FusionTables
 //  Copyright (c) 2013 Arseniy Kuznetsov. All rights reserved.
 
-/****
- Shows usage of Obj-C-FusionTables, 
- retrieving & displaying a list of Fusion Tables (requiring & setting a Google auth).
- For the sake data safety, allows editing only Fusion Tables created in this app.
- ****/
 
 #import "EmptyDetailViewController.h"
 

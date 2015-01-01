@@ -8,7 +8,6 @@
 
 #import "FusionTableViewerViewController.h"
 #import "GoogleServicesHelper.h"
-#import "AppDelegate.h"
 
 @implementation FusionTableViewerViewController
 

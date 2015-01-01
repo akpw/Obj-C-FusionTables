@@ -9,7 +9,6 @@
 #import "SampleFTTableDelegate.h"
 #import "SampleViewController.h"
 #import "EmptyDetailViewController.h"
-#import "AppDelegate.h"
 
 // processing states
 typedef NS_ENUM (NSUInteger, FTProcessingStates) {
