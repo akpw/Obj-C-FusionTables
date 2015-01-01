@@ -56,10 +56,6 @@
     return ([secondaryViewController isKindOfClass:[EmptyDetailViewController class]]) ? YES : NO;
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];    
-}
-
 
 @end
 
