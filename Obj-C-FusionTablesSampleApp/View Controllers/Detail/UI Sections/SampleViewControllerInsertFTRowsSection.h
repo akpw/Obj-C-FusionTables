@@ -25,6 +25,7 @@
     Shows usage of Obj-C-FusionTables for Fusion Tables rows operations
 ****/
 
-@interface SampleViewControllerInsertFTRowsSection : SampleViewControllerFTBaseSection <FTSQLQueryDelegate>
+@interface SampleViewControllerInsertFTRowsSection : SampleViewControllerFTBaseSection 
+                                                                        <FTSQLQueryDelegate>
 
 @end

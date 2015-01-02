@@ -22,7 +22,7 @@
 ****/
 
 #import "SampleViewControllerFTStylingSection.h"
-#import <QuartzCore/QuartzCore.h>
+#import "SampleViewController.h"
 
 // Defines rows in section
 enum SampleViewControllerFTStylingSectionRows {
@@ -31,25 +31,31 @@ enum SampleViewControllerFTStylingSectionRows {
     kSampleViewControllerFTStylingSectionNumRows
 };
 
-// FTable styling states
+// States
 typedef NS_ENUM (NSUInteger, FTStylingStates) {
-    kFTStateIdle = 0,
-    kFTStateApplyingStyling,
-    kFTStateApplyingInfoWindoTemplate
+    kFTStateStylingUnknown = 0,
+    kFTStateStylingNotSet,
+    kFTStateStylingSet,
+    kFTStateStylingProcessing
+};
+typedef NS_ENUM (NSUInteger, FTWindowTemplateStates) {
+    kFTStateWindowTemplateUnknown = 0,
+    kFTStateWindowTemplateNotSet,
+    kFTStateWindowTemplateSet,
+    kFTStateWindowTemplateProcessing
 };
 
 @implementation SampleViewControllerFTStylingSection {
     FTStylingStates ftStylingState;
-    BOOL ftStylingApplied, ftInfoWindowTemplateApplied;
+    FTWindowTemplateStates ftSWindowTemplateState;
 }
 
 #pragma mark - Initialisation
 - (void)initSpecifics {
     [super initSpecifics];
     
-    ftStylingState = kFTStateIdle;
-    ftStylingApplied = NO;
-    ftInfoWindowTemplateApplied = NO;
+    ftStylingState = kFTStateStylingUnknown;
+    ftSWindowTemplateState = kFTStateWindowTemplateUnknown;
 }
 
 #pragma mark - GroupedTableSectionsController Table View Data Source
@@ -62,29 +68,46 @@ enum FTActionTypes {
 };
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    UIButton *actionButton = [self ftActionButton];
+    cell.accessoryView = nil;
+    cell.accessoryType = UITableViewCellAccessoryNone;
     switch (row) {
         case kSampleViewControllerFTStylingSectionStyleRow:
-            if (!ftStylingApplied) {
-                cell.textLabel.text = @"Set sample FT style";
-                cell.accessoryView = actionButton;
-                actionButton.tag = kFTActionTypeStyle;
-            } else {
-                cell.textLabel.text = @"Sample FT style set";
-                cell.accessoryView = nil;
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            switch (ftStylingState) {
+                case kFTStateStylingNotSet:
+                    cell.textLabel.text = @"Set sample FT style";
+                    cell.accessoryView = [self ftActionButtonWithTag:kFTActionTypeStyle];
+                    break;
+                case kFTStateStylingSet:    
+                    cell.textLabel.text = @"Sample FT style set";
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    break;
+                case kFTStateStylingUnknown:
+                    [self ftCheckStyle];
+                case kFTStateStylingProcessing: {
+                    cell.textLabel.text = @"Resolving FT styling...";
+                    [cell setAccessoryView:[self spinnerView]];
+                    break;
+                }
+                default:
+                    break;
             }
             break;
         case kSampleViewControllerFTStylingSectionSetInfoWindowRow:
-            if (!ftInfoWindowTemplateApplied) {
-                cell.textLabel.text = @"Set sample Info Window Template";
-                cell.accessoryView = actionButton;
-                actionButton.tag = kFTActionTypeInfoWindow;
-            } else {
-                cell.textLabel.text = @"Sample Info Window Template set";
-                cell.accessoryView = nil;
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            switch (ftSWindowTemplateState) {
+                case kFTStateWindowTemplateNotSet:
+                    cell.textLabel.text = @"Set sample Info Window Template";
+                    cell.accessoryView = [self ftActionButtonWithTag:kFTActionTypeInfoWindow];
+                    break;
+                case kFTStateWindowTemplateSet:
+                    cell.textLabel.text = @"Sample Info Window Template set";
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    break;
+                case kFTStateWindowTemplateUnknown:                    
+                    [self ftCheckInfoWindowTemplate];
+                case kFTStateWindowTemplateProcessing:
+                    cell.textLabel.text = @"Resolving Info Window Template...";
+                    [cell setAccessoryView:[self spinnerView]];
+                    break;
             }            
             break;
         default:
@@ -105,58 +128,103 @@ enum FTActionTypes {
     }
 }
 
-#pragma mark - FT Map Styling
-- (void)ftSetStyle {
-    if (ftStylingState == kFTStateIdle) {
-        ftStylingState = kFTStateApplyingStyling;
-        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
-        [self reloadSection];
+#pragma mark - GroupedTableSectionsController Table View Delegate
+- (NSString *)titleForHeaderInSection {
+    return @"Fusion Table Map Styling";
+}
 
+#pragma mark - FT Map Styling
+- (void)ftCheckStyle {
+    if (ftStylingState != kFTStateStylingProcessing) {
+        ftStylingState = kFTStateStylingProcessing;
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+        
+        FTStyle *ftStyle = [[FTStyle alloc] init];
+        ftStyle.ftStyleDelegate = self;
+        [ftStyle lisFTStylesWithCompletionHandler:^(NSData *data, NSError *error) {
+            [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
+            ftStylingState = kFTStateStylingNotSet;
+            if (error) {
+                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+                [[GoogleServicesHelper sharedInstance]
+                     showAlertViewWithTitle:@"Fusion Tables Error"
+                     AndText: [NSString stringWithFormat:
+                                @"Error listing Fusion Table Styles: %@", errorStr]];
+            } else {
+                NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
+                                                                      options:kNilOptions error:nil];
+                NSLog(@"Fusion Tables styles: %@", lines);
+                NSArray *styles = [NSMutableArray arrayWithArray:lines[@"items"]];
+                if ([styles count] != 0) {
+                    // styling already set
+                    ftStylingState = kFTStateStylingSet;
+                }
+            }
+            [self reloadRow:kSampleViewControllerFTStylingSectionStyleRow];
+        }];
+    }    
+}
+- (void)ftSetStyle {
+    if (ftStylingState != kFTStateStylingProcessing) {
+        ftStylingState = kFTStateStylingProcessing;
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+        
         FTStyle *ftStyle = [[FTStyle alloc] init];
         ftStyle.ftStyleDelegate = self;
         [ftStyle insertFTStyleWithCompletionHandler:^(NSData *data, NSError *error) {
             [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
             if (error) {
+                ftStylingState = kFTStateStylingNotSet;
                 NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
                 [[GoogleServicesHelper sharedInstance]
                     showAlertViewWithTitle:@"Fusion Tables Error"
                     AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@", 
                                                                                             errorStr]];
             } else {
-                ftStylingApplied = YES;
+                ftStylingState = kFTStateStylingSet;
                 NSDictionary *styleObject = [NSJSONSerialization JSONObjectWithData:data
                                                                  options:kNilOptions error:nil];
                 NSLog(@"Set Fusion Table Styling: %@", styleObject);
             }
-            ftStylingState = kFTStateIdle;
-            [self reloadSection];
+            [self reloadRow:kSampleViewControllerFTStylingSectionStyleRow];
         }];
     }    
 }
 
-#pragma mark - FTStyleDelegate methods
-- (NSDictionary *)ftMarkerOptions {
-    return @{
-             @"iconStyler": @{
-                    @"kind": @"fusiontables#fromColumn",
-                    @"columnName": @"markerIcon"}
-            };
-}
-- (NSDictionary *)ftPolylineOptions {
-    return @{
-             @"strokeWeight" : @"4",
-             @"strokeColorStyler" : @{
-                     @"kind": @"fusiontables#fromColumn",
-                     @"columnName": @"lineColor"}
-            };
-}
-
-
 #pragma mark - FT Map Info Window Template
+- (void)ftCheckInfoWindowTemplate {
+    if (ftSWindowTemplateState != kFTStateWindowTemplateProcessing) {
+        ftSWindowTemplateState = kFTStateWindowTemplateProcessing;
+        [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+        
+        FTTemplate *ftTemplate = [[FTTemplate alloc] init];
+        ftTemplate.ftTemplateDelegate = self;
+        [ftTemplate lisFTTemplatesWithCompletionHandler:^(NSData *data, NSError *error) {
+            [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
+            ftSWindowTemplateState = kFTStateWindowTemplateNotSet;
+            if (error) {
+                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+                [[GoogleServicesHelper sharedInstance]
+                 showAlertViewWithTitle:@"Fusion Tables Error"
+                 AndText: [NSString stringWithFormat:
+                           @"Error listing Fusion Table Styles: %@", errorStr]];
+            } else {
+                NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
+                                                                      options:kNilOptions error:nil];
+                NSLog(@"Fusion Tables styles: %@", lines);
+                NSArray *templates = [NSMutableArray arrayWithArray:lines[@"items"]];
+                if ([templates count] != 0) {
+                    // info window template already set
+                    ftSWindowTemplateState = kFTStateWindowTemplateSet;
+                }
+            }
+            [self reloadRow:kSampleViewControllerFTStylingSectionSetInfoWindowRow];
+        }];
+    }    
+}
 - (void)ftSetInfoWindowTemplate {
-    if (ftStylingState == kFTStateIdle) {
-        ftStylingState = kFTStateApplyingInfoWindoTemplate;
-        [self reloadSection];
+    if (ftSWindowTemplateState != kFTStateWindowTemplateProcessing) {
+        ftSWindowTemplateState = kFTStateWindowTemplateProcessing;
         
         FTTemplate *ftTemplate = [[FTTemplate alloc] init];
         ftTemplate.ftTemplateDelegate = self;
@@ -165,21 +233,40 @@ enum FTActionTypes {
         [ftTemplate insertFTTemplateWithCompletionHandler:^(NSData *data, NSError *error) {
            [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
            if (error) {
+               ftSWindowTemplateState = kFTStateWindowTemplateNotSet;
                NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error]; 
                [[GoogleServicesHelper sharedInstance]
                       showAlertViewWithTitle:@"Fusion Tables Error"
-                      AndText: [NSString stringWithFormat:@"Error applying Fusion Table Style: %@", errorStr]];
+                      AndText: [NSString stringWithFormat:
+                                    @"Error applying Fusion Table Style: %@", errorStr]];
            } else {
-               ftInfoWindowTemplateApplied = YES;
+               ftSWindowTemplateState = kFTStateWindowTemplateSet;
                NSDictionary *ftTemplateDict = [NSJSONSerialization JSONObjectWithData:data
                                                                 options:kNilOptions error:nil];
                NSLog(@"Set Fusion Table Info Window Template: %@", ftTemplateDict);
            }
-           ftStylingState = kFTStateIdle;
-           [self reloadSection];
+           [self reloadRow:kSampleViewControllerFTStylingSectionSetInfoWindowRow];
        }];
     }    
 }
+
+#pragma mark - FTStyleDelegate methods
+- (NSDictionary *)ftMarkerOptions {
+    return @{
+             @"iconStyler": @{
+                     @"kind": @"fusiontables#fromColumn",
+                     @"columnName": @"markerIcon"}
+             };
+}
+- (NSDictionary *)ftPolylineOptions {
+    return @{
+             @"strokeWeight" : @"4",
+             @"strokeColorStyler" : @{
+                     @"kind": @"fusiontables#fromColumn",
+                     @"columnName": @"lineColor"}
+             };
+}
+
 #pragma mark - FTTemplateDelegate methods
 - (NSString *)ftTemplateBody {
     return
@@ -197,28 +284,5 @@ enum FTActionTypes {
         "<p>"
         "</div>";
 }
-
-#pragma mark - GroupedTableSectionsController Table View Delegate
-- (NSString *)titleForFooterInSection {
-    NSString *footerString = nil;
-    switch (ftStylingState) {
-        case kFTStateIdle:
-            footerString = @"Sets Fusion Table Map Styling";
-            break;
-        case kFTStateApplyingStyling:
-            footerString = @"Setting Fusion Table Styling...";
-            break;
-        case kFTStateApplyingInfoWindoTemplate:
-            footerString = @"Setting Info Window Template..";
-            break;
-        default:
-            break;
-    }
-    return footerString;
-}
-- (NSString *)titleForHeaderInSection {
-    return @"Fusion Table Map Styling";
-}
-
 
 @end

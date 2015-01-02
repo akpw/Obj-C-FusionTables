@@ -140,8 +140,8 @@
             [permissions indexesOfObjectsPassingTest:
              ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                  return 
-                 [dict[@"role"] isEqualToString:@"reader"] && 
-                 [dict[@"type"] isEqualToString:@"anyone"];
+                    [dict[@"role"] isEqualToString:@"reader"] && 
+                    [dict[@"type"] isEqualToString:@"anyone"];
              }]; 
             if ([matchIdxs count] != 0) {
                 // public permissions are already set

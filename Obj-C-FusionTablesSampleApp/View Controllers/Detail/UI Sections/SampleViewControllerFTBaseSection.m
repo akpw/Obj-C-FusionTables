@@ -36,23 +36,36 @@
 }
 
 #pragma mark - Default Action Button for Section Rows Action Handlers
-- (UIButton *)ftActionButton {
+- (UIButton *)ftActionButtonWithTag:(NSUInteger)tag {
     UIImage *buttonImage = [AppIconsController cellAccessoryActionBtnImage]
                                                         [IconsControllerIconTypeNormal];
     UIImage *selectedButtonImage = [AppIconsController cellAccessoryActionBtnImage]
-                                                        [IconsControllerIconTypeHighlighted];
-    
+                                                        [IconsControllerIconTypeHighlighted];    
     UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
     actionButton.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
     
     [actionButton setImage:buttonImage forState:UIControlStateNormal];
     [actionButton setImage:selectedButtonImage forState:UIControlStateHighlighted];
     [actionButton addTarget:self action:@selector(executeFTAction:) 
-                                        forControlEvents:UIControlEventTouchUpInside];    
+                                        forControlEvents:UIControlEventTouchUpInside];   
+    
+    actionButton.tag = tag;
     return actionButton;
 }
+- (UIButton *)ftActionButton {
+    return [self ftActionButtonWithTag:0];
+}
+
 // default action target
 - (void)executeFTAction:(id)sender {
+}
+
+#pragma mark - helpers
+- (UIActivityIndicatorView *)spinnerView {
+    UIActivityIndicatorView *spinnerView = [[UIActivityIndicatorView alloc] 
+                                            initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinnerView startAnimating];
+    return spinnerView;
 }
 
 @end

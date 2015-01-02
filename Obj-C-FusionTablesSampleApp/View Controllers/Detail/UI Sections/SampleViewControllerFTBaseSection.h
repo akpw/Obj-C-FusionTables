@@ -28,6 +28,8 @@
 @interface SampleViewControllerFTBaseSection : GroupedTableSectionController <FTDelegate>
 
 - (UIButton *)ftActionButton;
+- (UIButton *)ftActionButtonWithTag:(NSUInteger)tag;
 - (void)executeFTAction:(id)sender;
+- (UIActivityIndicatorView *)spinnerView;
 
 @end

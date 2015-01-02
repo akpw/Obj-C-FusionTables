@@ -39,9 +39,8 @@
         self.sectionID = sectionID;
         
         [self.parentVC.tableView registerClass:[UITableViewCell class] 
-                                               forCellReuseIdentifier:self.defaultCellIdentifier];
-        
-        // simple descendants' inits
+                                               forCellReuseIdentifier:self.defaultCellIdentifier];        
+        // descendant-specific inits
         [self initSpecifics];
     }
     return self;
@@ -52,18 +51,22 @@
 
 #pragma mark - Section reload methods
 - (void)reloadSectionWithRowAnimation:(UITableViewRowAnimation)rowAnimation {
+    [self.parentVC.tableView beginUpdates];
     [self.parentVC.tableView reloadSections:[NSIndexSet indexSetWithIndex:self.sectionID]
-                           withRowAnimation:rowAnimation];
+                                                                withRowAnimation:rowAnimation];
+    [self.parentVC.tableView endUpdates];    
 }
 - (void)reloadSection {
     [self reloadSectionWithRowAnimation:UITableViewRowAnimationAutomatic];
 }
 - (void)reloadRow:(NSUInteger)row WithRowAnimation:(UITableViewRowAnimation)rowAnimation {
     NSArray *rowsArray = @[[NSIndexPath indexPathForRow:row inSection:_sectionID]];
+    [self.parentVC.tableView beginUpdates];
     [self.parentVC.tableView reloadRowsAtIndexPaths:rowsArray withRowAnimation:rowAnimation];
+    [self.parentVC.tableView endUpdates];    
 }
 - (void)reloadRow:(NSUInteger)row {
-    [self reloadRow:row WithRowAnimation:UITableViewRowAnimationAutomatic];
+    [self reloadRow:row WithRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - Table View Data Source methods, defaults impls

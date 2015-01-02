@@ -18,7 +18,7 @@
 		<key>entryImageURL</key>
 		<string>http://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Prague_-_Jerusalemer_Synagoge.jpg/220px-Prague_-_Jerusalemer_Synagoge.jpg</string>
 		<key>markerIcon</key>
-		<string> cross_hairs_highlight</string>
+		<string>cross_hairs_highlight</string>
 		<key>lineColor</key>
 		<string></string>
 		<key>geometry</key>
@@ -40,7 +40,7 @@
 		<key>entryImageURL</key>
 		<string>http://www.tunliweb.no/Bilder_SM/_album_Praha2/B0.jpg</string>
 		<key>markerIcon</key>
-		<string> cross_hairs_highlight</string>
+		<string>cross_hairs_highlight</string>
 		<key>lineColor</key>
 		<string></string>
 		<key>geometry</key>
@@ -62,7 +62,7 @@
 		<key>entryImageURL</key>
 		<string>http://www.molon.de/galleries/Czech/Prague/Oldsquare/images01/07%20View%20of%20Old%20Town%20square.jpg</string>
 		<key>markerIcon</key>
-		<string> cross_hairs_highlight</string>
+		<string>cross_hairs_highlight</string>
 		<key>lineColor</key>
 		<string></string>
 		<key>geometry</key>

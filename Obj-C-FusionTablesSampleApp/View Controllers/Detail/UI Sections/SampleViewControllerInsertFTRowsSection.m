@@ -23,7 +23,6 @@
 
 #import "SampleViewControllerInsertFTRowsSection.h"
 #import "FTSQLQueryBuilder.h"
-#import <QuartzCore/QuartzCore.h>
 
 // Defines rows in section
 enum SampleViewControllerFTInsertSectionRows {
@@ -41,31 +40,21 @@ typedef NS_ENUM (NSUInteger, FTSQLQueryStates) {
     kFTStateDeletingRows
 };
 
-// Sample data for update
-// updates a route photo, on rotating basis
-typedef NS_ENUM (NSUInteger, FTSampleUpdateDataIndex) {
-    kFTSampleUpdateData_idx0 = 0,
-    kFTSampleUpdateData_idx1,
-    kFTSampleUpdateData_idx2,
-    kFTSampleUpdateDataCount
-};
-
 @interface SampleViewControllerInsertFTRowsSection ()
     @property (nonatomic, strong) FTSQLQuery *ftSQLQuery;
 @end
 
 @implementation SampleViewControllerInsertFTRowsSection {
     FTSQLQueryStates ftInsertRowState;
-    NSUInteger lastInsertedRowID;
-    FTSampleUpdateDataIndex sampleUpdateDataIndex;
+    NSInteger ftPhotoEntryRowID;
+    NSUInteger ftPhotoEntrySampleDataRotatingIdx;
 }
 
-#pragma mark - GroupedTableSectionsController Table View Data Source
 #pragma mark - Initialisation
 - (void)initSpecifics {
     ftInsertRowState = kFTStateIdle;
-    lastInsertedRowID = 0;
-    sampleUpdateDataIndex = kFTSampleUpdateData_idx0;
+    ftPhotoEntryRowID = -1; // Uknown at that point
+    ftPhotoEntrySampleDataRotatingIdx = 0;
 }
 - (FTSQLQuery *)ftSQLQuery {
     if (!_ftSQLQuery) {
@@ -75,52 +64,52 @@ typedef NS_ENUM (NSUInteger, FTSampleUpdateDataIndex) {
     return _ftSQLQuery;
 }
 
-- (NSUInteger)numberOfRows {
-    return SampleViewControllerFTInsertSectionNumRows;
-}
-
 #pragma mark - GroupedTableSectionsController Table View Data Source
-#define FT_ACTION_TYPE_KEY (@"FT_Action_Type_Key")
 enum FTActionTypes {
     kFTActionInsert = 0,
     kFTActionUpdate,
     kFTActionDelete
 };
+- (NSUInteger)numberOfRows {
+    return SampleViewControllerFTInsertSectionNumRows;
+}
 - (void)configureCell:(UITableViewCell *)cell ForRow:(NSUInteger)row {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    UIButton *actionButton = [self ftActionButton];
-    cell.accessoryView = actionButton;
+    cell.accessoryView = nil;
+    cell.accessoryType = UITableViewCellAccessoryNone;
     cell.userInteractionEnabled = YES;
     cell.backgroundColor = [UIColor whiteColor];
     switch (row) {
         case kSampleViewControllerFTInsertRowSection:
-            cell.textLabel.text = @"Insert sample rows";
-            if (lastInsertedRowID > 0) {
-                cell.accessoryView = nil;
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            if (ftPhotoEntryRowID < 0) {
+                cell.textLabel.text = @"Resolving sample rows";
+                cell.accessoryView = [self spinnerView];
+                [self selectSampleRows];
+            } else if (ftPhotoEntryRowID == 0) {
+                cell.textLabel.text = @"Insert sample rows";
+                cell.accessoryView = [self ftActionButtonWithTag:kFTActionInsert];
             } else {
-                [actionButton.layer setValue:@(kFTActionInsert) forKey:FT_ACTION_TYPE_KEY];                
+                cell.textLabel.text = @"Sample rows inserted";
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
             break;
         case kSampleViewControllerFTUpdateRowSection:
-            cell.textLabel.text = @"Update last sample row";
-            if (lastInsertedRowID == 0) {
-                cell.accessoryView = nil;
-                cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.text = @"Update the photo entry";
+            if (ftPhotoEntryRowID <= 0) {
+                cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
                 cell.userInteractionEnabled = NO;
             } else {
-                [actionButton.layer setValue:@(kFTActionUpdate) forKey:FT_ACTION_TYPE_KEY];
+                cell.accessoryView = [self ftActionButtonWithTag:kFTActionUpdate];
             }
             break;
         case kSampleViewControllerFTDeleteRowSection:
             cell.textLabel.text = @"Delete sample rows";
-            if (lastInsertedRowID == 0) {
-                cell.accessoryView = nil;
+            if (ftPhotoEntryRowID <= 0) {
+                cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
                 cell.userInteractionEnabled = NO;
-                cell.accessoryType = UITableViewCellAccessoryNone;
             } else {
-                [actionButton.layer setValue:@(kFTActionDelete) forKey:FT_ACTION_TYPE_KEY];                
+                cell.accessoryView = [self ftActionButtonWithTag:kFTActionDelete];
             }
             break;
         default:
@@ -129,8 +118,7 @@ enum FTActionTypes {
 }
 - (void)executeFTAction:(id)sender {
     UIButton *button = (UIButton *)sender;
-    NSNumber *actionType =  (NSNumber *)[button.layer valueForKey:FT_ACTION_TYPE_KEY];
-    switch ([actionType integerValue]) {
+    switch (button.tag) {
         case kFTActionInsert:
             [self insertSampleRows];
             break;
@@ -142,7 +130,6 @@ enum FTActionTypes {
             break;
     }
 }
-#undef FT_ACTION_TYPE_KEY
 
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
@@ -186,6 +173,11 @@ enum FTActionTypes {
 }
 
 #pragma mark - FTSQLQueryDelegate Methods
+- (NSString *)ftSQLSelectStatement {
+    return [NSString stringWithFormat:@"SELECT ROWID FROM %@ WHERE  markerIcon CONTAINS %@", 
+                                [self ftTableID], 
+                                [FTSQLQueryBuilder buildFTStringValueString:@"cross_hairs_highlight"]];
+}
 - (NSString *)ftSQLInsertStatement {
     NSString *ftSQLInsertStatementString = nil;
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"sampleInsertData" ofType:@"plist"];
@@ -217,12 +209,9 @@ enum FTActionTypes {
     return ftSQLInsertStatementString;
 }
 - (NSString *)ftSQLUpdateStatement {
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"sampleUpdateData" ofType:@"plist"];
-    NSArray *updatetArray = [NSArray arrayWithContentsOfFile:plistPath];
-
-    NSDictionary *updateEntry = updatetArray[sampleUpdateDataIndex];
+    NSDictionary *updateEntry = [self rotatingSampleDataPhotoEntry];
     NSString *ftSQLUpdateStatementString = [FTSQLQueryBuilder 
-                                        builSQLUpdateStringForRowID:lastInsertedRowID
+                                        builSQLUpdateStringForRowID:ftPhotoEntryRowID
                                         ColumnNames:[self columnNames]
                                         FTTableID:[self ftTableID],
                  [FTSQLQueryBuilder buildFTStringValueString:updateEntry[@"entryDate"]],
@@ -242,10 +231,33 @@ enum FTActionTypes {
     return [FTSQLQueryBuilder buildDeleteAllRowStringForFusionTableID:[self ftTableID]];
 }
 
-#pragma mark - Insert Sample Rows Handler
+#pragma mark - Sample Rows Handlers
+- (void)selectSampleRows {
+    [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+    [self.ftSQLQuery sqlSelectWithCompletionHandler:^(NSData *data, NSError *error) {
+        [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
+        ftPhotoEntryRowID = 0;
+        if (error) {
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+            [[GoogleServicesHelper sharedInstance]
+             showAlertViewWithTitle:@"Fusion Tables Error"
+             AndText: [NSString stringWithFormat:
+                       @"Error listing Fusion Table Styles: %@", errorStr]];
+        } else {
+            NSDictionary *lines = [NSJSONSerialization JSONObjectWithData:data
+                                                                  options:kNilOptions error:nil];
+            NSLog(@"Fusion Tables styles: %@", lines);
+            NSArray *rows = [NSMutableArray arrayWithArray:lines[@"rows"]];
+            if ([rows count] != 0) {
+                ftPhotoEntryRowID = [[rows lastObject][0] intValue];
+            }
+        }
+        [self reloadSection];
+    }];
+}
 - (void)insertSampleRows {   
     ftInsertRowState = kFTStateInsertingRows;
-    lastInsertedRowID = 0;
+    ftPhotoEntryRowID = 0;
     [self reloadSection];
     
     [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
@@ -263,23 +275,14 @@ enum FTActionTypes {
             NSArray *rows = responceDict[@"rows"];
             if (rows) {
                 NSLog(@"%@", rows);
-               lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
+               ftPhotoEntryRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
             }
         }
         [self reloadSection];
     }];
 }
-
-#pragma mark - Update Last Inserted Row Handler
-// rotates entry index from sampleUpdateData.plist
-- (void)rotateSampleUpdateDataIndex {
-    sampleUpdateDataIndex++;
-    if (sampleUpdateDataIndex + 1 == kFTSampleUpdateDataCount) {
-        sampleUpdateDataIndex = kFTSampleUpdateData_idx0;
-    }
-}
 - (void)updateLastInsertedRow {
-    if (lastInsertedRowID > 0) {
+    if (ftPhotoEntryRowID > 0) {
         ftInsertRowState = kFTStateUpdatingRows;
         [self reloadSection];
         
@@ -293,8 +296,6 @@ enum FTActionTypes {
                         showAlertViewWithTitle:@"Fusion Tables Error"
                         AndText: [NSString stringWithFormat:@"Error updating rows: %@", errorStr]];
             } else {
-                [self rotateSampleUpdateDataIndex];
-                
                 NSDictionary *responceDict = [NSJSONSerialization
                                               JSONObjectWithData:data options:kNilOptions error:nil];
                 NSArray *rows = responceDict[@"rows"];
@@ -307,8 +308,6 @@ enum FTActionTypes {
         }];
     }    
 }
-
-#pragma mark - Delete All Rows Handler
 - (void)deleteInsertedRows {
     ftInsertRowState = kFTStateDeletingRows;
     [self reloadSection];
@@ -324,10 +323,24 @@ enum FTActionTypes {
                     AndText: [NSString stringWithFormat:@"Error deleting rows: %@", errorStr]];
             
         } else {
-            lastInsertedRowID = 0;
+            ftPhotoEntryRowID = 0;
         }
         [self reloadSection];
     }];
+}
+
+#pragma mark - helpers
+// rotates entry index from sampleUpdateData.plist
+- (NSDictionary *)rotatingSampleDataPhotoEntry {
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"sampleUpdateData" ofType:@"plist"];
+    NSArray *updateEntries = [NSArray arrayWithContentsOfFile:plistPath];    
+    NSDictionary *updateEntry = [NSArray arrayWithContentsOfFile:plistPath]
+                                                [ftPhotoEntrySampleDataRotatingIdx];        
+    if (++ftPhotoEntrySampleDataRotatingIdx >= [updateEntries count]) {
+        ftPhotoEntrySampleDataRotatingIdx = 0;
+    }
+    
+    return updateEntry;
 }
 
 @end
