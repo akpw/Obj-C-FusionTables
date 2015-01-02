@@ -87,7 +87,7 @@
 
 #pragma mark - Google API Keys need to be initialised in "GoogleAPIKeys.plist"
 // initialize "GoogleAPIKeys.plist" with your API Keys
-// you can get the API keys from: https://developers.google.com/fusiontables/docs/v1/using#APIKey
+// you can get the API keys from: https://developers.google.com/fusiontables/docs/v2/using#APIKey
 - (NSDictionary *)googleAPIKeys {
     if (!_googleAPIKeys) {
         _googleAPIKeys = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]
@@ -96,7 +96,7 @@
     return _googleAPIKeys;
 }
 // initialize "GoogleAPIKeys.plist" with your API Keys
-// you can get the API keys from: https://developers.google.com/fusiontables/docs/v1/using#APIKey
+// you can get the API keys from: https://developers.google.com/fusiontables/docs/v2/using#APIKey
 #pragma mark - Google API Keys need to be initialised in "GoogleAPIKeys.plist"
 
 #pragma mark - Google API Keys Helpers
@@ -180,7 +180,7 @@
                       @"Before using Obj-C-FusionTables, "
                       "you need to set your Google API Key in GoogleAPIKeys.plist\n\n"
                       "You can get a Google API Key from: "
-                      "https://developers.google.com/fusiontables/docs/v1/using#APIKey"]];        
+                      "https://developers.google.com/fusiontables/docs/v2/using#APIKey"]];        
     }
     else {
         self.theAuth = [GTMOAuth2ViewControllerTouch 

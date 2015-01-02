@@ -10,8 +10,7 @@
 
 @interface FusionTableViewerViewController : UIViewController <UIWebViewDelegate>
 
-@property (strong, nonatomic) NSString *ftTableID;
-@property (strong, nonatomic) NSString *ftTableName;
-@property (strong, nonatomic) NSString *ftSharingURL;
+@property (strong, nonatomic) NSString *ftDataURL;
+@property (strong, nonatomic) NSString *ftMapURL;
 
 @end

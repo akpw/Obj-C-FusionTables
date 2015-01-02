@@ -53,7 +53,7 @@ typedef NS_ENUM (NSUInteger, FTSQLQueryStates) {
 #pragma mark - Initialisation
 - (void)initSpecifics {
     ftInsertRowState = kFTStateIdle;
-    ftPhotoEntryRowID = -1; // Uknown at that point
+    ftPhotoEntryRowID = -1; // uknown at that point
     ftPhotoEntrySampleDataRotatingIdx = 0;
 }
 - (FTSQLQuery *)ftSQLQuery {

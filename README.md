@@ -1,11 +1,11 @@
-![obj-c](https://lh3.googleusercontent.com/-lG4D7s1kiKA/VKQ0dyrGNgI/AAAAAAAAE_I/Ly1RnItCOFw/w1157-h707-no/u3.png)
+![obj-c](https://lh6.googleusercontent.com/-8D0zRsFyC98/VKbxYKNIzoI/AAAAAAAAFA4/9laOrutdy04/w1157-h707-no/u3.png)
 
 
-[Google Fusion Tables](http://www.google.com/drive/apps.html#fusiontables) is a powerful combination of a big web store and variety of ways to access and visualise the data. While still marked as 'experimental', it has reached its maturity with [Fusion Tables API v1.0](https://developers.google.com/fusiontables/) and offers developers some clean & easy ways to enrich their apps across variety of development platforms. 
+[Google Fusion Tables](http://www.google.com/drive/apps.html#fusiontables) is a powerful combination of a big web store and variety of ways to access and visualise the data. While still marked as 'experimental', it has reached its maturity with [Fusion Tables API v1.0](https://developers.google.com/fusiontables/) and offers developers some clean & easy ways to enrich their apps across variety of development platforms.
 
 One potential obstacle for Fusion Tables in iOS apps is that there is no official, dedicated Google API Objective-C API. While the existing libraries such as [gtm-oauth2](https://code.google.com/p/gtm-oauth2/) and [gtm-http-fetcher](https://code.google.com/p/gtm-http-fetcher/) are well-written and provide all that is needed to work with Fusion Tables, being general and a bit lower-level they can also put a lot of extra weight on developers's shoulders.
 
-Obj-C-FusionTables is an easy-to-use soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries. 
+Obj-C-FusionTables is an easy-to-use soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries.
 
 # Sample Project
 The main purpose of the sample project is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, executing SQL queries, sharing, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
@@ -18,12 +18,12 @@ Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project.
 # Usage
 * Start with setting <b>your own Google API Key</b> in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
 * Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory.
-* ````FTTable```` class is the Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````. 
+* ````FTTable```` class is the Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````.
 * The same applies to other Fusion Tables resources such as Templates and Styles, represented by the ````FTTemplate```` and ````FTStyle```` classes
-* ````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````. 
+* ````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````.
 * ````FTSQLQueryBuilder```` helps build SQL statements for various SQL queries.
 * ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
-* ````GoogleServicesHelper```` provides an easy & light-weight access to related Google serivces such as URL Shortener or Google Drive ACL (while libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these other services in greater depth they would also require non-trivial installation & introduce yet another set of APIs). 
+* ````GoogleServicesHelper```` provides an easy & light-weight access to related Google serivces such as URL Shortener or Google Drive ACL (while libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these other services in greater depth they would also require non-trivial installation & introduce yet another set of APIs).
 
 # A few quick code samples
 * read a list of Fusion Tables
@@ -37,7 +37,7 @@ ftTable.ftTableDelegate = self;
 	    NSLog(@"Error Listing Fusion Tables: %@", errorStr);
 	} else {
 	    NSDictionary *ftItems = [NSJSONSerialization JSONObjectWithData:data
-                                                                  options:kNilOptions error:nil];            
+                                                                  options:kNilOptions error:nil];
         NSArray *ftTableObjects = [NSMutableArray arrayWithArray:ftItems[@"items"]];
         for (NSDictionary *ftTable in ftTableObjects) {
         	NSLog(@"Table Name: %@", ftTable[@"name"]);
@@ -99,21 +99,21 @@ ftSQLQuery.ftSQLQueryDelegate = self;
             NSLog(@"%@", rows);
             NSUInteger lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
         } else {
-            NSLog (@"Error processing Insert Rows responce");                
+            NSLog (@"Error processing Insert Rows responce");
         }
     }
 }];
 ````
 
 * Delete Fusion Table rows
- 
+
 ````
 FTSQLQuery *ftSQLQuery = [[FTSQLQuery alloc] init];
 ftSQLQuery.ftSQLQueryDelegate = self;
 [ftSQLQuery sqlDeleteWithCompletionHandler:^(NSData *data, NSError *error) {
     if (error) {
         NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-        STFail (@"Error Inserting Fusion Table Style: %@", errorStr);            
+        STFail (@"Error Inserting Fusion Table Style: %@", errorStr);
     } else {
         NSDictionary *responceDict = [NSJSONSerialization
                                       JSONObjectWithData:data options:kNilOptions error:nil];
@@ -122,7 +122,7 @@ ftSQLQuery.ftSQLQueryDelegate = self;
             NSUInteger numRowsDeleted = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
             NSLog(@"Deleted %d %@", numRowsDeleted, (numRowsDeleted == 1) ? @"row" : @"rows");
         } else {
-            NSLog (@"Error processing Delete Rows responce");                
+            NSLog (@"Error processing Delete Rows responce");
         }
     }
 }];

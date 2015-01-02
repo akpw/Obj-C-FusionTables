@@ -41,7 +41,8 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 };
 
 @interface SampleViewControllerFTSharingInfoSection ()
-    @property (nonatomic, strong) NSString *sharingURL;
+    @property (nonatomic, strong) NSString *sharedMapURL;
+    @property (nonatomic, strong) NSString *sharedDataURL;
 @end
 
 @implementation SampleViewControllerFTSharingInfoSection {
@@ -56,10 +57,10 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.backgroundColor = [[AppGeneralServicesController sharedAppTheme] 
                                                 tableViewCellButtonBackgroundColor];
-    cell.userInteractionEnabled = (ftSharingRowState == kFTStateIdle) ? YES : NO;
     cell.textLabel.text = @"Show Fusion Table";
     cell.textLabel.textColor = [[AppGeneralServicesController sharedAppTheme]
                                                                 tableViewCellButtonTextLabelColor];
+    cell.userInteractionEnabled = (ftSharingRowState == kFTStateIdle) ? YES : NO;
 }
 
 #pragma mark - GroupedTableSectionsController Table View Data Delegate
@@ -69,6 +70,14 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
             [self showFTViewer];
         }];
     }];            
+}
+- (UIView *)viewForFooterInSection {
+    UILabel *footerLabel = [[UILabel alloc] init];
+    footerLabel.text = [self titleForFooterInSection];
+    footerLabel.textColor = [UIColor grayColor];
+    footerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    footerLabel.textAlignment = NSTextAlignmentCenter;
+    return footerLabel;
 }
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
@@ -80,20 +89,12 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
             footerString = @"Sharing the Fusion Table...";
             break;
         case kFTStateShorteningURL:
-            footerString = @"Shortening the sharing URL...";
+            footerString = @"Shortening the sharing URLs...";
             break;
         default:
             break;
     }
     return footerString;
-}
-- (UIView *)viewForFooterInSection {
-    UILabel *footerLabel = [[UILabel alloc] init];
-    footerLabel.text = [self titleForFooterInSection];
-    footerLabel.textColor = [UIColor grayColor];
-    footerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-    footerLabel.textAlignment = NSTextAlignmentCenter;
-    return footerLabel;
 }
 
 #pragma mark - FT user permissions / sharing
@@ -118,52 +119,85 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
             }
      }];
 }
-// Simple URL Shortener 
+
+#pragma mark - URLs shortening 
 - (void)shortenURLWithCompletionHandler:(void_completion_handler_block)completionHandler {
-    if (self.sharingURL) {
+    if (self.sharedMapURL && self.sharedDataURL) {
         completionHandler();
     } else {
         ftSharingRowState = kFTStateShorteningURL;
         [self reloadSection];
         
+        void(^errorHandler)(NSError *error, NSString *activityTypeMsg) = 
+                                            ^(NSError *error, NSString *activityTypeMsg) {
+            NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
+            [[GoogleServicesHelper sharedInstance]
+                showAlertViewWithTitle:@"Fusion Tables Error"
+                AndText: [NSString stringWithFormat:
+                            @"Error while %@: %@", activityTypeMsg, errorStr]];    
+            ftSharingRowState = kFTStateIdle; 
+            [self reloadSection];
+        };
+        
+        // Data URL shortening block
+        void_completion_handler_block shareDataUrlBlock = ^{
+            [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+            [[GoogleServicesHelper sharedInstance] shortenURL:[self longShareDataURL]
+                                        WithCompletionHandler:^(NSData *data, NSError *error) {
+                [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
+                ftSharingRowState = kFTStateIdle;                    
+                if (error) {
+                    errorHandler(error, @"shortening FT Data URL");
+                } else {
+                    NSDictionary *lines = [NSJSONSerialization
+                                                JSONObjectWithData:data 
+                                                options:kNilOptions error:nil];
+                    NSLog(@"%@", lines);
+                    self.sharedDataURL = lines[@"id"];
+                    
+                    ftSharingRowState = kFTStateIdle; 
+                    [self reloadSection];
+
+                    completionHandler ();
+                }
+            }];
+        };
+        
+        // shorten Map URL, then run the Data URL shortening block 
         [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
-        [[GoogleServicesHelper sharedInstance] shortenURL:[self longShareURL]
+        [[GoogleServicesHelper sharedInstance] shortenURL:[self longShareMapURL]
                                           WithCompletionHandler:^(NSData *data, NSError *error) {
              [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
-             ftSharingRowState = kFTStateIdle;
-             [self reloadSection];
-
              if (error) {
-                 NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
-                 [[GoogleServicesHelper sharedInstance]
-                        showAlertViewWithTitle:@"Fusion Tables Error"
-                        AndText: [NSString stringWithFormat:@"Error Sharing Fusion Table: %@", errorStr]];
+                 errorHandler(error, @"shortening FT Map URL");
              } else {
                  NSDictionary *lines = [NSJSONSerialization
-                                        JSONObjectWithData:data options:kNilOptions error:nil];
+                                                JSONObjectWithData:data 
+                                                options:kNilOptions error:nil];
                  NSLog(@"%@", lines);
-                 self.sharingURL = lines[@"id"];
-                 completionHandler ();
+                 self.sharedMapURL = lines[@"id"];
+                 shareDataUrlBlock ();
              }
          }];
     }
 }
-
-//https://www.google.com/fusiontables/embedviz?q=select+col9+from+1tTPDYdESPK5YIE-
-- (NSString *)longShareURL {
+- (NSString *)longShareMapURL {
     return [NSString stringWithFormat:
                 @"https://www.google.com/fusiontables/embedviz?q=select+col9+from+%@&viz=MAP"
-                "&h=false&lat=50.088555878607316&lng=14.429294793701292&t=1&z=15&l=col9&noCache=%@",
+                "&h=false&lat=50.088555878607316&lng=14.429294793701292&t=1&z=14&l=col9&noCache=%@",
                 [self ftTableID],
                 [[GoogleServicesHelper sharedInstance] random4DigitNumberString]];
+}
+- (NSString *)longShareDataURL {
+    return [NSString stringWithFormat:
+            @"https://www.google.com/fusiontables/DataSource?docid=%@", [self ftTableID]];
 }
 
 #pragma mark - Fusion Table Viewer
 - (void)showFTViewer {
     FusionTableViewerViewController *viewer = [[FusionTableViewerViewController alloc] init];
-    viewer.ftTableID = [self ftTableID];
-    viewer.ftSharingURL = self.sharingURL;
-    viewer.ftTableName = self.ftName;
+    viewer.ftMapURL = self.sharedMapURL;
+    viewer.ftDataURL = self.sharedDataURL;
     viewer.navigationItem.rightBarButtonItem = 
                 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                                         target:self action:@selector(closeFTViewer:)];
