@@ -7,22 +7,26 @@ One potential obstacle for Fusion Tables in iOS apps is that there is no officia
 
 Obj-C-FusionTables is an easy-to-use soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries.
 
-# Sample Project
-The main purpose of the sample project is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, executing SQL queries, sharing, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
-
-To run the sample project, you will need to fill in <b>your own Google API</b> key in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey).
-
 # Installation
 Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the <i>-fno-objc-arc</i> compiler flag for the gtm-oauth2 /  gtm-http-fetcher classes in the ````Google Toolbox```` subfolder as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
 
-Next, go to [Google Developer Console](https://console.developers.google.com/) and create a new project. In the  ````APIs```` section, enable the APIs as the shown:
+Next, go to [Google Developer Console](https://console.developers.google.com/) and create a new project. In the  ````APIs```` section, enable the APIs as the shown below:
+
 ![apis](https://lh6.googleusercontent.com/-1p19rUbv-5M/VKkWQVL9eOI/AAAAAAAAFBc/x9KVxHF9elA/w1157-h364-no/apis.png)
 
-In the ````Credentials```` section, ````Create new Client ID```` for ````Installed Application```` similar to
+
+In the ````Credentials```` section, choose ````Create new Client ID```` for ````Installed Application```` similar to:
+
 ![credentials](https://lh3.googleusercontent.com/-V8h0pVBGuBs/VKkWQSGo4BI/AAAAAAAAFBY/FPVwt1Kkbgc/w1155-h665-no/ids.png)
 
-Then go back to your XCode project, and fill in the values for GOOGLE_CLIENT_ID_KEY and GOOGLE_CLIENT_SECRET_KEY in your````GoogleAPIKeys.plist````. And that's pretty much it!
 
+Now go back to your XCode project, and fill in the generated values for GOOGLE_CLIENT_ID_KEY and GOOGLE_CLIENT_SECRET_KEY in your````GoogleAPIKeys.plist````. And that's pretty much it!
+
+
+# Sample Project
+The sample project is an universal iOS8 app that should run in both iPhone and iPad simulators. Its main purpose is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, selecting table rows, executing SQL queries, sharing your fusion tables, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
+
+To run the sample project, you will need to follow to the above installation instructions, filling in<b>your own Google API key</b> values in ````GoogleAPIKeys.plist````.
 
 # Usage
 * Start with setting <b>your own Google API Key</b> in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
