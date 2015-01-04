@@ -179,8 +179,8 @@
              AndText:[NSString stringWithFormat:
                       @"Before using Obj-C-FusionTables, "
                       "you need to set your Google API Key in GoogleAPIKeys.plist\n\n"
-                      "You can get a Google API Key from: "
-                      "https://developers.google.com/fusiontables/docs/v2/using#APIKey"]];        
+                      "Please follow the instructions at: "
+                      "https://github.com/akpw/Obj-C-FusionTables#setting-up-you-google-project"]];        
     }
     else {
         self.theAuth = [GTMOAuth2ViewControllerTouch 
