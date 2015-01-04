@@ -33,7 +33,7 @@ enum SampleViewControllerFTInsertSectionRows {
 };
 
 // FTable SQL query states
-typedef NS_ENUM (NSUInteger, FTSQLQueryStates) {
+typedef NS_ENUM (NSUInteger, FTProcessingStates) {
     kFTStateIdle = 0,
     kFTStateInsertingRows,
     kFTStateUpdatingRows,
@@ -45,14 +45,14 @@ typedef NS_ENUM (NSUInteger, FTSQLQueryStates) {
 @end
 
 @implementation SampleViewControllerInsertFTRowsSection {
-    FTSQLQueryStates ftInsertRowState;
+    FTProcessingStates ftProcessingState;
     NSInteger ftPhotoEntryRowID;
     NSUInteger ftPhotoEntrySampleDataRotatingIdx;
 }
 
 #pragma mark - Initialisation
 - (void)initSpecifics {
-    ftInsertRowState = kFTStateIdle;
+    ftProcessingState = kFTStateIdle;
     ftPhotoEntryRowID = -1; // uknown at that point
     ftPhotoEntrySampleDataRotatingIdx = 0;
 }
@@ -82,34 +82,49 @@ enum FTActionTypes {
     cell.backgroundColor = [UIColor whiteColor];
     switch (row) {
         case kSampleViewControllerFTInsertRowSection:
-            if (ftPhotoEntryRowID < 0) {
-                cell.textLabel.text = @"Resolving sample rows";
+            if (ftProcessingState == kFTStateInsertingRows) {
+                cell.textLabel.text = @"Inserting sample rows";
                 cell.accessoryView = [self spinnerView];
-                [self selectSampleRows];
-            } else if (ftPhotoEntryRowID == 0) {
-                cell.textLabel.text = @"Insert sample rows";
-                cell.accessoryView = [self ftActionButtonWithTag:kFTActionInsert];
             } else {
-                cell.textLabel.text = @"Sample rows inserted";
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                if (ftPhotoEntryRowID < 0) {
+                    cell.textLabel.text = @"Resolving sample rows";
+                    cell.accessoryView = [self spinnerView];
+                    [self selectSampleRows];
+                } else if (ftPhotoEntryRowID == 0) {
+                    cell.textLabel.text = @"Insert sample rows";
+                    cell.accessoryView = [self ftActionButtonWithTag:kFTActionInsert];
+                } else {
+                    cell.textLabel.text = @"Sample rows inserted";
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                }
             }
             break;
         case kSampleViewControllerFTUpdateRowSection:
-            cell.textLabel.text = @"Update the photo entry";
-            if (ftPhotoEntryRowID <= 0) {
-                cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-                cell.userInteractionEnabled = NO;
+            if (ftProcessingState == kFTStateUpdatingRows) {
+                cell.textLabel.text = @"Updating the photo entry";
+                cell.accessoryView = [self spinnerView];
             } else {
-                cell.accessoryView = [self ftActionButtonWithTag:kFTActionUpdate];
+                cell.textLabel.text = @"Update the photo entry";
+                if (ftPhotoEntryRowID <= 0) {
+                    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+                    cell.userInteractionEnabled = NO;
+                } else {
+                    cell.accessoryView = [self ftActionButtonWithTag:kFTActionUpdate];
+                }
             }
             break;
         case kSampleViewControllerFTDeleteRowSection:
-            cell.textLabel.text = @"Delete sample rows";
-            if (ftPhotoEntryRowID <= 0) {
-                cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-                cell.userInteractionEnabled = NO;
+            if (ftProcessingState == kFTStateDeletingRows) {
+                cell.textLabel.text = @"Deleting sample rows";
+                cell.accessoryView = [self spinnerView];
             } else {
-                cell.accessoryView = [self ftActionButtonWithTag:kFTActionDelete];
+                cell.textLabel.text = @"Delete sample rows";
+                if (ftPhotoEntryRowID <= 0) {
+                    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+                    cell.userInteractionEnabled = NO;
+                } else {
+                    cell.accessoryView = [self ftActionButtonWithTag:kFTActionDelete];
+                }
             }
             break;
         default:
@@ -134,7 +149,7 @@ enum FTActionTypes {
 #pragma mark - GroupedTableSectionsController Table View Delegate
 - (NSString *)titleForFooterInSection {
     NSString *footerString = nil;
-    switch (ftInsertRowState) {
+    switch (ftProcessingState) {
         case kFTStateIdle:
             footerString = @"Fusion Tables SQL operations";
             break;
@@ -256,14 +271,14 @@ enum FTActionTypes {
     }];
 }
 - (void)insertSampleRows {   
-    ftInsertRowState = kFTStateInsertingRows;
+    ftProcessingState = kFTStateInsertingRows;
     ftPhotoEntryRowID = 0;
     [self reloadSection];
     
     [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
     [self.ftSQLQuery sqlInsertWithCompletionHandler:^(NSData *data, NSError *error) {
         [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
-        ftInsertRowState = kFTStateIdle;
+        ftProcessingState = kFTStateIdle;
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             [[GoogleServicesHelper sharedInstance]
@@ -283,13 +298,13 @@ enum FTActionTypes {
 }
 - (void)updateLastInsertedRow {
     if (ftPhotoEntryRowID > 0) {
-        ftInsertRowState = kFTStateUpdatingRows;
+        ftProcessingState = kFTStateUpdatingRows;
         [self reloadSection];
         
         [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         [self.ftSQLQuery sqlUpdateWithCompletionHandler:^(NSData *data, NSError *error) {
             [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
-            ftInsertRowState = kFTStateIdle;
+            ftProcessingState = kFTStateIdle;
             if (error) {
                 NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
                 [[GoogleServicesHelper sharedInstance]
@@ -301,7 +316,8 @@ enum FTActionTypes {
                 NSArray *rows = responceDict[@"rows"];
                 if (rows) {
                     NSUInteger numRowsUpdated = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
-                    NSLog(@"Updated %lu %@", (unsigned long)numRowsUpdated, (numRowsUpdated == 1) ? @"row" : @"rows");
+                    NSLog(@"Updated %lu %@", (unsigned long)numRowsUpdated, 
+                                            (numRowsUpdated == 1) ? @"row" : @"rows");
                 }
             }
             [self reloadSection];
@@ -309,13 +325,13 @@ enum FTActionTypes {
     }    
 }
 - (void)deleteInsertedRows {
-    ftInsertRowState = kFTStateDeletingRows;
+    ftProcessingState = kFTStateDeletingRows;
     [self reloadSection];
 
     [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
     [self.ftSQLQuery sqlDeleteWithCompletionHandler:^(NSData *data, NSError *error) {
         [[GoogleServicesHelper sharedInstance] decrementNetworkActivityIndicator];
-        ftInsertRowState = kFTStateIdle;
+        ftProcessingState = kFTStateIdle;
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             [[GoogleServicesHelper sharedInstance]

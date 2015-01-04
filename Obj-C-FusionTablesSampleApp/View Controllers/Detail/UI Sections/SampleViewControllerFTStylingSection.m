@@ -36,13 +36,15 @@ typedef NS_ENUM (NSUInteger, FTStylingStates) {
     kFTStateStylingUnknown = 0,
     kFTStateStylingNotSet,
     kFTStateStylingSet,
-    kFTStateStylingProcessing
+    kFTStateStylingResolving,
+    kFTStateStylingSetting
 };
 typedef NS_ENUM (NSUInteger, FTWindowTemplateStates) {
     kFTStateWindowTemplateUnknown = 0,
     kFTStateWindowTemplateNotSet,
     kFTStateWindowTemplateSet,
-    kFTStateWindowTemplateProcessing
+    kFTStateWindowTemplateResolving,
+    kFTStateWindowTemplateSetting
 };
 
 @implementation SampleViewControllerFTStylingSection {
@@ -83,11 +85,14 @@ enum FTActionTypes {
                     break;
                 case kFTStateStylingUnknown:
                     [self ftCheckStyle];
-                case kFTStateStylingProcessing: {
+                case kFTStateStylingResolving:
                     cell.textLabel.text = @"Resolving FT styling...";
                     [cell setAccessoryView:[self spinnerView]];
                     break;
-                }
+                case kFTStateStylingSetting: 
+                    cell.textLabel.text = @"Setting FT styling...";
+                    [cell setAccessoryView:[self spinnerView]];
+                    break;
                 default:
                     break;
             }
@@ -104,8 +109,12 @@ enum FTActionTypes {
                     break;
                 case kFTStateWindowTemplateUnknown:                    
                     [self ftCheckInfoWindowTemplate];
-                case kFTStateWindowTemplateProcessing:
+                case kFTStateWindowTemplateResolving:
                     cell.textLabel.text = @"Resolving Info Window Template...";
+                    [cell setAccessoryView:[self spinnerView]];
+                    break;
+                case kFTStateWindowTemplateSetting:
+                    cell.textLabel.text = @"Setting Info Window Template...";
                     [cell setAccessoryView:[self spinnerView]];
                     break;
             }            
@@ -135,8 +144,8 @@ enum FTActionTypes {
 
 #pragma mark - FT Map Styling
 - (void)ftCheckStyle {
-    if (ftStylingState != kFTStateStylingProcessing) {
-        ftStylingState = kFTStateStylingProcessing;
+    if (ftStylingState != kFTStateStylingResolving) {
+        ftStylingState = kFTStateStylingResolving;
         [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         
         FTStyle *ftStyle = [[FTStyle alloc] init];
@@ -165,9 +174,10 @@ enum FTActionTypes {
     }    
 }
 - (void)ftSetStyle {
-    if (ftStylingState != kFTStateStylingProcessing) {
-        ftStylingState = kFTStateStylingProcessing;
+    if (ftStylingState != kFTStateStylingSetting) {
+        ftStylingState = kFTStateStylingSetting;
         [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
+        [self reloadRow:kSampleViewControllerFTStylingSectionStyleRow];
         
         FTStyle *ftStyle = [[FTStyle alloc] init];
         ftStyle.ftStyleDelegate = self;
@@ -193,8 +203,8 @@ enum FTActionTypes {
 
 #pragma mark - FT Map Info Window Template
 - (void)ftCheckInfoWindowTemplate {
-    if (ftSWindowTemplateState != kFTStateWindowTemplateProcessing) {
-        ftSWindowTemplateState = kFTStateWindowTemplateProcessing;
+    if (ftSWindowTemplateState != kFTStateWindowTemplateResolving) {
+        ftSWindowTemplateState = kFTStateWindowTemplateResolving;
         [[GoogleServicesHelper sharedInstance] incrementNetworkActivityIndicator];
         
         FTTemplate *ftTemplate = [[FTTemplate alloc] init];
@@ -223,8 +233,9 @@ enum FTActionTypes {
     }    
 }
 - (void)ftSetInfoWindowTemplate {
-    if (ftSWindowTemplateState != kFTStateWindowTemplateProcessing) {
-        ftSWindowTemplateState = kFTStateWindowTemplateProcessing;
+    if (ftSWindowTemplateState != kFTStateWindowTemplateSetting) {
+        ftSWindowTemplateState = kFTStateWindowTemplateSetting;
+        [self reloadRow:kSampleViewControllerFTStylingSectionSetInfoWindowRow];
         
         FTTemplate *ftTemplate = [[FTTemplate alloc] init];
         ftTemplate.ftTemplateDelegate = self;
