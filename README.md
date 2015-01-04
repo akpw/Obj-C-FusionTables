@@ -22,8 +22,6 @@ In the ````Credentials```` section, choose ````Create new Client ID```` for ````
 
 Now go back to your XCode project, and replace the placeholders in your ````GoogleAPIKeys.plist```` with the generated values of ````Client ID```` and ````Client Secret````.
 
-And that's pretty much it!
-
 
 # Sample Project
 The sample project is an universal iOS8 app that runs in both iPhone and iPad simulators. Its main purpose is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, executing SQL queries, inserting and deleting rows, sharing your fusion tables, etc.
