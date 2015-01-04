@@ -30,14 +30,14 @@ The sample project is an universal iOS8 app that runs in both iPhone and iPad si
 To run the sample project, you need to follow to the above installation instructions, filling in <b>your own Google API key</b> values in  the ````GoogleAPIKeys.plist````.
 
 # Usage
-* Start with setting <b>your own Google API Key</b> in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
-* Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v1.0](https://developers.google.com/fusiontables/docs/v1/reference/), things should be mostly self-explanatory.
-* ````FTTable```` class is the Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v1/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````.
+* [Install Obj-C-FusionTables](https://github.com/akpw/Obj-C-FusionTables#installation), filling in <b>your own Google API key</b> values in  the ````GoogleAPIKeys.plist```` as described above
+* Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v2.0](https://developers.google.com/fusiontables/docs/v2/reference/), things should be mostly self-explanatory.
+* ````FTTable```` class is the Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v2/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````.
 * The same applies to other Fusion Tables resources such as Templates and Styles, represented by the ````FTTemplate```` and ````FTStyle```` classes
 * ````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````.
 * ````FTSQLQueryBuilder```` helps build SQL statements for various SQL queries.
 * ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
-* ````GoogleServicesHelper```` provides an easy & light-weight access to related Google serivces such as URL Shortener or Google Drive ACL (while libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these other services in greater depth they would also require non-trivial installation & introduce yet another set of APIs).
+* ````GoogleServicesHelper```` provides an easy & light-weight access to related Google serivces such as URL Shortener or Google Drive ACL (while libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these other services in greater depth they also require non-trivial installation & introduce yet another set of APIs).
 
 # A few quick code samples
 * read a list of Fusion Tables
@@ -171,7 +171,7 @@ This way things are more flexible, letting you implement the delegate where it m
 @end
 ````
 
-A simple way to learn more about implementing specific delagates is via looking at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v1/reference/) knowledge, the Objective-C part of it as quite straightforward. A quick code sample:
+A simple way to learn more about implementing specific delagates is via looking at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v2/reference/) knowledge, the Objective-C part of it as quite straightforward. A quick code sample:
 
 ````
 // Sample Fusion Table Title
@@ -193,14 +193,14 @@ A simple way to learn more about implementing specific delagates is via looking 
 }
 ````
 
-Another easy way to learn the API is of course via taking a look at the ````Obj-C-FusionTablesTests```` (see below).
+Another way to learn the API is of course via taking a look at the ````Obj-C-FusionTablesTests```` (see below).
 
 
 # The Tests
-The tests are intended to  cover all essential Obj-C-FusionTables API operations.  The test cases go sequentially from creating a table / style / template / inserting sample rows through cleaning everything up and restoring the tested Google account to its initial state.
+The tests are intended to  cover all essential Obj-C-FusionTables API operations.  The test cases go from creating a table / style / template / inserting sample rows through cleaning everything up and restoring the tested Google account to its initial state.
 
 
 # Compatibility
-GroupedUITableViews requires ARC and are optimised for iOS6 and above.
+GroupedUITableViews requires ARC and are optimised for iOS8 and above.
 
 
