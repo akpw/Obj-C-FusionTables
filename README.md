@@ -19,14 +19,15 @@ In the ````Credentials```` section, choose ````Create new Client ID```` for ````
 
 ![credentials](https://lh3.googleusercontent.com/-V8h0pVBGuBs/VKkWQSGo4BI/AAAAAAAAFBY/FPVwt1Kkbgc/w1155-h665-no/ids.png)
 
+Now go back to your XCode project, and replace the placehoders in your ````GoogleAPIKeys.plist```` with the generated values of ````Client ID```` and ````Client Secret````.
 
-Now go back to your XCode project, and fill in the generated values for GOOGLE_CLIENT_ID_KEY and GOOGLE_CLIENT_SECRET_KEY in your````GoogleAPIKeys.plist````. And that's pretty much it!
+And that's pretty much it!
 
 
 # Sample Project
-The sample project is an universal iOS8 app that should run in both iPhone and iPad simulators. Its main purpose is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, selecting table rows, executing SQL queries, sharing your fusion tables, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
+The sample project is an universal iOS8 app that runs in both iPhone and iPad simulators. Its main purpose is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, selecting table rows, executing SQL queries, sharing your fusion tables, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
 
-To run the sample project, you will need to follow to the above installation instructions, filling in<b>your own Google API key</b> values in ````GoogleAPIKeys.plist````.
+To run the sample project, you need to follow to the above installation instructions, filling in <b>your own Google API key</b> values in  the ````GoogleAPIKeys.plist````.
 
 # Usage
 * Start with setting <b>your own Google API Key</b> in ````GoogleAPIKeys.plist````. You can get the API key [here](https://developers.google.com/fusiontables/docs/v1/using#APIKey)
