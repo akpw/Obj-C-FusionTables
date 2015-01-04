@@ -28,7 +28,7 @@
 
 @implementation FTRowImporter
 
-#define GOOGLE_FT_UPLOAD_API_URL @"https://www.googleapis.com/upload/fusiontables/v1/tables"
+#define GOOGLE_FT_UPLOAD_API_URL @"https://www.googleapis.com/upload/fusiontables/v2/tables"
 + (void)uploadRows:(NSArray *)rows
            toTable:(NSString *)tableID
    customDelimiter:(NSString *)delimiter
