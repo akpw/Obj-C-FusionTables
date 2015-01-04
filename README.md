@@ -3,12 +3,12 @@
 
 [Google Fusion Tables](http://www.google.com/drive/apps.html#fusiontables) is a powerful combination of a big web store and variety of ways to access and visualise the data. While still marked as 'experimental', it has reached its maturity with [Fusion Tables API v2.0](https://developers.google.com/fusiontables/) and offers developers some clean & easy ways to enrich their apps across variety of development platforms.
 
-One potential obstacle for Fusion Tables in iOS apps is that there is no official, dedicated Google API Objective-C API. While the existing libraries such as [gtm-oauth2](https://code.google.com/p/gtm-oauth2/) and [gtm-http-fetcher](https://code.google.com/p/gtm-http-fetcher/) are well-written and provide all that is needed to work with Fusion Tables, being general and a bit lower-level they can also put a lot of extra weight on developers's shoulders.
+One potential obstacle for Fusion Tables in iOS apps is that there is no official, dedicated Google API Objective-C API. While the existing libraries such as [gtm-oauth2](https://code.google.com/p/gtm-oauth2/) and [gtm-http-fetcher](https://code.google.com/p/gtm-http-fetcher/) are well-written and provide all that is needed to work with Fusion Tables, being general and a bit lower-level they can also put a lot of extra weight on developers' shoulders.
 
-Obj-C-FusionTables is an easy-to-use soluition for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries.
+Obj-C-FusionTables is an easy-to-use solution for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries.
 
 # Installation
-Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the <i>-fno-objc-arc</i> compiler flag for the gtm-oauth2 /  gtm-http-fetcher classes in the ````Google Toolbox```` subfolder as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
+Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` sub-folder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the <i>-fno-objc-arc</i> compiler flag for the gtm-oauth2 /  gtm-http-fetcher classes in the ````Google Toolbox```` sub-folder as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
 
 ### Setting up you Google Project
 Next, go to [Google Developer Console](https://console.developers.google.com/) and create a new project. In the  ````APIs```` section, enable the APIs as the shown below:
@@ -37,8 +37,8 @@ To run the sample project, you need to follow to the above instructions on [sett
 * The same applies to other Fusion Tables resources such as Templates and Styles, represented by the ````FTTemplate```` and ````FTStyle```` classes
 * ````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````.
 * ````FTSQLQueryBuilder```` helps build SQL statements for various SQL queries.
-* ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
-* ````GoogleServicesHelper```` provides an easy & light-weight access to related Google serivces such as URL Shortener or Google Drive ACL (while libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these other services in greater depth they also require non-trivial installation & introduce yet another set of APIs).
+* ````GoogleAuthorizationController```` class conveniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
+* ````GoogleServicesHelper```` provides an easy & light-weight access to related Google services such as URL Shortener or Google Drive ACL (while libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these other services in greater depth they also require non-trivial installation & introduce yet another set of APIs).
 
 ## A few quick code samples
 * read a list of Fusion Tables
@@ -137,7 +137,7 @@ ftSQLQuery.ftSQLQueryDelegate = self;
             NSUInteger numRowsDeleted = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
             NSLog(@"Deleted %d %@", numRowsDeleted, (numRowsDeleted == 1) ? @"row" : @"rows");
         } else {
-            NSLog (@"Error processing Delete Rows responce");
+            NSLog (@"Error processing Delete Rows response");
         }
     }
 }];
@@ -158,7 +158,7 @@ After a brief glance on e.g. the Delete Table code above, a first quick question
 @end
 ````
 
-This way things are more flexible, letting you implement the delegate where it makes sense in your app rather than going into parametrising / subclassing the ```FTTable``` class. A similar approach is used for other Obj-C-FusionTables core classes such as ````FTStyle```` and ````FTTemplate````.
+This way things are more flexible, letting you implement the delegate where it makes sense in your app rather than going into parameterizing / subclassing the ```FTTable``` class. A similar approach is used for other Obj-C-FusionTables core classes such as ````FTStyle```` and ````FTTemplate````.
 
 ````FTSQLQuery```` delegate is slightly different though essentially follows the same design pattern:
 
@@ -172,7 +172,7 @@ This way things are more flexible, letting you implement the delegate where it m
 @end
 ````
 
-A simple way to learn more about implementing specific delagates is via looking at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v2/reference/) knowledge, the Objective-C part of it as quite straightforward. A quick code sample:
+A simple way to learn more about implementing specific delegates is via looking at the sample project. While obviously it requires some level of the [Fusion Tables API](https://developers.google.com/fusiontables/docs/v2/reference/) knowledge, the Objective-C part of it as quite straightforward. A quick code sample:
 
 ````
 // Sample Fusion Table Title
@@ -202,6 +202,6 @@ The tests are intended to  cover all essential Obj-C-FusionTables API operations
 
 
 # Compatibility
-GroupedUITableViews requires ARC and are optimised for iOS8 and above.
+GroupedUITableViews requires ARC and are optimized for iOS8 and above.
 
 
