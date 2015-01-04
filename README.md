@@ -28,7 +28,7 @@ And that's pretty much it!
 # Sample Project
 The sample project is an universal iOS8 app that runs in both iPhone and iPad simulators. Its main purpose is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, selecting table rows, executing SQL queries, sharing your fusion tables, etc. For your existing Fusion Tables data safety, only the tables created within the sample app can be modified.
 
-To run the sample project, you need to follow to the above installation instructions, filling in <b>your own Google API key</b> values in  the ````GoogleAPIKeys.plist````.
+To run the sample project, you need to follow to the above instructions on [setting up your Google project](https://github.com/akpw/Obj-C-FusionTables#setting-up-you-google-project), filling in <b>your own Google API key</b> values in  the ````GoogleAPIKeys.plist````.
 
 # Usage
 * [Install Obj-C-FusionTables](https://github.com/akpw/Obj-C-FusionTables#installation), filling in <b>your own Google API key</b> values in  the ````GoogleAPIKeys.plist```` as described above
