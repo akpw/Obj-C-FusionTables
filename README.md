@@ -10,7 +10,7 @@ Obj-C-FusionTables is an easy-to-use soluition for integrating Fusion Tables int
 # Installation
 Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` subfolder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the <i>-fno-objc-arc</i> compiler flag for the gtm-oauth2 /  gtm-http-fetcher classes in the ````Google Toolbox```` subfolder as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
 
-## Setting up you Google Project
+### Setting up you Google Project
 Next, go to [Google Developer Console](https://console.developers.google.com/) and create a new project. In the  ````APIs```` section, enable the APIs as the shown below:
 
 ![apis](https://lh6.googleusercontent.com/-1p19rUbv-5M/VKkWQVL9eOI/AAAAAAAAFBc/x9KVxHF9elA/w1157-h364-no/apis.png)
@@ -40,7 +40,7 @@ To run the sample project, you need to follow to the above installation instruct
 * ````GoogleAuthorizationController```` class conviniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
 * ````GoogleServicesHelper```` provides an easy & light-weight access to related Google serivces such as URL Shortener or Google Drive ACL (while libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these other services in greater depth they also require non-trivial installation & introduce yet another set of APIs).
 
-# A few quick code samples
+## A few quick code samples
 * read a list of Fusion Tables
 
 ````
@@ -144,8 +144,8 @@ ftSQLQuery.ftSQLQueryDelegate = self;
 ````
 
 
-# The Delegates
-After a brief glance on e.g. the Delete Table code above, one question might probably be "OK but where the heck is the table ID coming from? a property or what?" Well, as ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
+## The Delegates
+After a brief glance on e.g. the Delete Table code above, a first quick question might be "so where the heck is the table ID coming from?" Well, as ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
 
 ````
 @protocol FTDelegate <NSObject>
