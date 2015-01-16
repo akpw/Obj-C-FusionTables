@@ -146,7 +146,7 @@ ftSQLQuery.ftSQLQueryDelegate = self;
 
 
 ## The Delegates
-After a brief glance on e.g. the Delete Table code above, a first quick question might be "so where the heck is the table ID coming from?" Well, as ```FTTable``` class is a representation of a stateless web resource a more logical way of handling parametrization is via a delegate. The ```FTTable``` delegate is defined as follows:
+After a brief glance on e.g. the Delete Table code above, a first quick question might be "so where the heck is the table ID coming from?" Since ```FTTable``` class is a representation of a stateless web resource, a logical way of handling parametrization is via the delegation pattern. The ```FTTable``` delegate is defined as follows:
 
 ````
 @protocol FTDelegate <NSObject>
