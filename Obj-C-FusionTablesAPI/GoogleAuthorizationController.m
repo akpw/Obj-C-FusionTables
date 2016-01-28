@@ -103,16 +103,24 @@
 #define GOOGLE_CLIENT_ID_KEY (@"GOOGLE_CLIENT_ID_KEY")
 #define GOOGLE_CLIENT_SECRET_KEY (@"GOOGLE_CLIENT_SECRET_KEY")
 #define GOOGLE_NON_VALID_ID_KEY (@"GET Your Google Client ID")
+#define GOOGLE_DEFAULT_IOS_CLIENT_SECRET (@"For Google APIs, iOS clients do not need a client secret string")
 - (BOOL)isDefaultNonValidGoogleClientID {
-    NSString *theAPIKey = [self googleClientID];    
-    return ([theAPIKey rangeOfString:GOOGLE_NON_VALID_ID_KEY 
+    NSString *theAPIKey = [self googleClientID];
+    return ([theAPIKey rangeOfString:GOOGLE_NON_VALID_ID_KEY
                     options:NSCaseInsensitiveSearch].location == NSNotFound) ? NO : YES;
 }
 - (NSString *)googleClientID {
     return self.googleAPIKeys[GOOGLE_CLIENT_ID_KEY];
 }
 - (NSString *)googleClientSecret {
-    return self.googleAPIKeys[GOOGLE_CLIENT_SECRET_KEY];
+    NSString *test = @"For Google APIs, iOS clients do not need a client secret string";
+    NSString *clientSecret = self.googleAPIKeys[GOOGLE_CLIENT_SECRET_KEY];
+    NSRange range = [clientSecret rangeOfString:test
+                                        options:NSCaseInsensitiveSearch];
+    if (range.location != NSNotFound) {
+        clientSecret = nil;
+    }
+    return ([clientSecret length] > 0) ? clientSecret : nil;
 }
 #undef GOOGLE_NON_VALID_ID_KEY
 #undef GOOGLE_CLIENT_ID_KEY
@@ -180,7 +188,7 @@
                       @"Before using Obj-C-FusionTables, "
                       "you need to set your Google API Key in GoogleAPIKeys.plist\n\n"
                       "Please follow the instructions at: "
-                      "https://github.com/akpw/Obj-C-FusionTables#setting-up-you-google-project"]];        
+                      "https://github.com/akpw/Obj-C-FusionTables#setting-up-you-google-project"]];
     }
     else {
         self.theAuth = [GTMOAuth2ViewControllerTouch 

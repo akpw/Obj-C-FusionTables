@@ -53,10 +53,6 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
     }
     return self;
 }
-- (instancetype)initWithStyle:(UITableViewStyle)style {
-    self = [self init];
-    return self;
-}
 
 - (SampleFTTableDelegate *)ftTableDelegate {
     if (!_ftTableDelegate) {
