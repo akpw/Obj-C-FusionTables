@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E3A78A23BA1691A3F286D158037D401322DC8B72",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "812ED1C6409765C8FCE9DBC9DF149C4EB852E23B" : 0,
+    "E3A78A23BA1691A3F286D158037D401322DC8B72" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "299610E6-28E4-4776-9550-E7670CE9A7D7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "812ED1C6409765C8FCE9DBC9DF149C4EB852E23B" : "..\/..\/..\/Desktop\/ObjCFT\/TestObj-C-FusionTables",
+    "E3A78A23BA1691A3F286D158037D401322DC8B72" : "Obj-C-FusionTables\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Obj-C-FusionTables",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/Obj-C-FusionTables.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/akpw\/TestObj-C-FusionTables.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "812ED1C6409765C8FCE9DBC9DF149C4EB852E23B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/akpw\/Obj-C-FusionTables",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E3A78A23BA1691A3F286D158037D401322DC8B72"
+    }
+  ]
+}

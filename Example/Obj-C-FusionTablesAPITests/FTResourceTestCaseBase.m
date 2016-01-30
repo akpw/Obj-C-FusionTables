@@ -52,8 +52,9 @@
         NSLog(@"connected to Google with userID: %@", 
               [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
     } else {
-        [[GoogleAuthorizationController sharedInstance] registerClientID:@"557838838021-3m5i7hsf7rdqkma6e804ndnht5iplqr5.apps.googleusercontent.com"];
-
+        [[GoogleAuthorizationController sharedInstance] registerClientID:
+            @"get your API key from: https://developers.google.com/fusiontables/docs/v2/using#APIKey"];
+        
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         [[GoogleAuthorizationController sharedInstance] signInToGoogleWithCompletionHandler:^{
             NSLog(@"connected to Google with userID: %@", 
