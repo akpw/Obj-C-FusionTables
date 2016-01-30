@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>GOOGLE_CLIENT_ID_KEY</key>
-	<string>GET Your Google Client ID: https://developers.google.com/fusiontables/docs/v2/using#APIKey</string>
+	<string>557838838021-3m5i7hsf7rdqkma6e804ndnht5iplqr5.apps.googleusercontent.com</string>
 	<key>GOOGLE_CLIENT_SECRET_KEY</key>
 	<string>For Google APIs, iOS clients do not need a client secret string</string>
 </dict>

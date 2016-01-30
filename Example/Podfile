@@ -4,10 +4,10 @@
 # use_frameworks!
 
 target 'Obj-C-FusionTables' do
-    pod 'gtm-oauth2', '~> 1.0.126'
+    pod 'Obj-C-FusionTables', :path => '/Users/AKPower/Desktop/ObjCFT/TestObj-C-FusionTables'
 end
 
 target 'Obj-C-FusionTablesTests' do
-
+    pod 'Obj-C-FusionTables', :path => '/Users/AKPower/Desktop/ObjCFT/TestObj-C-FusionTables'
 end
 

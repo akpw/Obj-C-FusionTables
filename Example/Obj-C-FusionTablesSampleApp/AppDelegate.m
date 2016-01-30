@@ -28,6 +28,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AppGeneralServicesController customizeAppearance];
     
+    [[GoogleAuthorizationController sharedInstance] registerClientID:@"557838838021-3m5i7hsf7rdqkma6e804ndnht5iplqr5.apps.googleusercontent.com"];
     //[[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

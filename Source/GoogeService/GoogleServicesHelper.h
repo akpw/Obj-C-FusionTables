@@ -22,6 +22,7 @@
 ****/
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef void(^ServiceAPIHandler)(NSData *data, NSError *error);
 typedef void (^void_completion_handler_block)(void);

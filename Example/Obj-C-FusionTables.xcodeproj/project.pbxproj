@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F2AA5261172493174FA4EA7 /* libPods-Obj-C-FusionTablesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 395CAFC21B28127D1F58F925 /* libPods-Obj-C-FusionTablesTests.a */; };
-		5708458F1A59754100D000DE /* FTRowImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5708458E1A59754100D000DE /* FTRowImporter.m */; };
+		07998848F66B5F28464C6E70 /* libPods-Obj-C-FusionTables.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2DA37FA8D686B44BE29059 /* libPods-Obj-C-FusionTables.a */; };
 		570FAE1E1C57FC7100551EEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 570FAE1D1C57FC7100551EEB /* LaunchScreen.storyboard */; };
 		57124BDA17B0D3BF0003A1F9 /* AppGeneralServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */; };
 		57124BDD17B0D50F0003A1F9 /* DefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 57124BDC17B0D50F0003A1F9 /* DefaultTheme.m */; };
@@ -20,8 +19,6 @@
 		571A75B21A46CA2900CF0887 /* SampleFTTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 571A75B11A46CA2900CF0887 /* SampleFTTableDelegate.m */; };
 		571A75B51A46DBEB00CF0887 /* FTCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 571A75B41A46DBEB00CF0887 /* FTCellTableViewCell.m */; };
 		5778303E17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5778303D17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m */; };
-		578CE61B17BE8D6D003CFD0A /* FTSQLQueryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */; };
-		578CE61E17BF5A02003CFD0A /* FTSQLQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */; };
 		578CE62117BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CE62017BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m */; };
 		578D658019122C0100253F8F /* FTTableResourceTestCaseBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D657F19122C0100253F8F /* FTTableResourceTestCaseBase.m */; };
 		578D65821912304100253F8F /* ObjCFTAPIResourceStyleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D65811912304100253F8F /* ObjCFTAPIResourceStyleTests.m */; };
@@ -35,7 +32,6 @@
 		57A7DEB917AA37FB00E74167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A7DE9417AA37FB00E74167 /* Foundation.framework */; };
 		57A7DEC117AA37FB00E74167 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */; };
 		57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DECE17AA385A00E74167 /* AppDelegate.m */; };
-		57A7DED317AA387A00E74167 /* GoogleServicesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DED217AA387A00E74167 /* GoogleServicesHelper.m */; };
 		57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED717AA394700E74167 /* sampleInsertData.plist */; };
 		57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DED817AA394700E74167 /* sampleUpdateData.plist */; };
 		57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEE117AA39A900E74167 /* SampleViewControllerFTBaseSection.m */; };
@@ -47,16 +43,9 @@
 		57A7DEFF17AA3A0900E74167 /* GroupedTableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEF917AA3A0900E74167 /* GroupedTableSectionController.m */; };
 		57A7DF0017AA3A0900E74167 /* GroupedTableUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEFB17AA3A0900E74167 /* GroupedTableUIController.m */; };
 		57A7DF0117AA3A0900E74167 /* GroupedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DEFD17AA3A0900E74167 /* GroupedTableViewController.m */; };
-		57A7DF1017AA3A1F00E74167 /* GoogleAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A7DF0317AA3A1F00E74167 /* GoogleAPIKeys.plist */; };
-		57A7DF1117AA3A1F00E74167 /* GoogleAuthorizationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0517AA3A1F00E74167 /* GoogleAuthorizationController.m */; };
-		57A7DF1217AA3A1F00E74167 /* FTAPIResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0717AA3A1F00E74167 /* FTAPIResource.m */; };
-		57A7DF1317AA3A1F00E74167 /* FTTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0917AA3A1F00E74167 /* FTTable.m */; };
-		57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0B17AA3A1F00E74167 /* FTStyle.m */; };
-		57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */; };
 		57CDB26C1A554F94005DDD99 /* ObjCFTAPIResourceTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CDB26B1A554F94005DDD99 /* ObjCFTAPIResourceTableTests.m */; };
 		57F0B16D17B0EBAA00302E3C /* AppIconsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F0B16C17B0EBAA00302E3C /* AppIconsController.m */; };
-		57FBFBC617AD6B9B00A275BA /* FTSQLQueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */; };
-		D9B795E67B0807255B4961A1 /* libPods-Obj-C-FusionTables.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A02BC095CBF44D5B6EDA66 /* libPods-Obj-C-FusionTables.a */; };
+		5B1BCDC073B0ADC04C5C50D6 /* libPods-Obj-C-FusionTablesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A27366A2D9A95FA242039D /* libPods-Obj-C-FusionTablesTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,11 +59,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F5553D970A79495C54D75FA /* Pods-Obj-C-FusionTables.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Obj-C-FusionTables.release.xcconfig"; path = "Pods/Target Support Files/Pods-Obj-C-FusionTables/Pods-Obj-C-FusionTables.release.xcconfig"; sourceTree = "<group>"; };
-		395CAFC21B28127D1F58F925 /* libPods-Obj-C-FusionTablesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Obj-C-FusionTablesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B89A2060538E8FB5C24C1C7 /* Pods-Obj-C-FusionTablesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Obj-C-FusionTablesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Obj-C-FusionTablesTests/Pods-Obj-C-FusionTablesTests.release.xcconfig"; sourceTree = "<group>"; };
-		5708458D1A59754100D000DE /* FTRowImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTRowImporter.h; sourceTree = "<group>"; };
-		5708458E1A59754100D000DE /* FTRowImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRowImporter.m; sourceTree = "<group>"; };
+		04A27366A2D9A95FA242039D /* libPods-Obj-C-FusionTablesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Obj-C-FusionTablesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A19080B83BE6003A4ECEE11 /* Pods-Obj-C-FusionTables.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Obj-C-FusionTables.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Obj-C-FusionTables/Pods-Obj-C-FusionTables.debug.xcconfig"; sourceTree = "<group>"; };
+		373BD4023D71661F49464913 /* Pods-Obj-C-FusionTablesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Obj-C-FusionTablesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Obj-C-FusionTablesTests/Pods-Obj-C-FusionTablesTests.release.xcconfig"; sourceTree = "<group>"; };
 		570FAE1D1C57FC7100551EEB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57124BD817B0D3BF0003A1F9 /* AppGeneralServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGeneralServicesController.h; sourceTree = "<group>"; };
 		57124BD917B0D3BF0003A1F9 /* AppGeneralServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGeneralServicesController.m; sourceTree = "<group>"; };
@@ -95,10 +82,6 @@
 		571A75B41A46DBEB00CF0887 /* FTCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCellTableViewCell.m; sourceTree = "<group>"; };
 		5778303C17B9FBDC002A5CF6 /* FTResourceTestCaseBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTResourceTestCaseBase.h; sourceTree = "<group>"; };
 		5778303D17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTResourceTestCaseBase.m; sourceTree = "<group>"; };
-		578CE61917BE8D6C003CFD0A /* FTSQLQueryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQueryResource.h; sourceTree = "<group>"; };
-		578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQueryResource.m; sourceTree = "<group>"; };
-		578CE61C17BF5A01003CFD0A /* FTSQLQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQuery.h; sourceTree = "<group>"; };
-		578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQuery.m; sourceTree = "<group>"; };
 		578CE62017BF9C08003CFD0A /* ObjCFusionTablesSQLQueryResourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFusionTablesSQLQueryResourceTests.m; sourceTree = "<group>"; };
 		578D657F19122C0100253F8F /* FTTableResourceTestCaseBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTableResourceTestCaseBase.m; sourceTree = "<group>"; };
 		578D65811912304100253F8F /* ObjCFTAPIResourceStyleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceStyleTests.m; sourceTree = "<group>"; };
@@ -118,8 +101,6 @@
 		57A7DEC017AA37FB00E74167 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		57A7DECD17AA385A00E74167 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		57A7DECE17AA385A00E74167 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		57A7DED117AA387A00E74167 /* GoogleServicesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleServicesHelper.h; sourceTree = "<group>"; };
-		57A7DED217AA387A00E74167 /* GoogleServicesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleServicesHelper.m; sourceTree = "<group>"; };
 		57A7DED717AA394700E74167 /* sampleInsertData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleInsertData.plist; sourceTree = "<group>"; };
 		57A7DED817AA394700E74167 /* sampleUpdateData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sampleUpdateData.plist; sourceTree = "<group>"; };
 		57A7DEE017AA39A900E74167 /* SampleViewControllerFTBaseSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewControllerFTBaseSection.h; sourceTree = "<group>"; };
@@ -140,25 +121,12 @@
 		57A7DEFB17AA3A0900E74167 /* GroupedTableUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedTableUIController.m; sourceTree = "<group>"; };
 		57A7DEFC17AA3A0900E74167 /* GroupedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedTableViewController.h; sourceTree = "<group>"; };
 		57A7DEFD17AA3A0900E74167 /* GroupedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedTableViewController.m; sourceTree = "<group>"; };
-		57A7DF0317AA3A1F00E74167 /* GoogleAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GoogleAPIKeys.plist; sourceTree = "<group>"; };
-		57A7DF0417AA3A1F00E74167 /* GoogleAuthorizationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAuthorizationController.h; sourceTree = "<group>"; };
-		57A7DF0517AA3A1F00E74167 /* GoogleAuthorizationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAuthorizationController.m; sourceTree = "<group>"; };
-		57A7DF0617AA3A1F00E74167 /* FTAPIResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAPIResource.h; sourceTree = "<group>"; };
-		57A7DF0717AA3A1F00E74167 /* FTAPIResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAPIResource.m; sourceTree = "<group>"; };
-		57A7DF0817AA3A1F00E74167 /* FTTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTable.h; sourceTree = "<group>"; };
-		57A7DF0917AA3A1F00E74167 /* FTTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTable.m; sourceTree = "<group>"; };
-		57A7DF0A17AA3A1F00E74167 /* FTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStyle.h; sourceTree = "<group>"; };
-		57A7DF0B17AA3A1F00E74167 /* FTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStyle.m; sourceTree = "<group>"; };
-		57A7DF0C17AA3A1F00E74167 /* FTTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTemplate.h; sourceTree = "<group>"; };
-		57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTemplate.m; sourceTree = "<group>"; };
 		57CDB26B1A554F94005DDD99 /* ObjCFTAPIResourceTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCFTAPIResourceTableTests.m; sourceTree = "<group>"; };
 		57F0B16B17B0EBAA00302E3C /* AppIconsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppIconsController.h; sourceTree = "<group>"; };
 		57F0B16C17B0EBAA00302E3C /* AppIconsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppIconsController.m; sourceTree = "<group>"; };
-		57FBFBC417AD6B9B00A275BA /* FTSQLQueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSQLQueryBuilder.h; sourceTree = "<group>"; };
-		57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSQLQueryBuilder.m; sourceTree = "<group>"; };
-		917FA6500B682EC0DA601C2E /* Pods-Obj-C-FusionTables.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Obj-C-FusionTables.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Obj-C-FusionTables/Pods-Obj-C-FusionTables.debug.xcconfig"; sourceTree = "<group>"; };
-		94A02BC095CBF44D5B6EDA66 /* libPods-Obj-C-FusionTables.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Obj-C-FusionTables.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3749B665FF9E43C0BF21859 /* Pods-Obj-C-FusionTablesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Obj-C-FusionTablesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Obj-C-FusionTablesTests/Pods-Obj-C-FusionTablesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BE66CB5788C91B3F2BDD04FC /* Pods-Obj-C-FusionTablesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Obj-C-FusionTablesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Obj-C-FusionTablesTests/Pods-Obj-C-FusionTablesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CBB918960B22732F57F54585 /* Pods-Obj-C-FusionTables.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Obj-C-FusionTables.release.xcconfig"; path = "Pods/Target Support Files/Pods-Obj-C-FusionTables/Pods-Obj-C-FusionTables.release.xcconfig"; sourceTree = "<group>"; };
+		DC2DA37FA8D686B44BE29059 /* libPods-Obj-C-FusionTables.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Obj-C-FusionTables.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +136,7 @@
 			files = (
 				57A7DE9317AA37FB00E74167 /* UIKit.framework in Frameworks */,
 				57A7DE9517AA37FB00E74167 /* Foundation.framework in Frameworks */,
-				D9B795E67B0807255B4961A1 /* libPods-Obj-C-FusionTables.a in Frameworks */,
+				07998848F66B5F28464C6E70 /* libPods-Obj-C-FusionTables.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,22 +146,13 @@
 			files = (
 				57A7DEB817AA37FB00E74167 /* UIKit.framework in Frameworks */,
 				57A7DEB917AA37FB00E74167 /* Foundation.framework in Frameworks */,
-				3F2AA5261172493174FA4EA7 /* libPods-Obj-C-FusionTablesTests.a in Frameworks */,
+				5B1BCDC073B0ADC04C5C50D6 /* libPods-Obj-C-FusionTablesTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5708458C1A5974EE00D000DE /* utils */ = {
-			isa = PBXGroup;
-			children = (
-				5708458D1A59754100D000DE /* FTRowImporter.h */,
-				5708458E1A59754100D000DE /* FTRowImporter.m */,
-			);
-			path = utils;
-			sourceTree = "<group>";
-		};
 		57124BD717B0D33B0003A1F9 /* App Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,9 +198,8 @@
 		57A7DE8617AA37FA00E74167 = {
 			isa = PBXGroup;
 			children = (
-				57A7DED417AA38C900E74167 /* Obj-C-FusionTablesAPI */,
-				57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesAPITests */,
 				57A7DED517AA38EA00E74167 /* Obj-C-FusionTablesSampleApp */,
+				57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesAPITests */,
 				57A7DE9117AA37FB00E74167 /* Frameworks */,
 				57A7DE9017AA37FB00E74167 /* Products */,
 				E39623EC51A59630BCD828E8 /* Pods */,
@@ -263,8 +221,8 @@
 				57A7DE9217AA37FB00E74167 /* UIKit.framework */,
 				57A7DE9417AA37FB00E74167 /* Foundation.framework */,
 				57FAD01D17BA0F500055BE35 /* Other Frameworks */,
-				94A02BC095CBF44D5B6EDA66 /* libPods-Obj-C-FusionTables.a */,
-				395CAFC21B28127D1F58F925 /* libPods-Obj-C-FusionTablesTests.a */,
+				DC2DA37FA8D686B44BE29059 /* libPods-Obj-C-FusionTables.a */,
+				04A27366A2D9A95FA242039D /* libPods-Obj-C-FusionTablesTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -305,33 +263,6 @@
 				57A7DEBF17AA37FB00E74167 /* InfoPlist.strings */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		57A7DED417AA38C900E74167 /* Obj-C-FusionTablesAPI */ = {
-			isa = PBXGroup;
-			children = (
-				5708458C1A5974EE00D000DE /* utils */,
-				57A7DF0317AA3A1F00E74167 /* GoogleAPIKeys.plist */,
-				57A7DF0417AA3A1F00E74167 /* GoogleAuthorizationController.h */,
-				57A7DF0517AA3A1F00E74167 /* GoogleAuthorizationController.m */,
-				57A7DED117AA387A00E74167 /* GoogleServicesHelper.h */,
-				57A7DED217AA387A00E74167 /* GoogleServicesHelper.m */,
-				57A7DF0617AA3A1F00E74167 /* FTAPIResource.h */,
-				57A7DF0717AA3A1F00E74167 /* FTAPIResource.m */,
-				57A7DF0817AA3A1F00E74167 /* FTTable.h */,
-				57A7DF0917AA3A1F00E74167 /* FTTable.m */,
-				57A7DF0A17AA3A1F00E74167 /* FTStyle.h */,
-				57A7DF0B17AA3A1F00E74167 /* FTStyle.m */,
-				57A7DF0C17AA3A1F00E74167 /* FTTemplate.h */,
-				57A7DF0D17AA3A1F00E74167 /* FTTemplate.m */,
-				578CE61917BE8D6C003CFD0A /* FTSQLQueryResource.h */,
-				578CE61A17BE8D6D003CFD0A /* FTSQLQueryResource.m */,
-				578CE61C17BF5A01003CFD0A /* FTSQLQuery.h */,
-				578CE61D17BF5A02003CFD0A /* FTSQLQuery.m */,
-				57FBFBC417AD6B9B00A275BA /* FTSQLQueryBuilder.h */,
-				57FBFBC517AD6B9B00A275BA /* FTSQLQueryBuilder.m */,
-			);
-			path = "Obj-C-FusionTablesAPI";
 			sourceTree = "<group>";
 		};
 		57A7DED517AA38EA00E74167 /* Obj-C-FusionTablesSampleApp */ = {
@@ -440,10 +371,10 @@
 		E39623EC51A59630BCD828E8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				917FA6500B682EC0DA601C2E /* Pods-Obj-C-FusionTables.debug.xcconfig */,
-				0F5553D970A79495C54D75FA /* Pods-Obj-C-FusionTables.release.xcconfig */,
-				E3749B665FF9E43C0BF21859 /* Pods-Obj-C-FusionTablesTests.debug.xcconfig */,
-				4B89A2060538E8FB5C24C1C7 /* Pods-Obj-C-FusionTablesTests.release.xcconfig */,
+				2A19080B83BE6003A4ECEE11 /* Pods-Obj-C-FusionTables.debug.xcconfig */,
+				CBB918960B22732F57F54585 /* Pods-Obj-C-FusionTables.release.xcconfig */,
+				BE66CB5788C91B3F2BDD04FC /* Pods-Obj-C-FusionTablesTests.debug.xcconfig */,
+				373BD4023D71661F49464913 /* Pods-Obj-C-FusionTablesTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -535,7 +466,6 @@
 				57A7DED917AA394700E74167 /* sampleInsertData.plist in Resources */,
 				57A7DEDA17AA394700E74167 /* sampleUpdateData.plist in Resources */,
 				570FAE1E1C57FC7100551EEB /* LaunchScreen.storyboard in Resources */,
-				57A7DF1017AA3A1F00E74167 /* GoogleAPIKeys.plist in Resources */,
 				5713134D1A4EA0D800546DF3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,13 +593,11 @@
 			files = (
 				57A7DE9F17AA37FB00E74167 /* main.m in Sources */,
 				571A75AE1A46B81D00CF0887 /* FTInfoCellTableViewCell.m in Sources */,
-				5708458F1A59754100D000DE /* FTRowImporter.m in Sources */,
 				571A75AA1A46B0F000CF0887 /* EmptyDetailViewController.m in Sources */,
 				57A7DECF17AA385A00E74167 /* AppDelegate.m in Sources */,
 				571A75B51A46DBEB00CF0887 /* FTCellTableViewCell.m in Sources */,
 				579F704F1A53F88600C72985 /* FusionTableViewerViewController.m in Sources */,
 				571A75B21A46CA2900CF0887 /* SampleFTTableDelegate.m in Sources */,
-				57A7DED317AA387A00E74167 /* GoogleServicesHelper.m in Sources */,
 				57A7DEEA17AA39A900E74167 /* SampleViewControllerFTBaseSection.m in Sources */,
 				57A7DEEC17AA39A900E74167 /* SampleViewControllerFTStylingSection.m in Sources */,
 				57A7DEED17AA39A900E74167 /* SampleViewControllerInsertFTRowsSection.m in Sources */,
@@ -679,19 +607,11 @@
 				57A7DEFF17AA3A0900E74167 /* GroupedTableSectionController.m in Sources */,
 				57A7DF0017AA3A0900E74167 /* GroupedTableUIController.m in Sources */,
 				57A7DF0117AA3A0900E74167 /* GroupedTableViewController.m in Sources */,
-				57A7DF1117AA3A1F00E74167 /* GoogleAuthorizationController.m in Sources */,
-				57A7DF1217AA3A1F00E74167 /* FTAPIResource.m in Sources */,
-				57A7DF1317AA3A1F00E74167 /* FTTable.m in Sources */,
-				57A7DF1417AA3A1F00E74167 /* FTStyle.m in Sources */,
-				57A7DF1517AA3A1F00E74167 /* FTTemplate.m in Sources */,
-				57FBFBC617AD6B9B00A275BA /* FTSQLQueryBuilder.m in Sources */,
 				57162A5117AE4DBA007DDDD2 /* FusionTablesViewController.m in Sources */,
 				57124BDA17B0D3BF0003A1F9 /* AppGeneralServicesController.m in Sources */,
 				57124BDD17B0D50F0003A1F9 /* DefaultTheme.m in Sources */,
 				57124BE017B0D5260003A1F9 /* TintedTheme.m in Sources */,
 				57F0B16D17B0EBAA00302E3C /* AppIconsController.m in Sources */,
-				578CE61B17BE8D6D003CFD0A /* FTSQLQueryResource.m in Sources */,
-				578CE61E17BF5A02003CFD0A /* FTSQLQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,7 +686,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "6ba4ca2c-34cb-4758-91ea-a0bc761027ef";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6ba4ca2c-34cb-4758-91ea-a0bc761027ef";
@@ -794,7 +714,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "6ba4ca2c-34cb-4758-91ea-a0bc761027ef";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6ba4ca2c-34cb-4758-91ea-a0bc761027ef";
@@ -805,7 +725,7 @@
 		};
 		57A7DEC817AA37FB00E74167 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 917FA6500B682EC0DA601C2E /* Pods-Obj-C-FusionTables.debug.xcconfig */;
+			baseConfigurationReference = 2A19080B83BE6003A4ECEE11 /* Pods-Obj-C-FusionTables.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -815,7 +735,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Obj-C-FusionTablesSampleApp/Supporting Files/Obj-C-FusionTables-Prefix.pch";
 				INFOPLIST_FILE = "Obj-C-FusionTablesSampleApp/Supporting Files/Obj-C-FusionTables-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akpw..${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -826,7 +746,7 @@
 		};
 		57A7DEC917AA37FB00E74167 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F5553D970A79495C54D75FA /* Pods-Obj-C-FusionTables.release.xcconfig */;
+			baseConfigurationReference = CBB918960B22732F57F54585 /* Pods-Obj-C-FusionTables.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -836,7 +756,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Obj-C-FusionTablesSampleApp/Supporting Files/Obj-C-FusionTables-Prefix.pch";
 				INFOPLIST_FILE = "Obj-C-FusionTablesSampleApp/Supporting Files/Obj-C-FusionTables-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akpw..${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -847,7 +767,7 @@
 		};
 		57A7DECB17AA37FB00E74167 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3749B665FF9E43C0BF21859 /* Pods-Obj-C-FusionTablesTests.debug.xcconfig */;
+			baseConfigurationReference = BE66CB5788C91B3F2BDD04FC /* Pods-Obj-C-FusionTablesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Obj-C-FusionTables.app/Obj-C-FusionTables";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -862,7 +782,7 @@
 		};
 		57A7DECC17AA37FB00E74167 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B89A2060538E8FB5C24C1C7 /* Pods-Obj-C-FusionTablesTests.release.xcconfig */;
+			baseConfigurationReference = 373BD4023D71661F49464913 /* Pods-Obj-C-FusionTablesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Obj-C-FusionTables.app/Obj-C-FusionTables";
 				CODE_SIGN_IDENTITY = "iPhone Developer";

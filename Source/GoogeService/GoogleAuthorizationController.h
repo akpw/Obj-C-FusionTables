@@ -27,10 +27,17 @@
 
 @interface GoogleAuthorizationController : NSObject
 
+@property (nonatomic, readonly) NSString *googleClientID;
+@property (nonatomic, readonly) NSString *googleClientSecret;
 @property (nonatomic, readonly) NSString *authenticatedUserID;
 
 #pragma mark - Singleton instance
 + (GoogleAuthorizationController *)sharedInstance;
+
+#pragma mark - OAuth Client ID / Secret
+- (void)registerClientID:(NSString *)clientID;
+- (void)registerClientID:(NSString *)clientID AndSecret:(NSString *)secret;
+
 
 #pragma mark - General Authorization Methods
 - (BOOL)isAuthorised;

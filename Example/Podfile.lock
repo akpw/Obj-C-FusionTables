@@ -1,0 +1,20 @@
+PODS:
+  - gtm-http-fetcher (1.0.141)
+  - gtm-oauth2 (1.0.126):
+    - gtm-http-fetcher (~> 1.0.141)
+  - Obj-C-FusionTables (0.0.4):
+    - gtm-oauth2 (~> 1.0.126)
+
+DEPENDENCIES:
+  - Obj-C-FusionTables (from `/Users/AKPower/Desktop/ObjCFT/TestObj-C-FusionTables`)
+
+EXTERNAL SOURCES:
+  Obj-C-FusionTables:
+    :path: "/Users/AKPower/Desktop/ObjCFT/TestObj-C-FusionTables"
+
+SPEC CHECKSUMS:
+  gtm-http-fetcher: 6d4617e7d343b6e4c082b777541c334eb6f5d81e
+  gtm-oauth2: 2a18b824e4f8a02df6cfe987beb59ae9d9697f9d
+  Obj-C-FusionTables: 4f238a0eec2f3df01ec675af93afd7c4a40b27f0
+
+COCOAPODS: 0.39.0

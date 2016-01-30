@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
 
   s.summary          = "Integrates Google Fusion Tables into iOS apps."
   s.description      = <<-DESC
-    Obj-C-FusionTables is an easy solution for integrating Google Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries.
+    Obj-C-FusionTables is an easy solution for integrating Google Fusion Tables into iOS apps, built on top of the Google gtm-oauth2 and gtm-http-fetcher libraries.
    DESC
 
   s.homepage         = "https://github.com/akpw/Obj-C-FusionTables"
@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   s.source           = {
     :git => "https://github.com/akpw/Obj-C-FusionTables.git",
     :tag => s.version.to_s }
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
-  s.source_files = 'Obj-C-FusionTablesAPI/**/*'
+  s.source_files = 'Source/**/*'
   s.dependency 'gtm-oauth2', '~> 1.0.126'
 end

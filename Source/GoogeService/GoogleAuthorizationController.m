@@ -26,7 +26,8 @@
 #import "GTMOAuth2SignIn.h"
 
 @interface GoogleAuthorizationController ()
-    @property (nonatomic, strong) NSDictionary *googleAPIKeys;
+    @property (nonatomic, strong) NSString *googleClientID;
+    @property (nonatomic, strong) NSString *googleClientSecret;
     @property (nonatomic, strong) GTMOAuth2Authentication *theAuth;
     @property (nonatomic, strong) NSString *theScope;
 @end
@@ -54,10 +55,10 @@
 #define GOOGLE_URLSHORTENER_SCOPE (@"https://www.googleapis.com/auth/urlshortener")
 #define GOOGLE_DRIVE_SCOPE (@"https://www.googleapis.com/auth/drive")
 #define GOOGLE_DRIVE_FILE_SCOPE (@"https://www.googleapis.com/auth/drive.file")
-#define GOOGLE_DOCS_FILE_SCOPE (@"https://docs.google.com/feeds/") 
-/* GOOGLE_DOCS_FILE_SCOPE: 
+#define GOOGLE_DOCS_FILE_SCOPE (@"https://docs.google.com/feeds/")
+/* GOOGLE_DOCS_FILE_SCOPE:
     a temporary workaround for the Drive API bug, see http://stackoverflow.com/questions/26761199/google-drive-api-call-to-insert-public-share-permissions-on-fusiontables-causes/27674201#27674201
-*/ 
+*/
 - (id)init {
     self = [super init];
     if (self) {
@@ -65,7 +66,7 @@
                                      GOOGLE_FUSION_TABLES_API_SCOPE,
                                      GOOGLE_FUSION_TABLES_SCOPE_READONLY,
                                      GOOGLE_URLSHORTENER_SCOPE,
-                                     GOOGLE_DRIVE_SCOPE, 
+                                     GOOGLE_DRIVE_SCOPE,
                                      GOOGLE_DRIVE_FILE_SCOPE, GOOGLE_DOCS_FILE_SCOPE,
                                      nil];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -85,46 +86,24 @@
 #undef GOOGLE_URLSHORTENER_SCOPE
 #undef GOOGLE_DRIVE_SCOPE
 
-#pragma mark - Google API Keys need to be initialised in "GoogleAPIKeys.plist"
-// initialize "GoogleAPIKeys.plist" with your API Keys
-// you can get the API keys from: https://developers.google.com/fusiontables/docs/v2/using#APIKey
-- (NSDictionary *)googleAPIKeys {
-    if (!_googleAPIKeys) {
-        _googleAPIKeys = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]
-                                     pathForResource:@"GoogleAPIKeys" ofType:@"plist"]];
-    }
-    return _googleAPIKeys;
-}
-// initialize "GoogleAPIKeys.plist" with your API Keys
-// you can get the API keys from: https://developers.google.com/fusiontables/docs/v2/using#APIKey
-#pragma mark - Google API Keys need to be initialised in "GoogleAPIKeys.plist"
+#pragma mark - Google API Keys
+// get your API keys from: https://developers.google.com/fusiontables/docs/v2/using#APIKey
 
-#pragma mark - Google API Keys Helpers
-#define GOOGLE_CLIENT_ID_KEY (@"GOOGLE_CLIENT_ID_KEY")
-#define GOOGLE_CLIENT_SECRET_KEY (@"GOOGLE_CLIENT_SECRET_KEY")
-#define GOOGLE_NON_VALID_ID_KEY (@"GET Your Google Client ID")
-#define GOOGLE_DEFAULT_IOS_CLIENT_SECRET (@"For Google APIs, iOS clients do not need a client secret string")
-- (BOOL)isDefaultNonValidGoogleClientID {
-    NSString *theAPIKey = [self googleClientID];
-    return ([theAPIKey rangeOfString:GOOGLE_NON_VALID_ID_KEY
-                    options:NSCaseInsensitiveSearch].location == NSNotFound) ? NO : YES;
-}
 - (NSString *)googleClientID {
-    return self.googleAPIKeys[GOOGLE_CLIENT_ID_KEY];
+    return _googleClientID;
 }
 - (NSString *)googleClientSecret {
-    NSString *test = @"For Google APIs, iOS clients do not need a client secret string";
-    NSString *clientSecret = self.googleAPIKeys[GOOGLE_CLIENT_SECRET_KEY];
-    NSRange range = [clientSecret rangeOfString:test
-                                        options:NSCaseInsensitiveSearch];
-    if (range.location != NSNotFound) {
-        clientSecret = nil;
-    }
-    return ([clientSecret length] > 0) ? clientSecret : nil;
+    return _googleClientSecret;
 }
-#undef GOOGLE_NON_VALID_ID_KEY
-#undef GOOGLE_CLIENT_ID_KEY
-#undef GOOGLE_CLIENT_SECRET_KEY
+
+- (void)registerClientID:(NSString *)clientID {
+    [self setGoogleClientID:clientID];
+}
+
+- (void)registerClientID:(NSString *)clientID AndSecret:(NSString *)secret {
+    [self setGoogleClientID:clientID];
+    [self setGoogleClientSecret:secret];
+}
 
 #pragma mark - Network connectivity indication
 - (void)incrementNetworkActivity:(NSNotification *)notify {
@@ -135,9 +114,9 @@
 }
 - (void)signInNetworkLostOrFound:(NSNotification *)notification {
     if ([[notification name] isEqual:kGTMOAuth2NetworkLost]) {
-        [[GoogleServicesHelper sharedInstance] 
+        [[GoogleServicesHelper sharedInstance]
                             showAlertViewWithTitle:@"Network Connection Lost"
-                            AndText:@"Network connection was lost while connecting to Google"];         
+                            AndText:@"Network connection was lost while connecting to Google"];
         [(GTMOAuth2SignIn *)[notification object] cancelSigningIn];
     } else {
         // network connection was found again
@@ -154,7 +133,7 @@
     }
     return [self.theAuth canAuthorize];
 }
-- (void)authorizedRequestWithCompletionHandler:(void_completion_handler_block)completionHandler 
+- (void)authorizedRequestWithCompletionHandler:(void_completion_handler_block)completionHandler
                                  CancelHandler:(void_completion_handler_block)cancelHandler {
     if ([self isAuthorised]) {
         completionHandler();
@@ -175,43 +154,43 @@
 }
 
 - (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
-       WithCompletionHandler:(void_completion_handler_block)completionHandler {        
+       WithCompletionHandler:(void_completion_handler_block)completionHandler {
     [self authorizeHTTPFetcher:fetcher WithCompletionHandler:completionHandler CancelHandler:nil];
 }
 
 #define GOOGLE_KEYCHAIN_ID (@"Obj-C FT Google KeyChain ID")
 - (void)restoreFromKeyChain {
-    if ([self isDefaultNonValidGoogleClientID]) {
+    if (!self.googleClientID) {
         [[GoogleServicesHelper sharedInstance]
-             showAlertViewWithTitle:@"Google API Key Not Set"
+             showAlertViewWithTitle:@"Google ClientID Key Not Set"
              AndText:[NSString stringWithFormat:
                       @"Before using Obj-C-FusionTables, "
-                      "you need to set your Google API Key in GoogleAPIKeys.plist\n\n"
+                      "you need to set register your Google API Key."
                       "Please follow the instructions at: "
                       "https://github.com/akpw/Obj-C-FusionTables#setting-up-you-google-project"]];
     }
     else {
-        self.theAuth = [GTMOAuth2ViewControllerTouch 
+        self.theAuth = [GTMOAuth2ViewControllerTouch
                                 authForGoogleFromKeychainForName:GOOGLE_KEYCHAIN_ID
                                 clientID:[self googleClientID]
-                                clientSecret:[self googleClientSecret]];        
+                                clientSecret:[self googleClientSecret]];
     }
 }
 
 #pragma mark - Google SignIn
 - (void)signInToGoogleWithCompletionHandler:(void_completion_handler_block)completionHandler
                                         CancelHandler:(void_completion_handler_block)cancelHandler {
-    
+
     GTMOAuth2ViewControllerTouch *viewController = [GTMOAuth2ViewControllerTouch
                                                             controllerWithScope:self.theScope
                                                             clientID:[self googleClientID]
                                                             clientSecret:[self googleClientSecret]
                                                             keychainItemName:GOOGLE_KEYCHAIN_ID
-         completionHandler:^(GTMOAuth2ViewControllerTouch *viewController, 
+         completionHandler:^(GTMOAuth2ViewControllerTouch *viewController,
                                     GTMOAuth2Authentication *auth, NSError *error) {
              if (error) {
                  self.theAuth = nil;
-                 
+
                  // error processing, look at what's up there
                  NSData *responseData = [error userInfo][kGTMHTTPFetcherStatusDataKey];
                  NSString *responseBody = nil;
@@ -224,33 +203,33 @@
                  [[GoogleServicesHelper sharedInstance]
                                 showAlertViewWithTitle:@"Authentication error" AndText:
                                 [NSString stringWithFormat:@"Error while signing-in in to Google: %@",
-                                [error localizedDescription]]];                                  
-                 [[GoogleServicesHelper sharedInstance] 
-                                dismissViewControllerAnimated:YES completion:nil];                  
+                                [error localizedDescription]]];
+                 [[GoogleServicesHelper sharedInstance]
+                                dismissViewControllerAnimated:YES completion:nil];
                  // cancel handler
                  if (cancelHandler) cancelHandler();
              } else {
                  // Authentication succeeded
                  self.theAuth = auth;
-                 [[GoogleServicesHelper sharedInstance] 
-                                dismissViewControllerAnimated:YES completion:nil];                  
+                 [[GoogleServicesHelper sharedInstance]
+                                dismissViewControllerAnimated:YES completion:nil];
                  // Execute the request
                  if (completionHandler) completionHandler();
-             }     
+             }
         }];
-    
+
     NSDictionary *params = @{@"hl": @"en"};
     viewController.signIn.additionalAuthorizationParameters = params;
     viewController.signIn.shouldFetchGoogleUserProfile = YES;
-    
+
     NSString *html =
             @"<html><body bgcolor=silver>"
             "<div align=center>Loading Google Secure Sign-In Page...</div>"
             "</body></html>";
-    viewController.initialHTMLString = html;  
-    
+    viewController.initialHTMLString = html;
+
     viewController.modalPresentationStyle = UIModalPresentationPageSheet;
-    [[GoogleServicesHelper sharedInstance] 
+    [[GoogleServicesHelper sharedInstance]
         presentController:viewController animated:YES completionHandler:nil];
 }
 
@@ -260,7 +239,7 @@
         if ([self.theAuth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
             // remove the token from Google's servers
             [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.theAuth];
-        }        
+        }
         // remove the stored Google authentication from the keychain, if any
         [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:GOOGLE_KEYCHAIN_ID];
     }
