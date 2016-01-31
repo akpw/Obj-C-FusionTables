@@ -29,7 +29,8 @@
     [AppGeneralServicesController customizeAppearance];
     
     [[GoogleAuthorizationController sharedInstance] registerClientID:
-        @"get your API key from: https://developers.google.com/fusiontables/docs/v2/using#APIKey"];
+        @"Register with your Google Client ID.\n"
+        "For info on Google API keys, see: https://developers.google.com/fusiontables/docs/v2/using#APIKey"];
     //[[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -28,7 +28,13 @@
 
 #pragma mark -  XCTestCase setup / teardown
 - (void)setUp {
-    [super setUp]; 
+    [super setUp];
+    
+    [[GoogleAuthorizationController sharedInstance] registerClientID:
+        @"Register with your Google Client ID.\n"
+        "For info on Google API keys, see: https://developers.google.com/fusiontables/docs/v2/using#APIKey"];
+    
+    
     [self checkGoogleConnection];
 }
 
@@ -48,28 +54,16 @@
 }
 // Checks Google Auth status, attemps to connect if needed
 - (void)checkGoogleConnection {
-    if ([[GoogleAuthorizationController sharedInstance] isAuthorised]) {
-        NSLog(@"connected to Google with userID: %@", 
-              [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
+  
+    if (![[GoogleAuthorizationController sharedInstance] isAuthorised]) {
+        NSLog(@"Use sample app to connect to Google Services before running the tests");
     } else {
-        [[GoogleAuthorizationController sharedInstance] registerClientID:
-            @"get your API key from: https://developers.google.com/fusiontables/docs/v2/using#APIKey"];
-        
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [[GoogleAuthorizationController sharedInstance] signInToGoogleWithCompletionHandler:^{
-            NSLog(@"connected to Google with userID: %@", 
-                  [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
-            dispatch_semaphore_signal(semaphore);
-        } CancelHandler:^{
-            XCTFail(@"failed connect to Google");
-            dispatch_semaphore_signal(semaphore);
-        }];   
-        [self waitForSemaphore:semaphore WithTimeout:15];
+        NSLog(@"connected to Google with userID: %@",
+              [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
     }
-//    XCTAssertNotNil([[GoogleAuthorizationController sharedInstance] 
-//                        authenticatedUserID], @"authenticatedUserID should not be nil");
+    XCTAssertNotNil([[GoogleAuthorizationController sharedInstance]
+                     authenticatedUserID], @"authenticatedUserID should not be nil");
 }
-
 
 
 
