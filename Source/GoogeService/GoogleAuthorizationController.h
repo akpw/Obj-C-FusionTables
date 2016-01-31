@@ -37,7 +37,7 @@
 #pragma mark - OAuth Client ID / Secret
 - (void)registerClientID:(NSString *)clientID;
 - (void)registerClientID:(NSString *)clientID AndSecret:(NSString *)secret;
-
+- (BOOL)isClientRegistered;
 
 #pragma mark - General Authorization Methods
 - (BOOL)isAuthorised;

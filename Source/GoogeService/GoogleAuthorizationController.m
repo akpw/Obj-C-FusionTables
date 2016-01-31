@@ -104,6 +104,10 @@
     [self setGoogleClientID:clientID];
     [self setGoogleClientSecret:secret];
 }
+- (BOOL)isClientRegistered {
+    return [_googleClientID length] > 0 ? YES : NO;
+}
+
 
 #pragma mark - Network connectivity indication
 - (void)incrementNetworkActivity:(NSNotification *)notify {
@@ -165,7 +169,7 @@
              showAlertViewWithTitle:@"Google ClientID Key Not Set"
              AndText:[NSString stringWithFormat:
                       @"Before using Obj-C-FusionTables, "
-                      "you need to set register your Google API Key."
+                      "you need to register your Google API Key."
                       "Please follow the instructions at: "
                       "https://github.com/akpw/Obj-C-FusionTables#setting-up-you-google-project"]];
     }

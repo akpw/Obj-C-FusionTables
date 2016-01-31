@@ -8,9 +8,30 @@ One potential obstacle for using Fusion Tables in iOS apps is that there is no o
 Obj-C-FusionTables is an easy and ready-to-use solution for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries.
 
 # Installation
-Drag & drop the ````Obj-C-Fusion Tables Base```` folder into your XCode project. The ````Google Toolbox```` sub-folder contains gtm-oauth2 and gtm-http-fetcher classes, if you're already using these two libraries in your project feel free to delete it. If not, you'll need to set the <i>-fno-objc-arc</i> compiler flag for the gtm-oauth2 /  gtm-http-fetcher classes in the ````Google Toolbox```` sub-folder as described [here](https://code.google.com/p/gtm-http-fetcher/wiki/GTMHTTPFetcherIntroduction#Adding_the_Fetcher_to_Your_Project).
+##CocoaPods
+Add Obj-C-FusionTables to your project's Podfile:
+````
+target :MyApp do
+    pod 'Obj-C-FusionTables'
+end
+````
+
+Run pod update or pod install in your project directory.
+
+##Manual
+* Add all files from the ```Source/FusionTablesAPI``` and ```Source/GoogeService``` folders to to your project's target.
+* You would also need to install [Google gtm-oauth2 library](https://github.com/google/gtm-oauth2) 
 
 ### Setting up you Google Project
+To communicate with Google Services, you need to generate your API key which you can get at Google Play Developer Console. 
+Go to the Google Developers Console.
+Select a project, or create a new one.
+In the sidebar on the left, expand APIs & auth. Next, click APIs. Select the Enabled APIs link in the API section to see a list of all your enabled APIs. Make sure that the Fusion Tables API is on the list of enabled APIs. If you have not enabled it, select the API from the list of APIs, then select the Enable API button for the API.
+In the sidebar on the left, select Credentials.
+This API supports two types of credentials. Create whichever credentials are appropriate for your project:
+OAuth: Your application must send an OAuth 2.0 token with any request that accesses private user data. Your application sends a client ID and, possibly, a client secret to obtain a token. You can generate OAuth 2.0 credentials for web applications, service accounts, or installed applications.
+To create an OAuth 2.0 token, click Create new Client ID, provide the required information where requested, and click Create Client ID.
+You can generate OAuth 2.0 credentials for web applications, service accounts, or installed applications.
 Next, go to [Google Developer Console](https://console.developers.google.com/) and create a new project. In the  ````APIs```` section, enable the APIs as the shown below:
 
 ![apis](https://lh6.googleusercontent.com/-1p19rUbv-5M/VKkWQVL9eOI/AAAAAAAAFBc/x9KVxHF9elA/w1157-h364-no/apis.png)
