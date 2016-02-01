@@ -11,7 +11,7 @@ Obj-C-FusionTables is an easy and ready-to-use solution for integrating Fusion T
 Use [CocoaPods](https://github.com/akpw/Obj-C-FusionTables#cocoapods), or [Set up manually](https://github.com/akpw/Obj-C-FusionTables#manual)
 
 ###CocoaPods
-Add Obj-C-FusionTables to your project's Podfile:
+Add Obj-C-FusionTables to your Project's Podfile:
 ````
 target :MyApp do
     pod 'Obj-C-FusionTables'
