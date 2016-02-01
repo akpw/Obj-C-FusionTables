@@ -3,9 +3,9 @@
 
 [Google Fusion Tables](http://www.google.com/drive/apps.html#fusiontables) is a powerful combination of a big web store and variety of ways to access and visualize the data. While still marked as 'experimental', it has reached its maturity with [Fusion Tables API v2.0](https://developers.google.com/fusiontables/) and offers developers clean & easy ways to enrich their apps across variety of development platforms.
 
-One potential obstacle for using Fusion Tables in iOS apps is that there is no official, dedicated Google API Objective-C API. While the existing Google libraries such as [gtm-oauth2](https://code.google.com/p/gtm-oauth2/) and [gtm-http-fetcher](https://code.google.com/p/gtm-http-fetcher/) are well-written and can provide a solid foundation, being general and a bit lower-level they could also put a lot of extra weight on developers' shoulders.
+One potential obstacle for using Fusion Tables in iOS apps is that there is no official, dedicated Objective-C API. 
 
-Obj-C-FusionTables is an easy and ready-to-use solution for integrating Fusion Tables into iOS apps, built entirely on top of the gtm-oauth2 and gtm-http-fetcher libraries.
+Obj-C-FusionTables is an easy and ready-to-use solution for integrating Fusion Tables into iOS apps, built entirely on top of the Google gtm-oauth2 and gtm-http-fetcher libraries.
 
 # Installation
 ##CocoaPods
@@ -20,28 +20,22 @@ Run pod update or pod install in your project directory.
 
 ##Manual
 * Add all files from the ```Source/FusionTablesAPI``` and ```Source/GoogeService``` folders to to your project's target.
-* You would also need to install [Google gtm-oauth2 library](https://github.com/google/gtm-oauth2) 
+* Install [Google gtm-oauth2 library](https://github.com/google/gtm-oauth2) 
 
-### Setting up you Google Project
-To communicate with Google Services, you need to generate your API key which you can get at Google Play Developer Console. 
-Go to the Google Developers Console.
-Select a project, or create a new one.
-In the sidebar on the left, expand APIs & auth. Next, click APIs. Select the Enabled APIs link in the API section to see a list of all your enabled APIs. Make sure that the Fusion Tables API is on the list of enabled APIs. If you have not enabled it, select the API from the list of APIs, then select the Enable API button for the API.
-In the sidebar on the left, select Credentials.
-This API supports two types of credentials. Create whichever credentials are appropriate for your project:
-OAuth: Your application must send an OAuth 2.0 token with any request that accesses private user data. Your application sends a client ID and, possibly, a client secret to obtain a token. You can generate OAuth 2.0 credentials for web applications, service accounts, or installed applications.
-To create an OAuth 2.0 token, click Create new Client ID, provide the required information where requested, and click Create Client ID.
-You can generate OAuth 2.0 credentials for web applications, service accounts, or installed applications.
-Next, go to [Google Developer Console](https://console.developers.google.com/) and create a new project. In the  ````APIs```` section, enable the APIs as the shown below:
+### Setting up your Google Project
+To communicate with Fusion Tables and other Google services, you need an OAuth 2.0 client ID that your application will use when requesting an OAuth 2.0 access token.
 
-![apis](https://lh6.googleusercontent.com/-1p19rUbv-5M/VKkWQVL9eOI/AAAAAAAAFBc/x9KVxHF9elA/w1157-h364-no/apis.png)
+The OAuth 2.0 client ID for your project can be set up in the [Google Developers Console](https://console.developers.google.com) as described in details [here](https://support.google.com/cloud/answer/6158849?hl=en&ref_topic=6262490)
 
 
-In the ````Credentials```` section, choose ````Create new Client ID```` for ````Installed Application```` similar to:
+In the Google API sections of your project, enable the APIs as shown below:
 
-![credentials](https://lh3.googleusercontent.com/-V8h0pVBGuBs/VKkWQSGo4BI/AAAAAAAAFBY/FPVwt1Kkbgc/w1155-h665-no/ids.png)
+![api](https://lh3.googleusercontent.com/H9g16IionLVpMpsz9dlQ8xpuu4ci2KiqV9qKwzcYC6l0qzYq3T7F9p2OjXdU7-XLBA-YscIQLjKxmQz10SlH32t1FVCaK1w4_Y52zg5HXk59YHql-qS5Q4q_vjFd5PDVSlyktd-fjE01t-l2Ccb9R05ALw2CPh2ZPUgAwpZYWNKorRzFubAmdMez9EUJZ245IjEVCnmwJiGnlr457AxOcrrmWtNclPDvlW7oHRYEUMjOr69iR5ygPVSM99f-rpEKPKflorTXHsdheAeyqicZbGOFr59ekVwl9-pIDHBeL8Z7mM7VxxVJkRz3G4COlpSKWEH9AWYYsSqhvPbHGJwx94OUhTGsXgE5I6GXN4ifGFO5JI2B_cbnpgE1xD9_JAmySLEwCtNdBGoTjMUp953f848a4TtOgzrXLDjy6yQyYYWJPfbu-rka6rFl5yxBaU6f8-09r_lR9pDIApf_Acuhp-GQWNRJSpsU0MYJ7-Qz_H8k0CsR4mLEz421cUuSoVZtawhuXcLTZtxKIAc33w3tV0BMTAS6JR3iJoEmxJrBqVUklt0mAG2vTrcORPCHmMxbfRIb=w896-h409-no)
 
-Now go back to your XCode project, and replace the placeholders in your ````GoogleAPIKeys.plist```` with the generated values of ````Client ID```` and ````Client Secret````.
+Now back in your XCode project, put this line of code at appropriate place  such as in the App Delegate:
+````
+[[GoogleAuthorizationController sharedInstance] registerClientID:<YOUR-OAuth2-CLIENT_ID>]
+````
 
 
 # Sample Project
