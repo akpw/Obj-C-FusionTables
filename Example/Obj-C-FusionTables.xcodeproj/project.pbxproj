@@ -81,6 +81,8 @@
 		571A75B11A46CA2900CF0887 /* SampleFTTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleFTTableDelegate.m; sourceTree = "<group>"; };
 		571A75B31A46DBEB00CF0887 /* FTCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCellTableViewCell.h; sourceTree = "<group>"; };
 		571A75B41A46DBEB00CF0887 /* FTCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCellTableViewCell.m; sourceTree = "<group>"; };
+		575C31EB1C5F70C80053B758 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		575C31EC1C5F70C80053B758 /* Obj-C-FusionTables.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Obj-C-FusionTables.podspec"; path = "../Obj-C-FusionTables.podspec"; sourceTree = "<group>"; };
 		576CEA721C5E6E3E0038FD25 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5778303C17B9FBDC002A5CF6 /* FTResourceTestCaseBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTResourceTestCaseBase.h; sourceTree = "<group>"; };
 		5778303D17B9FBDC002A5CF6 /* FTResourceTestCaseBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTResourceTestCaseBase.m; sourceTree = "<group>"; };
@@ -200,6 +202,8 @@
 			isa = PBXGroup;
 			children = (
 				576CEA721C5E6E3E0038FD25 /* README.md */,
+				575C31EB1C5F70C80053B758 /* LICENSE */,
+				575C31EC1C5F70C80053B758 /* Obj-C-FusionTables.podspec */,
 				57A7DED517AA38EA00E74167 /* Obj-C-FusionTablesSampleApp */,
 				57A7DEBC17AA37FB00E74167 /* Obj-C-FusionTablesAPITests */,
 				57A7DE9117AA37FB00E74167 /* Frameworks */,
