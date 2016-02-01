@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Obj-C-FusionTables"
-  s.version          = "2.0.2"
+  s.version          = "2.0.3"
 
   s.summary          = "Integrates Google Fusion Tables into iOS apps."
   s.description      = <<-DESC

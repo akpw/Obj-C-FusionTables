@@ -25,9 +25,7 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
 
-// NSString *const NonValidGoogleOauth2ClientID = @"This is a non valid Client ID.\n"
-//                                                 "Check out https://goo.gl/hRiop8 for how to\n"
-//                                                 "set up you Google project";
+NSString *const NonValidGoogleOauth2ClientID = @"This is a non valid Oauth2 Client ID";
 
 @interface GoogleAuthorizationController ()
     @property (nonatomic, strong) NSString *googleClientID;

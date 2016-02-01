@@ -25,7 +25,7 @@
 #import "GoogleServicesHelper.h"
 #import "GTMHTTPFetcher.h"
 
-#define NonValidGoogleOauth2ClientID (@"This is a non valid Oauth2 Client ID")
+extern NSString *const NonValidGoogleOauth2ClientID;
 
 @interface GoogleAuthorizationController : NSObject
 
