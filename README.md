@@ -8,7 +8,7 @@ One potential obstacle for using Fusion Tables in iOS apps is that there is no o
 Obj-C-FusionTables is an easy and ready-to-use solution for integrating Fusion Tables into iOS apps, built entirely on top of the Google gtm-oauth2 and gtm-http-fetcher libraries.
 
 # Installation
-Use [CocoaPods](https://github.com/akpw/Obj-C-FusionTables#cocoapods), or [set up manually](https://github.com/akpw/Obj-C-FusionTables#manual)
+Use [CocoaPods](https://github.com/akpw/Obj-C-FusionTables#cocoapods), or [Set up manually](https://github.com/akpw/Obj-C-FusionTables#manual)
 
 ###CocoaPods
 Add Obj-C-FusionTables to your project's Podfile:
