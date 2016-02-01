@@ -25,6 +25,8 @@
 #import "GoogleServicesHelper.h"
 #import "GTMHTTPFetcher.h"
 
+FOUNDATION_EXPORT NSString *const NonValidGoogleOauth2ClientID;
+
 @interface GoogleAuthorizationController : NSObject
 
 @property (nonatomic, readonly) NSString *googleClientID;

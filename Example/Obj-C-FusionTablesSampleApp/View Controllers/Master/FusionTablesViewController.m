@@ -98,8 +98,14 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
                                                forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
-    // Authenticate & Load Fusion Tables list
-    [self performSelector:@selector(loadFusionTables) withObject:self afterDelay:1.0f];
+        
+    if (![[GoogleAuthorizationController sharedInstance] isClientRegistered] ||
+                [GoogleAuthorizationController sharedInstance].googleClientID == NonValidGoogleOauth2ClientID) {
+        [self performSelector:@selector(showNonValidClientInfo) withObject:self afterDelay:0.1f];
+    } else {
+        // Authenticate & Load Fusion Tables list
+        [self performSelector:@selector(loadFusionTables) withObject:self afterDelay:1.0f];
+    }
 }
 - (void)refreshFusionTablesList:(UIRefreshControl *)refreshControl {
     [self loadFusionTables];
@@ -107,6 +113,13 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
 }
 
 #pragma mark - FT Action Handlers
+// If not registered with a valid Oauth2 Client ID, display an info message:
+- (void)showNonValidClientInfo {
+    [[GoogleServicesHelper sharedInstance] showAlertViewWithTitle:@"Need a valid Oauth2 Client ID"
+                                           AndText:@"To communicate with Fusion Tables and other Google services, you need to set up a valid OAuth 2.0 client ID as described at https://goo.gl/hRiop8\n\n"
+                                               "You can also look at the relevant comments in this Sample App Delegate's application:didFinishLaunchingWithOptions: method for more reference."];
+}
+
 // loads list of Fusion Tables for authenticated user
 - (void)loadFusionTables {
     __weak typeof (self) weakSelf = self;

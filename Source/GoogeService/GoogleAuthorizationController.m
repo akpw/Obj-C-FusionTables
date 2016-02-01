@@ -25,6 +25,10 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
 
+NSString *const NonValidGoogleOauth2ClientID = @"This is a non valid Client ID.\n"
+                                                "Check out https://goo.gl/hRiop8 for how to\n"
+                                                "set up you Google project";
+
 @interface GoogleAuthorizationController ()
     @property (nonatomic, strong) NSString *googleClientID;
     @property (nonatomic, strong) NSString *googleClientSecret;
@@ -170,8 +174,7 @@
              AndText:[NSString stringWithFormat:
                       @"Before using Obj-C-FusionTables, "
                       "you need to register your Google API Key."
-                      "Please follow the instructions at: "
-                      "https://github.com/akpw/Obj-C-FusionTables#setting-up-you-google-project"]];
+                      "Please follow the instructions at: https://goo.gl/hRiop8"]];
     }
     else {
         self.theAuth = [GTMOAuth2ViewControllerTouch

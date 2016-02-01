@@ -30,10 +30,14 @@
 - (void)setUp {
     [super setUp];
     
-    [[GoogleAuthorizationController sharedInstance] registerClientID:
-        @"Register with your Google Client ID.\n"
-        "For info on Google API keys, see: https://developers.google.com/fusiontables/docs/v2/using#APIKey"];
-    
+    /*  To communicate with Fusion Tables and other Google services,
+     you need to set up a valid OAuth 2.0 client ID as described at: https://goo.gl/hRiop8
+     
+     Then simply replace the NonValidGoogleClientID below with your Oauth2 client ID
+     */
+    ///////////
+    [[GoogleAuthorizationController sharedInstance] registerClientID:NonValidGoogleOauth2ClientID];
+    //////////
     
     [self checkGoogleConnection];
 }
@@ -54,17 +58,14 @@
 }
 // Checks Google Auth status, attemps to connect if needed
 - (void)checkGoogleConnection {
-  
-    if (![[GoogleAuthorizationController sharedInstance] isAuthorised]) {
+    if (![[GoogleAuthorizationController sharedInstance] isClientRegistered] ||
+        [GoogleAuthorizationController sharedInstance].googleClientID == NonValidGoogleOauth2ClientID) {
         NSLog(@"Use sample app to connect to Google Services before running the tests");
     } else {
         NSLog(@"connected to Google with userID: %@",
               [[GoogleAuthorizationController sharedInstance] authenticatedUserID]);
     }
-    XCTAssertNotNil([[GoogleAuthorizationController sharedInstance]
-                     authenticatedUserID], @"authenticatedUserID should not be nil");
 }
-
 
 
 @end

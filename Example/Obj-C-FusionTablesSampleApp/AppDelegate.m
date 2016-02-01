@@ -23,16 +23,22 @@
 #import "EmptyDetailViewController.h"
 #import "GoogleAuthorizationController.h"
 
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AppGeneralServicesController customizeAppearance];
     
-    [[GoogleAuthorizationController sharedInstance] registerClientID:
-        @"Register with your Google Client ID.\n"
-        "For info on Google API keys, see: https://developers.google.com/fusiontables/docs/v2/using#APIKey"];
-    //[[GoogleAuthorizationController sharedInstance] signOutFromGoogle];
-
+    
+    /*  To communicate with Fusion Tables and other Google services,
+        you need to set up a valid OAuth 2.0 client ID as described at: https://goo.gl/hRiop8
+     
+        Then simply replace the NonValidGoogleOauth2ClientID below with your Oauth2 client ID
+     */
+    /////////////////////////
+    [[GoogleAuthorizationController sharedInstance] registerClientID:NonValidGoogleOauth2ClientID];
+    /////////////////////////
+       
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
      
     UISplitViewController *splitVC = [[UISplitViewController alloc] init];
