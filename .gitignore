@@ -73,6 +73,7 @@ DerivedData
 
 #CocoaPods
 Pods
+Podfile.lock
 
 # Other source repository archive directories #
 ###############################################

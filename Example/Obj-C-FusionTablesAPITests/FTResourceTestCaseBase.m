@@ -61,7 +61,7 @@
 // Checks Google Auth status, attemps to connect if needed
 - (void)checkGoogleConnection {
     if (![[GoogleAuthorizationController sharedInstance] isClientRegistered] ||
-        [GoogleAuthorizationController sharedInstance].googleClientID == NonValidGoogleOauth2ClientID) {
+        [GoogleAuthorizationController sharedInstance].googleClientID isEqualToString:NonValidGoogleOauth2ClientID) {
         NSLog(@"Use sample app to connect to Google Services before running the tests");
     } else {
         NSLog(@"connected to Google with userID: %@",
