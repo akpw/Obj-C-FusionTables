@@ -3,12 +3,12 @@
 
 [Google Fusion Tables](http://www.google.com/drive/apps.html#fusiontables) is a powerful combination of a big web store and variety of ways to access and visualize the data. While still marked as 'experimental', it has reached its maturity with [Fusion Tables API v2.0](https://developers.google.com/fusiontables/) and offers developers clean & easy ways to enrich their apps across variety of development platforms.
 
-One potential obstacle for using Fusion Tables in iOS apps is that there is no official, dedicated Objective-C API. 
+One potential obstacle for using Fusion Tables in iOS apps is that there is no official, dedicated Objective-C API.
 
 Obj-C-FusionTables is an easy and ready-to-use solution for integrating Fusion Tables into iOS apps, built entirely on top of the Google gtm-oauth2 and gtm-http-fetcher libraries.
 
 # Installation
-##CocoaPods
+###CocoaPods
 Add Obj-C-FusionTables to your project's Podfile:
 ````
 target :MyApp do
@@ -16,45 +16,45 @@ target :MyApp do
 end
 ````
 
-Run pod update or pod install in your project directory.
+Run ````pod update```` or ````pod install```` in your project directory.
 
-##Manual
-* Add all files from the ```Source/FusionTablesAPI``` and ```Source/GoogeService``` folders to to your project's target.
-* Install [Google gtm-oauth2 library](https://github.com/google/gtm-oauth2) 
+###Manual
+* Add all files from the ```Source/FusionTablesAPI``` and ```Source/GoogeService``` folders to  your project's target.
+* Install [Google gtm-oauth2 library](https://github.com/google/gtm-oauth2)
 
-### Setting up your Google Project
+## Setting up your Google Project
 To communicate with Fusion Tables and other Google services, you need an OAuth 2.0 client ID that your application will use when requesting an OAuth 2.0 access token.
 
-The OAuth 2.0 client ID for your project can be set up in the [Google Developers Console](https://console.developers.google.com) as described in details [here](https://support.google.com/cloud/answer/6158849?hl=en&ref_topic=6262490)
+The OAuth 2.0 client ID for your project can be set up in the [Google Developers Console](https://console.developers.google.com) as described in details [here](https://support.google.com/cloud/answer/6158849?hl=en&ref_topic=6262490).
 
 
 In the Google API sections of your project, enable the APIs as shown below:
 
 ![api](https://lh3.googleusercontent.com/H9g16IionLVpMpsz9dlQ8xpuu4ci2KiqV9qKwzcYC6l0qzYq3T7F9p2OjXdU7-XLBA-YscIQLjKxmQz10SlH32t1FVCaK1w4_Y52zg5HXk59YHql-qS5Q4q_vjFd5PDVSlyktd-fjE01t-l2Ccb9R05ALw2CPh2ZPUgAwpZYWNKorRzFubAmdMez9EUJZ245IjEVCnmwJiGnlr457AxOcrrmWtNclPDvlW7oHRYEUMjOr69iR5ygPVSM99f-rpEKPKflorTXHsdheAeyqicZbGOFr59ekVwl9-pIDHBeL8Z7mM7VxxVJkRz3G4COlpSKWEH9AWYYsSqhvPbHGJwx94OUhTGsXgE5I6GXN4ifGFO5JI2B_cbnpgE1xD9_JAmySLEwCtNdBGoTjMUp953f848a4TtOgzrXLDjy6yQyYYWJPfbu-rka6rFl5yxBaU6f8-09r_lR9pDIApf_Acuhp-GQWNRJSpsU0MYJ7-Qz_H8k0CsR4mLEz421cUuSoVZtawhuXcLTZtxKIAc33w3tV0BMTAS6JR3iJoEmxJrBqVUklt0mAG2vTrcORPCHmMxbfRIb=w896-h409-no)
 
-Now back in your XCode project, put this line of code at appropriate place  such as in the App Delegate:
+Now back in your XCode project, put this line of code at appropriate place  such as in the App's Delegate ````application:didFinishLaunchingWithOptions:```` method:
 ````
-[[GoogleAuthorizationController sharedInstance] registerClientID:<YOUR-OAuth2-CLIENT_ID>]
+[[GoogleAuthorizationController sharedInstance] registerClientID:<YOUR-OAUTH2-CLIENT_ID>]
 ````
 
 
 # Sample Project
 The sample project is an universal iOS8 app that runs in both iPhone and iPad simulators. Its main purpose is to show typical usage of ````Obj-C-FusionTables```` for common Fusion Tables operations such as listing tables, creating a table, setting Map styles, adding InfoWindow templates, executing SQL queries, inserting and deleting rows, sharing your fusion tables, etc.
 
-If you already have Fusion Tables in your Google account, they will show up the sample app. To ensure safety of your data, only the tables created from within the sample app can be modified.
+If you already have Fusion Tables in your Google account, they will show up in the sample app. To ensure safety of your data, only the tables created from within the sample app can be modified.
 
-To run the sample project, you need to follow to the above instructions on [setting up your Google project](https://github.com/akpw/Obj-C-FusionTables#setting-up-you-google-project) and filling in <b>your own Google API key</b> values in  the ````GoogleAPIKeys.plist````.
+To run the sample project, you need to follow to the above instructions on [setting up your Google project](https://github.com/akpw/Obj-C-FusionTables/blob/master/README.md#setting-up-your-google-project) and filling in <b>your own Google API key</b> in the App's Delegate ````application:didFinishLaunchingWithOptions:```` method.
 
 
 # Usage
-* [Install Obj-C-FusionTables](https://github.com/akpw/Obj-C-FusionTables#installation), filling in <b>your own Google API key</b> values in  the ````GoogleAPIKeys.plist```` as described above
-* Take a quick look at the Obj-C-FusionTables classes to famiiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v2.0](https://developers.google.com/fusiontables/docs/v2/reference/), things should be mostly self-explanatory.
+* [Install Obj-C-FusionTables](https://github.com/akpw/Obj-C-FusionTables#installation) as described above
+* Take a quick look at the Obj-C-FusionTables classes to familiarize yourself with the concepts. If you already have some level of experience with [Google Fusion Tables API v2.0](https://developers.google.com/fusiontables/docs/v2/reference/), things should be mostly self-explanatory.
 * ````FTTable```` class is the Objective-C representation of the [Fusion Table resource](https://developers.google.com/fusiontables/docs/v2/reference/#Table), with corresponding methods such as ````list....````, ````insert....````, ````update....````, ````delete....````.
 * The same applies to other Fusion Tables resources such as Templates and Styles, represented by the ````FTTemplate```` and ````FTStyle```` classes
 * ````FTSQLQuery```` class represents the Fusion Table SQL query resource and has corresponding methods such as ````select...````, ````insert...````, ````update...````, ````delete...````.
 * ````FTSQLQueryBuilder```` helps build SQL statements for various SQL queries.
 * ````GoogleAuthorizationController```` class conveniently wraps around Google Authentication library, providing simple ways to sign-in / sign-out and authenticating general requests to Google Services.
-* ````GoogleServicesHelper```` provides an easy & light-weight access to related Google services such as URL Shortener or Google Drive ACL (while libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these in greater depth they would also require non-trivial installation & would introduce yet another set of APIs).
+* ````GoogleServicesHelper```` provides an easy & light-weight access to related Google services such as URL Shortener or Google Drive ACL. While libraries such as [Google APIs Client](https://code.google.com/p/google-api-objectivec-client/) already cover these in greater depth, they would also require non-trivial installation & would introduce yet another set of APIs.
 
 ## A few quick code samples
 * read a list of Fusion Tables
@@ -130,7 +130,7 @@ ftSQLQuery.ftSQLQueryDelegate = self;
             NSLog(@"%@", rows);
             NSUInteger lastInsertedRowID = [(NSString *)((NSArray *)[rows lastObject])[0] intValue];
         } else {
-            NSLog (@"Error processing Insert Rows responce");
+            NSLog (@"Error processing Insert Rows response");
         }
     }
 }];
@@ -214,10 +214,10 @@ Another way to learn the API is of course via taking a look at the ````Obj-C-Fus
 
 
 # The Tests
-The tests are intended to  cover all essential Obj-C-FusionTables API operations.  The test cases go from creating a table / style / template / inserting sample rows through cleaning everything up and restoring the tested Google account to its initial state.
+The tests are intended to  cover all essential Obj-C-FusionTables API operations. The test cases go from creating a table / style / template / inserting sample rows through cleaning everything up and restoring the tested Google account to its initial state.
 
 
 # Compatibility
-GroupedUITableViews requires ARC and are optimized for iOS8 and above.
+Obj-C-FusionTables requires ARC and are optimized for iOS8 and above.
 
 
