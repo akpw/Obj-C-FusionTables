@@ -45,7 +45,17 @@ The sample project is an universal iOS8 app that runs in both iPhone and iPad si
 
 If you already have Fusion Tables in your Google account, they will show up in the sample app. To ensure safety of your data, only the tables created from within the sample app can be modified.
 
+### Googe Project Setup
 To run the sample project, you need to follow to the above instructions on [setting up your Google project](https://github.com/akpw/Obj-C-FusionTables/blob/master/README.md#setting-up-your-google-project) and filling in <b>your own Google API key</b> in the App's Delegate ````application:didFinishLaunchingWithOptions:```` method.
+
+### Trying Out via CocoaPods
+In your terminal, run:
+````
+$ pod try Obj-C-FusionTables
+
+````
+After the project is opened in XCode, go to the ````AppDelegate.m```` and fill in your Google API key in its ````application:didFinishLaunchingWithOptions:```` method.
+
 
 
 # Usage
