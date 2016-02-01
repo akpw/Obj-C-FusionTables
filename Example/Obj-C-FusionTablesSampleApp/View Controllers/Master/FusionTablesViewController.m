@@ -100,7 +100,7 @@ NSString *const FTTableViewControllerCellIdentifier = @"FusionTableCell";
     
         
     if (![[GoogleAuthorizationController sharedInstance] isClientRegistered] ||
-                [GoogleAuthorizationController sharedInstance].googleClientID isEqualToString:NonValidGoogleOauth2ClientID) {
+                [[GoogleAuthorizationController sharedInstance].googleClientID isEqualToString:NonValidGoogleOauth2ClientID]) {
         [self performSelector:@selector(showNonValidClientInfo) withObject:self afterDelay:0.1f];
     } else {
         // Authenticate & Load Fusion Tables list
