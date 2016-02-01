@@ -57,9 +57,8 @@ static NSString *_sFusionTableTemplateID;
 
 #pragma mark -  XCTestCases
 - (void)testListTemplates {
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+    XCTestExpectation *listTemplatesExpectation = [self expectationWithDescription:@"listTemplatesExpectation"];
     [self.ftTemplateResource lisFTTemplatesWithCompletionHandler: ^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Fetching Fusion Table Templates: %@", errorStr);
@@ -73,17 +72,17 @@ static NSString *_sFusionTableTemplateID;
                 XCTAssertNotNil(ftTableTemplate[@"templateId"], @"Loaded Fusion Table Template ID should not be nil");
             }
         }
+        [listTemplatesExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 
 #pragma mark - Test Fusion Table Template Insert / Delete Methods
 - (void)insertTemplate {
     XCTAssertNotNil([self ftTableID], 
                     @"for Insert Template, the FTTemplateDelegate Fusion Table ID the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    XCTestExpectation *insertTemplatesExpectation = [self expectationWithDescription:@"insertTemplatesExpectation"];
     [self.ftTemplateResource insertFTTemplateWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Inserting Fusion Table Template: %@", errorStr);
@@ -99,25 +98,26 @@ static NSString *_sFusionTableTemplateID;
                 XCTFail (@"Error processsing inserted Fusion Table Template data");
             }
         }
+        [insertTemplatesExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 - (void)deleteTemplate {
     XCTAssertNotNil([self ftTableID], 
                     @"for Delete Template, the FTTemplateDelegate Fusion Table ID the should not be nil");
     XCTAssertNotNil([self ftTemplateID], 
                     @"for Delete Template, the FTTemplateDelegate Template ID the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+    XCTestExpectation *deleteTemplatesExpectation = [self expectationWithDescription:@"deleteTemplatesExpectation"];
     [self.ftTemplateResource deleteFTTemplateWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Deleting Fusion Table Template With ID: %@, %@", [self ftTemplateID], errorStr);
         } else {
             NSLog(@"Deleted Fusion Table Template with ID: %@", [self ftTemplateID]);
         }
+        [deleteTemplatesExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 
 #pragma mark - FTTemplateDelegate methods

@@ -57,9 +57,8 @@ static NSString *_sFusionTableStyleID;
 
 #pragma mark -  XCTestCases
 - (void)testListStyles {
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+    XCTestExpectation *listStylesExpectation = [self expectationWithDescription:@"listStylesExpectation"];
     [self.ftStyleResource lisFTStylesWithCompletionHandler: ^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Fetching Fusion Table Styles: %@", errorStr);
@@ -73,17 +72,17 @@ static NSString *_sFusionTableStyleID;
                 XCTAssertNotNil(ftTableStyle[@"styleId"], @"Loaded Fusion Table Style should not be nil");
             }
         }
+        [listStylesExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 
 #pragma mark - Test Fusion TableStyle  Insert / Delete Methods
 - (void)insertStyle {
     XCTAssertNotNil([self ftTableID], 
                     @"for Insert Style, the FTStyleDelegate Fusion Table ID the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    XCTestExpectation *insertStylesExpectation = [self expectationWithDescription:@"insertStylesExpectation"];
     [self.ftStyleResource insertFTStyleWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Inserting Fusion Table Style: %@", errorStr);
@@ -99,25 +98,26 @@ static NSString *_sFusionTableStyleID;
                 XCTFail (@"Error processsing inserted Fusion Table Style data");
             }
         }
+        [insertStylesExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 - (void)deleteStyle {
     XCTAssertNotNil([self ftTableID], 
                     @"for Delete Style, the FTStyleDelegate Fusion Table ID the should not be nil");
     XCTAssertNotNil([self ftStyleID], 
                     @"for Delete Style, the FTStyleDelegate Style ID the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+    XCTestExpectation *deleteStylesExpectation = [self expectationWithDescription:@"deleteStylesExpectation"];
     [self.ftStyleResource deleteFTStyleWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Deleting Fusion Table Style With ID: %@, %@", [self ftStyleID], errorStr);
         } else {
             NSLog(@"Deleted Fusion Table Style with ID: %@", [self ftStyleID]);
         }
+        [deleteStylesExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 
 #pragma mark - FTStyleDelegate methods

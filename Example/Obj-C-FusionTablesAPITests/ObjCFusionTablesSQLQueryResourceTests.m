@@ -60,10 +60,10 @@ static NSUInteger _lastInsertedRowID;
 - (void)testUpdateLastInsertedRow {
     XCTAssertNotNil([self ftSQLUpdateStatement], 
                     @"for Update Rows, the FTSQLQueryDelegate SQL Update Statement should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    XCTestExpectation *updateLastInsertedRowExpectation =
+                            [self expectationWithDescription:@"updateLastInsertedRowExpectation"];
     if (_lastInsertedRowID > 0) {
         [self.ftSQLQuery sqlUpdateWithCompletionHandler:^(NSData *data, NSError *error) {
-            dispatch_semaphore_signal(semaphore);
             if (error) {
                 NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
                 XCTFail (@"Error Updating Last Inserted Row: %@", errorStr);                
@@ -80,18 +80,19 @@ static NSUInteger _lastInsertedRowID;
                     XCTFail (@"Error processing Update Rows responce");                
                 }
             }
+            [updateLastInsertedRowExpectation fulfill];
         }];
     }    
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 
 #pragma mark - Test Fusion Table SQL  Insert / Delete Sample Rows Methods
 - (void)insertSampleRows {   
     XCTAssertNotNil([self ftSQLInsertStatement], 
                    @"for Insert Rows, the FTSQLQueryDelegate SQL Insert Statement should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    XCTestExpectation *insertSampleRowsExpectation =
+            [self expectationWithDescription:@"insertSampleRowsExpectation"];
     [self.ftSQLQuery sqlInsertWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Inserting Sample Rows: %@", errorStr);
@@ -109,15 +110,16 @@ static NSUInteger _lastInsertedRowID;
                 XCTFail (@"Error processing Insert Rows responce");                
             }
         }
+        [insertSampleRowsExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 - (void)deleteInsertedSampleRows {
     XCTAssertNotNil([self ftSQLDeleteStatement], 
                    @"for Delete Rows, the FTSQLQueryDelegate SQL Delete Statement should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    XCTestExpectation *deleteInsertedSampleRowsExpectation =
+        [self expectationWithDescription:@"deleteInsertedSampleRowsExpectation"];
     [self.ftSQLQuery sqlDeleteWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Deleting Inserted Rows: %@", errorStr);            
@@ -134,8 +136,9 @@ static NSUInteger _lastInsertedRowID;
                 XCTFail (@"Error processing Delete Rows responce");                
             }
         }
+        [deleteInsertedSampleRowsExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 
 #pragma mark - FTSQLQueryDelegate Methods

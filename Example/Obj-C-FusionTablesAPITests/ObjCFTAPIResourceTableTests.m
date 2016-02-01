@@ -36,9 +36,8 @@
 
 #pragma mark -  XCTestCases
 - (void)testListTables {
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+    XCTestExpectation *listTableExpectation = [self expectationWithDescription:@"listTableExpectation"];
     [self.ftTableResource listFusionTablesWithCompletionHandler: ^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Fetching Fusion Tables: %@", errorStr);
@@ -52,8 +51,9 @@
                 XCTAssertNotNil(ftTable[@"tableId"], @"Loaded Fusion Table ID should not be nil");
             }
         }
+        [listTableExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 
 @end

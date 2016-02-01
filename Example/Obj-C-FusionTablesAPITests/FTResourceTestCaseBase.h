@@ -27,6 +27,6 @@
 
 #pragma mark - Helper Methods
 - (void)checkGoogleConnection;
-- (void)waitForSemaphore:(dispatch_semaphore_t)semaphore WithTimeout:(NSTimeInterval)timeoutInSeconds;
+- (void)waitForSemaphore:(dispatch_semaphore_t)semaphore WithTimeout:(NSTimeInterval)timeoutInSeconds DEPRECATED_MSG_ATTRIBUTE("As of XCode 6, should use Apple Asynchronous Testing API instead");
 
 @end

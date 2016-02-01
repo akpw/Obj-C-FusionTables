@@ -61,9 +61,9 @@ typedef void(^TableIDProcessingBlock)(NSString *tableID);
                     @"for Insert Table, the FTDelegate Fusion Table Name the should not be nil");
     XCTAssertNotNil([self ftColumns], 
                     @"for Insert Table, the FTDelegate Fusion Table Columns the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    XCTestExpectation *insertTableExpectation = [self expectationWithDescription:@"insertTableWithCompletionHandler"];
     [self.ftTableResource insertFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Inserting Fusion Table: %@", errorStr);
@@ -81,15 +81,15 @@ typedef void(^TableIDProcessingBlock)(NSString *tableID);
                 XCTFail (@"Error processsing inserted Fusion Table data");
             }
         }
-    }];    
-    [self waitForSemaphore:semaphore WithTimeout:10];
+        [insertTableExpectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 - (void)deleteTableWithCompletionHandler:(void_completion_handler_block)handler {
     XCTAssertNotNil([self ftTableID], 
                     @"for Delete Table, the FTDelegate Fusion Table ID the should not be nil");
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+    XCTestExpectation *deleteTableExpectation = [self expectationWithDescription:@"deleteTableWithCompletionHandler"];
     [self.ftTableResource deleteFusionTableWithCompletionHandler:^(NSData *data, NSError *error) {
-        dispatch_semaphore_signal(semaphore);
         if (error) {
             NSString *errorStr = [GoogleServicesHelper remoteErrorDataString:error];
             XCTFail (@"Error Deleting Fusion Table With ID: %@, %@", [self ftTableID], errorStr);
@@ -97,8 +97,9 @@ typedef void(^TableIDProcessingBlock)(NSString *tableID);
             NSLog(@"Deleted Fusion Tables with ID: %@", [self ftTableID]);
             if (handler) handler();
         }
+        [deleteTableExpectation fulfill];
     }];
-    [self waitForSemaphore:semaphore WithTimeout:10];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
 }
 
 

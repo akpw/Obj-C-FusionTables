@@ -44,6 +44,7 @@
 
 #pragma mark - Helper Methods
 // waits for the semaphore, allowing the tests run their network ops code
+// Starting from XCode 6, tests should use Apple Asynchronous Testing API instead
 - (void)waitForSemaphore:(dispatch_semaphore_t)semaphore WithTimeout:(NSTimeInterval)timeoutInSeconds {
     NSDate *giveUpDate = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
     BOOL isMainThread = [NSThread isMainThread];
@@ -56,6 +57,7 @@
         }
     }    
 }
+
 // Checks Google Auth status, attemps to connect if needed
 - (void)checkGoogleConnection {
     if (![[GoogleAuthorizationController sharedInstance] isClientRegistered] ||
