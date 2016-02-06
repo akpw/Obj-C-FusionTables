@@ -46,7 +46,7 @@ The sample project is an universal iOS8 app that runs in both iPhone and iPad si
 If you already have Fusion Tables in your Google account, they will show up in the sample app. To ensure safety of your data, only the tables created from within the sample app can be modified.
 
 ### Installing pods
-In the sample project directory, run:
+In the sample project's directory, run:
 ````
 $ pod install
 ````
