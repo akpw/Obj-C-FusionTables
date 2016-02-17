@@ -34,7 +34,7 @@ In the Google API sections of your project, enable the APIs as shown below:
 
 ![api](https://lh3.googleusercontent.com/H9g16IionLVpMpsz9dlQ8xpuu4ci2KiqV9qKwzcYC6l0qzYq3T7F9p2OjXdU7-XLBA-YscIQLjKxmQz10SlH32t1FVCaK1w4_Y52zg5HXk59YHql-qS5Q4q_vjFd5PDVSlyktd-fjE01t-l2Ccb9R05ALw2CPh2ZPUgAwpZYWNKorRzFubAmdMez9EUJZ245IjEVCnmwJiGnlr457AxOcrrmWtNclPDvlW7oHRYEUMjOr69iR5ygPVSM99f-rpEKPKflorTXHsdheAeyqicZbGOFr59ekVwl9-pIDHBeL8Z7mM7VxxVJkRz3G4COlpSKWEH9AWYYsSqhvPbHGJwx94OUhTGsXgE5I6GXN4ifGFO5JI2B_cbnpgE1xD9_JAmySLEwCtNdBGoTjMUp953f848a4TtOgzrXLDjy6yQyYYWJPfbu-rka6rFl5yxBaU6f8-09r_lR9pDIApf_Acuhp-GQWNRJSpsU0MYJ7-Qz_H8k0CsR4mLEz421cUuSoVZtawhuXcLTZtxKIAc33w3tV0BMTAS6JR3iJoEmxJrBqVUklt0mAG2vTrcORPCHmMxbfRIb=w896-h409-no)
 
-Now back in your XCode project, put this line of code at appropriate place  such as in the App's Delegate ````application:didFinishLaunchingWithOptions:```` method:
+Now back in your Xcode project, put this line of code at appropriate place  such as in the App's Delegate ````application:didFinishLaunchingWithOptions:```` method:
 ````
 [[GoogleAuthorizationController sharedInstance] registerClientID:<YOUR-OAUTH2-CLIENT_ID>]
 ````
@@ -60,7 +60,7 @@ In your terminal, run:
 $ pod try Obj-C-FusionTables
 
 ````
-After the project is opened in XCode, go to the ````AppDelegate.m```` and fill in your Google API key in its ````application:didFinishLaunchingWithOptions:```` method.
+After the project is opened in Xcode, go to the ````AppDelegate.m```` and fill in your Google API key in its ````application:didFinishLaunchingWithOptions:```` method.
 
 
 
