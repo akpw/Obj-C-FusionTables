@@ -36,7 +36,8 @@
      Then simply replace the NonValidGoogleClientID below with your Oauth2 client ID
      */
     ///////////
-    [[GoogleAuthorizationController sharedInstance] registerClientID:NonValidGoogleOauth2ClientID];
+    [[GoogleAuthorizationController sharedInstance]
+            registerClientID:NonValidGoogleOauth2ClientID];
     //////////
     
     [self checkGoogleConnection];

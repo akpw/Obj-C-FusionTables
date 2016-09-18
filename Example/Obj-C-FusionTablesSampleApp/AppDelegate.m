@@ -36,7 +36,8 @@
         Then simply replace the NonValidGoogleOauth2ClientID below with your Oauth2 client ID
      */
     /////////////////////////
-    [[GoogleAuthorizationController sharedInstance] registerClientID:NonValidGoogleOauth2ClientID];
+    [[GoogleAuthorizationController sharedInstance]
+                registerClientID:NonValidGoogleOauth2ClientID];
     /////////////////////////
        
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
