@@ -48,7 +48,6 @@
     UINavigationController *navigationController = [[UINavigationController alloc]
                                                         initWithRootViewController:ftMasterVC];       
     EmptyDetailViewController *emptyDetailVC = [[EmptyDetailViewController alloc] init];    
-    emptyDetailVC.infoLabel.text = @"No Fusion Table Selected";
     
     splitVC.viewControllers = @[navigationController, emptyDetailVC];
     splitVC.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;

@@ -30,6 +30,8 @@
         _infoLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         _infoLabel.adjustsFontSizeToFitWidth = NO;
         _infoLabel.numberOfLines = 0;
+        _infoLabel.text = @"No Fusion Table Selected";
+
     }
     return _infoLabel;
 }

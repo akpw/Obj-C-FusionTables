@@ -190,7 +190,7 @@ typedef NS_ENUM (NSUInteger, FTSharingStates) {
 }
 - (NSString *)longShareDataURL {
     return [NSString stringWithFormat:
-            @"https://www.google.com/fusiontables/DataSource?docid=%@", [self ftTableID]];
+            @"https://fusiontables.google.com/data?docid=%@%@", [self ftTableID], @"#rows:id=1"];
 }
 
 #pragma mark - Fusion Table Viewer

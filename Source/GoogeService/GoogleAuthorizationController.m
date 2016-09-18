@@ -149,7 +149,7 @@ NSString *const NonValidGoogleOauth2ClientID = @"This is a non valid Oauth2 Clie
 }
 
 #pragma mark Fetcher Authorization Methods
-- (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
+- (void)authorizeHTTPFetcher:(GTMSessionFetcher *)fetcher
                 WithCompletionHandler:(void_completion_handler_block)completionHandler
                                 CancelHandler:(void_completion_handler_block)cancelHandler {
     void_completion_handler_block authFetcherBlock = ^ {
@@ -159,7 +159,7 @@ NSString *const NonValidGoogleOauth2ClientID = @"This is a non valid Oauth2 Clie
     [self authorizedRequestWithCompletionHandler:authFetcherBlock CancelHandler:cancelHandler];
 }
 
-- (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
+- (void)authorizeHTTPFetcher:(GTMSessionFetcher *)fetcher
        WithCompletionHandler:(void_completion_handler_block)completionHandler {
     [self authorizeHTTPFetcher:fetcher WithCompletionHandler:completionHandler CancelHandler:nil];
 }
@@ -197,7 +197,7 @@ NSString *const NonValidGoogleOauth2ClientID = @"This is a non valid Oauth2 Clie
                  self.theAuth = nil;
 
                  // error processing, look at what's up there
-                 NSData *responseData = [error userInfo][kGTMHTTPFetcherStatusDataKey];
+                 NSData *responseData = [error userInfo][kGTMSessionFetcherStatusDataKey];
                  NSString *responseBody = nil;
                  if ([responseData length] > 0) {
                      // the body of the server's authentication failure response

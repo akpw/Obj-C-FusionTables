@@ -34,7 +34,7 @@
                      [sql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher
                                                    WithCompletionHandler:^{
                                                        [fetcher beginFetchWithCompletionHandler:handler];
@@ -47,11 +47,10 @@
     NSMutableURLRequest *request = [NSMutableURLRequest
                                     requestWithURL:[NSURL URLWithString:GOOGLE_FT_QUERY_URL]];
     
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
         NSData *postData = [[NSString stringWithFormat:@"sql=%@", sql] dataUsingEncoding:NSUTF8StringEncoding];
-        [fetcher setPostData:postData];
-        
+        fetcher.bodyData = postData;        
         [fetcher beginFetchWithCompletionHandler:handler];
     }];    
 }

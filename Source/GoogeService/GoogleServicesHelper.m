@@ -78,7 +78,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
 
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
         [fetcher beginFetchWithCompletionHandler:completionHandler];
     }];
@@ -107,7 +107,7 @@
         NSString *url = [NSString stringWithFormat:@"%@/%@/%@", GOOGLE_GDRIVE_API_URL, fileID, @"permissions"];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
         [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-        GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+        GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
         [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
             
             NSMutableDictionary *permissionsDict = [NSMutableDictionary dictionary];
@@ -117,7 +117,7 @@
             
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:permissionsDict
                                                                options:NSJSONWritingPrettyPrinted error:nil];
-            [fetcher setPostData:jsonData];
+            fetcher.bodyData = jsonData;
             [fetcher beginFetchWithCompletionHandler:theDriveAPiBugHandler];
         }];
     };
@@ -180,7 +180,7 @@
     [request setValue:@"application/atom+xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
 
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     NSString *message = 
                 @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                 "<entry  xmlns=\"http://www.w3.org/2005/Atom\" "
@@ -192,7 +192,7 @@
                     "<category scheme=\"http://schemas.google.com/g/2005#kind\" "
                     "term=\"http://schemas.google.com/acl/2007#accessRule\"/>"
                 "</entry>";
-    [fetcher setPostData:[message dataUsingEncoding:NSUTF8StringEncoding]];
+    fetcher.bodyData = [message dataUsingEncoding:NSUTF8StringEncoding];
     
     [[GoogleAuthorizationController sharedInstance] 
                         authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
@@ -201,9 +201,9 @@
 }
 #undef GOOGLE_GDATA_API_URL
 
-#pragma mark - Google GTMHTTPFetcher error processing
+#pragma mark - Google GTMSessionFetcher error processing
 + (NSString *)remoteErrorDataString:(NSError *)error {
-    NSData *data = [[error userInfo] valueForKey:kGTMHTTPFetcherStatusDataKey];
+    NSData *data = [[error userInfo] valueForKey:kGTMSessionFetcherStatusDataKey];
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];                    
 }
 
@@ -214,7 +214,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest
                                     requestWithURL:[NSURL URLWithString:GOOGLE_URL_SHORTENER_API_URL]];
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{            
         NSMutableDictionary* jsonObject = [NSMutableDictionary dictionary];
@@ -223,11 +223,11 @@
         // convert object to data
         NSData *postData = [NSJSONSerialization dataWithJSONObject:jsonObject
                                                            options:NSJSONWritingPrettyPrinted error:nil];
-        [fetcher setPostData:postData];
+        fetcher.bodyData = postData;
         
-        GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+        GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
         [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
-            [fetcher setPostData:postData];
+            fetcher.bodyData = postData;
             [fetcher beginFetchWithCompletionHandler:completionHandler];
         }];
     }];

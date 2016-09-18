@@ -35,7 +35,7 @@
     NSString *url = [NSString stringWithFormat:@"%@%@", GOOGLE_FT_QUERY_API_URL, resourceTypeIDString];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
         [fetcher beginFetchWithCompletionHandler:handler];
     }];
@@ -52,10 +52,10 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
         NSData *postData = [postDataString dataUsingEncoding:NSUTF8StringEncoding];
-        [fetcher setPostData:postData];
+        fetcher.bodyData = postData;
         [fetcher beginFetchWithCompletionHandler:handler];
     }];
 }
@@ -69,7 +69,7 @@
     
     [request setHTTPMethod:@"DELETE"];
     
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher WithCompletionHandler:^{
         [fetcher beginFetchWithCompletionHandler:handler];
     }];    

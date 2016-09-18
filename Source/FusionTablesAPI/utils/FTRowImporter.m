@@ -46,10 +46,10 @@
     [request setHTTPMethod:@"POST"];
     
     // Authorize and send
-    GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+    GTMSessionFetcher *fetcher = [GTMSessionFetcher fetcherWithRequest:request];
     [[GoogleAuthorizationController sharedInstance] authorizeHTTPFetcher:fetcher
                                                    WithCompletionHandler:^{
-                                                       [fetcher setPostData:[self postDataForRows:rows]];
+                                                       fetcher.bodyData = [self postDataForRows:rows];
                                                        [fetcher beginFetchWithCompletionHandler:completionHandler];
                                                    }];
 }

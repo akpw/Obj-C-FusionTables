@@ -23,7 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GoogleServicesHelper.h"
-#import "GTMHTTPFetcher.h"
+#import "GTMSessionFetcher.h"
 
 extern NSString *const NonValidGoogleOauth2ClientID;
 
@@ -51,10 +51,10 @@ extern NSString *const NonValidGoogleOauth2ClientID;
                                  CancelHandler:(void_completion_handler_block)cancelHandler;
 
 #pragma mark Fetcher Authorization Methods
-- (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
+- (void)authorizeHTTPFetcher:(GTMSessionFetcher *)fetcher
                 WithCompletionHandler:(void_completion_handler_block)completionHandler
                CancelHandler:(void_completion_handler_block)cancelHandler;
-- (void)authorizeHTTPFetcher:(GTMHTTPFetcher *)fetcher
+- (void)authorizeHTTPFetcher:(GTMSessionFetcher *)fetcher
                 WithCompletionHandler:(void_completion_handler_block)completionHandler;
 
 @end
